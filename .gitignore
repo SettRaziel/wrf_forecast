@@ -1,0 +1,7 @@
+
+# documentation folders and files
+doc/
+.yardoc/
+
+# dev testing folder
+dev/
