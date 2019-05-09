@@ -1,7 +1,7 @@
 # @Author: Benjamin Held
 # @Date:   2015-06-12 10:45:36
 # @Last Modified by:   Benjamin Held
-# @Last Modified time: 2019-04-24 19:25:14
+# @Last Modified time: 2019-05-09 16:04:43
 
 # Parent module which holdes the classes dealing with reading and validating
 # the provided input parameters
@@ -20,7 +20,7 @@ module Parameter
     def process_argument(arg, unflagged_arguments)
       case arg
         when '-d', '--date'
-          create_argument_entry(:type, unflagged_arguments)
+          create_argument_entry(:date, unflagged_arguments)
         when /-[a-z]|--[a-z]+/ then raise_invalid_parameter(arg)
       else
         raise_invalid_parameter(arg)
