@@ -1,7 +1,7 @@
 # @Author: Benjamin Held
 # @Date:   2015-07-20 11:23:58
 # @Last Modified by:   Benjamin Held
-# @Last Modified time: 2019-04-24 19:25:38
+# @Last Modified time: 2019-06-29 15:23:11
 
 module Parameter
 
@@ -25,7 +25,8 @@ module Parameter
 
     # private method to the specified parameter constraints
     def check_parameter_constraints
-      # none at the moment
+      # check for mandatory date
+      raise ArgumentError, "Error: Parameter date is not set" if (!@repository.parameters[:date])
     end
 
   end

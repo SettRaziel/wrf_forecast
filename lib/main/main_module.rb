@@ -1,7 +1,7 @@
 # @Author: Benjamin Held
 # @Date:   2019-05-08 15:34:21
 # @Last Modified by:   Benjamin Held
-# @Last Modified time: 2019-05-10 16:11:13
+# @Last Modified time: 2019-06-29 15:16:14
 
 module WrfForecast
 
@@ -24,9 +24,7 @@ module WrfForecast
       @parameter_handler = Parameter::ParameterHandler.new(arguments)
       filename = @parameter_handler.repository.parameters[:file]
       time = @parameter_handler.repository.parameters[:date]
-      if (filename != nil && time != nil)
-        @data_repo = Wrf::WrfHandler.new(filename, time)
-      end
+      @wrf_handler = Wrf::WrfHandler.new(filename, time)
   end
 
   # call to print the help text
