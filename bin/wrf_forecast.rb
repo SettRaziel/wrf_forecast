@@ -1,7 +1,7 @@
 # @Author: Benjamin Held
 # @Date:   2019-04-22 16:00:53
 # @Last Modified by:   Benjamin Held
-# @Last Modified time: 2019-05-16 17:56:54
+# @Last Modified time: 2019-06-29 14:59:11
 
 require_relative '../lib/wrf_library/ruby_utils/string/string'
 require_relative '../lib/main/main_module'
@@ -14,6 +14,8 @@ begin
   if (parameter_handler.repository.parameters[:version])
     WrfForecast.print_version()
   end
+
+  puts WrfForecast.wrf_handler.data_repository.meta_data.inspect
 
 rescue StandardError, NotImplementedError => e
     WrfForecast.print_error(e.message)
