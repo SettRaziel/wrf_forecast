@@ -1,7 +1,7 @@
 # @Author: Benjamin Held
 # @Date:   2019-05-08 15:34:21
 # @Last Modified by:   Benjamin Held
-# @Last Modified time: 2019-06-29 15:16:14
+# @Last Modified time: 2019-09-30 21:57:37
 
 module WrfForecast
 
@@ -18,10 +18,15 @@ module WrfForecast
     attr_reader :parameter_handler
   end
 
-  # singleton method to initialize the required repositories
+
+  # singleton method to initialize the parameter repositories
   # @param [Array] arguments the input values from the terminal input ARGV
-  def self.initialize_repositories(arguments)
-      @parameter_handler = Parameter::ParameterHandler.new(arguments)
+  def self.initialize_parameter(arguments)
+    @parameter_handler = Parameter::ParameterHandler.new(arguments)
+  end
+
+  # singleton method to initialize the wrf handler
+  def self.initialize_wrf_handler
       filename = @parameter_handler.repository.parameters[:file]
       time = @parameter_handler.repository.parameters[:date]
       @wrf_handler = Wrf::WrfHandler.new(filename, time)
