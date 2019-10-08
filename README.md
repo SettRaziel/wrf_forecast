@@ -14,7 +14,15 @@ Initially there will be two types of forecast available:
     * serveral special limitations apply like start time, end time
 
 ## Usage
-follows
+```
+script usage: ruby <script> [parameters] <filename>
+help usage :              ruby <script> (-h | --help)
+help usage for parameter: ruby <script> <parameter> (-h | --help)
+WRF forecast help:
+ -h, --help     show help text
+ -v, --version  prints the current version of the project
+ -d, --date     argument: <date>; specifies the start_date of the requested forecast
+```
 
 ## License
 see LICENSE
