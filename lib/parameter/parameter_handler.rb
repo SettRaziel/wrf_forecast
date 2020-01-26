@@ -1,7 +1,7 @@
 # @Author: Benjamin Held
 # @Date:   2015-07-20 11:23:58
 # @Last Modified by:   Benjamin Held
-# @Last Modified time: 2019-09-30 21:57:33
+# @Last Modified time: 2020-01-26 12:07:33
 
 module Parameter
 
@@ -25,8 +25,9 @@ module Parameter
 
     # private method to the specified parameter constraints
     def check_parameter_constraints
-      # check for mandatory date when help is not used
-      if (!@repository.parameters[:date] && !@repository.parameters[:help])
+      # check for mandatory date when help or version is not used
+      if (!@repository.parameters[:date] &&
+          !(@repository.parameters[:help] || @repository.parameters[:version]))
         raise ArgumentError, "Error: Parameter date is not set" 
       end
     end
