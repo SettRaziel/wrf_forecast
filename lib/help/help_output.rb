@@ -1,7 +1,7 @@
 # @Author: Benjamin Held
 # @Date:   2019-05-07 10:03:48
 # @Last Modified by:   Benjamin Held
-# @Last Modified time: 2019-05-07 10:05:31
+# @Last Modified time: 2020-02-16 10:20:21
 require_relative '../wrf_library/ruby_utils/help/help_output'
 
 # Output class for help text
@@ -11,6 +11,8 @@ class HelpOutput < BasicHelpOutput
 
   # method to specify and add the help entries with help text only
   def self.add_single_help_entries
+    add_simple_text(:default, '     --default  ', 
+          'runs the script with date as today at midnight and a 84 h forecast period')
     nil
   end
 
