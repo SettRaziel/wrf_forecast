@@ -1,4 +1,5 @@
 # WRF Forecast
+[![Maintainability](https://api.codeclimate.com/v1/badges/f8e37146f91c5b3fc933/maintainability)](https://codeclimate.com/github/SettRaziel/wrf_forecast/maintainability)
 
 Repository for the creation of an automated weather forecast based on station forecast data.
 
