@@ -2,9 +2,9 @@
 # @Author: Benjamin Held
 # @Date:   2019-09-24 12:22:38
 # @Last Modified by:   Benjamin Held
-# @Last Modified time: 2019-10-11 21:24:08
+# @Last Modified time: 2020-02-18 17:20:53
 
-# As past of the forecast text this module holds string replacements 
+# As part of the forecast text this module holds string replacements 
 # for the wind directions
 module Direction
   N  = 'north'
