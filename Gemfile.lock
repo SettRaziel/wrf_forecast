@@ -1,0 +1,26 @@
+GIT
+  remote: https://github.com/SettRaziel/ruby_utils
+  revision: 7cafebf00721914954edd91270d0e30298aa80eb
+  specs:
+    ruby_utils (0.0.1)
+
+GIT
+  remote: https://github.com/SettRaziel/wrf_library
+  revision: 3151889026cb648134f8f7e85315290179ec81d2
+  specs:
+    wrf_library (0.0.1)
+      ruby_utils (~> 0.0.1)
+
+GEM
+  remote: https://rubygems.org/
+  specs:
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  ruby_utils!
+  wrf_library!
+
+BUNDLED WITH
+   2.1.4

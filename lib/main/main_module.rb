@@ -1,13 +1,13 @@
 # @Author: Benjamin Held
 # @Date:   2019-05-08 15:34:21
 # @Last Modified by:   Benjamin Held
-# @Last Modified time: 2019-09-30 21:57:37
+# @Last Modified time: 2020-02-26 15:13:34
 
 module WrfForecast
 
+  require 'wrf_library/wrf'
   require_relative '../parameter/parameter'
   require_relative '../help/help_output'
-  require_relative '../wrf_library/data/wrf/wrf'
   
   # Dummy class to get access to the instance variables
   class << self
@@ -29,7 +29,7 @@ module WrfForecast
   def self.initialize_wrf_handler
       filename = @parameter_handler.repository.parameters[:file]
       time = @parameter_handler.repository.parameters[:date]
-      @wrf_handler = Wrf::WrfHandler.new(filename, time)
+      @wrf_handler = WrfLibrary::Wrf::WrfHandler.new(filename, time)
   end
 
   # call to print the help text

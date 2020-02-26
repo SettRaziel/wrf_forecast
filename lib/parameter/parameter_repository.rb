@@ -1,7 +1,7 @@
 # @Author: Benjamin Held
 # @Date:   2015-06-12 10:45:36
 # @Last Modified by:   Benjamin Held
-# @Last Modified time: 2020-02-16 14:07:28
+# @Last Modified time: 2020-02-26 15:17:10
 
 # Parent module which holdes the classes dealing with reading and validating
 # the provided input parameters
@@ -10,7 +10,7 @@ module Parameter
   # Parameter repository to store the valid parameters of the script.
   # {#initialize} gets the provided parameters and fills a hash which
   # grants access to the provided parameters and arguments.
-  class ParameterRepository < BaseParameterRepository
+  class ParameterRepository < RubyUtils::Parameter::BaseParameterRepository
 
     private
 

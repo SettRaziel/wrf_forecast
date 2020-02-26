@@ -1,12 +1,12 @@
 # @Author: Benjamin Held
 # @Date:   2019-06-28 16:45:16
 # @Last Modified by:   Benjamin Held
-# @Last Modified time: 2019-07-12 19:12:54
+# @Last Modified time: 2020-02-26 15:11:22
+
+require 'ruby_utils/file_reader'
+require 'ruby_utils/string'
 
 module Location
-
-  require_relative '../wrf_library/ruby_utils/data/file_reader'
-  require_relative '../wrf_library/ruby_utils/string/string'
 
   class LocationMapping
 
@@ -24,7 +24,7 @@ module Location
     attr :locations
 
     def create_mapping(location_file)
-      data = FileReader.new(location_file, ';').data
+      data = RubyUtils::FileReader.new(location_file, ';').data
       data.each { |line|
         puts line.inspect
         if (line.length == 2 && line[0] != nil && line[1] != nil)

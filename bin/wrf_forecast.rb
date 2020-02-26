@@ -1,9 +1,9 @@
 # @Author: Benjamin Held
 # @Date:   2019-04-22 16:00:53
 # @Last Modified by:   Benjamin Held
-# @Last Modified time: 2019-09-30 21:57:05
+# @Last Modified time: 2020-02-26 14:58:32
 
-require_relative '../lib/wrf_library/ruby_utils/string/string'
+require 'ruby_utils/string'
 require_relative '../lib/main/main_module'
 
 begin
