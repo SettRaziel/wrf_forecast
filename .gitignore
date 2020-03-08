@@ -7,3 +7,6 @@ dev/
 
 # folder for location data and other stuff
 files/
+
+# exclude coverage files
+coverage/
