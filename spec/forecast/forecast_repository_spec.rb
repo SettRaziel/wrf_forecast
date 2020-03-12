@@ -2,7 +2,7 @@
 # @Author: Benjamin Held
 # @Date:   2020-03-08 18:13:30
 # @Last Modified by:   Benjamin Held
-# @Last Modified time: 2020-03-09 18:32:02
+# @Last Modified time: 2020-03-12 18:55:02
 
 require 'spec_helper'
 require 'wrf_library/wrf'
@@ -40,10 +40,10 @@ describe ForecastRepository do
       it "initialize handler, fill the forecast data, check wind speed values" do
         handler = WrfLibrary::Wrf::WrfHandler.new(File.join(__dir__,"Ber.d01.TS"), Date.new(2017, 06, 29))
         repository = ForecastRepository.new(handler)
-        temperature_values = repository.forecast_data[:wind_speed]
-        expect(temperature_values.size).to match(5)
-        expect(temperature_values[0].round(3)).to match(2.023)
-        expect(temperature_values[4].round(3)).to match(2.164)
+        windspeed_values = repository.forecast_data[:wind_speed]
+        expect(windspeed_values.size).to match(5)
+        expect(windspeed_values[0].round(3)).to match(2.023)
+        expect(windspeed_values[4].round(3)).to match(2.164)
       end
     end
   end
@@ -56,6 +56,19 @@ describe ForecastRepository do
         extreme_values = repository.extreme_values[:wind_speed]
         expect(extreme_values.maximum.round(3)).to match(2.164)
         expect(extreme_values.minimum.round(3)).to match(2.023)
+      end
+    end
+  end
+
+  describe ".new" do
+    context "given a meteogram output file and the date" do
+      it "initialize handler, fill the forecast data, check wind direction values" do
+        handler = WrfLibrary::Wrf::WrfHandler.new(File.join(__dir__,"Ber.d01.TS"), Date.new(2019, 06, 29))
+        repository = ForecastRepository.new(handler)
+        direction_values = repository.forecast_data[:wind_direction]
+        expect(direction_values.size).to match(5)
+        expect(direction_values[0].round(3)).to match(307.278)
+        expect(direction_values[4].round(3)).to match(308.562)
       end
     end
   end
