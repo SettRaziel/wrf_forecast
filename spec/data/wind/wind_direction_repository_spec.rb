@@ -2,7 +2,7 @@
 # @Author: Benjamin Held
 # @Date:   2020-03-12 19:16:02
 # @Last Modified by:   Benjamin Held
-# @Last Modified time: 2020-03-12 20:01:47
+# @Last Modified time: 2020-03-14 11:46:32
 
 require 'spec_helper'
 require_relative '../../../lib/data/wind_direction_repository'
@@ -193,5 +193,41 @@ describe WindDirectionRepository do
     end
   end
 
+  describe ".generate_direction_distribution" do
+    context "given an array with western direction data" do
+      it "should determine the correct west wind distribution" do
+        repository = WindDirectionRepository.new()
+        data = [ 240, 243, 254, 263, 270, 270, 283, 285, 295, 300 ]
+        distribution = repository.generate_direction_distribution(data)
+        expect(distribution[:N]).to match(0)
+        expect(distribution[:NE]).to match(0)
+        expect(distribution[:E]).to match(0)
+        expect(distribution[:SE]).to match(0)
+        expect(distribution[:S]).to match(0)
+        expect(distribution[:SW]).to match(2)
+        expect(distribution[:W]).to match(6)
+        expect(distribution[:NW]).to match(2)
+      end
+    end
+  end
+
+  describe ".generate_direction_distribution" do
+    context "given an array with northern direction data" do
+      it "should determine the correct north wind distribution" do
+        repository = WindDirectionRepository.new()
+        data = [ 300, 310, 337, 342, 359, 1, 0, 22, 42, 67 ]
+        distribution = repository.generate_direction_distribution(data)
+        expect(distribution[:N]).to match(5)
+        expect(distribution[:NE]).to match(2)
+        expect(distribution[:E]).to match(0)
+        expect(distribution[:SE]).to match(0)
+        expect(distribution[:S]).to match(0)
+        expect(distribution[:SW]).to match(0)
+        expect(distribution[:W]).to match(0)
+        expect(distribution[:NW]).to match(3)
+      end
+    end
+  end
+
+
 end
-  
