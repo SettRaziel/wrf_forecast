@@ -1,9 +1,10 @@
 # @Author: Benjamin Held
 # @Date:   2020-02-14 19:44:57
 # @Last Modified by:   Benjamin Held
-# @Last Modified time: 2020-03-12 18:54:11
+# @Last Modified time: 2020-03-14 13:21:31
 
 require 'ruby_utils/statistic'
+require_relative 'wind_direction_repository'
 
 class ForecastRepository
   
@@ -12,6 +13,9 @@ class ForecastRepository
 
   # @return [Hash] the forecast data identified by a symbol
   attr_reader :forecast_data
+
+  # @return [Hash] the wind direction distribution
+  attr_reader :direction_distribution
 
   # initialization
   # @params [WrfHandler] the wrf handler with the data
@@ -22,6 +26,7 @@ class ForecastRepository
 
     add_temperature_data(wrf_handler)
     add_windspeed_data(wrf_handler)
+    generate_wind_direction_statistic
   end
 
   private
@@ -38,6 +43,8 @@ class ForecastRepository
     nil
   end
 
+  # method to add the wind data und determine extreme values for wind speed
+  # @params [WrfHandler] the wrf handler with the data
   def add_windspeed_data(wrf_handler)
     r2d = 180.0 / (Math.atan(1) * 4.0)
     u_component = wrf_handler.retrieve_data_set(:u_wind)
@@ -51,6 +58,14 @@ class ForecastRepository
     @forecast_data[:wind_speed] = wind_speed
     @forecast_data[:wind_direction] = wind_direction
     @extreme_values[:wind_speed] = RubyUtils::Statistic.extreme_values(wind_speed)
+    nil
+  end
+
+  # method to determine the wind direction distribution for the given data
+  def generate_wind_direction_statistic
+    direction_repository = WindDirectionRepository.new()
+    direction_repository.generate_direction_distribution(@forecast_data[:wind_direction])
+    @direction_distribution = direction_repository.direction_distribution
     nil
   end
 
