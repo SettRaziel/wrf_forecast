@@ -2,7 +2,7 @@
 # @Author: Benjamin Held
 # @Date:   2020-03-08 18:13:30
 # @Last Modified by:   Benjamin Held
-# @Last Modified time: 2020-03-14 13:19:27
+# @Last Modified time: 2020-03-14 22:10:20
 
 require 'spec_helper'
 require 'wrf_library/wrf'
@@ -87,6 +87,19 @@ describe ForecastRepository do
         expect(distribution[:SW]).to match(0)
         expect(distribution[:W]).to match(0)
         expect(distribution[:NW]).to match(5)
+      end
+    end
+  end
+
+  describe ".new" do
+    context "given a meteogram output file and the date" do
+      it "initialize handler, fill the forecast data, check rain data values" do
+        handler = WrfLibrary::Wrf::WrfHandler.new(File.join(__dir__,"Ber.d01.TS"), Date.new(2020, 06, 29))
+        repository = ForecastRepository.new(handler)
+        windspeed_values = repository.forecast_data[:rain]
+        expect(windspeed_values.size).to match(5)
+        expect(windspeed_values[0].round(3)).to match(0.0)
+        expect(windspeed_values[4].round(3)).to match(0.1)
       end
     end
   end

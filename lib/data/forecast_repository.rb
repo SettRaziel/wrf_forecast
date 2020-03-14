@@ -1,7 +1,7 @@
 # @Author: Benjamin Held
 # @Date:   2020-02-14 19:44:57
 # @Last Modified by:   Benjamin Held
-# @Last Modified time: 2020-03-14 13:21:31
+# @Last Modified time: 2020-03-14 22:11:16
 
 require 'ruby_utils/statistic'
 require_relative 'wind_direction_repository'
@@ -27,6 +27,7 @@ class ForecastRepository
     add_temperature_data(wrf_handler)
     add_windspeed_data(wrf_handler)
     generate_wind_direction_statistic
+    add_rain_data(wrf_handler)
   end
 
   private
@@ -66,6 +67,19 @@ class ForecastRepository
     direction_repository = WindDirectionRepository.new()
     direction_repository.generate_direction_distribution(@forecast_data[:wind_direction])
     @direction_distribution = direction_repository.direction_distribution
+    nil
+  end
+
+  # method to add the rain data from the two different sources
+  # @params [WrfHandler] the wrf handler with the data
+  def add_rain_data(wrf_handler)
+    cumulus_rain = wrf_handler.retrieve_data_set(:cumulus_rainfall)
+    explicit_rain = wrf_handler.retrieve_data_set(:explicit_rainfall)
+    rain_sum = Array.new()
+    cumulus_rain.zip(explicit_rain).each { |c, e| 
+      rain_sum << c + e
+    }
+    @forecast_data[:rain] = rain_sum
     nil
   end
 
