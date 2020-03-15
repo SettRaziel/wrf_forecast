@@ -1,7 +1,7 @@
 # @Author: Benjamin Held
 # @Date:   2020-02-14 19:44:57
 # @Last Modified by:   Benjamin Held
-# @Last Modified time: 2020-03-14 22:11:16
+# @Last Modified time: 2020-03-15 16:21:23
 
 require 'ruby_utils/statistic'
 require_relative 'wind_direction_repository'
@@ -17,6 +17,8 @@ class ForecastRepository
   # @return [Hash] the wind direction distribution
   attr_reader :direction_distribution
 
+  attr_reader :hourly_rain
+
   # initialization
   # @params [WrfHandler] the wrf handler with the data
   def initialize(wrf_handler)
@@ -26,7 +28,6 @@ class ForecastRepository
 
     add_temperature_data(wrf_handler)
     add_windspeed_data(wrf_handler)
-    generate_wind_direction_statistic
     add_rain_data(wrf_handler)
   end
 
@@ -59,6 +60,7 @@ class ForecastRepository
     @forecast_data[:wind_speed] = wind_speed
     @forecast_data[:wind_direction] = wind_direction
     @extreme_values[:wind_speed] = RubyUtils::Statistic.extreme_values(wind_speed)
+    generate_wind_direction_statistic
     nil
   end
 
@@ -75,11 +77,32 @@ class ForecastRepository
   def add_rain_data(wrf_handler)
     cumulus_rain = wrf_handler.retrieve_data_set(:cumulus_rainfall)
     explicit_rain = wrf_handler.retrieve_data_set(:explicit_rainfall)
-    rain_sum = Array.new()
+    rain_data = Array.new()
     cumulus_rain.zip(explicit_rain).each { |c, e| 
-      rain_sum << c + e
+      rain_data << c + e
     }
-    @forecast_data[:rain] = rain_sum
+    @forecast_data[:rain] = rain_data
+    calculate_hourly_rainsum
+    nil
+  end
+
+  # method to sum up the rain data into hourly rain sums
+  def calculate_hourly_rainsum
+    rain_data = @forecast_data[:rain]
+    @hourly_rain = Array.new()
+    hourly_sum = 0
+    previous_timestamp = 0
+    rain_data.zip(time_data).each { |rain, timestamp|
+      # detect new hour, when the leading number increases by one
+      if (timestamp.floor - previous_timestamp.floor == 1)
+        @hourly_rain << hourly_sum
+        hourly_sum = 0
+      else
+        hourly_sum += rain
+      end
+      previous_timestamp = timestamp
+    }
+    @hourly_rain << hourly_sum
     nil
   end
 
