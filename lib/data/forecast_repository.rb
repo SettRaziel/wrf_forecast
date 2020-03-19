@@ -1,7 +1,7 @@
 # @Author: Benjamin Held
 # @Date:   2020-02-14 19:44:57
 # @Last Modified by:   Benjamin Held
-# @Last Modified time: 2020-03-15 16:21:23
+# @Last Modified time: 2020-03-19 09:15:37
 
 require 'ruby_utils/statistic'
 require_relative 'wind_direction_repository'
@@ -17,10 +17,11 @@ class ForecastRepository
   # @return [Hash] the wind direction distribution
   attr_reader :direction_distribution
 
+  # @return [Array] the hourly rain sums
   attr_reader :hourly_rain
 
   # initialization
-  # @params [WrfHandler] the wrf handler with the data
+  # @param [WrfHandler] the wrf handler with the data
   def initialize(wrf_handler)
     @extreme_values = Hash.new()
     @forecast_data = Hash.new()
@@ -37,7 +38,7 @@ class ForecastRepository
   attr_reader :time_data
 
   # method to add the temperature data und determine extreme values
-  # @params [WrfHandler] the wrf handler with the data
+  # @param [WrfHandler] wrf_handler the wrf handler with the data
   def add_temperature_data(wrf_handler)
     temperature = wrf_handler.retrieve_data_set(:air_temperature)
     @forecast_data[:air_temperature] = temperature
@@ -46,7 +47,7 @@ class ForecastRepository
   end
 
   # method to add the wind data und determine extreme values for wind speed
-  # @params [WrfHandler] the wrf handler with the data
+  # @param [WrfHandler] wrf_handler the wrf handler with the data
   def add_windspeed_data(wrf_handler)
     r2d = 180.0 / (Math.atan(1) * 4.0)
     u_component = wrf_handler.retrieve_data_set(:u_wind)
@@ -73,7 +74,7 @@ class ForecastRepository
   end
 
   # method to add the rain data from the two different sources
-  # @params [WrfHandler] the wrf handler with the data
+  # @param [WrfHandler] wrf_handler the wrf handler with the data
   def add_rain_data(wrf_handler)
     cumulus_rain = wrf_handler.retrieve_data_set(:cumulus_rainfall)
     explicit_rain = wrf_handler.retrieve_data_set(:explicit_rainfall)
