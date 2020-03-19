@@ -2,11 +2,11 @@
 # @Author: Benjamin Held
 # @Date:   2020-03-19 10:01:28
 # @Last Modified by:   Benjamin Held
-# @Last Modified time: 2020-03-19 12:44:47
+# @Last Modified time: 2020-03-19 14:19:39
 
 require 'spec_helper'
 require 'wrf_library/wrf'
-require_relative '../../lib/threshold/temperature_threshold'
+require_relative '../../lib/threshold/threshold'
 
 describe Threshold::TemperatureThreshold do
 

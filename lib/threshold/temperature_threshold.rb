@@ -2,7 +2,7 @@
 # @Author: Benjamin Held
 # @Date:   2020-03-19 08:04:09
 # @Last Modified by:   Benjamin Held
-# @Last Modified time: 2020-03-19 10:16:32
+# @Last Modified time: 2020-03-19 14:18:36
 
 module Threshold
 
@@ -16,24 +16,12 @@ module Threshold
   # * summer day: the temperature did exceed 25.0 degress celsius at least once
   # * hot day: the temperature did exceed 30.0 degress celsius at least once
   # * tropical night: the temperature of the day did not fall below 20.0 degrees celsius
-  class TemperatureThreshold
-
-    # @return [Hash] the indicator by mapping symbol => boolean
-    attr_reader :indicators
-
-    # initialization
-    # @param [Array] temperature_values the input values
-    def initialize(temperature_values)
-      initialize_indicators
-      check_temperature_values(temperature_values)
-      determine_indicators(temperature_values)
-    end
+  class TemperatureThreshold < BaseThreshold
 
     private
 
     # initialization of the required indicators
     def initialize_indicators
-      @indicators = Hash.new()
       @indicators[:ice_day] = true
       @indicators[:frost_day] = false
       @indicators[:summer_day] = false
@@ -42,22 +30,10 @@ module Threshold
       nil
     end
 
-    # method to check if the data sample offers enough data for the indicators
-    # less than 720 data points means, less than 1 data point every 2 minutes
-    # less then 48 data points means, less than 2 data points per hours
-    def check_temperature_values(temperature_values)
-      if (temperature_values.size < 720)
-        puts "Warning: Threshold for temperature values is lesser than 720."
-      end
-      if (temperature_values.size < 48)
-        raise ArgumentError, "Error: Lesser than 48 data values available for threshold."
-      end
-    end
-
     # method to determine the indicators based on the input data
-    # @param [Array] temperature_values the input values
-    def determine_indicators(temperature_values)
-      temperature_values.each { |value|
+    # @param [Array] data_values the input values
+    def determine_indicators(data_values)
+      data_values.each { |value|
         @indicators[:ice_day] = false if (value > 273.15)
         @indicators[:frost_day] = true if (value < 273.15)
         @indicators[:summer_day] = true if (value >= 298.15)
