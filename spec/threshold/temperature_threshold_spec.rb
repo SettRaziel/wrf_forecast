@@ -2,7 +2,7 @@
 # @Author: Benjamin Held
 # @Date:   2020-03-19 10:01:28
 # @Last Modified by:   Benjamin Held
-# @Last Modified time: 2020-03-19 14:19:39
+# @Last Modified time: 2020-03-20 13:45:50
 
 require 'spec_helper'
 require 'wrf_library/wrf'
@@ -145,7 +145,7 @@ describe Threshold::TemperatureThreshold do
       it "try to generate the indicators and raise error" do
         expect {
           temperature_values = [ 296, 296, 296, 295, 295, 295, 294, 294, 294, 294 ]
-          indicators = Threshold::TemperatureThreshold.new(temperature_values)
+          Threshold::TemperatureThreshold.new(temperature_values)
         }.to raise_error(ArgumentError)
       end
     end

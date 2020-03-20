@@ -2,7 +2,7 @@
 # @Author: Benjamin Held
 # @Date:   2020-03-17 17:19:08
 # @Last Modified by:   Benjamin Held
-# @Last Modified time: 2020-03-17 17:41:02
+# @Last Modified time: 2020-03-20 13:46:07
 
 require 'spec_helper'
 require_relative '../../lib/parameter/parameter'
@@ -24,7 +24,7 @@ describe Parameter::ParameterHandler do
       it "create the repository and fail the parameter contrains" do
         arguments = ['-p', '42', 'filename']
         expect {
-          parameter_handler = Parameter::ParameterHandler.new(arguments)
+          Parameter::ParameterHandler.new(arguments)
         }.to raise_error(ArgumentError)
       end
     end
