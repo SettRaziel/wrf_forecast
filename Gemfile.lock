@@ -1,12 +1,12 @@
 GIT
   remote: https://github.com/SettRaziel/ruby_utils
-  revision: 22954509d2ca0cf6d204dd4f76426f5a11207476
+  revision: ad3b19a6d757008d29f8d0b37a12b1a28922f2ac
   specs:
     ruby_utils (0.0.1)
 
 GIT
   remote: https://github.com/SettRaziel/wrf_library
-  revision: 5bbc099bd47688945b00ade165fe96b985b91934
+  revision: ebc999cc6af067136e2efdf3509085ac79ba1de7
   specs:
     wrf_library (0.0.1)
       ruby_utils (~> 0.0.1)
@@ -30,7 +30,7 @@ GEM
       rspec-mocks (~> 3.9.0)
     rspec-core (3.9.1)
       rspec-support (~> 3.9.1)
-    rspec-expectations (3.9.0)
+    rspec-expectations (3.9.1)
       diff-lcs (>= 1.2.0, < 2.0)
       rspec-support (~> 3.9.0)
     rspec-mocks (3.9.1)
