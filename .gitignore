@@ -6,7 +6,7 @@ doc/
 dev/
 
 # folder for location data and other stuff
-files/
+/files/*
 
 # exclude coverage files
 coverage/

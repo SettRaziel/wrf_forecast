@@ -1,7 +1,7 @@
 # @Author: Benjamin Held
 # @Date:   2020-02-14 19:44:57
 # @Last Modified by:   Benjamin Held
-# @Last Modified time: 2020-03-20 14:02:33
+# @Last Modified time: 2020-03-20 21:58:25
 
 require 'ruby_utils/statistic'
 require_relative 'wind_direction_repository'
@@ -91,21 +91,21 @@ class ForecastRepository
   def calculate_hourly_rainsum
     rain_data = @forecast_data[:rain]
     @hourly_rain = Array.new()
-    hourly_sum = 0.0
+    previous_hour = 0.0
     previous_timestamp = time_data[0].floor
     rain_data.zip(time_data).each { |rain, timestamp|
       # detect new hour, when the leading number increases by one
       if (timestamp.floor > previous_timestamp.floor)
-        @hourly_rain << hourly_sum
-        hourly_sum = 0.0
-      else
-        hourly_sum += rain
+        @hourly_rain << rain - previous_hour
+        previous_hour = rain
       end
       previous_timestamp = timestamp
     }
 
     # workaround to satisfy the current requirement for daily values
-    @hourly_rain << hourly_sum if (hourly_rain.size < 24)
+    if (hourly_rain.size < 24)
+      @hourly_rain << rain_data[rain_data.size-1] - previous_hour
+    end
     nil
   end
 
