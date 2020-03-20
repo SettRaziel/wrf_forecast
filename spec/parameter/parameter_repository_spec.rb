@@ -2,10 +2,10 @@
 # @Author: Benjamin Held
 # @Date:   2020-03-16 20:11:41
 # @Last Modified by:   Benjamin Held
-# @Last Modified time: 2020-03-16 20:31:52
+# @Last Modified time: 2020-03-20 16:42:40
 
 require 'spec_helper'
-require_relative '../../lib/parameter/parameter'
+require_relative '../../lib/parameter'
 
 describe Parameter::ParameterRepository do
 

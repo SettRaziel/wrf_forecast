@@ -2,12 +2,12 @@
 # @Author: Benjamin Held
 # @Date:   2020-03-19 16:54:37
 # @Last Modified by:   Benjamin Held
-# @Last Modified time: 2020-03-20 13:45:30
+# @Last Modified time: 2020-03-20 16:42:14
 
 require 'spec_helper'
 require 'wrf_library/wrf'
 require_relative '../../lib/data/forecast_repository'
-require_relative '../../lib/threshold/threshold'
+require_relative '../../lib/threshold'
 
 describe Threshold::WindThreshold do
 

@@ -1,17 +1,17 @@
 # @Author: Benjamin Held
 # @Date:   2019-05-08 15:34:21
 # @Last Modified by:   Benjamin Held
-# @Last Modified time: 2020-02-26 15:13:34
+# @Last Modified time: 2020-03-20 16:40:52
 
 module WrfForecast
 
   require 'wrf_library/wrf'
-  require_relative '../parameter/parameter'
-  require_relative '../help/help_output'
+  require_relative './parameter'
+  require_relative './help/help_output'
   
   # Dummy class to get access to the instance variables
   class << self
-    # @return [DataRepository] the repository storing the datasets
+    # @return [WrfHandler] the repository storing the datasets
     attr_reader :wrf_handler
     # @return [Parameter::ParameterHandler] the handler controlling
     #   the parameters
