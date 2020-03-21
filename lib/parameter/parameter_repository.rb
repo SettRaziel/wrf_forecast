@@ -1,7 +1,7 @@
 # @Author: Benjamin Held
 # @Date:   2015-06-12 10:45:36
 # @Last Modified by:   Benjamin Held
-# @Last Modified time: 2020-03-21 12:37:29
+# @Last Modified time: 2020-03-21 15:07:20
 
 # Parent module which holdes the classes dealing with reading and validating
 # the provided input parameters
@@ -37,7 +37,7 @@ module Parameter
 
     # method to set the default values when parameter --default is set
     def create_defaults
-      @parameters[:date] = Time.parse('00:00')
+      @parameters[:date] = Time.parse('00:00').to_s
       @parameters[:period] = '24'
       @parameters[:default] = true
     end

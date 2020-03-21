@@ -1,7 +1,7 @@
 # @Author: Benjamin Held
 # @Date:   2019-05-08 15:34:21
 # @Last Modified by:   Benjamin Held
-# @Last Modified time: 2020-03-20 16:40:52
+# @Last Modified time: 2020-03-21 10:30:08
 
 module WrfForecast
 
@@ -23,6 +23,7 @@ module WrfForecast
   # @param [Array] arguments the input values from the terminal input ARGV
   def self.initialize_parameter(arguments)
     @parameter_handler = Parameter::ParameterHandler.new(arguments)
+    initialize_wrf_handler
   end
 
   # singleton method to initialize the wrf handler
@@ -35,14 +36,12 @@ module WrfForecast
   # call to print the help text
   def self.print_help
     HelpOutput.print_help_for(@parameter_handler.repository.parameters[:help])
-    exit(0)
   end
 
   # call to print version number and author
   def self.print_version
     puts 'wrf_forecast version 0.0.1'.yellow
     puts 'Created by Benjamin Held (March 2019)'.yellow
-    exit(0)
   end
 
   # call for standard error output
@@ -50,7 +49,6 @@ module WrfForecast
   def self.print_error(message)
     puts "#{message}".red
     puts 'For help type: ruby <script> --help'.green
-    exit(0)
   end
 
 end
