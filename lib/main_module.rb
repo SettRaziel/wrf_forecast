@@ -1,7 +1,7 @@
 # @Author: Benjamin Held
 # @Date:   2019-05-08 15:34:21
 # @Last Modified by:   Benjamin Held
-# @Last Modified time: 2020-03-21 10:30:08
+# @Last Modified time: 2020-03-21 20:21:42
 
 module WrfForecast
 
@@ -13,9 +13,10 @@ module WrfForecast
   class << self
     # @return [WrfHandler] the repository storing the datasets
     attr_reader :wrf_handler
-    # @return [Parameter::ParameterHandler] the handler controlling
-    #   the parameters
+    # @return [Parameter::ParameterHandler] the handler controlling the parameters
     attr_reader :parameter_handler
+    # @return [ForecastHandler] the handler for the rehashed forecast data
+    attr_reader :forecast_handler
   end
 
 
@@ -24,13 +25,27 @@ module WrfForecast
   def self.initialize_parameter(arguments)
     @parameter_handler = Parameter::ParameterHandler.new(arguments)
     initialize_wrf_handler
+    initialize_forecast
   end
 
   # singleton method to initialize the wrf handler
   def self.initialize_wrf_handler
+    if [@parameter_handler != nil]
       filename = @parameter_handler.repository.parameters[:file]
       time = @parameter_handler.repository.parameters[:date]
       @wrf_handler = WrfLibrary::Wrf::WrfHandler.new(filename, time)
+    else
+      raise ArgumentError, 'Error: Required input data is not initialized.'
+    end
+  end
+
+  # singleton method to initialize the forecast handler
+  def self.initialize_forecast
+    if (@wrf_handler != nil)
+      @forecast_handler = ForecastHandler.new(@wrf_handler)
+    else
+      raise ArgumentError, 'Error: Required forecast data is not initialized.'
+    end
   end
 
   # call to print the help text
