@@ -2,7 +2,7 @@
 # @Author: Benjamin Held
 # @Date:   2020-03-16 20:59:23
 # @Last Modified by:   Benjamin Held
-# @Last Modified time: 2020-03-16 21:18:30
+# @Last Modified time: 2020-03-21 11:27:37
 
 require 'spec_helper'
 require_relative '../../lib/help/help_output'
@@ -16,7 +16,7 @@ describe HelpOutput do
           HelpOutput.print_help_for(:default) 
         }.to output("WRF forecast help:".light_yellow + "\n" + \
                     "     --default  ".light_blue +  \
-                    "runs the script with date as today at midnight and a 84 h forecast period\n").to_stdout
+                    "runs the script with date as today at midnight and a 24 h forecast period\n").to_stdout
       end
     end
   end
@@ -57,7 +57,7 @@ describe HelpOutput do
                     " -h, --help     ".light_blue + "show help text\n" + \
                     " -v, --version  ".light_blue + "prints the current version of the project\n" + \
                     "     --default  ".light_blue +  \
-                    "runs the script with date as today at midnight and a 84 h forecast period\n" + \
+                    "runs the script with date as today at midnight and a 24 h forecast period\n" + \
                     " -d, --date     ".light_blue + "argument:".red + " <date>".yellow  + \
                     "; specifies the start_date of the requested forecast\n" + \
                     " -p, --period   ".light_blue + "argument:".red + " <period>".yellow  + \

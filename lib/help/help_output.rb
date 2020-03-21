@@ -1,7 +1,7 @@
 # @Author: Benjamin Held
 # @Date:   2019-05-07 10:03:48
 # @Last Modified by:   Benjamin Held
-# @Last Modified time: 2020-03-16 21:16:16
+# @Last Modified time: 2020-03-21 10:27:06
 
 require 'ruby_utils/help_output'
 
@@ -13,7 +13,7 @@ class HelpOutput < RubyUtils::BasicHelpOutput
   # method to specify and add the help entries with help text only
   def self.add_single_help_entries
     add_simple_text(:default, '     --default  ', 
-          'runs the script with date as today at midnight and a 84 h forecast period')
+          'runs the script with date as today at midnight and a 24 h forecast period')
     nil
   end
 
