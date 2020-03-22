@@ -1,13 +1,14 @@
 # @Author: Benjamin Held
 # @Date:   2019-05-08 15:34:21
 # @Last Modified by:   Benjamin Held
-# @Last Modified time: 2020-03-21 20:21:42
+# @Last Modified time: 2020-03-22 11:27:15
+  
+require 'wrf_library/wrf'
+require_relative './parameter'
+require_relative './help/help_output'
+require_relative './forecast/forecast_handler'
 
 module WrfForecast
-
-  require 'wrf_library/wrf'
-  require_relative './parameter'
-  require_relative './help/help_output'
   
   # Dummy class to get access to the instance variables
   class << self
@@ -18,7 +19,6 @@ module WrfForecast
     # @return [ForecastHandler] the handler for the rehashed forecast data
     attr_reader :forecast_handler
   end
-
 
   # singleton method to initialize the parameter repositories
   # @param [Array] arguments the input values from the terminal input ARGV

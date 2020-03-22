@@ -2,12 +2,13 @@
 # @Author: Benjamin Held
 # @Date:   2020-03-21 19:45:31
 # @Last Modified by:   Benjamin Held
-# @Last Modified time: 2020-03-21 20:07:16
+# @Last Modified time: 2020-03-22 10:50:34
 
 require 'spec_helper'
 require 'wrf_library/wrf'
 require_relative '../../lib/data/forecast_repository'
 require_relative '../../lib/threshold'
+require_relative '../../lib/forecast/forecast_handler'
 
 describe ForecastHandler do
 

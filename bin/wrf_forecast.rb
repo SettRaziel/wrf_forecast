@@ -1,23 +1,22 @@
 # @Author: Benjamin Held
 # @Date:   2019-04-22 16:00:53
 # @Last Modified by:   Benjamin Held
-# @Last Modified time: 2020-02-26 14:58:32
+# @Last Modified time: 2020-03-22 11:27:24
 
 require 'ruby_utils/string'
-require_relative '../lib/main/main_module'
+require_relative '../lib/main_module'
 
 begin
   WrfForecast::initialize_parameter(ARGV)
   parameter_handler = WrfForecast.parameter_handler
   
-  WrfForecast.print_help() if (parameter_handler.repository.parameters[:help])
-  if (parameter_handler.repository.parameters[:version])
+  if (parameter_handler.repository.parameters[:help])
+    WrfForecast.print_help() 
+  elsif (parameter_handler.repository.parameters[:version])
     WrfForecast.print_version()
+  else
+    # start forecast form here
   end
-
-  WrfForecast::initialize_wrf_handler
-
-  puts WrfForecast.wrf_handler.data_repository.meta_data.inspect
 
 rescue StandardError, NotImplementedError => e
     WrfForecast.print_error(e.message)
