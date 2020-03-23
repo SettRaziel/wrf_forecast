@@ -2,7 +2,7 @@
 # @Author: Benjamin Held
 # @Date:   2020-03-12 19:05:50
 # @Last Modified by:   Benjamin Held
-# @Last Modified time: 2020-03-14 12:02:33
+# @Last Modified time: 2020-03-23 17:33:54
 
 # This class serves as the creation and storage component of a wind direction distribution
 class WindDirectionRepository
@@ -52,7 +52,20 @@ class WindDirectionRepository
       @direction_distribution[sector] = @direction_distribution[sector] + 1
     }
     return @direction_distribution
-  end    
+  end
+
+  # method to determine the prevalent wind direction
+  def determine_prevalent_direction
+    prevalent_direction = nil
+    count = 0
+    @direction_distribution.each_pair { |key, value|
+      if (value > count)
+        prevalent_direction = key
+        count = value
+      end
+    }
+    return prevalent_direction
+  end
 
   private
 

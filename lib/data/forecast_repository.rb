@@ -1,7 +1,7 @@
 # @Author: Benjamin Held
 # @Date:   2020-02-14 19:44:57
 # @Last Modified by:   Benjamin Held
-# @Last Modified time: 2020-03-20 21:58:25
+# @Last Modified time: 2020-03-23 17:33:17
 
 require 'ruby_utils/statistic'
 require_relative 'wind_direction_repository'
@@ -10,13 +10,12 @@ class ForecastRepository
   
   # @return [Hash] the extreme values for the interval data
   attr_reader :extreme_values
-
   # @return [Hash] the forecast data identified by a symbol
   attr_reader :forecast_data
-
   # @return [Hash] the wind direction distribution
   attr_reader :direction_distribution
-
+  # @return [Symbol] the prevalent wind direction
+  attr_reader :prevalent_direction
   # @return [Array] the hourly rain sums
   attr_reader :hourly_rain
 
@@ -70,6 +69,7 @@ class ForecastRepository
     direction_repository = WindDirectionRepository.new()
     direction_repository.generate_direction_distribution(@forecast_data[:wind_direction])
     @direction_distribution = direction_repository.direction_distribution
+    @prevalent_direction = direction_repository.determine_prevalent_direction
     nil
   end
 
