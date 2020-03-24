@@ -2,8 +2,10 @@
 # @Author: Benjamin Held
 # @Date:   2020-03-23 16:27:56
 # @Last Modified by:   Benjamin Held
-# @Last Modified time: 2020-03-23 17:35:52
+# @Last Modified time: 2020-03-24 16:30:49
 
+# This class generates the forecast text for the wind speed
+# and direction of the forecast
 class WindText
 
   # @return [String] the forecast text for the wind forecast

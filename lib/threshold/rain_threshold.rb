@@ -2,7 +2,7 @@
 # @Author: Benjamin Held
 # @Date:   2020-03-20 12:14:58
 # @Last Modified by:   Benjamin Held
-# @Last Modified time: 2020-03-20 13:49:39
+# @Last Modified time: 2020-03-24 19:19:51
 
 module Threshold
 
@@ -14,7 +14,7 @@ module Threshold
   # * strong rain: the hourly rain sum exceeds 15 mm per hour
   # * heavy rain: the hourly rain sum exceeds 25 mm per hour
   # * extreme rain: the hourly rain sum exceeds 40 mm per hour
-  # * continous rain: the rain sum over
+  # * continous rain: the rain sum over 24 hours exceeds a total of 30 mm
   class RainThreshold < BaseThreshold
 
     private
@@ -46,8 +46,7 @@ module Threshold
     end
 
     # method to check if the data sample offers enough data for the indicators
-    # less than 720 data points means, less than 1 data point every 2 minutes
-    # less then 48 data points means, less than 2 data points per hours
+    # if we dont have 24 values we do not have hourly rain for the day
     # @raise [ArgumentError] if the data values are not sufficient
     def check_data_values(data_values)
       if (data_values.size != 24)
