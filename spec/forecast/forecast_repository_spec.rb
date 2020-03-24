@@ -2,7 +2,7 @@
 # @Author: Benjamin Held
 # @Date:   2020-03-08 18:13:30
 # @Last Modified by:   Benjamin Held
-# @Last Modified time: 2020-03-20 22:02:11
+# @Last Modified time: 2020-03-24 16:41:29
 
 require 'spec_helper'
 require 'wrf_library/wrf'
@@ -113,6 +113,18 @@ describe ForecastRepository do
         expect(rain_sum.size).to match(84)
         expect(rain_sum[0].round(3)).to match(0.0)
         expect(rain_sum[8].round(3)).to match(0.272)
+      end
+    end
+  end
+
+  describe ".new" do
+    context "given a meteogram output file and the date" do
+      it "initialize handler, fill the forecast data, check rain sum extreme values" do
+        handler = WrfLibrary::Wrf::WrfHandler.new(File.join(__dir__,"../files/Ber.d01.TS"), Date.new(2020, 06, 29))
+        repository = ForecastRepository.new(handler)
+        extreme_values = repository.extreme_values[:rain]
+        expect(extreme_values.maximum.round(3)).to match(0.334)
+        expect(extreme_values.minimum.round(3)).to match(0.0)
       end
     end
   end

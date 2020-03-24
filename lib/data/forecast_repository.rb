@@ -1,11 +1,13 @@
 # @Author: Benjamin Held
 # @Date:   2020-02-14 19:44:57
 # @Last Modified by:   Benjamin Held
-# @Last Modified time: 2020-03-23 17:33:17
+# @Last Modified time: 2020-03-24 16:33:27
 
 require 'ruby_utils/statistic'
 require_relative 'wind_direction_repository'
 
+# This class contains all relevant forecast data that is required for
+# generating a forecast text
 class ForecastRepository
   
   # @return [Hash] the extreme values for the interval data
@@ -106,6 +108,7 @@ class ForecastRepository
     if (hourly_rain.size < 24)
       @hourly_rain << rain_data[rain_data.size-1] - previous_hour
     end
+    @extreme_values[:rain] = RubyUtils::Statistic.extreme_values(@hourly_rain)
     nil
   end
 
