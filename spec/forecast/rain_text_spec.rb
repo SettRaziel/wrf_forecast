@@ -2,7 +2,7 @@
 # @Author: Benjamin Held
 # @Date:   2020-03-24 16:47:58
 # @Last Modified by:   Benjamin Held
-# @Last Modified time: 2020-03-25 15:28:29
+# @Last Modified time: 2020-03-26 18:01:15
 
 require 'spec_helper'
 require 'ruby_utils/statistic'
@@ -22,7 +22,7 @@ describe RainText do
         extreme_values = RubyUtils::ExtremeValues.new(0, 2)
         text = RainText.new(extreme_values, rain_values, indicators.indicators)
         expected = 'The forecast does predict normal rain with a maximum of '
-        expected.concat('2 mm in 1 hour and some dry periods.')
+        expected.concat('2 mm in 1 hour and some dry periods during the day.')
         expect(text.forecast_text).to match(expected)
       end
     end
