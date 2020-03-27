@@ -2,7 +2,7 @@
 # @Author: Benjamin Held
 # @Date:   2020-03-22 11:32:06
 # @Last Modified by:   Benjamin Held
-# @Last Modified time: 2020-03-24 16:31:30
+# @Last Modified time: 2020-03-27 15:05:26
 
 # This class generates the forecast text for the temperature
 # data of the forecast
@@ -55,7 +55,7 @@ class TemperatureText
     text = ' The maximum temperature will reach up to '
     text.concat((@extreme_values.maximum - 273.15).ceil.to_s)
     text.concat(' degrees celsius. The minimum temperature will be ')
-    text.concat((@extreme_values.minimum - 273.15).ceil.to_s)
+    text.concat((@extreme_values.minimum - 273.15).floor.to_s)
     text.concat(' degrees celsius.')
     return text
   end

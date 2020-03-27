@@ -2,7 +2,7 @@
 # @Author: Benjamin Held
 # @Date:   2020-03-22 10:46:55
 # @Last Modified by:   Benjamin Held
-# @Last Modified time: 2020-03-26 21:03:55
+# @Last Modified time: 2020-03-27 10:10:37
 
 require 'wrf_library/wrf'
 require_relative '../data/forecast_repository'
@@ -27,10 +27,11 @@ class ForecastText
 
   private
 
+  # @return [TemperatureText] the class generating the temperature forecast
   attr_reader :temperature_text
-
+  # @return [WindText] the class generating the wind forecast
   attr_reader :wind_text
-
+  # @return [RainText] the class generating the rain forecast
   attr_reader :rain_text
 
   # method to create the forcast text based on the data and meta information
