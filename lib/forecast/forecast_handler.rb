@@ -2,7 +2,7 @@
 # @Author: Benjamin Held
 # @Date:   2020-03-21 17:34:42
 # @Last Modified by:   Benjamin Held
-# @Last Modified time: 2020-03-22 10:47:59
+# @Last Modified time: 2020-03-27 19:30:32
 
 require_relative '../data/forecast_repository'
 require_relative '../threshold'
@@ -15,12 +15,17 @@ class ForecastHandler
   attr_reader :forecast_repository
   # @return [ThresholdHandler] the handler with the threshold indicators
   attr_reader :threshold_handler
+  # @return [ForecastText] the class creation the forecast text
+  attr_reader :forecast_text
 
   # initialization
-  # @param [WrfHandler] the wrf handler with the data
+  # @param [WrfHandler] wrf_handler the wrf handler with the input data
   def initialize(wrf_handler)
     @forecast_repository = ForecastRepository.new(wrf_handler)
     @threshold_handler = Threshold::ThresholdHandler.new(@forecast_repository)
+    meta_data = wrf_handler.data_repository.meta_data
+    @forecast_text = ForecastText.new(meta_data, @forecast_repository, 
+                                      @threshold_handler)
   end
 
 end

@@ -2,7 +2,7 @@
 # @Author: Benjamin Held
 # @Date:   2020-03-21 19:45:31
 # @Last Modified by:   Benjamin Held
-# @Last Modified time: 2020-03-22 10:50:34
+# @Last Modified time: 2020-03-27 15:19:46
 
 require 'spec_helper'
 require 'wrf_library/wrf'
@@ -20,6 +20,7 @@ describe ForecastHandler do
         forecast_handler = ForecastHandler.new(wrf_handler)
         expect(forecast_handler.forecast_repository).to be_truthy
         expect(forecast_handler.threshold_handler).to be_truthy
+        expect(forecast_handler.forecast_text).to be_truthy
       end
     end
   end

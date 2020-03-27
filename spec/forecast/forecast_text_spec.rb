@@ -2,7 +2,7 @@
 # @Author: Benjamin Held
 # @Date:   2020-03-26 12:56:07
 # @Last Modified by:   Benjamin Held
-# @Last Modified time: 2020-03-27 15:08:28
+# @Last Modified time: 2020-03-27 15:12:17
 
 require 'spec_helper'
 require_relative '../../lib/forecast/forecast_text'
@@ -31,7 +31,7 @@ describe ForecastText do
     end
   end
 
-    describe ".new" do
+  describe ".new" do
     context "given a meteogram output file and the date" do
       it "initialize handler, fill the forecast data, create forecast for Hannover" do
         wrf_handler = WrfLibrary::Wrf::WrfHandler.new(File.join(__dir__,"../files/Han_24.d01.TS"), 
