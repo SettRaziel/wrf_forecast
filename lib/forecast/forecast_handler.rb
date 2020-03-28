@@ -2,10 +2,11 @@
 # @Author: Benjamin Held
 # @Date:   2020-03-21 17:34:42
 # @Last Modified by:   Benjamin Held
-# @Last Modified time: 2020-03-27 19:30:32
+# @Last Modified time: 2020-03-28 15:19:21
 
 require_relative '../data/forecast_repository'
 require_relative '../threshold'
+require_relative 'forecast_text'
 
 # This class maintains the data and handler classes which are needed to generate
 # the forecast based on the given data

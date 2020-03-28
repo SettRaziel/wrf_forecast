@@ -2,11 +2,14 @@
 # @Author: Benjamin Held
 # @Date:   2020-03-22 10:46:55
 # @Last Modified by:   Benjamin Held
-# @Last Modified time: 2020-03-27 10:10:37
+# @Last Modified time: 2020-03-28 15:44:15
 
 require 'wrf_library/wrf'
 require_relative '../data/forecast_repository'
 require_relative '../threshold'
+require_relative './english/temperature/temperature_text'
+require_relative './english/wind/wind_text'
+require_relative './english/rain/rain_text'
 
 class ForecastText
 

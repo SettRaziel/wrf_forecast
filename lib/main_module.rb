@@ -1,7 +1,7 @@
 # @Author: Benjamin Held
 # @Date:   2019-05-08 15:34:21
 # @Last Modified by:   Benjamin Held
-# @Last Modified time: 2020-03-22 11:27:15
+# @Last Modified time: 2020-03-28 15:47:35
   
 require 'wrf_library/wrf'
 require_relative './parameter'
@@ -24,8 +24,13 @@ module WrfForecast
   # @param [Array] arguments the input values from the terminal input ARGV
   def self.initialize_parameter(arguments)
     @parameter_handler = Parameter::ParameterHandler.new(arguments)
+  end
+
+  # singleton method to initialize further required classes and create the forecast
+  def self.output_forecast
     initialize_wrf_handler
     initialize_forecast
+    puts @forecast_handler.forecast_text.forecast_text
   end
 
   # singleton method to initialize the wrf handler
