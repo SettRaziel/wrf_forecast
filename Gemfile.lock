@@ -1,0 +1,63 @@
+GIT
+  remote: https://github.com/SettRaziel/ruby_utils
+  revision: ff3e4633041b3793acc7e4893d517c34bcccf301
+  specs:
+    ruby_utils (0.0.1)
+
+GIT
+  remote: https://github.com/SettRaziel/wrf_library
+  revision: ebc999cc6af067136e2efdf3509085ac79ba1de7
+  specs:
+    wrf_library (0.0.1)
+      ruby_utils (~> 0.0.1)
+
+GEM
+  remote: https://rubygems.org/
+  specs:
+    coveralls (0.8.23)
+      json (>= 1.8, < 3)
+      simplecov (~> 0.16.1)
+      term-ansicolor (~> 1.3)
+      thor (>= 0.19.4, < 2.0)
+      tins (~> 1.6)
+    diff-lcs (1.3)
+    docile (1.3.2)
+    json (2.3.0)
+    rake (13.0.1)
+    rspec (3.9.0)
+      rspec-core (~> 3.9.0)
+      rspec-expectations (~> 3.9.0)
+      rspec-mocks (~> 3.9.0)
+    rspec-core (3.9.1)
+      rspec-support (~> 3.9.1)
+    rspec-expectations (3.9.1)
+      diff-lcs (>= 1.2.0, < 2.0)
+      rspec-support (~> 3.9.0)
+    rspec-mocks (3.9.1)
+      diff-lcs (>= 1.2.0, < 2.0)
+      rspec-support (~> 3.9.0)
+    rspec-support (3.9.2)
+    simplecov (0.16.1)
+      docile (~> 1.1)
+      json (>= 1.8, < 3)
+      simplecov-html (~> 0.10.0)
+    simplecov-html (0.10.2)
+    sync (0.5.0)
+    term-ansicolor (1.7.1)
+      tins (~> 1.0)
+    thor (1.0.1)
+    tins (1.24.1)
+      sync
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  coveralls
+  rake
+  rspec
+  ruby_utils!
+  wrf_library!
+
+BUNDLED WITH
+   2.1.4

@@ -1,23 +1,25 @@
 # @Author: Benjamin Held
 # @Date:   2019-05-08 15:34:21
 # @Last Modified by:   Benjamin Held
-# @Last Modified time: 2019-09-30 21:57:37
+# @Last Modified time: 2020-03-30 09:45:06
+  
+require 'wrf_library/wrf'
+require_relative './parameter'
+require_relative './help/help_output'
+require_relative './forecast/forecast_handler'
 
+# This module is the main entry point and will be called from the main forecast script
 module WrfForecast
-
-  require_relative '../parameter/parameter'
-  require_relative '../help/help_output'
-  require_relative '../wrf_library/data/wrf/wrf'
   
   # Dummy class to get access to the instance variables
   class << self
-    # @return [DataRepository] the repository storing the datasets
+    # @return [WrfHandler] the repository storing the datasets
     attr_reader :wrf_handler
-    # @return [Parameter::ParameterHandler] the handler controlling
-    #   the parameters
+    # @return [Parameter::ParameterHandler] the handler controlling the parameters
     attr_reader :parameter_handler
+    # @return [ForecastHandler] the handler for the rehashed forecast data
+    attr_reader :forecast_handler
   end
-
 
   # singleton method to initialize the parameter repositories
   # @param [Array] arguments the input values from the terminal input ARGV
@@ -25,24 +27,42 @@ module WrfForecast
     @parameter_handler = Parameter::ParameterHandler.new(arguments)
   end
 
+  # singleton method to initialize further required classes and create the forecast
+  def self.output_forecast
+    initialize_wrf_handler
+    initialize_forecast
+    puts @forecast_handler.forecast_text.forecast_text
+  end
+
   # singleton method to initialize the wrf handler
   def self.initialize_wrf_handler
+    if [@parameter_handler != nil]
       filename = @parameter_handler.repository.parameters[:file]
       time = @parameter_handler.repository.parameters[:date]
-      @wrf_handler = Wrf::WrfHandler.new(filename, time)
+      @wrf_handler = WrfLibrary::Wrf::WrfHandler.new(filename, time)
+    else
+      raise ArgumentError, 'Error: Required input data is not initialized.'
+    end
+  end
+
+  # singleton method to initialize the forecast handler
+  def self.initialize_forecast
+    if (@wrf_handler != nil)
+      @forecast_handler = ForecastHandler.new(@wrf_handler)
+    else
+      raise ArgumentError, 'Error: Required forecast data is not initialized.'
+    end
   end
 
   # call to print the help text
   def self.print_help
     HelpOutput.print_help_for(@parameter_handler.repository.parameters[:help])
-    exit(0)
   end
 
   # call to print version number and author
   def self.print_version
     puts 'wrf_forecast version 0.0.1'.yellow
     puts 'Created by Benjamin Held (March 2019)'.yellow
-    exit(0)
   end
 
   # call for standard error output
@@ -50,7 +70,6 @@ module WrfForecast
   def self.print_error(message)
     puts "#{message}".red
     puts 'For help type: ruby <script> --help'.green
-    exit(0)
   end
 
 end

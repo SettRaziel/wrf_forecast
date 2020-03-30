@@ -1,3 +1,0 @@
-[submodule "lib/wrf_library"]
-	path = lib/wrf_library
-	url = git@github.com:SettRaziel/wrf_library.git

@@ -1,13 +1,13 @@
 # @Author: Benjamin Held
 # @Date:   2015-07-20 11:23:58
 # @Last Modified by:   Benjamin Held
-# @Last Modified time: 2019-09-30 21:57:33
+# @Last Modified time: 2020-02-26 15:17:23
 
 module Parameter
 
   # class to seperate the storage of the parameter in a repository entity and
   # checking for valid parameter combination as part of the application logic.
-  class ParameterHandler < BaseParameterHandler
+  class ParameterHandler < RubyUtils::Parameter::BaseParameterHandler
 
     # method to initialize the correct repository that should be used 
     # in this handler
@@ -25,8 +25,9 @@ module Parameter
 
     # private method to the specified parameter constraints
     def check_parameter_constraints
-      # check for mandatory date when help is not used
-      if (!@repository.parameters[:date] && !@repository.parameters[:help])
+      # check for mandatory date when help or version is not used
+      if (!@repository.parameters[:date] &&
+          !(@repository.parameters[:help] || @repository.parameters[:version]))
         raise ArgumentError, "Error: Parameter date is not set" 
       end
     end

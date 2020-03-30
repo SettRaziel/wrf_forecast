@@ -1,23 +1,28 @@
 # @Author: Benjamin Held
 # @Date:   2019-05-07 10:03:48
 # @Last Modified by:   Benjamin Held
-# @Last Modified time: 2019-05-07 10:05:31
-require_relative '../wrf_library/ruby_utils/help/help_output'
+# @Last Modified time: 2020-03-21 10:27:06
+
+require 'ruby_utils/help_output'
 
 # Output class for help text
-class HelpOutput < BasicHelpOutput
+class HelpOutput < RubyUtils::BasicHelpOutput
 
   private
 
   # method to specify and add the help entries with help text only
   def self.add_single_help_entries
+    add_simple_text(:default, '     --default  ', 
+          'runs the script with date as today at midnight and a 24 h forecast period')
     nil
   end
 
   # method to specify and add the help entries with help text and one argument
   def self.add_one_argument_help_entries
     add_single_argument_text(:date, ' -d, --date     ', ' <date>',
-          '; specifies the start_date of the requested forecast ')
+          '; specifies the start_date of the requested forecast')
+    add_single_argument_text(:period, ' -p, --period   ', ' <period>',
+          '; specifies the forecast period')
     nil
   end
 
