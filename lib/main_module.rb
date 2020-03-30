@@ -1,13 +1,14 @@
 # @Author: Benjamin Held
 # @Date:   2019-05-08 15:34:21
 # @Last Modified by:   Benjamin Held
-# @Last Modified time: 2020-03-28 15:47:35
+# @Last Modified time: 2020-03-30 09:45:06
   
 require 'wrf_library/wrf'
 require_relative './parameter'
 require_relative './help/help_output'
 require_relative './forecast/forecast_handler'
 
+# This module is the main entry point and will be called from the main forecast script
 module WrfForecast
   
   # Dummy class to get access to the instance variables
