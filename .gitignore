@@ -10,3 +10,6 @@ dev/
 
 # exclude coverage files
 coverage/
+
+# exclude gem informations
+*.gem

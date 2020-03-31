@@ -11,6 +11,11 @@ GIT
     wrf_library (0.0.1)
       ruby_utils (~> 0.0.1)
 
+PATH
+  remote: .
+  specs:
+    wrf_forecast (0.0.1)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -54,9 +59,10 @@ PLATFORMS
 
 DEPENDENCIES
   coveralls
-  rake
-  rspec
+  rake (~> 13.0, >= 13.0.1)
+  rspec (~> 3.9, >= 3.9.0)
   ruby_utils!
+  wrf_forecast!
   wrf_library!
 
 BUNDLED WITH

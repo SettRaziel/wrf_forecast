@@ -2,14 +2,14 @@
 # @Author: Benjamin Held
 # @Date:   2020-03-22 16:34:27
 # @Last Modified by:   Benjamin Held
-# @Last Modified time: 2020-03-22 17:35:50
+# @Last Modified time: 2020-03-31 16:47:54
 
 require 'spec_helper'
 require 'ruby_utils/statistic'
-require_relative '../../lib/threshold'
-require_relative '../../lib/forecast/english/temperature/temperature_text'
+require 'wrf_forecast/threshold'
+require 'wrf_forecast/forecast/english/temperature/temperature_text'
 
-describe TemperatureText do
+describe WrfForecast::TemperatureText do
 
   describe ".new" do
     context "given an array of temperature data for an ice day" do
@@ -20,9 +20,9 @@ describe TemperatureText do
                                271, 271, 272, 272, 271, 271, 271, 270, 270, 270,
                                269, 269, 269, 269, 268, 268, 268, 268, 268, 267
                              ]
-        indicators = Threshold::TemperatureThreshold.new(temperature_values)
+        indicators = WrfForecast::Threshold::TemperatureThreshold.new(temperature_values)
         extreme_values = RubyUtils::ExtremeValues.new(265.15, 272.15)
-        text = TemperatureText.new(extreme_values, indicators.indicators)
+        text = WrfForecast::TemperatureText.new(extreme_values, indicators.indicators)
         expected = 'Today will be a very frosty day.'
         expected.concat(' The maximum temperature will reach up to -1 degrees celsius.')
         expected.concat(' The minimum temperature will be -8 degrees celsius.')
@@ -40,9 +40,9 @@ describe TemperatureText do
                                272, 272, 273, 274, 271, 271, 271, 270, 270, 270,
                                269, 269, 269, 269, 268, 268, 268, 268, 268, 267
                              ]
-        indicators = Threshold::TemperatureThreshold.new(temperature_values)
+        indicators = WrfForecast::Threshold::TemperatureThreshold.new(temperature_values)
         extreme_values = RubyUtils::ExtremeValues.new(265.15, 274.15)
-        text = TemperatureText.new(extreme_values, indicators.indicators)
+        text = WrfForecast::TemperatureText.new(extreme_values, indicators.indicators)
         expected = 'Today will be a cold day.'
         expected.concat(' The maximum temperature will reach up to 1 degrees celsius.')
         expected.concat(' The minimum temperature will be -8 degrees celsius.')
@@ -60,9 +60,9 @@ describe TemperatureText do
                                281, 281, 282, 282, 281, 281, 281, 280, 280, 280,
                                279, 279, 279, 279, 278, 278, 278, 278, 278, 277
                              ]
-        indicators = Threshold::TemperatureThreshold.new(temperature_values)
+        indicators = WrfForecast::Threshold::TemperatureThreshold.new(temperature_values)
         extreme_values = RubyUtils::ExtremeValues.new(275.15, 282.15)
-        text = TemperatureText.new(extreme_values, indicators.indicators)
+        text = WrfForecast::TemperatureText.new(extreme_values, indicators.indicators)
         expected = 'Today will be a normal day.'
         expected.concat(' The maximum temperature will reach up to 9 degrees celsius.')
         expected.concat(' The minimum temperature will be 2 degrees celsius.')
@@ -80,9 +80,9 @@ describe TemperatureText do
                                300, 301, 301, 300, 300, 299, 298, 297, 296, 295,
                                294, 294, 293, 293, 292, 292, 291, 291, 290, 290
                              ]
-        indicators = Threshold::TemperatureThreshold.new(temperature_values)
+        indicators = WrfForecast::Threshold::TemperatureThreshold.new(temperature_values)
         extreme_values = RubyUtils::ExtremeValues.new(288.15, 301.05)
-        text = TemperatureText.new(extreme_values, indicators.indicators)
+        text = WrfForecast::TemperatureText.new(extreme_values, indicators.indicators)
         expected = 'Today will be a summer day.'
         expected.concat(' The maximum temperature will reach up to 28 degrees celsius.')
         expected.concat(' The minimum temperature will be 15 degrees celsius.')
@@ -100,9 +100,9 @@ describe TemperatureText do
                                305, 305, 304, 304, 303, 303, 302, 302, 301, 300,
                                299, 299, 298, 298, 297, 297, 296, 296, 296, 296
                              ]
-        indicators = Threshold::TemperatureThreshold.new(temperature_values)
+        indicators = WrfForecast::Threshold::TemperatureThreshold.new(temperature_values)
         extreme_values = RubyUtils::ExtremeValues.new(294.15, 305.25)
-        text = TemperatureText.new(extreme_values, indicators.indicators)
+        text = WrfForecast::TemperatureText.new(extreme_values, indicators.indicators)
         expected = 'Today will be a hot day with a tropical night.'
         expected.concat(' The maximum temperature will reach up to 33 degrees celsius.')
         expected.concat(' The minimum temperature will be 21 degrees celsius.')

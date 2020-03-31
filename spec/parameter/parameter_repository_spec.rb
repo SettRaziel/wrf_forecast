@@ -2,18 +2,18 @@
 # @Author: Benjamin Held
 # @Date:   2020-03-16 20:11:41
 # @Last Modified by:   Benjamin Held
-# @Last Modified time: 2020-03-20 16:42:40
+# @Last Modified time: 2020-03-31 16:49:23
 
 require 'spec_helper'
-require_relative '../../lib/parameter'
+require 'wrf_forecast/parameter'
 
-describe Parameter::ParameterRepository do
+describe WrfForecast::Parameter::ParameterRepository do
 
   describe ".new" do
     context "given the one element date flag" do
       it "create the repository with the correct flags" do
         arguments = ['-d', '2020-06-29', 'filename']
-        parameter_repository = Parameter::ParameterRepository.new(arguments)
+        parameter_repository = WrfForecast::Parameter::ParameterRepository.new(arguments)
         expect(parameter_repository.parameters[:date]).to match('2020-06-29')
       end
     end
@@ -23,7 +23,7 @@ describe Parameter::ParameterRepository do
     context "given the two element period flag with only one argument" do
       it "create the repository with the correct flags" do
         arguments = ['-p', '29', 'filename']
-        parameter_repository = Parameter::ParameterRepository.new(arguments)
+        parameter_repository = WrfForecast::Parameter::ParameterRepository.new(arguments)
         expect(parameter_repository.parameters[:period]).to match('29')
       end
     end
@@ -33,7 +33,7 @@ describe Parameter::ParameterRepository do
     context "given the default flag" do
       it "create the repository with the correct flags" do
         arguments = ['--default', 'filename']
-        parameter_repository = Parameter::ParameterRepository.new(arguments)
+        parameter_repository = WrfForecast::Parameter::ParameterRepository.new(arguments)
         expect(parameter_repository.parameters[:date].to_s).to match(Time.parse('00:00').to_s)
         expect(parameter_repository.parameters[:period]).to match('24')
       end
@@ -44,7 +44,7 @@ describe Parameter::ParameterRepository do
     context "given only the filename" do
       it "create the repository with the correct filename" do
         arguments = ['filename']
-        parameter_repository = Parameter::ParameterRepository.new(arguments)
+        parameter_repository = WrfForecast::Parameter::ParameterRepository.new(arguments)
         expect(parameter_repository.parameters[:file]).to match('filename')
       end
     end
@@ -55,7 +55,7 @@ describe Parameter::ParameterRepository do
       it "raise an argument error" do
         arguments = [ ]
         expect { 
-          Parameter::ParameterRepository.new(arguments)
+          WrfForecast::Parameter::ParameterRepository.new(arguments)
         }.to raise_error(ArgumentError)
       end
     end
@@ -66,7 +66,7 @@ describe Parameter::ParameterRepository do
       it "raise an argument error" do
         arguments = ['-1', 'filename']
         expect { 
-          Parameter::ParameterRepository.new(arguments)
+          WrfForecast::Parameter::ParameterRepository.new(arguments)
         }.to raise_error(ArgumentError)
       end
     end
@@ -76,7 +76,7 @@ describe Parameter::ParameterRepository do
     context "given the version flag as parameter" do
       it "set the flag for version output" do
         arguments = ['-v', 'filename']
-        parameter_repository = Parameter::ParameterRepository.new(arguments)
+        parameter_repository = WrfForecast::Parameter::ParameterRepository.new(arguments)
         expect(parameter_repository.parameters[:version]).to match(true)
       end
     end
@@ -86,7 +86,7 @@ describe Parameter::ParameterRepository do
     context "given the help flag as parameter" do
       it "set the flag for help output" do
         arguments = ['-h', 'filename']
-        parameter_repository = Parameter::ParameterRepository.new(arguments)
+        parameter_repository = WrfForecast::Parameter::ParameterRepository.new(arguments)
         expect(parameter_repository.parameters[:help]).to match(true)
       end
     end
@@ -96,7 +96,7 @@ describe Parameter::ParameterRepository do
     context "given the help flag with the date parameter" do
       it "set the flag for help output with the date" do
         arguments = ['-d', '-h', 'filename']
-        parameter_repository = Parameter::ParameterRepository.new(arguments)
+        parameter_repository = WrfForecast::Parameter::ParameterRepository.new(arguments)
         expect(parameter_repository.parameters[:help]).to match(:date)
       end
     end

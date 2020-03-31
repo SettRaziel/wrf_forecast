@@ -1,10 +1,10 @@
 # @Author: Benjamin Held
 # @Date:   2019-04-22 16:00:53
 # @Last Modified by:   Benjamin Held
-# @Last Modified time: 2020-03-28 15:45:29
+# @Last Modified time: 2020-03-31 17:26:48
 
 require 'ruby_utils/string'
-require_relative '../lib/main_module'
+require_relative '../lib/wrf_forecast'
 
 begin
   WrfForecast::initialize_parameter(ARGV)
@@ -19,5 +19,5 @@ begin
   end
 
 rescue StandardError, NotImplementedError => e
-    WrfForecast.print_error(e.message)
+  WrfForecast.print_error(e.message)
 end

@@ -1,12 +1,12 @@
 # @Author: Benjamin Held
 # @Date:   2019-05-08 15:34:21
 # @Last Modified by:   Benjamin Held
-# @Last Modified time: 2020-03-30 09:45:06
+# @Last Modified time: 2020-03-31 16:34:21
   
 require 'wrf_library/wrf'
-require_relative './parameter'
-require_relative './help/help_output'
-require_relative './forecast/forecast_handler'
+require 'wrf_forecast/parameter'
+require 'wrf_forecast/help/help_output'
+require 'wrf_forecast/forecast/forecast_handler'
 
 # This module is the main entry point and will be called from the main forecast script
 module WrfForecast
@@ -48,7 +48,7 @@ module WrfForecast
   # singleton method to initialize the forecast handler
   def self.initialize_forecast
     if (@wrf_handler != nil)
-      @forecast_handler = ForecastHandler.new(@wrf_handler)
+      @forecast_handler = WrfForecast::ForecastHandler.new(@wrf_handler)
     else
       raise ArgumentError, 'Error: Required forecast data is not initialized.'
     end
@@ -56,7 +56,7 @@ module WrfForecast
 
   # call to print the help text
   def self.print_help
-    HelpOutput.print_help_for(@parameter_handler.repository.parameters[:help])
+    WrfForecast::HelpOutput.print_help_for(@parameter_handler.repository.parameters[:help])
   end
 
   # call to print version number and author

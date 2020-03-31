@@ -2,14 +2,14 @@
 # @Author: Benjamin Held
 # @Date:   2020-03-23 16:57:26
 # @Last Modified by:   Benjamin Held
-# @Last Modified time: 2020-03-23 17:31:29
+# @Last Modified time: 2020-03-31 16:48:35
 
 require 'spec_helper'
 require 'ruby_utils/statistic'
-require_relative '../../lib/threshold'
-require_relative '../../lib/forecast/english/wind/wind_text'
+require 'wrf_forecast/threshold'
+require 'wrf_forecast/forecast/english/wind/wind_text'
 
-describe WindText do
+describe WrfForecast::WindText do
 
   describe ".new" do
     context "given an array of wind data for a normal day" do
@@ -19,9 +19,9 @@ describe WindText do
                               4,  5,  7,  7,  9,  9, 11, 11, 11, 11, 
                              10, 10,  9,  9,  8,  8,  8,  7,  8,  6,
                               5,  5,  4,  3,  4,  4,  3,  2,  1,  0 ]
-        indicators = Threshold::WindThreshold.new(windspeed_values)
+        indicators = WrfForecast::Threshold::WindThreshold.new(windspeed_values)
         extreme_values = RubyUtils::ExtremeValues.new(0, 11)
-        text = WindText.new(extreme_values, nil, indicators.indicators)
+        text = WrfForecast::WindText.new(extreme_values, nil, indicators.indicators)
         expected = 'The wind will be normal and will reach up to '
         expected.concat('40 km/h from circulatory directions. The mean wind will be 20 km/h.')
         expect(text.forecast_text).to match(expected)
@@ -37,9 +37,9 @@ describe WindText do
                               4,  5,  7,  7,  9,  9, 11, 11, 11, 11, 
                              12, 12, 14, 16, 13, 17, 14, 17, 18, 20,
                              18, 16, 14, 12, 10,  8,  6,  5,  5,  5 ]
-        indicators = Threshold::WindThreshold.new(windspeed_values)
+        indicators = WrfForecast::Threshold::WindThreshold.new(windspeed_values)
         extreme_values = RubyUtils::ExtremeValues.new(0, 20)
-        text = WindText.new(extreme_values, :E, indicators.indicators)
+        text = WrfForecast::WindText.new(extreme_values, :E, indicators.indicators)
         expected = 'The wind will be squall and will reach up to '
         expected.concat('72 km/h from east. The mean wind will be 36 km/h.')
         expect(text.forecast_text).to match(expected)
@@ -55,9 +55,9 @@ describe WindText do
                              14, 15, 17, 17, 19, 19, 21, 21, 21, 21, 
                              22, 22, 24, 26, 23, 27, 24, 19, 18, 20,
                              18, 16, 14, 12, 10,  8,  6,  5,  5,  5 ]
-        indicators = Threshold::WindThreshold.new(windspeed_values)
+        indicators = WrfForecast::Threshold::WindThreshold.new(windspeed_values)
         extreme_values = RubyUtils::ExtremeValues.new(2, 26)
-        text = WindText.new(extreme_values, :W, indicators.indicators)
+        text = WrfForecast::WindText.new(extreme_values, :W, indicators.indicators)
         expected = 'The wind will be stormy and will reach up to '
         expected.concat('94 km/h from west. The mean wind will be 51 km/h.')
         expect(text.forecast_text).to match(expected)
@@ -73,9 +73,9 @@ describe WindText do
                              14, 15, 17, 17, 19, 19, 21, 21, 21, 21, 
                              22, 24, 27, 29, 29, 27, 24, 19, 18, 20,
                              18, 16, 14, 12, 10,  8,  6,  5,  5,  5 ]
-        indicators = Threshold::WindThreshold.new(windspeed_values)
+        indicators = WrfForecast::Threshold::WindThreshold.new(windspeed_values)
         extreme_values = RubyUtils::ExtremeValues.new(2, 29)
-        text = WindText.new(extreme_values, :SW, indicators.indicators)
+        text = WrfForecast::WindText.new(extreme_values, :SW, indicators.indicators)
         expected = 'The wind will be very stromy and will reach up to '
         expected.concat('105 km/h from southwest. The mean wind will be 56 km/h.')
         expect(text.forecast_text).to match(expected)
@@ -91,9 +91,9 @@ describe WindText do
                              14, 15, 17, 17, 21, 23, 26, 25, 26, 28, 
                              29, 30, 33, 29, 29, 27, 24, 19, 18, 20,
                              18, 16, 14, 12, 14, 15, 12, 15, 14, 12 ]
-        indicators = Threshold::WindThreshold.new(windspeed_values)
+        indicators = WrfForecast::Threshold::WindThreshold.new(windspeed_values)
         extreme_values = RubyUtils::ExtremeValues.new(2, 33)
-        text = WindText.new(extreme_values, :NE, indicators.indicators)
+        text = WrfForecast::WindText.new(extreme_values, :NE, indicators.indicators)
         expected = 'The wind will be extremly stromy and will reach up to '
         expected.concat('119 km/h from northeast. The mean wind will be 63 km/h.')
         expect(text.forecast_text).to match(expected)

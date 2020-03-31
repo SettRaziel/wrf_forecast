@@ -2,10 +2,10 @@
 # @Author: Benjamin Held
 # @Date:   2020-03-20 21:08:30
 # @Last Modified by:   Benjamin Held
-# @Last Modified time: 2020-03-28 15:56:30
+# @Last Modified time: 2020-03-31 16:18:10
 
 require 'spec_helper'
-require_relative '../../lib/main_module'
+require 'wrf_forecast'
 
 describe WrfForecast do
 
