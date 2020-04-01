@@ -2,7 +2,7 @@
 # @Author: Benjamin Held
 # @Date:   2020-03-26 12:56:07
 # @Last Modified by:   Benjamin Held
-# @Last Modified time: 2020-03-31 16:46:41
+# @Last Modified time: 2020-04-01 16:47:19
 
 require 'spec_helper'
 require 'wrf_forecast/forecast/forecast_text'
@@ -19,11 +19,11 @@ describe WrfForecast::ForecastText do
         meta_data = wrf_handler.data_repository.meta_data
         forecast_text = WrfForecast::ForecastText.new(meta_data, repository, threshold_handler)
         expected = "Weather forecast of Berlin for the 2020-02-23.\n\n"
-        expected.concat('Today will be a normal day.')
-        expected.concat(' The maximum temperature will reach up to 13 degrees celsius.')
-        expected.concat(" The minimum temperature will be 6 degrees celsius.\n")
+        expected.concat('Today will be a cold day.')
+        expected.concat(' The maximum temperature will reach up to 10 degrees celsius.')
+        expected.concat(" The minimum temperature will be -4 degrees celsius.\n")
         expected.concat('The wind will be normal and will reach up to ')
-        expected.concat("14 km/h from northeast. The mean wind will be 10 km/h.\n")
+        expected.concat("23 km/h from west. The mean wind will be 16 km/h.\n")
         expected.concat('The forecast does predict normal rain with a maximum of ')
         expected.concat('1 mm in 1 hour and some dry periods during the day.')
         expect(forecast_text.forecast_text).to match(expected)

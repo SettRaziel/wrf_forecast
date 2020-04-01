@@ -1,8 +1,9 @@
 # @Author: Benjamin Held
 # @Date:   2019-05-08 15:34:21
 # @Last Modified by:   Benjamin Held
-# @Last Modified time: 2020-03-31 16:34:21
+# @Last Modified time: 2020-04-01 16:23:22
   
+require 'ruby_utils/parameter_converter'  
 require 'wrf_library/wrf'
 require 'wrf_forecast/parameter'
 require 'wrf_forecast/help/help_output'
@@ -39,7 +40,10 @@ module WrfForecast
     if [@parameter_handler != nil]
       filename = @parameter_handler.repository.parameters[:file]
       time = @parameter_handler.repository.parameters[:date]
-      @wrf_handler = WrfLibrary::Wrf::WrfHandler.new(filename, time)
+      period = RubyUtils::ParameterConverter.convert_int_parameter(
+               @parameter_handler.repository.parameters[:period])
+      # use 24 hours for a forecast right now to create a forecast text for a day
+      @wrf_handler = WrfLibrary::Wrf::WrfHandler.new(filename, time, period)
     else
       raise ArgumentError, 'Error: Required input data is not initialized.'
     end

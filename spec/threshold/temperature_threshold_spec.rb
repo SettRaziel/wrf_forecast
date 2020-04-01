@@ -2,7 +2,7 @@
 # @Author: Benjamin Held
 # @Date:   2020-03-19 10:01:28
 # @Last Modified by:   Benjamin Held
-# @Last Modified time: 2020-03-31 16:50:35
+# @Last Modified time: 2020-04-01 16:44:58
 
 require 'spec_helper'
 require 'wrf_library/wrf'
@@ -18,7 +18,7 @@ describe WrfForecast::Threshold::TemperatureThreshold do
         temperature_values = handler.retrieve_data_set(:air_temperature)
         indicators = WrfForecast::Threshold::TemperatureThreshold.new(temperature_values)
         expect(indicators.indicators[:ice_day]).to eq(false)
-        expect(indicators.indicators[:frost_day]).to eq(false)
+        expect(indicators.indicators[:frost_day]).to eq(true)
         expect(indicators.indicators[:summer_day]).to eq(false)
         expect(indicators.indicators[:hot_day]).to eq(false)
         expect(indicators.indicators[:tropical_night]).to eq(false)
