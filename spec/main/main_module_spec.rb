@@ -2,7 +2,7 @@
 # @Author: Benjamin Held
 # @Date:   2020-03-20 21:08:30
 # @Last Modified by:   Benjamin Held
-# @Last Modified time: 2020-04-01 16:48:09
+# @Last Modified time: 2020-04-01 21:43:49
 
 require 'spec_helper'
 require 'wrf_forecast'
@@ -35,8 +35,7 @@ describe WrfForecast do
         expected.concat(" The minimum temperature will be -4 degrees celsius.\n")
         expected.concat('The wind will be normal and will reach up to ')
         expected.concat("23 km/h from west. The mean wind will be 16 km/h.\n")
-        expected.concat('The forecast does predict normal rain with a maximum of ')
-        expected.concat("1 mm in 1 hour and some dry periods during the day.\n")
+        expected.concat("The forecast does not predict rain.\n")
         expect {
           WrfForecast.output_forecast
         }.to output(expected).to_stdout
@@ -63,7 +62,7 @@ describe WrfForecast do
         expected.concat('The wind will be normal and will reach up to ')
         expected.concat("17 km/h from northeast. The mean wind will be 11 km/h.\n")
         expected.concat('The forecast does predict normal rain with a maximum of ')
-        expected.concat("1 mm in 1 hour and some dry periods during the day.\n")
+        expected.concat("0.3 mm in 1 hour and some dry periods during the day.\n")
         expect {
           WrfForecast.output_forecast
         }.to output(expected).to_stdout

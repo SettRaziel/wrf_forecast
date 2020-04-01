@@ -2,7 +2,7 @@
 # @Author: Benjamin Held
 # @Date:   2020-03-24 15:49:26
 # @Last Modified by:   Benjamin Held
-# @Last Modified time: 2020-03-31 16:26:29
+# @Last Modified time: 2020-04-01 21:41:37
 
 module WrfForecast
 
@@ -61,7 +61,7 @@ module WrfForecast
         text.concat(get_rain_sum.ceil.to_s)
         text.concat(' mm in 24 hours')
       else
-        text.concat(@extreme_values.maximum.ceil.to_s)
+        text.concat(@extreme_values.maximum.round(1).to_s)
         text.concat(' mm in 1 hour')
       end
 
@@ -77,7 +77,7 @@ module WrfForecast
     # method to check if it should rain in the forecast time
     def shall_it_rain?
       @hourly_rain.each { |value|
-        return true if (value > 0.0)
+        return true if (value > 0.05)
       }
       return false
     end
