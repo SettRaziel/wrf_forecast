@@ -1,7 +1,7 @@
 # @Author: Benjamin Held
 # @Date:   2019-05-08 15:34:21
 # @Last Modified by:   Benjamin Held
-# @Last Modified time: 2020-04-01 16:23:22
+# @Last Modified time: 2020-04-02 16:42:10
   
 require 'ruby_utils/parameter_converter'  
 require 'wrf_library/wrf'
@@ -29,10 +29,11 @@ module WrfForecast
   end
 
   # singleton method to initialize further required classes and create the forecast
+  # @return [String] the created forecast text
   def self.output_forecast
     initialize_wrf_handler
     initialize_forecast
-    puts @forecast_handler.forecast_text.forecast_text
+    @forecast_handler.forecast_text.forecast_text
   end
 
   # singleton method to initialize the wrf handler

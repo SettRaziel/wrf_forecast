@@ -1,7 +1,7 @@
 # @Author: Benjamin Held
 # @Date:   2019-04-22 16:00:53
 # @Last Modified by:   Benjamin Held
-# @Last Modified time: 2020-03-31 17:26:48
+# @Last Modified time: 2020-04-02 16:40:14
 
 require 'ruby_utils/string'
 require_relative '../lib/wrf_forecast'
@@ -15,7 +15,7 @@ begin
   elsif (parameter_handler.repository.parameters[:version])
     WrfForecast.print_version
   else
-    WrfForecast.output_forecast
+    puts WrfForecast.output_forecast
   end
 
 rescue StandardError, NotImplementedError => e
