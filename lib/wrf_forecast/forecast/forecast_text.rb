@@ -2,7 +2,7 @@
 # @Author: Benjamin Held
 # @Date:   2020-03-22 10:46:55
 # @Last Modified by:   Benjamin Held
-# @Last Modified time: 2020-03-31 16:28:49
+# @Last Modified time: 2020-04-09 16:28:03
 
 require 'wrf_library/wrf'
 require 'wrf_forecast/data/forecast_repository'
@@ -18,6 +18,10 @@ module WrfForecast
 
     # @return [String] the forecast text for given forecast data
     attr_reader :forecast_text
+    # @return [String] a copy of the forecast header text
+    attr_reader :forecast_header
+    # @return [String] a copy of the forecast body text
+    attr_reader :forecast_body
 
     # initialization
     # @param [WrfMetaData] meta_data the meta data for the forecast
@@ -40,18 +44,35 @@ module WrfForecast
     # @return [RainText] the class generating the rain forecast
     attr_reader :rain_text
 
-    # method to create the forcast text based on the data and meta information
+    # method to create the forecast text based on the data and meta information
+    # @param [WrfMetaData] meta_data the meta data for the forecast
     def generate_forecast_text(meta_data)
+      @forecast_text = create_forecast_header(meta_data)
+      @forecast_text.concat(".\n\n")
+      @forecast_text.concat(create_forecast_body)
+      nil
+    end
+
+    # method to create the header line for the text forecast
+    # @param [WrfMetaData] meta_data the meta data for the forecast
+    # @return [String] a copy of the forecast header text
+    def create_forecast_header(meta_data)
       station = meta_data.station
       start_date = meta_data.start_date
-      @forecast_text = 'Weather forecast of '
-      @forecast_text.concat(station.name)
-      @forecast_text.concat(' for the ')
-      @forecast_text.concat(start_date.to_s)
-      @forecast_text.concat(".\n\n")
-      @forecast_text.concat(@temperature_text.forecast_text).concat("\n")
-      @forecast_text.concat(@wind_text.forecast_text).concat("\n")
-      @forecast_text.concat(@rain_text.forecast_text)
+      @forecast_header = 'Weather forecast of '
+      @forecast_header.concat(station.name)
+      @forecast_header.concat(' for the ')
+      @forecast_header.concat(start_date.to_s)
+      @forecast_header.dup
+    end
+
+    # method to create the body text for the text forecast
+    # @return [String] a copy of the forecast body text
+    def create_forecast_body
+      @forecast_body = @temperature_text.forecast_text.concat("\n")
+      @forecast_body.concat(@wind_text.forecast_text).concat("\n")
+      @forecast_body.concat(@rain_text.forecast_text)
+      @forecast_body.dup
     end
 
     # method to create the text for the air temperature
