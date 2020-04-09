@@ -1,6 +1,6 @@
 Gem::Specification.new do |s|
   s.name          = "wrf_forecast"
-  s.version       = "0.0.1"
+  s.version       = "0.1.0"
   s.summary       = "WRF Testforecast with ruby"
   s.description   = "Scripts to generate a weather forecast based on the data of a station meteogram"
   s.authors       = ["Benjamin Held"]

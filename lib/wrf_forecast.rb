@@ -1,7 +1,7 @@
 # @Author: Benjamin Held
 # @Date:   2019-05-08 15:34:21
 # @Last Modified by:   Benjamin Held
-# @Last Modified time: 2020-04-02 16:42:10
+# @Last Modified time: 2020-04-09 16:32:12
   
 require 'ruby_utils/parameter_converter'  
 require 'wrf_library/wrf'
@@ -66,7 +66,7 @@ module WrfForecast
 
   # call to print version number and author
   def self.print_version
-    puts 'wrf_forecast version 0.0.1'.yellow
+    puts 'wrf_forecast version 0.1.0'.yellow
     puts 'Created by Benjamin Held (March 2019)'.yellow
   end
 
