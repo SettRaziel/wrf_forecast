@@ -2,12 +2,15 @@
 # @Author: Benjamin Held
 # @Date:   2020-03-19 14:02:55
 # @Last Modified by:   Benjamin Held
-# @Last Modified time: 2020-03-31 16:30:06
+# @Last Modified time: 2020-04-10 08:30:54
 
 require 'ruby_utils/string'
 
 module WrfForecast
 
+  # This module holds the classes that describe threshold values for the different meteorological
+  # data values. These are relevant when creating a weather forecast and giving information
+  # about significant weather events like hot day, strong winds or high precipitation sums.
   module Threshold
 
     # This abstract class determines the significant thresholds for a forecast day.

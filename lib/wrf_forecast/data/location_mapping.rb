@@ -1,15 +1,17 @@
 # @Author: Benjamin Held
 # @Date:   2019-06-28 16:45:16
 # @Last Modified by:   Benjamin Held
-# @Last Modified time: 2020-03-31 16:24:21
+# @Last Modified time: 2020-04-10 08:32:56
 
 require 'ruby_utils/file_reader'
 require 'ruby_utils/string'
 
 module WrfForecast
 
+  # @todo not used at the moment
   module Location
 
+    # not used at the moment
     class LocationMapping
 
       def initialize(location_file)
