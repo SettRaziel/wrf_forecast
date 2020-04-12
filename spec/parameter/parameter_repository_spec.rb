@@ -2,7 +2,7 @@
 # @Author: Benjamin Held
 # @Date:   2020-03-16 20:11:41
 # @Last Modified by:   Benjamin Held
-# @Last Modified time: 2020-03-31 16:49:23
+# @Last Modified time: 2020-04-12 16:16:10
 
 require 'spec_helper'
 require 'wrf_forecast/parameter'
@@ -20,7 +20,7 @@ describe WrfForecast::Parameter::ParameterRepository do
   end
 
   describe ".new" do
-    context "given the two element period flag with only one argument" do
+    context "given the one element period flag with only one argument" do
       it "create the repository with the correct flags" do
         arguments = ['-p', '29', 'filename']
         parameter_repository = WrfForecast::Parameter::ParameterRepository.new(arguments)
@@ -98,6 +98,16 @@ describe WrfForecast::Parameter::ParameterRepository do
         arguments = ['-d', '-h', 'filename']
         parameter_repository = WrfForecast::Parameter::ParameterRepository.new(arguments)
         expect(parameter_repository.parameters[:help]).to match(:date)
+      end
+    end
+  end
+
+  describe ".new" do
+    context "given the one element offset flag with only one argument" do
+      it "create the repository with the correct flags" do
+        arguments = ['-o', '12', 'filename']
+        parameter_repository = WrfForecast::Parameter::ParameterRepository.new(arguments)
+        expect(parameter_repository.parameters[:offset]).to match('12')
       end
     end
   end
