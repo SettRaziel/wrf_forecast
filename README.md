@@ -1,5 +1,7 @@
 # WRF Forecast
+[![Build Status](https://travis-ci.org/SettRaziel/wrf_forecast.svg?branch=development)](https://travis-ci.org/SettRaziel/wrf_forecast)
 [![Maintainability](https://api.codeclimate.com/v1/badges/f8e37146f91c5b3fc933/maintainability)](https://codeclimate.com/github/SettRaziel/wrf_forecast/maintainability)
+[![Coverage Status](https://coveralls.io/repos/github/SettRaziel/wrf_forecast/badge.svg)](https://coveralls.io/github/SettRaziel/wrf_forecast)
 
 Repository for the creation of an automated weather forecast based on station forecast data.
 
