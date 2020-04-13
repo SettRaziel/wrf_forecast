@@ -1,7 +1,7 @@
 # @Author: Benjamin Held
 # @Date:   2019-05-08 15:34:21
 # @Last Modified by:   Benjamin Held
-# @Last Modified time: 2020-04-09 16:32:12
+# @Last Modified time: 2020-04-13 16:44:14
   
 require 'ruby_utils/parameter_converter'  
 require 'wrf_library/wrf'
@@ -20,6 +20,48 @@ module WrfForecast
     attr_reader :parameter_handler
     # @return [ForecastHandler] the handler for the rehashed forecast data
     attr_reader :forecast_handler
+
+      # singleton method to initialize the wrf handler
+    def initialize_wrf_handler
+      if [@parameter_handler != nil]
+        filename = @parameter_handler.repository.parameters[:file]
+        time = @parameter_handler.repository.parameters[:date]
+        # use 24 hours for a forecast right now to create a forecast text for a day
+
+        if (contains_parameter?(:offset) && contains_parameter?(:period))
+          period = RubyUtils::ParameterConverter.convert_float_parameter(
+                 @parameter_handler.repository.parameters[:period])
+          offset = RubyUtils::ParameterConverter.convert_float_parameter(
+                 @parameter_handler.repository.parameters[:offset])
+          @wrf_handler = WrfLibrary::Wrf::WrfHandler.new(filename, time, period, offset)
+        elsif (@parameter_handler.repository.parameters[:period] != nil)
+          period = RubyUtils::ParameterConverter.convert_float_parameter(
+                 @parameter_handler.repository.parameters[:period])
+          @wrf_handler = WrfLibrary::Wrf::WrfHandler.new(filename, time, period)
+        else
+          @wrf_handler = WrfLibrary::Wrf::WrfHandler.new(filename, time)
+        end
+          
+      else
+        raise ArgumentError, 'Error: Required input data is not initialized.'
+      end
+    end
+
+    # singleton method to initialize the forecast handler
+    def initialize_forecast
+      if (@wrf_handler != nil)
+        @forecast_handler = WrfForecast::ForecastHandler.new(@wrf_handler)
+      else
+        raise ArgumentError, 'Error: Required forecast data is not initialized.'
+      end
+    end
+
+    private
+
+    def contains_parameter?(symbol)
+      @parameter_handler.repository.parameters[symbol] != nil
+    end
+
   end
 
   # singleton method to initialize the parameter repositories
@@ -34,29 +76,6 @@ module WrfForecast
     initialize_wrf_handler
     initialize_forecast
     @forecast_handler.forecast_text.forecast_text
-  end
-
-  # singleton method to initialize the wrf handler
-  def self.initialize_wrf_handler
-    if [@parameter_handler != nil]
-      filename = @parameter_handler.repository.parameters[:file]
-      time = @parameter_handler.repository.parameters[:date]
-      period = RubyUtils::ParameterConverter.convert_int_parameter(
-               @parameter_handler.repository.parameters[:period])
-      # use 24 hours for a forecast right now to create a forecast text for a day
-      @wrf_handler = WrfLibrary::Wrf::WrfHandler.new(filename, time, period)
-    else
-      raise ArgumentError, 'Error: Required input data is not initialized.'
-    end
-  end
-
-  # singleton method to initialize the forecast handler
-  def self.initialize_forecast
-    if (@wrf_handler != nil)
-      @forecast_handler = WrfForecast::ForecastHandler.new(@wrf_handler)
-    else
-      raise ArgumentError, 'Error: Required forecast data is not initialized.'
-    end
   end
 
   # call to print the help text

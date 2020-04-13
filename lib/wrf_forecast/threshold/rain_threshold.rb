@@ -2,7 +2,7 @@
 # @Author: Benjamin Held
 # @Date:   2020-03-20 12:14:58
 # @Last Modified by:   Benjamin Held
-# @Last Modified time: 2020-03-31 16:30:20
+# @Last Modified time: 2020-04-13 11:05:05
 
 module WrfForecast
 
@@ -51,8 +51,8 @@ module WrfForecast
       # if we dont have 24 values we do not have hourly rain for the day
       # @raise [ArgumentError] if the data values are not sufficient
       def check_data_values(data_values)
-        if (data_values.size != 24)
-          raise ArgumentError, "Error: Not enough hourly data available."
+        if (data_values.size < 24)
+          raise ArgumentError, "Error: Not enough hourly data available for a forecast day."          
         end
       end
 
