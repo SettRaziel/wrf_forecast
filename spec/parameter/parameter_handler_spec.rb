@@ -2,7 +2,7 @@
 # @Author: Benjamin Held
 # @Date:   2020-03-17 17:19:08
 # @Last Modified by:   Benjamin Held
-# @Last Modified time: 2020-03-31 16:49:10
+# @Last Modified time: 2020-04-13 11:01:03
 
 require 'spec_helper'
 require 'wrf_forecast/parameter'
@@ -20,9 +20,20 @@ describe WrfForecast::Parameter::ParameterHandler do
   end
 
   describe ".new" do
-    context "given the interval and compare flag" do
-      it "create the repository and fail the parameter contrains" do
+    context "given the period flag" do
+      it "create the repository and fail the parameter contrains due to missing date" do
         arguments = ['-p', '42', 'filename']
+        expect {
+          WrfForecast::Parameter::ParameterHandler.new(arguments)
+        }.to raise_error(ArgumentError)
+      end
+    end
+  end
+
+  describe ".new" do
+    context "given the date and offset flag" do
+      it "create the repository and fail the parameter contrains due to missing period requirement" do
+        arguments = ['-d', '2020-06-29', '-o', '12', 'filename']
         expect {
           WrfForecast::Parameter::ParameterHandler.new(arguments)
         }.to raise_error(ArgumentError)
