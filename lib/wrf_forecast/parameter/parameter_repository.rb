@@ -1,7 +1,7 @@
 # @Author: Benjamin Held
 # @Date:   2015-06-12 10:45:36
 # @Last Modified by:   Benjamin Held
-# @Last Modified time: 2020-03-31 16:29:49
+# @Last Modified time: 2020-04-12 16:01:17
 
 module WrfForecast
 
@@ -21,8 +21,9 @@ module WrfForecast
       def process_argument(arg)
         case arg
           when *@mapping[:date] then create_argument_entry(:date)
-          when *@mapping[:period] then create_argument_entry(:period)
           when *@mapping[:default] then create_defaults
+          when *@mapping[:offset] then create_argument_entry(:offset)
+          when *@mapping[:period] then create_argument_entry(:period)
           when /-[a-z]|--[a-z]+/ then raise_invalid_parameter(arg)
         else
           raise_invalid_parameter(arg)
@@ -34,6 +35,7 @@ module WrfForecast
       def define_mapping
         @mapping[:date] = ['-d', '--date']
         @mapping[:default] = ['--default']
+        @mapping[:offset] = ['-o', '--offset']
         @mapping[:period] = ['-p', '--period']
       end
 
