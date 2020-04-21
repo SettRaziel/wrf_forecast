@@ -2,7 +2,7 @@
 # @Author: Benjamin Held
 # @Date:   2020-03-22 16:34:27
 # @Last Modified by:   Benjamin Held
-# @Last Modified time: 2020-03-31 16:47:54
+# @Last Modified time: 2020-04-21 17:02:06
 
 require 'spec_helper'
 require 'ruby_utils/statistic'
@@ -22,11 +22,11 @@ describe WrfForecast::TemperatureText do
                              ]
         indicators = WrfForecast::Threshold::TemperatureThreshold.new(temperature_values)
         extreme_values = RubyUtils::ExtremeValues.new(265.15, 272.15)
-        text = WrfForecast::TemperatureText.new(extreme_values, indicators.indicators)
+        forecast = WrfForecast::TemperatureText.new(extreme_values, indicators.indicators)
         expected = 'Today will be a very frosty day.'
         expected.concat(' The maximum temperature will reach up to -1 degrees celsius.')
         expected.concat(' The minimum temperature will be -8 degrees celsius.')
-        expect(text.forecast_text).to match(expected)
+        expect(forecast.text).to match(expected)
       end
     end
   end
@@ -42,11 +42,11 @@ describe WrfForecast::TemperatureText do
                              ]
         indicators = WrfForecast::Threshold::TemperatureThreshold.new(temperature_values)
         extreme_values = RubyUtils::ExtremeValues.new(265.15, 274.15)
-        text = WrfForecast::TemperatureText.new(extreme_values, indicators.indicators)
+        forecast = WrfForecast::TemperatureText.new(extreme_values, indicators.indicators)
         expected = 'Today will be a cold day.'
         expected.concat(' The maximum temperature will reach up to 1 degrees celsius.')
         expected.concat(' The minimum temperature will be -8 degrees celsius.')
-        expect(text.forecast_text).to match(expected)
+        expect(forecast.text).to match(expected)
       end
     end
   end
@@ -62,11 +62,11 @@ describe WrfForecast::TemperatureText do
                              ]
         indicators = WrfForecast::Threshold::TemperatureThreshold.new(temperature_values)
         extreme_values = RubyUtils::ExtremeValues.new(275.15, 282.15)
-        text = WrfForecast::TemperatureText.new(extreme_values, indicators.indicators)
+        forecast = WrfForecast::TemperatureText.new(extreme_values, indicators.indicators)
         expected = 'Today will be a normal day.'
         expected.concat(' The maximum temperature will reach up to 9 degrees celsius.')
         expected.concat(' The minimum temperature will be 2 degrees celsius.')
-        expect(text.forecast_text).to match(expected)
+        expect(forecast.text).to match(expected)
       end
     end
   end
@@ -82,11 +82,11 @@ describe WrfForecast::TemperatureText do
                              ]
         indicators = WrfForecast::Threshold::TemperatureThreshold.new(temperature_values)
         extreme_values = RubyUtils::ExtremeValues.new(288.15, 301.05)
-        text = WrfForecast::TemperatureText.new(extreme_values, indicators.indicators)
+        forecast = WrfForecast::TemperatureText.new(extreme_values, indicators.indicators)
         expected = 'Today will be a summer day.'
         expected.concat(' The maximum temperature will reach up to 28 degrees celsius.')
         expected.concat(' The minimum temperature will be 15 degrees celsius.')
-        expect(text.forecast_text).to match(expected)
+        expect(forecast.text).to match(expected)
       end
     end
   end
@@ -102,11 +102,11 @@ describe WrfForecast::TemperatureText do
                              ]
         indicators = WrfForecast::Threshold::TemperatureThreshold.new(temperature_values)
         extreme_values = RubyUtils::ExtremeValues.new(294.15, 305.25)
-        text = WrfForecast::TemperatureText.new(extreme_values, indicators.indicators)
+        forecast = WrfForecast::TemperatureText.new(extreme_values, indicators.indicators)
         expected = 'Today will be a hot day with a tropical night.'
         expected.concat(' The maximum temperature will reach up to 33 degrees celsius.')
         expected.concat(' The minimum temperature will be 21 degrees celsius.')
-        expect(text.forecast_text).to match(expected)
+        expect(forecast.text).to match(expected)
       end
     end
   end

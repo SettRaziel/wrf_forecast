@@ -2,7 +2,7 @@
 # @Author: Benjamin Held
 # @Date:   2020-03-24 15:49:26
 # @Last Modified by:   Benjamin Held
-# @Last Modified time: 2020-04-01 21:41:37
+# @Last Modified time: 2020-04-21 16:58:35
 
 module WrfForecast
 
@@ -10,7 +10,7 @@ module WrfForecast
   class RainText
 
     # @return [String] the forecast text for the rain
-    attr_reader :forecast_text
+    attr_reader :text
 
     # initialization
     # @param [ExtremeValues] extreme_values the hourly rain extreme values
@@ -35,11 +35,11 @@ module WrfForecast
     # method to generate the forecast text for the rain
     def generate_rain_text
       if (!shall_it_rain?)
-        @forecast_text = 'The forecast does not predict rain.'
+        @text = 'The forecast does not predict rain.'
       else
-        @forecast_text = 'The forecast does predict '
-        @forecast_text.concat(create_intensity_text)
-        @forecast_text.concat(create_rain_text)
+        @text = 'The forecast does predict '
+        @text.concat(create_intensity_text)
+        @text.concat(create_rain_text)
       end
       nil
     end

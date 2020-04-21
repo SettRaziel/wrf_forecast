@@ -2,7 +2,7 @@
 # @Author: Benjamin Held
 # @Date:   2020-03-22 10:46:55
 # @Last Modified by:   Benjamin Held
-# @Last Modified time: 2020-04-09 16:28:03
+# @Last Modified time: 2020-04-21 16:58:53
 
 require 'wrf_library/wrf'
 require 'wrf_forecast/data/forecast_repository'
@@ -69,9 +69,9 @@ module WrfForecast
     # method to create the body text for the text forecast
     # @return [String] a copy of the forecast body text
     def create_forecast_body
-      @forecast_body = @temperature_text.forecast_text.concat("\n")
-      @forecast_body.concat(@wind_text.forecast_text).concat("\n")
-      @forecast_body.concat(@rain_text.forecast_text)
+      @forecast_body = @temperature_text.text.concat("\n")
+      @forecast_body.concat(@wind_text.text).concat("\n")
+      @forecast_body.concat(@rain_text.text)
       @forecast_body.dup
     end
 

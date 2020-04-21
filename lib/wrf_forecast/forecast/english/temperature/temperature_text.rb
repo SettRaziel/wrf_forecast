@@ -2,7 +2,7 @@
 # @Author: Benjamin Held
 # @Date:   2020-03-22 11:32:06
 # @Last Modified by:   Benjamin Held
-# @Last Modified time: 2020-03-31 16:26:45
+# @Last Modified time: 2020-04-21 16:58:08
 
 module WrfForecast
 
@@ -11,7 +11,7 @@ module WrfForecast
   class TemperatureText
 
     # @return [String] the forecast text for the temperature
-    attr_reader :forecast_text
+    attr_reader :text
 
     # initialization
     # @param [ExtremeValues] extreme_values the temperature extreme values
@@ -31,9 +31,9 @@ module WrfForecast
 
     # method to generate the forecast text for the temperature
     def generate_temperature_text
-      @forecast_text = 'Today will be a '
-      @forecast_text.concat(create_warmth_text).concat('.')
-      @forecast_text.concat(create_temperature_text)
+      @text = 'Today will be a '
+      @text.concat(create_warmth_text).concat('.')
+      @text.concat(create_temperature_text)
       nil
     end
 

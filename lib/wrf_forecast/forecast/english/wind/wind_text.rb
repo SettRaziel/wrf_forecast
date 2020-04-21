@@ -2,7 +2,7 @@
 # @Author: Benjamin Held
 # @Date:   2020-03-23 16:27:56
 # @Last Modified by:   Benjamin Held
-# @Last Modified time: 2020-03-31 16:27:17
+# @Last Modified time: 2020-04-21 16:55:51
 
 module WrfForecast
 
@@ -11,7 +11,7 @@ module WrfForecast
   class WindText
 
     # @return [String] the forecast text for the wind forecast
-    attr_reader :forecast_text
+    attr_reader :text
 
     # initialization
     # @param [ExtremeValues] extreme_values the wind extreme values
@@ -52,9 +52,9 @@ module WrfForecast
 
     # method to generate the forecast text for the wind
     def generate_wind_text
-      @forecast_text = 'The wind will be '
-      @forecast_text.concat(create_strength_text)
-      @forecast_text.concat(create_wind_text)
+      @text = 'The wind will be '
+      @text.concat(create_strength_text)
+      @text.concat(create_wind_text)
       nil
     end
 
