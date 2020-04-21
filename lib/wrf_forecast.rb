@@ -1,7 +1,7 @@
 # @Author: Benjamin Held
 # @Date:   2019-05-08 15:34:21
 # @Last Modified by:   Benjamin Held
-# @Last Modified time: 2020-04-21 17:33:35
+# @Last Modified time: 2020-04-21 17:47:07
   
 require 'ruby_utils/parameter_converter'  
 require 'wrf_library/wrf'
@@ -79,7 +79,7 @@ module WrfForecast
   def self.output_forecast
     initialize_wrf_handler
     initialize_forecast
-    @forecast_handler.forecast_text.get_complete_text
+    @forecast_handler.text.get_complete_text
   end
 
   # call to print the help text
