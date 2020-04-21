@@ -2,7 +2,7 @@
 # @Author: Benjamin Held
 # @Date:   2020-03-22 10:46:55
 # @Last Modified by:   Benjamin Held
-# @Last Modified time: 2020-04-21 16:58:53
+# @Last Modified time: 2020-04-21 17:31:38
 
 require 'wrf_library/wrf'
 require 'wrf_forecast/data/forecast_repository'
@@ -16,12 +16,10 @@ module WrfForecast
   # This class handles the creation of the combined forecast text for the given input
   class ForecastText
 
-    # @return [String] the forecast text for given forecast data
-    attr_reader :forecast_text
     # @return [String] a copy of the forecast header text
-    attr_reader :forecast_header
+    attr_reader :header
     # @return [String] a copy of the forecast body text
-    attr_reader :forecast_body
+    attr_reader :body
 
     # initialization
     # @param [WrfMetaData] meta_data the meta data for the forecast
@@ -32,7 +30,16 @@ module WrfForecast
       initialize_temperature_text(forecast_repository, threshold_handler)
       initialize_wind_text(forecast_repository, threshold_handler)
       initialize_rain_text(forecast_repository, threshold_handler)
-      generate_forecast_text(meta_data)
+      create_header(meta_data)
+      create_body
+    end
+
+    # method to create the complete forecast text
+    # @return [String] the combined forecast text
+    def get_complete_text
+      text = @header
+      text.concat(".\n\n")
+      text.concat(@body)
     end
 
     private
@@ -44,35 +51,24 @@ module WrfForecast
     # @return [RainText] the class generating the rain forecast
     attr_reader :rain_text
 
-    # method to create the forecast text based on the data and meta information
+    # method to create the header line for the text forecast
     # @param [WrfMetaData] meta_data the meta data for the forecast
-    def generate_forecast_text(meta_data)
-      @forecast_text = create_forecast_header(meta_data)
-      @forecast_text.concat(".\n\n")
-      @forecast_text.concat(create_forecast_body)
+    def create_header(meta_data)
+      station = meta_data.station
+      start_date = meta_data.start_date
+      @header = 'Weather forecast of '
+      @header.concat(station.name)
+      @header.concat(' for the ')
+      @header.concat(start_date.to_s)
       nil
     end
 
-    # method to create the header line for the text forecast
-    # @param [WrfMetaData] meta_data the meta data for the forecast
-    # @return [String] a copy of the forecast header text
-    def create_forecast_header(meta_data)
-      station = meta_data.station
-      start_date = meta_data.start_date
-      @forecast_header = 'Weather forecast of '
-      @forecast_header.concat(station.name)
-      @forecast_header.concat(' for the ')
-      @forecast_header.concat(start_date.to_s)
-      @forecast_header.dup
-    end
-
     # method to create the body text for the text forecast
-    # @return [String] a copy of the forecast body text
-    def create_forecast_body
-      @forecast_body = @temperature_text.text.concat("\n")
-      @forecast_body.concat(@wind_text.text).concat("\n")
-      @forecast_body.concat(@rain_text.text)
-      @forecast_body.dup
+    def create_body
+      @body = @temperature_text.text.concat("\n")
+      @body.concat(@wind_text.text).concat("\n")
+      @body.concat(@rain_text.text)
+      nil
     end
 
     # method to create the text for the air temperature
