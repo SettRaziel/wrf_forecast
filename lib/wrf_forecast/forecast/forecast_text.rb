@@ -2,7 +2,7 @@
 # @Author: Benjamin Held
 # @Date:   2020-03-22 10:46:55
 # @Last Modified by:   Benjamin Held
-# @Last Modified time: 2020-04-21 17:31:38
+# @Last Modified time: 2020-04-21 19:33:02
 
 require 'wrf_library/wrf'
 require 'wrf_forecast/data/forecast_repository'
@@ -37,7 +37,7 @@ module WrfForecast
     # method to create the complete forecast text
     # @return [String] the combined forecast text
     def get_complete_text
-      text = @header
+      text = @header.dup
       text.concat(".\n\n")
       text.concat(@body)
     end

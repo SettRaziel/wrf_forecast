@@ -2,7 +2,7 @@
 # @Author: Benjamin Held
 # @Date:   2020-03-17 17:19:08
 # @Last Modified by:   Benjamin Held
-# @Last Modified time: 2020-04-13 11:01:03
+# @Last Modified time: 2020-04-21 19:32:25
 
 require 'spec_helper'
 require 'wrf_forecast/parameter'
@@ -14,7 +14,7 @@ describe WrfForecast::Parameter::ParameterHandler do
       it "create the repository and pass the parameter contrains" do
         arguments = ['-d', '2020-06-29', 'filename']
         parameter_handler = WrfForecast::Parameter::ParameterHandler.new(arguments)
-        expect(parameter_handler.repository.parameters[:date]).to match('2020-06-29')
+        expect(parameter_handler.repository.parameters[:date]).to eq('2020-06-29')
       end
     end
   end

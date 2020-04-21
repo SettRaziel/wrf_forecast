@@ -2,7 +2,7 @@
 # @Author: Benjamin Held
 # @Date:   2020-03-22 16:34:27
 # @Last Modified by:   Benjamin Held
-# @Last Modified time: 2020-04-21 17:02:06
+# @Last Modified time: 2020-04-21 19:31:48
 
 require 'spec_helper'
 require 'ruby_utils/statistic'
@@ -26,7 +26,7 @@ describe WrfForecast::TemperatureText do
         expected = 'Today will be a very frosty day.'
         expected.concat(' The maximum temperature will reach up to -1 degrees celsius.')
         expected.concat(' The minimum temperature will be -8 degrees celsius.')
-        expect(forecast.text).to match(expected)
+        expect(forecast.text).to eq(expected)
       end
     end
   end
@@ -46,7 +46,7 @@ describe WrfForecast::TemperatureText do
         expected = 'Today will be a cold day.'
         expected.concat(' The maximum temperature will reach up to 1 degrees celsius.')
         expected.concat(' The minimum temperature will be -8 degrees celsius.')
-        expect(forecast.text).to match(expected)
+        expect(forecast.text).to eq(expected)
       end
     end
   end
@@ -66,7 +66,7 @@ describe WrfForecast::TemperatureText do
         expected = 'Today will be a normal day.'
         expected.concat(' The maximum temperature will reach up to 9 degrees celsius.')
         expected.concat(' The minimum temperature will be 2 degrees celsius.')
-        expect(forecast.text).to match(expected)
+        expect(forecast.text).to eq(expected)
       end
     end
   end
@@ -86,7 +86,7 @@ describe WrfForecast::TemperatureText do
         expected = 'Today will be a summer day.'
         expected.concat(' The maximum temperature will reach up to 28 degrees celsius.')
         expected.concat(' The minimum temperature will be 15 degrees celsius.')
-        expect(forecast.text).to match(expected)
+        expect(forecast.text).to eq(expected)
       end
     end
   end
@@ -106,7 +106,7 @@ describe WrfForecast::TemperatureText do
         expected = 'Today will be a hot day with a tropical night.'
         expected.concat(' The maximum temperature will reach up to 33 degrees celsius.')
         expected.concat(' The minimum temperature will be 21 degrees celsius.')
-        expect(forecast.text).to match(expected)
+        expect(forecast.text).to eq(expected)
       end
     end
   end

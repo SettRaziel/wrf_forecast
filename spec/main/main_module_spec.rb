@@ -2,7 +2,7 @@
 # @Author: Benjamin Held
 # @Date:   2020-03-20 21:08:30
 # @Last Modified by:   Benjamin Held
-# @Last Modified time: 2020-04-17 15:55:33
+# @Last Modified time: 2020-04-21 19:32:13
 
 require 'spec_helper'
 require 'wrf_forecast'
@@ -15,8 +15,8 @@ describe WrfForecast do
         arguments = ['--default', File.join(__dir__,"../files/Ber_24.d01.TS")]
         WrfForecast.initialize_parameter(arguments)
         parameters = WrfForecast.parameter_handler.repository.parameters
-        expect(parameters[:date]).to match(Time.parse('00:00').to_s)
-        expect(parameters[:period]).to match('24')
+        expect(parameters[:date]).to eq(Time.parse('00:00').to_s)
+        expect(parameters[:period]).to eq('24')
       end
     end
   end
@@ -36,10 +36,10 @@ describe WrfForecast do
         expected.concat('The wind will be normal and will reach up to ')
         expected.concat("23 km/h from west. The mean wind will be 16 km/h.\n")
         expected.concat("The forecast does not predict rain.")
-        expect(WrfForecast.output_forecast).to match(expected)
-        expect(parameters[:date]).to match(timestamp)
-        expect(parameters[:period]).to match('24')
-        expect(WrfForecast.wrf_handler.data_repository.repository.size).to match(994)
+        expect(WrfForecast.output_forecast).to eq(expected)
+        expect(parameters[:date]).to eq(timestamp)
+        expect(parameters[:period]).to eq('24')
+        expect(WrfForecast.wrf_handler.data_repository.repository.size).to eq(994)
         expect(WrfForecast.forecast_handler).to be_truthy
       end
     end
@@ -60,9 +60,9 @@ describe WrfForecast do
         expected.concat('The wind will be normal and will reach up to ')
         expected.concat("23 km/h from west. The mean wind will be 16 km/h.\n")
         expected.concat("The forecast does not predict rain.")
-        expect(WrfForecast.output_forecast).to match(expected)
-        expect(parameters[:date]).to match(timestamp)
-        expect(WrfForecast.wrf_handler.data_repository.repository.size).to match(994)
+        expect(WrfForecast.output_forecast).to eq(expected)
+        expect(parameters[:date]).to eq(timestamp)
+        expect(WrfForecast.wrf_handler.data_repository.repository.size).to eq(994)
         expect(WrfForecast.forecast_handler).to be_truthy
       end
     end
@@ -84,10 +84,10 @@ describe WrfForecast do
         expected.concat("17 km/h from northeast. The mean wind will be 11 km/h.\n")
         expected.concat('The forecast does predict normal rain with a maximum of ')
         expected.concat("0.3 mm in 1 hour and some dry periods during the day.")
-        expect(WrfForecast.output_forecast).to match(expected)
-        expect(parameters[:date]).to match(timestamp)
-        expect(parameters[:period]).to match('24')
-        expect(WrfForecast.wrf_handler.data_repository.repository.size).to match(1124)
+        expect(WrfForecast.output_forecast).to eq(expected)
+        expect(parameters[:date]).to eq(timestamp)
+        expect(parameters[:period]).to eq('24')
+        expect(WrfForecast.wrf_handler.data_repository.repository.size).to eq(1124)
         expect(WrfForecast.forecast_handler).to be_truthy
       end
     end
@@ -109,10 +109,10 @@ describe WrfForecast do
         expected.concat("27 km/h from northeast. The mean wind will be 21 km/h.\n")
         expected.concat('The forecast does predict normal rain with a maximum of ')
         expected.concat("0.7 mm in 1 hour and some dry periods during the day.")
-        expect(WrfForecast.output_forecast).to match(expected)
-        expect(parameters[:date]).to match(timestamp)
-        expect(parameters[:period]).to match('24')
-        expect(WrfForecast.wrf_handler.data_repository.repository.size).to match(923)
+        expect(WrfForecast.output_forecast).to eq(expected)
+        expect(parameters[:date]).to eq(timestamp)
+        expect(parameters[:period]).to eq('24')
+        expect(WrfForecast.wrf_handler.data_repository.repository.size).to eq(923)
         expect(WrfForecast.forecast_handler).to be_truthy
       end
     end

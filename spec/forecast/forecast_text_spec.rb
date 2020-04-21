@@ -2,7 +2,7 @@
 # @Author: Benjamin Held
 # @Date:   2020-03-26 12:56:07
 # @Last Modified by:   Benjamin Held
-# @Last Modified time: 2020-04-21 17:32:33
+# @Last Modified time: 2020-04-21 19:29:40
 
 require 'spec_helper'
 require 'wrf_forecast/forecast/forecast_text'
@@ -25,7 +25,7 @@ describe WrfForecast::ForecastText do
         expected.concat('The wind will be normal and will reach up to ')
         expected.concat("23 km/h from west. The mean wind will be 16 km/h.\n")
         expected.concat('The forecast does not predict rain.')
-        expect(text.get_complete_text).to match(expected)
+        expect(text.get_complete_text).to eq(expected)
       end
     end
   end
@@ -46,8 +46,9 @@ describe WrfForecast::ForecastText do
         expected_body.concat('The wind will be normal and will reach up to ')
         expected_body.concat("23 km/h from west. The mean wind will be 16 km/h.\n")
         expected_body.concat('The forecast does not predict rain.')
-        expect(text.header).to match(expected_header)
-        expect(text.body).to match(expected_body)
+        expect(text.get_complete_text).to eq(expected_header.dup.concat(".\n\n").concat(expected_body))
+        expect(text.header).to eq(expected_header)
+        expect(text.body).to eq(expected_body)
       end
     end
   end
@@ -68,7 +69,7 @@ describe WrfForecast::ForecastText do
         expected.concat('The wind will be normal and will reach up to ')
         expected.concat("24 km/h from northeast. The mean wind will be 17 km/h.\n")
         expected.concat('The forecast does not predict rain.')
-        expect(text.get_complete_text).to match(expected)
+        expect(text.get_complete_text).to eq(expected)
       end
     end
   end
@@ -89,8 +90,8 @@ describe WrfForecast::ForecastText do
         expected_body.concat('The wind will be normal and will reach up to ')
         expected_body.concat("24 km/h from northeast. The mean wind will be 17 km/h.\n")
         expected_body.concat('The forecast does not predict rain.')
-        expect(text.header).to match(expected_header)
-        expect(text.body).to match(expected_body)
+        expect(text.header).to eq(expected_header)
+        expect(text.body).to eq(expected_body)
       end
     end
   end

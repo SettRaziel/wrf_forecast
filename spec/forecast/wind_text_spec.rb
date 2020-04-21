@@ -2,7 +2,7 @@
 # @Author: Benjamin Held
 # @Date:   2020-03-23 16:57:26
 # @Last Modified by:   Benjamin Held
-# @Last Modified time: 2020-04-21 17:01:28
+# @Last Modified time: 2020-04-21 19:31:54
 
 require 'spec_helper'
 require 'ruby_utils/statistic'
@@ -24,7 +24,7 @@ describe WrfForecast::WindText do
         forecast = WrfForecast::WindText.new(extreme_values, nil, indicators.indicators)
         expected = 'The wind will be normal and will reach up to '
         expected.concat('40 km/h from circulatory directions. The mean wind will be 20 km/h.')
-        expect(forecast.text).to match(expected)
+        expect(forecast.text).to eq(expected)
       end
     end
   end
@@ -42,7 +42,7 @@ describe WrfForecast::WindText do
         forecast = WrfForecast::WindText.new(extreme_values, :E, indicators.indicators)
         expected = 'The wind will be squall and will reach up to '
         expected.concat('72 km/h from east. The mean wind will be 36 km/h.')
-        expect(forecast.text).to match(expected)
+        expect(forecast.text).to eq(expected)
       end
     end
   end
@@ -60,7 +60,7 @@ describe WrfForecast::WindText do
         forecast = WrfForecast::WindText.new(extreme_values, :W, indicators.indicators)
         expected = 'The wind will be stormy and will reach up to '
         expected.concat('94 km/h from west. The mean wind will be 51 km/h.')
-        expect(forecast.text).to match(expected)
+        expect(forecast.text).to eq(expected)
       end
     end
   end
@@ -78,7 +78,7 @@ describe WrfForecast::WindText do
         forecast = WrfForecast::WindText.new(extreme_values, :SW, indicators.indicators)
         expected = 'The wind will be very stromy and will reach up to '
         expected.concat('105 km/h from southwest. The mean wind will be 56 km/h.')
-        expect(forecast.text).to match(expected)
+        expect(forecast.text).to eq(expected)
       end
     end
   end
@@ -96,7 +96,7 @@ describe WrfForecast::WindText do
         forecast = WrfForecast::WindText.new(extreme_values, :NE, indicators.indicators)
         expected = 'The wind will be extremly stromy and will reach up to '
         expected.concat('119 km/h from northeast. The mean wind will be 63 km/h.')
-        expect(forecast.text).to match(expected)
+        expect(forecast.text).to eq(expected)
       end
     end
   end
