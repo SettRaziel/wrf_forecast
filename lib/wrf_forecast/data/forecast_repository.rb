@@ -1,7 +1,7 @@
 # @Author: Benjamin Held
 # @Date:   2020-02-14 19:44:57
 # @Last Modified by:   Benjamin Held
-# @Last Modified time: 2020-03-31 16:24:04
+# @Last Modified time: 2020-04-27 14:38:54
 
 require 'ruby_utils/statistic'
 require 'wrf_forecast/data/wind_direction_repository'
@@ -92,10 +92,13 @@ module WrfForecast
     end
 
     # method to sum up the rain data into hourly rain sums
+    # for that calculate the difference from the rain value at the start and end
+    # of the currently checked hour
     def calculate_hourly_rainsum
       rain_data = @forecast_data[:rain]
       @hourly_rain = Array.new()
-      previous_hour = 0.0
+      # when using an offset, start with the current value as delta
+      previous_hour = rain_data[0]
       previous_timestamp = time_data[0].floor
       rain_data.zip(time_data).each { |rain, timestamp|
         # detect new hour, when the leading number increases by one

@@ -2,7 +2,7 @@
 # @Author: Benjamin Held
 # @Date:   2020-03-20 21:08:30
 # @Last Modified by:   Benjamin Held
-# @Last Modified time: 2020-04-23 10:16:13
+# @Last Modified time: 2020-04-27 16:01:57
 
 require 'spec_helper'
 require 'wrf_forecast'
@@ -96,6 +96,31 @@ describe WrfForecast do
   describe "#initialize_parameter" do
     context "given an array of parameters" do
       it "initialize the handler and repositories correctly, create output" do
+        arguments = ['--default', '-o', '6', File.join(__dir__,"../files/Ber.d01.TS")]
+        WrfForecast.initialize_parameter(arguments)
+        parameters = WrfForecast.parameter_handler.repository.parameters
+
+        timestamp = Time.parse('00:00').to_s
+        expected = "Weather forecast of Berlin for the #{timestamp}.\n\n"
+        expected.concat('Today will be a cold day.')
+        expected.concat(' The maximum temperature will reach up to 10 degrees celsius.')
+        expected.concat(" The minimum temperature will be -1 degrees celsius.\n")
+        expected.concat('The wind will be normal and will reach up to ')
+        expected.concat("19 km/h from northeast. The mean wind will be 12 km/h.\n")
+        expected.concat('The forecast does predict normal rain with a maximum of ')
+        expected.concat("0.3 mm in 1 hour and some dry periods during the day.")
+        expect(WrfForecast.output_forecast).to eq(expected)
+        expect(parameters[:date]).to eq(timestamp)
+        expect(parameters[:period]).to eq('24')
+        expect(WrfForecast.wrf_handler.data_repository.repository.size).to eq(1009)
+        expect(WrfForecast.forecast_handler).to be_truthy
+      end
+    end
+  end
+
+  describe "#initialize_parameter" do
+    context "given an array of parameters" do
+      it "initialize the handler and repositories correctly, create output" do
         arguments = ['--default', '-o', '24', File.join(__dir__,"../files/Ber.d01.TS")]
         WrfForecast.initialize_parameter(arguments)
         parameters = WrfForecast.parameter_handler.repository.parameters
@@ -107,8 +132,7 @@ describe WrfForecast do
         expected.concat(" The minimum temperature will be -2 degrees celsius.\n")
         expected.concat('The wind will be normal and will reach up to ')
         expected.concat("27 km/h from northeast. The mean wind will be 21 km/h.\n")
-        expected.concat('The forecast does predict normal rain with a maximum of ')
-        expected.concat("0.7 mm in 1 hour and some dry periods during the day.")
+        expected.concat("The forecast does not predict rain.")
         expect(WrfForecast.output_forecast).to eq(expected)
         expect(parameters[:date]).to eq(timestamp)
         expect(parameters[:period]).to eq('24')
