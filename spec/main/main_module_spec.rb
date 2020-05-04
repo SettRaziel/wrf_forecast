@@ -2,18 +2,18 @@
 # @Author: Benjamin Held
 # @Date:   2020-03-20 21:08:30
 # @Last Modified by:   Benjamin Held
-# @Last Modified time: 2020-04-27 16:13:37
+# @Last Modified time: 2020-05-04 22:28:26
 
 require 'spec_helper'
 require 'wrf_forecast'
 
 describe WrfForecast do
 
-  describe "#initialize_parameter" do
+  describe "#initialize" do
     context "given an array of parameters" do
       it "initialize the parameters correctly" do
         arguments = ['--default', File.join(__dir__,"../files/Ber_24.d01.TS")]
-        WrfForecast.initialize_parameter(arguments)
+        WrfForecast.initialize(arguments)
         parameters = WrfForecast.parameter_handler.repository.parameters
         expect(parameters[:date]).to eq(Time.parse('00:00').to_s)
         expect(parameters[:period]).to eq('24')
@@ -21,11 +21,11 @@ describe WrfForecast do
     end
   end
 
-  describe "#initialize_parameter" do
+  describe "#initialize" do
     context "given an array of parameters" do
       it "initialize the handler and repositories correctly, create output" do
         arguments = ['--default', File.join(__dir__,"../files/Ber_24.d01.TS")]
-        WrfForecast.initialize_parameter(arguments)
+        WrfForecast.initialize(arguments)
         parameters = WrfForecast.parameter_handler.repository.parameters
 
         timestamp = Time.parse('00:00').to_s
@@ -45,12 +45,12 @@ describe WrfForecast do
     end
   end
 
-  describe "#initialize_parameter" do
+  describe "#initialize" do
     context "given an array of parameters" do
       it "initialize the handler and repositories correctly, create output" do
         timestamp = Time.parse('00:00').to_s
         arguments = ['-d', timestamp, File.join(__dir__,"../files/Ber_24.d01.TS")]
-        WrfForecast.initialize_parameter(arguments)
+        WrfForecast.initialize(arguments)
         parameters = WrfForecast.parameter_handler.repository.parameters
 
         expected = "Weather forecast of Berlin for the #{timestamp}.\n\n"
@@ -68,11 +68,11 @@ describe WrfForecast do
     end
   end
 
-  describe "#initialize_parameter" do
+  describe "#initialize" do
     context "given an array of parameters" do
       it "initialize the handler and repositories correctly, create output" do
         arguments = ['--default', File.join(__dir__,"../files/Ber.d01.TS")]
-        WrfForecast.initialize_parameter(arguments)
+        WrfForecast.initialize(arguments)
         parameters = WrfForecast.parameter_handler.repository.parameters
 
         timestamp = Time.parse('00:00').to_s
@@ -93,11 +93,25 @@ describe WrfForecast do
     end
   end
 
-  describe "#initialize_parameter" do
+    describe "#get_warnings" do
+    context "given an array of parameters" do
+      it "initialize the handler and repositories correctly, check for no warnings" do
+        arguments = ['--default', File.join(__dir__,"../files/Ber.d01.TS")]
+        WrfForecast.initialize(arguments)
+        threshold_handler = WrfForecast.forecast_handler.threshold_handler
+
+        expect(threshold_handler.warnings[:air_temperature]).to be_empty
+        expect(threshold_handler.warnings[:wind_speed]).to be_empty
+        expect(threshold_handler.warnings[:rain]).to be_empty
+      end
+    end
+  end
+
+  describe "#initialize" do
     context "given an array of parameters" do
       it "initialize the handler and repositories correctly, create output" do
         arguments = ['--default', '-o', '6', File.join(__dir__,"../files/Ber.d01.TS")]
-        WrfForecast.initialize_parameter(arguments)
+        WrfForecast.initialize(arguments)
         parameters = WrfForecast.parameter_handler.repository.parameters
 
         timestamp = Time.parse('00:00').to_s
@@ -118,11 +132,11 @@ describe WrfForecast do
     end
   end
 
-  describe "#initialize_parameter" do
+  describe "#initialize" do
     context "given an array of parameters" do
       it "initialize the handler and repositories correctly, create output" do
         arguments = ['--default', '-o', '24', File.join(__dir__,"../files/Ber.d01.TS")]
-        WrfForecast.initialize_parameter(arguments)
+        WrfForecast.initialize(arguments)
         parameters = WrfForecast.parameter_handler.repository.parameters
 
         timestamp = Time.parse('00:00').to_s
@@ -147,7 +161,7 @@ describe WrfForecast do
       it "print the help text for :default" do
         expect { 
           arguments = ['--default', '-h', File.join(__dir__,"../files/Ber_24.d01.TS")]
-          WrfForecast.initialize_parameter(arguments)
+          WrfForecast.initialize(arguments)
           WrfForecast.print_help
         }.to output("WRF forecast help:".light_yellow + "\n" + \
                     "     --default  ".light_blue +  \
@@ -156,9 +170,22 @@ describe WrfForecast do
     end
   end
 
+  describe "#print_help_for" do
+    context "given an array of parameters without help parameter" do
+      it "print the error" do
+        expect { 
+          arguments = ['--default', File.join(__dir__,"../files/Ber_24.d01.TS")]
+          WrfForecast.initialize(arguments)
+          WrfForecast.print_help
+        }.to output("Error: Module not initialized. Run WrfForecast.new(ARGV)".red + "\n" + \
+                    "For help type: ruby <script> --help".green + "\n").to_stdout
+      end
+    end
+  end
+
   describe "#print_version" do
-    context "given an error message text" do
-      it "print the error message text" do
+    context "given the module" do
+      it "print the version text" do
         expect {
           WrfForecast.print_version
         }.to output("wrf_forecast version 0.1.3".yellow + "\n" + \

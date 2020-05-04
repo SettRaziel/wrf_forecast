@@ -30,6 +30,10 @@ WRF forecast help:
      --default  runs the script with date as today at midnight and a 24 h forecast period
  -p, --period   argument: <period>; specifies the forecast period
 ```
+When using this as a gem the main entry point is passing the arguments to the main module:
+```
+WrfForecast.initialize(['--default', '-o', '6', "../files/Ber.d01.TS"])
+```
 
 ## Examples
 Reading a file with 24 h forecast data and creating a forecast with default parameters
