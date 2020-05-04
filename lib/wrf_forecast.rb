@@ -1,7 +1,7 @@
 # @Author: Benjamin Held
 # @Date:   2019-05-08 15:34:21
 # @Last Modified by:   Benjamin Held
-# @Last Modified time: 2020-04-27 16:13:53
+# @Last Modified time: 2020-05-04 18:21:36
   
 require 'ruby_utils/parameter_converter'  
 require 'wrf_library/wrf'
@@ -23,6 +23,7 @@ module WrfForecast
     attr_reader :forecast_handler
 
     # method to initialize the wrf handler based on the available parameter
+    # @raise [ArgumentError] if the input data is not initialized and the warnings are nil
     def initialize_wrf_handler
       if [@parameter_handler != nil]
         filename = @parameter_handler.repository.parameters[:file]
@@ -50,6 +51,7 @@ module WrfForecast
     end
 
     # method to initialize the forecast handler
+    # @raise [ArgumentError] if the wrf handler is not initialized and the warnings are nil
     def initialize_forecast
       if (@wrf_handler != nil)
         @forecast_handler = WrfForecast::ForecastHandler.new(@wrf_handler)
@@ -73,6 +75,17 @@ module WrfForecast
   def self.initialize_parameter(arguments)
     @parameter_handler = Parameter::ParameterHandler.new(arguments)
   end
+
+  # method to return the warnings of the current forecast
+  # @raise [ArgumentError] if the forecast repository is not initialized and the warnings are nil
+  def self.get_warnings
+    if (@forecast_handler != nil)
+      return @forecast_handler.threshold_handler.warnings
+    else
+      raise ArgumentError, 'Error: Required forecast handler is not initialized.'
+    end
+    nil
+  end    
 
   # singleton method to initialize further required classes and create the forecast
   # @return [String] the created forecast text
