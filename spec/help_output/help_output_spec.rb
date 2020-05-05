@@ -2,7 +2,7 @@
 # @Author: Benjamin Held
 # @Date:   2020-03-16 20:59:23
 # @Last Modified by:   Benjamin Held
-# @Last Modified time: 2020-05-05 17:39:27
+# @Last Modified time: 2020-05-05 22:22:57
 
 require 'spec_helper'
 require 'wrf_forecast/help/help_output'
@@ -58,6 +58,18 @@ describe WrfForecast::HelpOutput do
   end
 
   describe "#print_help_for" do
+    context "given a one element help entry" do
+      it "print the help text for :offset" do
+        expect { 
+          WrfForecast::HelpOutput.print_help_for(:offset) 
+        }.to output("WRF forecast help:".light_yellow + "\n" + \
+                    " -o, --offset   ".light_blue + "argument:".red + " <offset>".yellow  + \
+                    "; specifies how many hours from the forecast should be skipped\n").to_stdout
+      end
+    end
+  end
+
+  describe "#print_help_for" do
     context "given a to whole help text" do
       it "print the help text for the script" do
         expect { 
@@ -74,6 +86,8 @@ describe WrfForecast::HelpOutput do
                     "adds an addtional text section containing the forecast warnings\n" + \
                     " -d, --date     ".light_blue + "argument:".red + " <date>".yellow  + \
                     "; specifies the start_date of the requested forecast\n" + \
+                    " -o, --offset   ".light_blue + "argument:".red + " <offset>".yellow  + \
+                    "; specifies how many hours from the forecast should be skipped\n" + \
                     " -p, --period   ".light_blue + "argument:".red + " <period>".yellow  + \
                     "; specifies the forecast period\n").to_stdout
       end
