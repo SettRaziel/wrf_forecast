@@ -1,7 +1,7 @@
 # @Author: Benjamin Held
 # @Date:   2019-05-07 10:03:48
 # @Last Modified by:   Benjamin Held
-# @Last Modified time: 2020-03-31 15:44:33
+# @Last Modified time: 2020-05-05 17:37:02
 
 require 'ruby_utils/help_output'
 
@@ -16,6 +16,8 @@ module WrfForecast
     def self.add_single_help_entries
       add_simple_text(:default, '     --default  ', 
             'runs the script with date as today at midnight and a 24 h forecast period')
+      add_simple_text(:warning, ' -w, --warning  ', 
+            'adds an addtional text section containing the forecast warnings')
       nil
     end
 
