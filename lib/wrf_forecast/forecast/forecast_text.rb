@@ -2,12 +2,12 @@
 # @Author: Benjamin Held
 # @Date:   2020-03-22 10:46:55
 # @Last Modified by:   Benjamin Held
-# @Last Modified time: 2020-04-21 19:33:02
+# @Last Modified time: 2020-05-06 18:19:22
 
 require 'wrf_library/wrf'
 require 'wrf_forecast/data/forecast_repository'
 require 'wrf_forecast/threshold'
-require 'wrf_forecast/forecast/english/temperature/temperature_text'
+require 'wrf_forecast/text'
 require 'wrf_forecast/forecast/english/wind/wind_text'
 require 'wrf_forecast/forecast/english/rain/rain_text'
 
@@ -78,7 +78,7 @@ module WrfForecast
     def initialize_temperature_text(repository, handler)
       extreme_values = repository.extreme_values[:air_temperature]
       threshold = handler.temperature_threshold.indicators
-      @temperature_text = WrfForecast::TemperatureText.new(extreme_values, threshold)
+      @temperature_text = WrfForecast::Text::TemperatureText.new(extreme_values, threshold)
       nil
     end
 

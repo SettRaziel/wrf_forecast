@@ -2,14 +2,14 @@
 # @Author: Benjamin Held
 # @Date:   2020-03-22 16:34:27
 # @Last Modified by:   Benjamin Held
-# @Last Modified time: 2020-04-21 19:31:48
+# @Last Modified time: 2020-05-06 18:18:47
 
 require 'spec_helper'
 require 'ruby_utils/statistic'
 require 'wrf_forecast/threshold'
-require 'wrf_forecast/forecast/english/temperature/temperature_text'
+require 'wrf_forecast/text'
 
-describe WrfForecast::TemperatureText do
+describe WrfForecast::Text::TemperatureText do
 
   describe ".new" do
     context "given an array of temperature data for an ice day" do
@@ -22,7 +22,7 @@ describe WrfForecast::TemperatureText do
                              ]
         indicators = WrfForecast::Threshold::TemperatureThreshold.new(temperature_values)
         extreme_values = RubyUtils::ExtremeValues.new(265.15, 272.15)
-        forecast = WrfForecast::TemperatureText.new(extreme_values, indicators.indicators)
+        forecast = WrfForecast::Text::TemperatureText.new(extreme_values, indicators.indicators)
         expected = 'Today will be a very frosty day.'
         expected.concat(' The maximum temperature will reach up to -1 degrees celsius.')
         expected.concat(' The minimum temperature will be -8 degrees celsius.')
@@ -42,7 +42,7 @@ describe WrfForecast::TemperatureText do
                              ]
         indicators = WrfForecast::Threshold::TemperatureThreshold.new(temperature_values)
         extreme_values = RubyUtils::ExtremeValues.new(265.15, 274.15)
-        forecast = WrfForecast::TemperatureText.new(extreme_values, indicators.indicators)
+        forecast = WrfForecast::Text::TemperatureText.new(extreme_values, indicators.indicators)
         expected = 'Today will be a cold day.'
         expected.concat(' The maximum temperature will reach up to 1 degrees celsius.')
         expected.concat(' The minimum temperature will be -8 degrees celsius.')
@@ -62,7 +62,7 @@ describe WrfForecast::TemperatureText do
                              ]
         indicators = WrfForecast::Threshold::TemperatureThreshold.new(temperature_values)
         extreme_values = RubyUtils::ExtremeValues.new(275.15, 282.15)
-        forecast = WrfForecast::TemperatureText.new(extreme_values, indicators.indicators)
+        forecast = WrfForecast::Text::TemperatureText.new(extreme_values, indicators.indicators)
         expected = 'Today will be a normal day.'
         expected.concat(' The maximum temperature will reach up to 9 degrees celsius.')
         expected.concat(' The minimum temperature will be 2 degrees celsius.')
@@ -82,7 +82,7 @@ describe WrfForecast::TemperatureText do
                              ]
         indicators = WrfForecast::Threshold::TemperatureThreshold.new(temperature_values)
         extreme_values = RubyUtils::ExtremeValues.new(288.15, 301.05)
-        forecast = WrfForecast::TemperatureText.new(extreme_values, indicators.indicators)
+        forecast = WrfForecast::Text::TemperatureText.new(extreme_values, indicators.indicators)
         expected = 'Today will be a summer day.'
         expected.concat(' The maximum temperature will reach up to 28 degrees celsius.')
         expected.concat(' The minimum temperature will be 15 degrees celsius.')
@@ -102,7 +102,7 @@ describe WrfForecast::TemperatureText do
                              ]
         indicators = WrfForecast::Threshold::TemperatureThreshold.new(temperature_values)
         extreme_values = RubyUtils::ExtremeValues.new(294.15, 305.25)
-        forecast = WrfForecast::TemperatureText.new(extreme_values, indicators.indicators)
+        forecast = WrfForecast::Text::TemperatureText.new(extreme_values, indicators.indicators)
         expected = 'Today will be a hot day with a tropical night.'
         expected.concat(' The maximum temperature will reach up to 33 degrees celsius.')
         expected.concat(' The minimum temperature will be 21 degrees celsius.')
