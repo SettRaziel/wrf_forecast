@@ -2,13 +2,12 @@
 # @Author: Benjamin Held
 # @Date:   2020-03-22 10:46:55
 # @Last Modified by:   Benjamin Held
-# @Last Modified time: 2020-05-06 18:19:22
+# @Last Modified time: 2020-05-06 18:47:41
 
 require 'wrf_library/wrf'
 require 'wrf_forecast/data/forecast_repository'
 require 'wrf_forecast/threshold'
 require 'wrf_forecast/text'
-require 'wrf_forecast/forecast/english/wind/wind_text'
 require 'wrf_forecast/forecast/english/rain/rain_text'
 
 module WrfForecast
@@ -90,7 +89,7 @@ module WrfForecast
       extreme_values = repository.extreme_values[:wind_speed]
       prevalent_direction = repository.prevalent_direction
       threshold = handler.wind_threshold.indicators
-      @wind_text = WrfForecast::WindText.new(extreme_values, prevalent_direction, threshold)
+      @wind_text = WrfForecast::Text::WindText.new(extreme_values, prevalent_direction, threshold)
       nil
     end
 
