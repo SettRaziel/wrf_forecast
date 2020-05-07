@@ -2,12 +2,11 @@
 # @Author: Benjamin Held
 # @Date:   2020-03-24 16:47:58
 # @Last Modified by:   Benjamin Held
-# @Last Modified time: 2020-05-06 18:57:23
+# @Last Modified time: 2020-05-07 19:09:51
 
 require 'spec_helper'
 require 'ruby_utils/statistic'
 require 'wrf_forecast/threshold'
-require 'wrf_forecast/data/forecast_repository'
 require 'wrf_forecast/text'
 
 describe WrfForecast::Text::RainText do
