@@ -2,7 +2,7 @@
 # @Author: Benjamin Held
 # @Date:   2020-03-16 20:59:23
 # @Last Modified by:   Benjamin Held
-# @Last Modified time: 2020-05-05 22:22:57
+# @Last Modified time: 2020-05-10 16:48:55
 
 require 'spec_helper'
 require 'wrf_forecast/help/help_output'
@@ -28,7 +28,7 @@ describe WrfForecast::HelpOutput do
           WrfForecast::HelpOutput.print_help_for(:warning) 
         }.to output("WRF forecast help:".light_yellow + "\n" + \
                     " -w, --warning  ".light_blue +  \
-                    "adds an addtional text section containing the forecast warnings\n").to_stdout
+                    "adds an additional text section containing warnings and significant weather\n").to_stdout
       end
     end
   end
@@ -83,7 +83,7 @@ describe WrfForecast::HelpOutput do
                     "     --default  ".light_blue +  \
                     "runs the script with date as today at midnight and a 24 h forecast period\n" + \
                     " -w, --warning  ".light_blue +  \
-                    "adds an addtional text section containing the forecast warnings\n" + \
+                    "adds an additional text section containing warnings and significant weather\n" + \
                     " -d, --date     ".light_blue + "argument:".red + " <date>".yellow  + \
                     "; specifies the start_date of the requested forecast\n" + \
                     " -o, --offset   ".light_blue + "argument:".red + " <offset>".yellow  + \
