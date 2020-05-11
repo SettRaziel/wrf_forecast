@@ -2,11 +2,11 @@
 # @Author: Benjamin Held
 # @Date:   2020-03-19 10:01:28
 # @Last Modified by:   Benjamin Held
-# @Last Modified time: 2020-04-01 16:44:58
+# @Last Modified time: 2020-05-11 20:49:26
 
-require 'spec_helper'
-require 'wrf_library/wrf'
-require 'wrf_forecast/threshold'
+require "spec_helper"
+require "wrf_library/wrf"
+require "wrf_forecast/threshold"
 
 describe WrfForecast::Threshold::TemperatureThreshold do
 
@@ -17,11 +17,11 @@ describe WrfForecast::Threshold::TemperatureThreshold do
                                                   Date.new(2020, 02, 23))
         temperature_values = handler.retrieve_data_set(:air_temperature)
         indicators = WrfForecast::Threshold::TemperatureThreshold.new(temperature_values)
-        expect(indicators.indicators[:ice_day]).to eq(false)
-        expect(indicators.indicators[:frost_day]).to eq(true)
-        expect(indicators.indicators[:summer_day]).to eq(false)
-        expect(indicators.indicators[:hot_day]).to eq(false)
-        expect(indicators.indicators[:tropical_night]).to eq(false)
+        expect(indicators.indicators[:ice_day].is_active).to eq(false)
+        expect(indicators.indicators[:frost_day].is_active).to eq(true)
+        expect(indicators.indicators[:summer_day].is_active).to eq(false)
+        expect(indicators.indicators[:hot_day].is_active).to eq(false)
+        expect(indicators.indicators[:tropical_night].is_active).to eq(false)
       end
     end
   end
@@ -36,11 +36,11 @@ describe WrfForecast::Threshold::TemperatureThreshold do
                                269, 269, 269, 269, 268, 268, 268, 268, 268, 267
                              ]
         indicators = WrfForecast::Threshold::TemperatureThreshold.new(temperature_values)
-        expect(indicators.indicators[:ice_day]).to eq(true)
-        expect(indicators.indicators[:frost_day]).to eq(true)
-        expect(indicators.indicators[:summer_day]).to eq(false)
-        expect(indicators.indicators[:hot_day]).to eq(false)
-        expect(indicators.indicators[:tropical_night]).to eq(false)
+        expect(indicators.indicators[:ice_day].is_active).to eq(true)
+        expect(indicators.indicators[:frost_day].is_active).to eq(true)
+        expect(indicators.indicators[:summer_day].is_active).to eq(false)
+        expect(indicators.indicators[:hot_day].is_active).to eq(false)
+        expect(indicators.indicators[:tropical_night].is_active).to eq(false)
       end
     end
   end  
@@ -55,11 +55,11 @@ describe WrfForecast::Threshold::TemperatureThreshold do
                                269, 269, 269, 269, 268, 268, 268, 268, 268, 267
                              ]
         indicators = WrfForecast::Threshold::TemperatureThreshold.new(temperature_values)
-        expect(indicators.indicators[:ice_day]).to eq(false)
-        expect(indicators.indicators[:frost_day]).to eq(true)
-        expect(indicators.indicators[:summer_day]).to eq(false)
-        expect(indicators.indicators[:hot_day]).to eq(false)
-        expect(indicators.indicators[:tropical_night]).to eq(false)
+        expect(indicators.indicators[:ice_day].is_active).to eq(false)
+        expect(indicators.indicators[:frost_day].is_active).to eq(true)
+        expect(indicators.indicators[:summer_day].is_active).to eq(false)
+        expect(indicators.indicators[:hot_day].is_active).to eq(false)
+        expect(indicators.indicators[:tropical_night].is_active).to eq(false)
       end
     end
   end  
@@ -74,11 +74,11 @@ describe WrfForecast::Threshold::TemperatureThreshold do
                                279, 279, 279, 279, 278, 278, 278, 278, 278, 277
                              ]
         indicators = WrfForecast::Threshold::TemperatureThreshold.new(temperature_values)
-        expect(indicators.indicators[:ice_day]).to eq(false)
-        expect(indicators.indicators[:frost_day]).to eq(false)
-        expect(indicators.indicators[:summer_day]).to eq(false)
-        expect(indicators.indicators[:hot_day]).to eq(false)
-        expect(indicators.indicators[:tropical_night]).to eq(false)
+        expect(indicators.indicators[:ice_day].is_active).to eq(false)
+        expect(indicators.indicators[:frost_day].is_active).to eq(false)
+        expect(indicators.indicators[:summer_day].is_active).to eq(false)
+        expect(indicators.indicators[:hot_day].is_active).to eq(false)
+        expect(indicators.indicators[:tropical_night].is_active).to eq(false)
       end
     end
   end
@@ -93,11 +93,11 @@ describe WrfForecast::Threshold::TemperatureThreshold do
                                294, 294, 293, 293, 292, 292, 291, 291, 290, 290
                              ]
         indicators = WrfForecast::Threshold::TemperatureThreshold.new(temperature_values)
-        expect(indicators.indicators[:ice_day]).to eq(false)
-        expect(indicators.indicators[:frost_day]).to eq(false)
-        expect(indicators.indicators[:summer_day]).to eq(true)
-        expect(indicators.indicators[:hot_day]).to eq(false)
-        expect(indicators.indicators[:tropical_night]).to eq(false)
+        expect(indicators.indicators[:ice_day].is_active).to eq(false)
+        expect(indicators.indicators[:frost_day].is_active).to eq(false)
+        expect(indicators.indicators[:summer_day].is_active).to eq(true)
+        expect(indicators.indicators[:hot_day].is_active).to eq(false)
+        expect(indicators.indicators[:tropical_night].is_active).to eq(false)
       end
     end
   end  
@@ -112,11 +112,11 @@ describe WrfForecast::Threshold::TemperatureThreshold do
                                295, 294, 293, 293, 292, 292, 291, 291, 290, 290
                              ]
         indicators = WrfForecast::Threshold::TemperatureThreshold.new(temperature_values)
-        expect(indicators.indicators[:ice_day]).to eq(false)
-        expect(indicators.indicators[:frost_day]).to eq(false)
-        expect(indicators.indicators[:summer_day]).to eq(true)
-        expect(indicators.indicators[:hot_day]).to eq(true)
-        expect(indicators.indicators[:tropical_night]).to eq(false)
+        expect(indicators.indicators[:ice_day].is_active).to eq(false)
+        expect(indicators.indicators[:frost_day].is_active).to eq(false)
+        expect(indicators.indicators[:summer_day].is_active).to eq(true)
+        expect(indicators.indicators[:hot_day].is_active).to eq(true)
+        expect(indicators.indicators[:tropical_night].is_active).to eq(false)
       end
     end
   end
@@ -131,11 +131,11 @@ describe WrfForecast::Threshold::TemperatureThreshold do
                                299, 299, 298, 298, 297, 297, 296, 296, 296, 296
                              ]
         indicators = WrfForecast::Threshold::TemperatureThreshold.new(temperature_values)
-        expect(indicators.indicators[:ice_day]).to eq(false)
-        expect(indicators.indicators[:frost_day]).to eq(false)
-        expect(indicators.indicators[:summer_day]).to eq(true)
-        expect(indicators.indicators[:hot_day]).to eq(true)
-        expect(indicators.indicators[:tropical_night]).to eq(true)
+        expect(indicators.indicators[:ice_day].is_active).to eq(false)
+        expect(indicators.indicators[:frost_day].is_active).to eq(false)
+        expect(indicators.indicators[:summer_day].is_active).to eq(true)
+        expect(indicators.indicators[:hot_day].is_active).to eq(true)
+        expect(indicators.indicators[:tropical_night].is_active).to eq(true)
       end
     end
   end

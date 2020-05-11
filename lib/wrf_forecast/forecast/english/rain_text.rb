@@ -2,7 +2,7 @@
 # @Author: Benjamin Held
 # @Date:   2020-03-24 15:49:26
 # @Last Modified by:   Benjamin Held
-# @Last Modified time: 2020-05-11 17:53:21
+# @Last Modified time: 2020-05-11 20:47:22
 
 module WrfForecast
 
@@ -28,9 +28,9 @@ module WrfForecast
       # method to generate the forecast text for the rain
       def generate_forecast_text
         if (!shall_it_rain?)
-          @text = 'The forecast does not predict rain.'
+          @text = "The forecast does not predict rain."
         else
-          @text = 'The forecast does predict '
+          @text = "The forecast does predict "
           @text.concat(create_intensity_text)
           @text.concat(create_rain_text)
         end
@@ -44,31 +44,31 @@ module WrfForecast
 
       # method to generate the text about the day
       def create_intensity_text
-        intensity = 'normal'
-        intensity = 'strong' if (@thresholds[:strong_rain])
-        intensity = 'heavy' if (@thresholds[:heavy_rain])
-        intensity = 'extreme' if (@thresholds[:extreme_rain])
-        intensity = 'continous' if (@thresholds[:continous_rain])
+        intensity = "normal"
+        intensity = "strong" if (@thresholds[:strong_rain].is_active)
+        intensity = "heavy" if (@thresholds[:heavy_rain].is_active)
+        intensity = "extreme" if (@thresholds[:extreme_rain].is_active)
+        intensity = "continous" if (@thresholds[:continous_rain].is_active)
         return intensity
       end
 
       # method to generate the text with rain values
       def create_rain_text
-        text = ' rain with a maximum of '
-        if (@thresholds[:continous_rain])
+        text = " rain with a maximum of "
+        if (@thresholds[:continous_rain].is_active)
           text.concat(get_rain_sum.ceil.to_s)
-          text.concat(' mm in 24 hours')
+          text.concat(" mm in 24 hours")
         else
           text.concat(@extreme_values.maximum.round(1).to_s)
-          text.concat(' mm in 1 hour')
+          text.concat(" mm in 1 hour")
         end
 
         if (@extreme_values.minimum.round(5) == 0.0)
-          text.concat(' and some dry periods ')
+          text.concat(" and some dry periods ")
         else
-          text.concat(' and no dry periods ')
+          text.concat(" and no dry periods ")
         end
-        text.concat('during the day.')
+        text.concat("during the day.")
         return text
       end
 

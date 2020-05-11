@@ -2,9 +2,9 @@
 # @Author: Benjamin Held
 # @Date:   2020-03-21 17:38:16
 # @Last Modified by:   Benjamin Held
-# @Last Modified time: 2020-05-04 18:16:02
+# @Last Modified time: 2020-05-11 20:46:26
 
-require 'wrf_forecast/data/forecast_repository'
+require "wrf_forecast/data/forecast_repository"
 
 module WrfForecast
 
@@ -47,8 +47,8 @@ module WrfForecast
       # method to collect the overstepped thresholds for the given measurand threshold
       def collect_thresholds_for(threshold)
         active_thresholds = Array.new()
-        threshold.indicators.each_pair { |key, value| 
-          active_thresholds << key if(value)
+        threshold.indicators.each_value { |value| 
+          active_thresholds << value if(value.is_active)
         }
         return active_thresholds
       end

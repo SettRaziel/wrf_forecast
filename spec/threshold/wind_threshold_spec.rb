@@ -2,12 +2,12 @@
 # @Author: Benjamin Held
 # @Date:   2020-03-19 16:54:37
 # @Last Modified by:   Benjamin Held
-# @Last Modified time: 2020-03-31 16:51:11
+# @Last Modified time: 2020-05-11 20:48:55
 
-require 'spec_helper'
-require 'wrf_library/wrf'
-require 'wrf_forecast/data/forecast_repository'
-require 'wrf_forecast/threshold'
+require "spec_helper"
+require "wrf_library/wrf"
+require "wrf_forecast/data/forecast_repository"
+require "wrf_forecast/threshold"
 
 describe WrfForecast::Threshold::WindThreshold do
 
@@ -19,10 +19,10 @@ describe WrfForecast::Threshold::WindThreshold do
         repository = WrfForecast::ForecastRepository.new(handler)
         windspeed_values = repository.forecast_data[:wind_speed]
         indicators = WrfForecast::Threshold::WindThreshold.new(windspeed_values)
-        expect(indicators.indicators[:squall_day]).to eq(false)
-        expect(indicators.indicators[:storm_squall_day]).to eq(false)
-        expect(indicators.indicators[:storm_day]).to eq(false)
-        expect(indicators.indicators[:hurricane_day]).to eq(false)
+        expect(indicators.indicators[:squall_day].is_active).to eq(false)
+        expect(indicators.indicators[:storm_squall_day].is_active).to eq(false)
+        expect(indicators.indicators[:storm_day].is_active).to eq(false)
+        expect(indicators.indicators[:hurricane_day].is_active).to eq(false)
       end
     end
   end
@@ -36,10 +36,10 @@ describe WrfForecast::Threshold::WindThreshold do
                              12, 12, 14, 16, 13, 17, 14, 17, 18, 20,
                              18, 16, 14, 12, 10,  8,  6,  5,  5,  5 ]
         indicators = WrfForecast::Threshold::WindThreshold.new(windspeed_values)
-        expect(indicators.indicators[:squall_day]).to eq(true)
-        expect(indicators.indicators[:storm_squall_day]).to eq(false)
-        expect(indicators.indicators[:storm_day]).to eq(false)
-        expect(indicators.indicators[:hurricane_day]).to eq(false)
+        expect(indicators.indicators[:squall_day].is_active).to eq(true)
+        expect(indicators.indicators[:storm_squall_day].is_active).to eq(false)
+        expect(indicators.indicators[:storm_day].is_active).to eq(false)
+        expect(indicators.indicators[:hurricane_day].is_active).to eq(false)
       end
     end
   end  
@@ -53,10 +53,10 @@ describe WrfForecast::Threshold::WindThreshold do
                              22, 22, 24, 26, 23, 27, 24, 19, 18, 20,
                              18, 16, 14, 12, 10,  8,  6,  5,  5,  5 ]
         indicators = WrfForecast::Threshold::WindThreshold.new(windspeed_values)
-        expect(indicators.indicators[:squall_day]).to eq(true)
-        expect(indicators.indicators[:storm_squall_day]).to eq(true)
-        expect(indicators.indicators[:storm_day]).to eq(false)
-        expect(indicators.indicators[:hurricane_day]).to eq(false)
+        expect(indicators.indicators[:squall_day].is_active).to eq(true)
+        expect(indicators.indicators[:storm_squall_day].is_active).to eq(true)
+        expect(indicators.indicators[:storm_day].is_active).to eq(false)
+        expect(indicators.indicators[:hurricane_day].is_active).to eq(false)
       end
     end
   end  
@@ -70,10 +70,10 @@ describe WrfForecast::Threshold::WindThreshold do
                              22, 24, 27, 29, 29, 27, 24, 19, 18, 20,
                              18, 16, 14, 12, 10,  8,  6,  5,  5,  5 ]
         indicators = WrfForecast::Threshold::WindThreshold.new(windspeed_values)
-        expect(indicators.indicators[:squall_day]).to eq(true)
-        expect(indicators.indicators[:storm_squall_day]).to eq(true)
-        expect(indicators.indicators[:storm_day]).to eq(true)
-        expect(indicators.indicators[:hurricane_day]).to eq(false)
+        expect(indicators.indicators[:squall_day].is_active).to eq(true)
+        expect(indicators.indicators[:storm_squall_day].is_active).to eq(true)
+        expect(indicators.indicators[:storm_day].is_active).to eq(true)
+        expect(indicators.indicators[:hurricane_day].is_active).to eq(false)
       end
     end
   end
@@ -87,10 +87,10 @@ describe WrfForecast::Threshold::WindThreshold do
                              29, 30, 33, 29, 29, 27, 24, 19, 18, 20,
                              18, 16, 14, 12, 14, 15, 12, 15, 14, 12 ]
         indicators = WrfForecast::Threshold::WindThreshold.new(windspeed_values)
-        expect(indicators.indicators[:squall_day]).to eq(true)
-        expect(indicators.indicators[:storm_squall_day]).to eq(true)
-        expect(indicators.indicators[:storm_day]).to eq(true)
-        expect(indicators.indicators[:hurricane_day]).to eq(true)
+        expect(indicators.indicators[:squall_day].is_active).to eq(true)
+        expect(indicators.indicators[:storm_squall_day].is_active).to eq(true)
+        expect(indicators.indicators[:storm_day].is_active).to eq(true)
+        expect(indicators.indicators[:hurricane_day].is_active).to eq(true)
       end
     end
   end
@@ -104,10 +104,10 @@ describe WrfForecast::Threshold::WindThreshold do
                              10, 10,  9,  9,  8,  8,  8,  7,  8,  6,
                               5,  5,  4,  3,  4,  4,  3,  2,  1,  0 ]
         indicators = WrfForecast::Threshold::WindThreshold.new(windspeed_values)
-        expect(indicators.indicators[:squall_day]).to eq(false)
-        expect(indicators.indicators[:storm_squall_day]).to eq(false)
-        expect(indicators.indicators[:storm_day]).to eq(false)
-        expect(indicators.indicators[:hurricane_day]).to eq(false)
+        expect(indicators.indicators[:squall_day].is_active).to eq(false)
+        expect(indicators.indicators[:storm_squall_day].is_active).to eq(false)
+        expect(indicators.indicators[:storm_day].is_active).to eq(false)
+        expect(indicators.indicators[:hurricane_day].is_active).to eq(false)
       end
     end
   end

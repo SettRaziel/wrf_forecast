@@ -2,9 +2,10 @@
 # @Author: Benjamin Held
 # @Date:   2020-03-19 14:02:55
 # @Last Modified by:   Benjamin Held
-# @Last Modified time: 2020-04-10 08:30:54
+# @Last Modified time: 2020-05-11 20:52:54
 
-require 'ruby_utils/string'
+require "ruby_utils/string"
+require "wrf_forecast/threshold/threshold_value"
 
 module WrfForecast
 
@@ -33,6 +34,15 @@ module WrfForecast
       end
 
       private
+
+      # method to add a threshold value to the indicator hash
+      # @param [Symbol] identifier the symbol that identifies the threshold
+      # @param [boolean] is_active a bool flag that indicated if the threshold was activated
+      # @param [String] warning_text the corresponding warning text to the threshold
+      def add_indicator(identifier, is_active, warning_text)
+        @indicators[identifier] = 
+          WrfForecast::Threshold::ThresholdValue.new(identifier, is_active, warning_text)
+      end
 
       # method to check if the data sample offers enough data for the indicators
       # less than 720 data points means, less than 1 data point every 2 minutes

@@ -2,7 +2,7 @@
 # @Author: Benjamin Held
 # @Date:   2020-03-19 13:59:43
 # @Last Modified by:   Benjamin Held
-# @Last Modified time: 2020-03-31 16:31:25
+# @Last Modified time: 2020-05-11 20:32:41
 
 module WrfForecast
 
@@ -14,7 +14,7 @@ module WrfForecast
     # The indicators and thresholds are bases on the climate indicators of the german
     # (weatherservice)[https://www.dwd.de/DE/wetter/warnungen_aktuell/kriterien/warnkriterien.html]:
     # * squall day: the wind speed exceeds 14 m/s or 7 bft
-    # * storm squall day: the wind speed exceeds 24 m/s or 8 bft
+    # * storm squall day: the wind speed exceeds 24 m/s or 9 bft
     # * storm day: the wind speed exceeds 28 m/s or 10 bft
     # * hurricane day: the wind speed exceeds 32 m/s or 11 bft
     class WindThreshold < BaseThreshold
@@ -23,10 +23,10 @@ module WrfForecast
 
       # initialization of the required indicators
       def initialize_indicators
-        @indicators[:squall_day] = false
-        @indicators[:storm_squall_day] = false
-        @indicators[:storm_day] = false
-        @indicators[:hurricane_day] = false
+        add_indicator(:squall_day, false, "wind speed exceeds 14 m/s, 50 km/h, 7 bft")
+        add_indicator(:storm_squall_day, false, "wind speed exceeds 24 m/s, 89 km/h, 9 bft")
+        add_indicator(:storm_day, false, "wind speed exceeds 28 m/s, 104 km/h, 10 bft")
+        add_indicator(:hurricane_day, false, "wind speed exceeds 32 m/s, 120 km/h, 11 bft")
         nil
       end
 
@@ -34,10 +34,10 @@ module WrfForecast
       # @param [Array] data_values the input values
       def determine_indicators(data_values)
         data_values.each { |value|
-          @indicators[:squall_day] = true if (value > 14.0)
-          @indicators[:storm_squall_day] = true if (value > 24.0)
-          @indicators[:storm_day] = true if (value > 28.0)
-          @indicators[:hurricane_day] = true if (value >= 32.0)
+          @indicators[:squall_day].is_active = true if (value > 14.0)
+          @indicators[:storm_squall_day].is_active = true if (value > 24.0)
+          @indicators[:storm_day].is_active = true if (value > 28.0)
+          @indicators[:hurricane_day].is_active = true if (value > 32.0)
         }
         nil
       end

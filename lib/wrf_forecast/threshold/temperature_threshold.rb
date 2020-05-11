@@ -2,7 +2,7 @@
 # @Author: Benjamin Held
 # @Date:   2020-03-19 08:04:09
 # @Last Modified by:   Benjamin Held
-# @Last Modified time: 2020-03-31 16:30:32
+# @Last Modified time: 2020-05-11 20:13:25
 
 module WrfForecast
 
@@ -24,11 +24,11 @@ module WrfForecast
 
       # initialization of the required indicators
       def initialize_indicators
-        @indicators[:ice_day] = true
-        @indicators[:frost_day] = false
-        @indicators[:summer_day] = false
-        @indicators[:hot_day] = false
-        @indicators[:tropical_night] = true
+        add_indicator(:ice_day, true, "temperature does not exceed 0 degrees celsius")
+        add_indicator(:frost_day, false, "temperature will fall below 0 degrees celsius")
+        add_indicator(:summer_day, false, "temperature will exceed 25 degress celsius")
+        add_indicator(:hot_day, false, "temperature will exceed 30 degress celsius")
+        add_indicator(:tropical_night, true, "temperature does not fall below 20 degrees celsius")
         nil
       end
 
@@ -36,11 +36,11 @@ module WrfForecast
       # @param [Array] data_values the input values
       def determine_indicators(data_values)
         data_values.each { |value|
-          @indicators[:ice_day] = false if (value > 273.15)
-          @indicators[:frost_day] = true if (value < 273.15)
-          @indicators[:summer_day] = true if (value >= 298.15)
-          @indicators[:hot_day] = true if (value >= 303.15)
-          @indicators[:tropical_night] = false if (value < 293.15) 
+          @indicators[:ice_day].is_active = false if (value > 273.15)
+          @indicators[:frost_day].is_active = true if (value < 273.15)
+          @indicators[:summer_day].is_active = true if (value >= 298.15)
+          @indicators[:hot_day].is_active = true if (value >= 303.15)
+          @indicators[:tropical_night].is_active = false if (value < 293.15)
         }
         nil
       end

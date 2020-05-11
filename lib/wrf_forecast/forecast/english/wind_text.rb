@@ -2,7 +2,7 @@
 # @Author: Benjamin Held
 # @Date:   2020-03-23 16:27:56
 # @Last Modified by:   Benjamin Held
-# @Last Modified time: 2020-05-11 17:53:13
+# @Last Modified time: 2020-05-11 20:47:54
 
 module WrfForecast
 
@@ -32,20 +32,20 @@ module WrfForecast
       # method to initialize the mapping from direction to direction text
       def initialize_directions
         @directions = Hash.new()
-        @directions[:N]  = 'north'
-        @directions[:S]  = 'south'
-        @directions[:W]  = 'west'
-        @directions[:E]  = 'east'
-        @directions[:NW] = 'northwest'
-        @directions[:NE] = 'northeast'
-        @directions[:SW] = 'southwest'
-        @directions[:SE] = 'southeast'
+        @directions[:N]  = "north"
+        @directions[:S]  = "south"
+        @directions[:W]  = "west"
+        @directions[:E]  = "east"
+        @directions[:NW] = "northwest"
+        @directions[:NE] = "northeast"
+        @directions[:SW] = "southwest"
+        @directions[:SE] = "southeast"
         nil
       end
 
       # method to generate the forecast text for the wind
       def generate_forecast_text
-        @text = 'The wind will be '
+        @text = "The wind will be "
         @text.concat(create_strength_text)
         @text.concat(create_wind_text)
         nil
@@ -58,31 +58,31 @@ module WrfForecast
 
       # method to generate the text about the day
       def create_strength_text
-        wind_strength = 'normal'
-        wind_strength = 'squall' if (@thresholds[:squall_day])
-        wind_strength = 'stormy' if (@thresholds[:storm_squall_day])
-        wind_strength = 'very stromy' if (@thresholds[:storm_day])
-        wind_strength = 'extremly stromy' if (@thresholds[:hurricane_day])
+        wind_strength = "normal"
+        wind_strength = "squall" if (@thresholds[:squall_day].is_active)
+        wind_strength = "stormy" if (@thresholds[:storm_squall_day].is_active)
+        wind_strength = "very stromy" if (@thresholds[:storm_day].is_active)
+        wind_strength = "extremly stromy" if (@thresholds[:hurricane_day].is_active)
         return wind_strength
       end
 
       # method to generate the text with wind values
       def create_wind_text
-        text = ' and will reach up to '
+        text = " and will reach up to "
         text.concat((@extreme_values.maximum * 3.6).ceil.to_s)
-        text.concat(' km/h from ')
+        text.concat(" km/h from ")
         text.concat(create_prevalent_direction_text)
-        text.concat('. The mean wind will be ')
+        text.concat(". The mean wind will be ")
         mean = (@extreme_values.maximum + @extreme_values.minimum) / 2.0
         text.concat((mean * 3.6).ceil.to_s)
-        text.concat(' km/h.')
+        text.concat(" km/h.")
         return text
       end
 
       # method to create the text for the prevalent wind direction
       def create_prevalent_direction_text
         if (@prevalent_direction == nil)
-          return 'circulatory directions'
+          return "circulatory directions"
         end
         return @directions[@prevalent_direction]
       end

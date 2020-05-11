@@ -2,7 +2,7 @@
 # @Author: Benjamin Held
 # @Date:   2020-03-20 12:14:58
 # @Last Modified by:   Benjamin Held
-# @Last Modified time: 2020-04-13 11:05:05
+# @Last Modified time: 2020-05-11 20:39:56
 
 module WrfForecast
 
@@ -23,10 +23,10 @@ module WrfForecast
 
       # initialization of the required indicators
       def initialize_indicators
-        @indicators[:strong_rain] = false
-        @indicators[:heavy_rain] = false
-        @indicators[:extreme_rain] = false
-        @indicators[:continous_rain] = false
+        add_indicator(:strong_rain, false, "hourly rain sum exceeds 15 mm per hour")
+        add_indicator(:heavy_rain, false, "hourly rain sum exceeds 25 mm per hour")
+        add_indicator(:extreme_rain, false, "hourly rain sum exceeds 40 mm per hour")
+        add_indicator(:continous_rain, false, "rain sum exceeds 30 mm per 24 hours")
         nil
       end
 
@@ -35,14 +35,14 @@ module WrfForecast
       def determine_indicators(data_values)
         sum = 0
         data_values.each { |value|
-          @indicators[:strong_rain] = true if (value > 15.0)
-          @indicators[:heavy_rain] = true if (value > 25.0)
-          @indicators[:extreme_rain] = true  if (value > 40.0)
+          @indicators[:strong_rain].is_active = true if (value > 15.0)
+          @indicators[:heavy_rain].is_active = true if (value > 25.0)
+          @indicators[:extreme_rain].is_active = true  if (value > 40.0)
           sum += value
         }
 
-        if (sum > 30.0 && !@indicators[:strong_rain])
-          @indicators[:continous_rain] = true
+        if (sum > 30.0 && !@indicators[:strong_rain].is_active)
+          @indicators[:continous_rain].is_active = true
         end
         nil
       end

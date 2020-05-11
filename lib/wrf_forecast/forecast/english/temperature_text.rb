@@ -2,7 +2,7 @@
 # @Author: Benjamin Held
 # @Date:   2020-03-22 11:32:06
 # @Last Modified by:   Benjamin Held
-# @Last Modified time: 2020-05-11 17:53:03
+# @Last Modified time: 2020-05-11 20:47:42
 
 module WrfForecast
 
@@ -16,8 +16,8 @@ module WrfForecast
 
       # method to generate the forecast text for the temperature
       def generate_forecast_text
-        @text = 'Today will be a '
-        @text.concat(create_warmth_text).concat('.')
+        @text = "Today will be a "
+        @text.concat(create_warmth_text).concat(".")
         @text.concat(create_temperature_text)
         nil
       end
@@ -29,26 +29,26 @@ module WrfForecast
 
       # method to generate the text about the day
       def create_warmth_text
-        warmth = 'normal'
-        warmth = 'cold' if (@thresholds[:frost_day])
-        warmth = 'very frosty' if (@thresholds[:ice_day])
-        warmth = 'summer' if (@thresholds[:summer_day])
-        warmth = 'hot' if (@thresholds[:hot_day])
+        warmth = "normal"
+        warmth = "cold" if (@thresholds[:frost_day].is_active)
+        warmth = "very frosty" if (@thresholds[:ice_day].is_active)
+        warmth = "summer" if (@thresholds[:summer_day].is_active)
+        warmth = "hot" if (@thresholds[:hot_day].is_active)
 
-        warmth.concat(' day')
-        if (@thresholds[:tropical_night])
-          warmth.concat(' with a tropical night')
+        warmth.concat(" day")
+        if (@thresholds[:tropical_night].is_active)
+          warmth.concat(" with a tropical night")
         end
         return warmth
       end
 
       # method to generate the text with temperature values
       def create_temperature_text
-        text = ' The maximum temperature will reach up to '
+        text = " The maximum temperature will reach up to "
         text.concat((@extreme_values.maximum - 273.15).ceil.to_s)
-        text.concat(' degrees celsius. The minimum temperature will be ')
+        text.concat(" degrees celsius. The minimum temperature will be ")
         text.concat((@extreme_values.minimum - 273.15).floor.to_s)
-        text.concat(' degrees celsius.')
+        text.concat(" degrees celsius.")
         return text
       end
       
