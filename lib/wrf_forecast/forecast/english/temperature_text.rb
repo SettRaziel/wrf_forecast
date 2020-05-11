@@ -2,7 +2,7 @@
 # @Author: Benjamin Held
 # @Date:   2020-03-22 11:32:06
 # @Last Modified by:   Benjamin Held
-# @Last Modified time: 2020-05-06 18:10:53
+# @Last Modified time: 2020-05-11 17:53:03
 
 module WrfForecast
 
@@ -20,6 +20,11 @@ module WrfForecast
         @text.concat(create_warmth_text).concat('.')
         @text.concat(create_temperature_text)
         nil
+      end
+
+      # method to generate the warning text for the measurand
+      def generate_warning_text
+        return ""
       end
 
       # method to generate the text about the day

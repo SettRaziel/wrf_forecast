@@ -2,7 +2,7 @@
 # @Author: Benjamin Held
 # @Date:   2020-03-24 15:49:26
 # @Last Modified by:   Benjamin Held
-# @Last Modified time: 2020-05-06 18:58:00
+# @Last Modified time: 2020-05-11 17:53:21
 
 module WrfForecast
 
@@ -35,6 +35,11 @@ module WrfForecast
           @text.concat(create_rain_text)
         end
         nil
+      end
+
+      # method to generate the warning text for the measurand
+      def generate_warning_text
+        return ""
       end
 
       # method to generate the text about the day

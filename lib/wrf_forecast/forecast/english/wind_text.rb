@@ -2,7 +2,7 @@
 # @Author: Benjamin Held
 # @Date:   2020-03-23 16:27:56
 # @Last Modified by:   Benjamin Held
-# @Last Modified time: 2020-05-06 18:49:48
+# @Last Modified time: 2020-05-11 17:53:13
 
 module WrfForecast
 
@@ -49,6 +49,11 @@ module WrfForecast
         @text.concat(create_strength_text)
         @text.concat(create_wind_text)
         nil
+      end
+
+      # method to generate the warning text for the measurand
+      def generate_warning_text
+        return ""
       end
 
       # method to generate the text about the day
