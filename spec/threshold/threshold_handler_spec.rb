@@ -2,7 +2,7 @@
 # @Author: Benjamin Held
 # @Date:   2020-03-21 18:25:17
 # @Last Modified by:   Benjamin Held
-# @Last Modified time: 2020-05-11 20:49:04
+# @Last Modified time: 2020-05-11 20:59:43
 
 require "spec_helper"
 require "wrf_library/wrf"
@@ -35,6 +35,7 @@ describe WrfForecast::Threshold::ThresholdHandler do
                                                   Date.new(2020, 02, 23))
         repository = WrfForecast::ForecastRepository.new(wrf_handler)
         threshold_handler = WrfForecast::Threshold::ThresholdHandler.new(repository)
+        expect(threshold_handler.warnings[:air_temperature].size).to eq(1)
         expect(threshold_handler.warnings[:air_temperature][0].identifier).to eq(:frost_day)
         expect(threshold_handler.warnings[:wind_speed]).to be_empty
         expect(threshold_handler.warnings[:rain]).to be_empty
@@ -49,6 +50,7 @@ describe WrfForecast::Threshold::ThresholdHandler do
                                                   Date.new(2020, 02, 23))
         repository = WrfForecast::ForecastRepository.new(wrf_handler)
         threshold_handler = WrfForecast::Threshold::ThresholdHandler.new(repository)
+        expect(threshold_handler.warnings[:air_temperature].size).to eq(1)
         expect(threshold_handler.warnings[:air_temperature][0].identifier).to eq(:frost_day)
         expect(threshold_handler.warnings[:wind_speed]).to be_empty
         expect(threshold_handler.warnings[:rain]).to be_empty

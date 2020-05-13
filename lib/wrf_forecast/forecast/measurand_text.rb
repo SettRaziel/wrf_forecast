@@ -2,7 +2,7 @@
 # @Author: Benjamin Held
 # @Date:   2020-05-06 17:57:19
 # @Last Modified by:   Benjamin Held
-# @Last Modified time: 2020-05-10 16:51:39
+# @Last Modified time: 2020-05-12 16:51:28
 
 module WrfForecast
 
@@ -21,6 +21,8 @@ module WrfForecast
       def initialize(extreme_values, thresholds)
         @extreme_values = extreme_values
         @thresholds = thresholds
+        @text = ""
+        @warnings = ""
         generate_forecast_text
         generate_warning_text
       end
