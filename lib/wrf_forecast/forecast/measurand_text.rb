@@ -2,7 +2,7 @@
 # @Author: Benjamin Held
 # @Date:   2020-05-06 17:57:19
 # @Last Modified by:   Benjamin Held
-# @Last Modified time: 2020-05-12 16:51:28
+# @Last Modified time: 2020-05-13 18:22:32
 
 module WrfForecast
 
@@ -33,6 +33,16 @@ module WrfForecast
       attr_reader :extreme_values
       # @return [TemperatureThreshold] the measurand thresholds
       attr_reader :thresholds
+
+      # method to determine if the threshold for the given indicator is active
+      # @param [Symbol] indicator the given threshold indicator
+      # @return boolean if the thresolhd to the indicator is active
+      def is_threshold_active?(indicator)
+        if (@thresholds[indicator].is_active)
+          @warnings = @thresholds[indicator].warning_text
+        end
+        @thresholds[indicator].is_active
+      end
 
       # abstract method to generate the forecast text for the measurand
       # @raise [NotImplementedError] if the child class does not implement this

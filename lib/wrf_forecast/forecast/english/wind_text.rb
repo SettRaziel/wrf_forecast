@@ -2,7 +2,7 @@
 # @Author: Benjamin Held
 # @Date:   2020-03-23 16:27:56
 # @Last Modified by:   Benjamin Held
-# @Last Modified time: 2020-05-12 16:51:00
+# @Last Modified time: 2020-05-13 18:22:46
 
 module WrfForecast
 
@@ -65,16 +65,6 @@ module WrfForecast
         wind_strength = "very stromy" if (is_threshold_active?(:storm_day))
         wind_strength = "extremly stromy" if (is_threshold_active?(:hurricane_day))
         return wind_strength
-      end
-
-      # method to determine if the threshold for the given indicator is active
-      # @param [Symbol] indicator the given threshold indicator
-      # @return boolean if the thresolhd to the indicator is active
-      def is_threshold_active?(indicator)
-        if (@thresholds[indicator].is_active)
-          @warnings = @thresholds[indicator].warning_text
-        end
-        @thresholds[indicator].is_active
       end
 
       # method to generate the text with wind values

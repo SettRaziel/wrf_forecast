@@ -2,7 +2,7 @@
 # @Author: Benjamin Held
 # @Date:   2020-03-24 15:49:26
 # @Last Modified by:   Benjamin Held
-# @Last Modified time: 2020-05-11 20:47:22
+# @Last Modified time: 2020-05-13 18:33:54
 
 module WrfForecast
 
@@ -45,10 +45,14 @@ module WrfForecast
       # method to generate the text about the day
       def create_intensity_text
         intensity = "normal"
-        intensity = "strong" if (@thresholds[:strong_rain].is_active)
-        intensity = "heavy" if (@thresholds[:heavy_rain].is_active)
-        intensity = "extreme" if (@thresholds[:extreme_rain].is_active)
-        intensity = "continous" if (@thresholds[:continous_rain].is_active)
+        intensity = "strong" if (is_threshold_active?(:strong_rain))
+        intensity = "heavy" if (is_threshold_active?(:heavy_rain))
+        intensity = "extreme" if (is_threshold_active?(:extreme_rain))
+        if (@thresholds[:continous_rain].is_active)
+          intensity = "continous"
+          @warnings.concat"\n" if (!@warnings.empty?)
+          @warnings.concat(@thresholds[:continous_rain].warning_text)
+        end
         return intensity
       end
 

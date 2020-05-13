@@ -2,7 +2,7 @@
 # @Author: Benjamin Held
 # @Date:   2020-03-23 16:57:26
 # @Last Modified by:   Benjamin Held
-# @Last Modified time: 2020-05-12 16:50:07
+# @Last Modified time: 2020-05-13 18:26:31
 
 require "spec_helper"
 require "ruby_utils/statistic"
@@ -112,7 +112,7 @@ describe WrfForecast::Text::WindText do
         indicators = WrfForecast::Threshold::WindThreshold.new(windspeed_values)
         extreme_values = RubyUtils::ExtremeValues.new(0, 11)
         forecast = WrfForecast::Text::WindText.new(extreme_values, nil, indicators.indicators)
-        expect(forecast.warnings).to eq("")
+        expect(forecast.warnings).to be_empty
       end
     end
   end
