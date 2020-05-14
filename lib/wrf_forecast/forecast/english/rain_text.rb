@@ -2,13 +2,16 @@
 # @Author: Benjamin Held
 # @Date:   2020-03-24 15:49:26
 # @Last Modified by:   Benjamin Held
-# @Last Modified time: 2020-05-13 18:33:54
+# @Last Modified time: 2020-05-14 16:58:49
 
 module WrfForecast
 
   module Text
 
     # This class generates the forecast text for the rain data of the forecast
+    # warings: all hourly warnings contain the lesser warnings as a subset, so only the worst 
+    # hourly warning needs to be shown, the continous warning will be shown if the rain amount
+    # sums up over 6 hours, if a hourly event also accours during the time both are shown
     class RainText < MeasurandText
 
       # initialization
@@ -39,7 +42,7 @@ module WrfForecast
 
       # method to generate the warning text for the measurand
       def generate_warning_text
-        return ""
+        @warnings
       end
 
       # method to generate the text about the day

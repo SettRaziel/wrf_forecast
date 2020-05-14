@@ -2,7 +2,7 @@
 # @Author: Benjamin Held
 # @Date:   2020-03-22 11:32:06
 # @Last Modified by:   Benjamin Held
-# @Last Modified time: 2020-05-11 20:47:42
+# @Last Modified time: 2020-05-14 16:59:18
 
 module WrfForecast
 
@@ -10,6 +10,9 @@ module WrfForecast
 
     # This class generates the forecast text for the temperature
     # data of the forecast
+    # warnings: the hot day contains the summer day and can have a tropical night or frost day
+    # but exclude the ice day
+    # the ice day contains the frost day, both exclude tropical night
     class TemperatureText < MeasurandText
 
       private
@@ -24,20 +27,26 @@ module WrfForecast
 
       # method to generate the warning text for the measurand
       def generate_warning_text
-        return ""
+        if (@thresholds[:frost_day].is_active && !@thresholds[:ice_day].is_active)
+          @warnings.concat"\n" if (!@warnings.empty?)
+          @warnings.concat(@thresholds[:frost_day].warning_text)
+        end  
+        @warnings
       end
 
       # method to generate the text about the day
       def create_warmth_text
         warmth = "normal"
         warmth = "cold" if (@thresholds[:frost_day].is_active)
-        warmth = "very frosty" if (@thresholds[:ice_day].is_active)
-        warmth = "summer" if (@thresholds[:summer_day].is_active)
-        warmth = "hot" if (@thresholds[:hot_day].is_active)
+        warmth = "very frosty" if (is_threshold_active?(:ice_day))
+        warmth = "summer" if (is_threshold_active?(:summer_day))
+        warmth = "hot" if (is_threshold_active?(:hot_day))
 
         warmth.concat(" day")
         if (@thresholds[:tropical_night].is_active)
           warmth.concat(" with a tropical night")
+          @warnings.concat("\n") if (!@warnings.empty?)
+          @warnings.concat(@thresholds[:tropical_night].warning_text)
         end
         return warmth
       end

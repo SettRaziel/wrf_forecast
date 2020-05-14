@@ -2,7 +2,7 @@
 # @Author: Benjamin Held
 # @Date:   2020-03-23 16:27:56
 # @Last Modified by:   Benjamin Held
-# @Last Modified time: 2020-05-13 18:22:46
+# @Last Modified time: 2020-05-14 16:59:00
 
 module WrfForecast
 
@@ -10,6 +10,8 @@ module WrfForecast
 
     # This class generates the forecast text for the wind speed
     # and direction of the forecast
+    # warnings: all lesser warnings are a subset of the highest warning, that means
+    # only the worst warning needs to be shown, that can be done during text creation
     class WindText < MeasurandText
 
       # initialization
