@@ -2,7 +2,7 @@
 # @Author: Benjamin Held
 # @Date:   2020-03-22 10:46:55
 # @Last Modified by:   Benjamin Held
-# @Last Modified time: 2020-05-06 18:57:39
+# @Last Modified time: 2020-05-15 18:40:14
 
 require 'wrf_library/wrf'
 require 'wrf_forecast/data/forecast_repository'
@@ -18,6 +18,8 @@ module WrfForecast
     attr_reader :header
     # @return [String] a copy of the forecast body text
     attr_reader :body
+    # @return [String] a the warning text
+    attr_reader :warnings
 
     # initialization
     # @param [WrfMetaData] meta_data the meta data for the forecast
@@ -30,6 +32,7 @@ module WrfForecast
       initialize_rain_text(forecast_repository, threshold_handler)
       create_header(meta_data)
       create_body
+      create_warnings
     end
 
     # method to create the complete forecast text
@@ -66,6 +69,23 @@ module WrfForecast
       @body = @temperature_text.text.concat("\n")
       @body.concat(@wind_text.text).concat("\n")
       @body.concat(@rain_text.text)
+      nil
+    end
+
+    # method to create the warning text for the forecast
+    def create_warnings
+      @warnings= ""
+      @warnings.concat("\n") if (!@temperature_text.warnings.empty?)
+      @warnings.concat(@temperature_text.warnings)
+      @warnings.concat("\n") if (!@wind_text.warnings.empty?)
+      @warnings.concat(@wind_text.warnings)
+      @warnings.concat("\n") if (!@rain_text.warnings.empty?)
+      @warnings.concat(@rain_text.warnings)
+      if (@warnings.empty?)
+        @warnings = "Warnings: -"
+      else
+        @warnings = "Warnings: ".concat(@warnings)
+      end
       nil
     end
 
