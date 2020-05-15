@@ -1,7 +1,7 @@
 # @Author: Benjamin Held
 # @Date:   2019-05-08 15:34:21
 # @Last Modified by:   Benjamin Held
-# @Last Modified time: 2020-05-04 22:37:15
+# @Last Modified time: 2020-05-15 21:46:28
   
 require 'ruby_utils/parameter_converter'  
 require 'wrf_library/wrf'
@@ -78,11 +78,15 @@ module WrfForecast
     nil
   end    
 
-  # singleton method to initialize further required classes and create the forecast
+  # singleton method check for the forecast text and return it
   # @return [String] if initialized the created forecast text, else nil
   def self.output_forecast
     if (@forecast_handler != nil)
-      return @forecast_handler.text.get_complete_text
+      forecast = @forecast_handler.text.get_complete_text
+      if (@parameter_handler.repository.parameters[:warning])
+        forecast.concat("\n\n").concat(@forecast_handler.text.warnings)
+      end
+      return forecast
     else
       print_error("Error: Module not initialized. Run WrfForecast.new(ARGV)")
     end
