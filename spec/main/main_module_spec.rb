@@ -2,7 +2,7 @@
 # @Author: Benjamin Held
 # @Date:   2020-03-20 21:08:30
 # @Last Modified by:   Benjamin Held
-# @Last Modified time: 2020-05-15 21:47:29
+# @Last Modified time: 2020-05-16 11:32:29
 
 require "spec_helper"
 require "wrf_forecast"
@@ -10,7 +10,7 @@ require "wrf_forecast"
 describe WrfForecast do
 
   describe "#initialize" do
-    context "given an array of parameters" do
+    context "given an array of parameters with default option" do
       it "initialize the parameters correctly" do
         arguments = ["--default", File.join(__dir__,"../files/Ber_24.d01.TS")]
         WrfForecast.initialize(arguments)
@@ -22,7 +22,7 @@ describe WrfForecast do
   end
 
   describe "#initialize" do
-    context "given an array of parameters" do
+    context "given an array of parameters with default option" do
       it "initialize the handler and repositories correctly, create output" do
         arguments = ["--default", File.join(__dir__,"../files/Ber_24.d01.TS")]
         WrfForecast.initialize(arguments)
@@ -46,7 +46,7 @@ describe WrfForecast do
   end
 
   describe "#initialize" do
-    context "given an array of parameters" do
+    context "given an array of parameters with timestamp option" do
       it "initialize the handler and repositories correctly, create output" do
         timestamp = Time.parse("00:00").to_s
         arguments = ["-d", timestamp, File.join(__dir__,"../files/Ber_24.d01.TS")]
@@ -69,7 +69,7 @@ describe WrfForecast do
   end
 
   describe "#initialize" do
-    context "given an array of parameters" do
+    context "given an array of parameters with deafult option" do
       it "initialize the handler and repositories correctly, create output" do
         arguments = ["--default", File.join(__dir__,"../files/Ber.d01.TS")]
         WrfForecast.initialize(arguments)
@@ -94,7 +94,7 @@ describe WrfForecast do
   end
 
     describe "#get_warnings" do
-    context "given an array of parameters" do
+    context "given an array of parameters with default option" do
       it "initialize the handler and repositories correctly, check for no warnings" do
         arguments = ["--default", File.join(__dir__,"../files/Ber.d01.TS")]
         WrfForecast.initialize(arguments)
@@ -108,7 +108,7 @@ describe WrfForecast do
   end
 
   describe "#initialize" do
-    context "given an array of parameters" do
+    context "given an array of parameters with default and offset" do
       it "initialize the handler and repositories correctly, create output" do
         arguments = ["--default", "-o", "6", File.join(__dir__,"../files/Ber.d01.TS")]
         WrfForecast.initialize(arguments)
@@ -133,7 +133,7 @@ describe WrfForecast do
   end
 
   describe "#initialize" do
-    context "given an array of parameters" do
+    context "given an array of parameters with default and offset" do
       it "initialize the handler and repositories correctly, create output" do
         arguments = ["--default", "-o", "24", File.join(__dir__,"../files/Ber.d01.TS")]
         WrfForecast.initialize(arguments)
@@ -157,7 +157,7 @@ describe WrfForecast do
   end
 
   describe "#initialize" do
-    context "given an array of parameters" do
+    context "given an array of parameters with timestamp and warnings" do
       it "initialize the handler and repositories correctly, create output" do
         timestamp = Time.parse("00:00").to_s
         arguments = ["-d", timestamp, "-w", File.join(__dir__,"../files/Ber_24.d01.TS")]
@@ -182,7 +182,7 @@ describe WrfForecast do
   end
 
   describe "#initialize" do
-    context "given an array of parameters" do
+    context "given an array of parameters with default and warings" do
       it "initialize the handler and repositories correctly, create output" do
         arguments = ["--default", "-w", File.join(__dir__,"../files/Ber.d01.TS")]
         WrfForecast.initialize(arguments)
