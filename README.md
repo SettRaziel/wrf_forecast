@@ -5,7 +5,7 @@
 
 Repository for the creation of an automated weather forecast based on station forecast data.
 
-Current version: v0.1.3
+Current version: v0.1.4
 
 ## Features
 The scripts will create forecast information bases on the given input and the api method that is called.

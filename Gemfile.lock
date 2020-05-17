@@ -1,12 +1,12 @@
 GIT
   remote: https://github.com/SettRaziel/ruby_utils
-  revision: 1fca1087a4fb9fc9ab786ec378326388146591de
+  revision: 061de9533eeb162293db813a3eee041547265c32
   specs:
     ruby_utils (0.0.1)
 
 GIT
   remote: https://github.com/SettRaziel/wrf_library
-  revision: 3539c1fbdeecc4d39983b6d5561f79a261b4637e
+  revision: 917515dac64796f2ef9b37d0bf8b3f5ff63cc9dc
   specs:
     wrf_library (0.0.1)
       ruby_utils (~> 0.0.1)
@@ -14,7 +14,7 @@ GIT
 PATH
   remote: .
   specs:
-    wrf_forecast (0.1.3)
+    wrf_forecast (0.1.4)
       wrf_library (~> 0.0.1)
 
 GEM
@@ -34,15 +34,15 @@ GEM
       rspec-core (~> 3.9.0)
       rspec-expectations (~> 3.9.0)
       rspec-mocks (~> 3.9.0)
-    rspec-core (3.9.1)
-      rspec-support (~> 3.9.1)
-    rspec-expectations (3.9.1)
+    rspec-core (3.9.2)
+      rspec-support (~> 3.9.3)
+    rspec-expectations (3.9.2)
       diff-lcs (>= 1.2.0, < 2.0)
       rspec-support (~> 3.9.0)
     rspec-mocks (3.9.1)
       diff-lcs (>= 1.2.0, < 2.0)
       rspec-support (~> 3.9.0)
-    rspec-support (3.9.2)
+    rspec-support (3.9.3)
     simplecov (0.16.1)
       docile (~> 1.1)
       json (>= 1.8, < 3)
@@ -52,7 +52,7 @@ GEM
     term-ansicolor (1.7.1)
       tins (~> 1.0)
     thor (1.0.1)
-    tins (1.24.1)
+    tins (1.25.0)
       sync
 
 PLATFORMS

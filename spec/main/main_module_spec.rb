@@ -2,7 +2,7 @@
 # @Author: Benjamin Held
 # @Date:   2020-03-20 21:08:30
 # @Last Modified by:   Benjamin Held
-# @Last Modified time: 2020-05-16 15:53:07
+# @Last Modified time: 2020-05-17 14:18:25
 
 require "spec_helper"
 require "wrf_forecast"
@@ -249,7 +249,7 @@ describe WrfForecast do
       it "print the version text" do
         expect {
           WrfForecast.print_version
-        }.to output("wrf_forecast version 0.1.3".yellow + "\n" + \
+        }.to output("wrf_forecast version 0.1.4".yellow + "\n" + \
                     "Created by Benjamin Held (March 2019)".yellow + "\n").to_stdout
       end
     end
