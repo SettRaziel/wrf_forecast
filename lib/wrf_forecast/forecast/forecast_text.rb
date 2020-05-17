@@ -2,14 +2,12 @@
 # @Author: Benjamin Held
 # @Date:   2020-03-22 10:46:55
 # @Last Modified by:   Benjamin Held
-# @Last Modified time: 2020-04-21 19:33:02
+# @Last Modified time: 2020-05-15 18:40:14
 
 require 'wrf_library/wrf'
 require 'wrf_forecast/data/forecast_repository'
 require 'wrf_forecast/threshold'
-require 'wrf_forecast/forecast/english/temperature/temperature_text'
-require 'wrf_forecast/forecast/english/wind/wind_text'
-require 'wrf_forecast/forecast/english/rain/rain_text'
+require 'wrf_forecast/text'
 
 module WrfForecast
 
@@ -20,6 +18,8 @@ module WrfForecast
     attr_reader :header
     # @return [String] a copy of the forecast body text
     attr_reader :body
+    # @return [String] a the warning text
+    attr_reader :warnings
 
     # initialization
     # @param [WrfMetaData] meta_data the meta data for the forecast
@@ -32,6 +32,7 @@ module WrfForecast
       initialize_rain_text(forecast_repository, threshold_handler)
       create_header(meta_data)
       create_body
+      create_warnings
     end
 
     # method to create the complete forecast text
@@ -71,6 +72,23 @@ module WrfForecast
       nil
     end
 
+    # method to create the warning text for the forecast
+    def create_warnings
+      @warnings= ""
+      @warnings.concat("\n") if (!@temperature_text.warnings.empty?)
+      @warnings.concat(@temperature_text.warnings)
+      @warnings.concat("\n") if (!@wind_text.warnings.empty?)
+      @warnings.concat(@wind_text.warnings)
+      @warnings.concat("\n") if (!@rain_text.warnings.empty?)
+      @warnings.concat(@rain_text.warnings)
+      if (@warnings.empty?)
+        @warnings = "Warnings: -"
+      else
+        @warnings = "Warnings: ".concat(@warnings)
+      end
+      nil
+    end
+
     # method to create the text for the air temperature
     # @param [ForecastRepository] repository the repository with
     # the rehashed forecast data
@@ -78,7 +96,7 @@ module WrfForecast
     def initialize_temperature_text(repository, handler)
       extreme_values = repository.extreme_values[:air_temperature]
       threshold = handler.temperature_threshold.indicators
-      @temperature_text = WrfForecast::TemperatureText.new(extreme_values, threshold)
+      @temperature_text = WrfForecast::Text::TemperatureText.new(extreme_values, threshold)
       nil
     end
 
@@ -90,7 +108,7 @@ module WrfForecast
       extreme_values = repository.extreme_values[:wind_speed]
       prevalent_direction = repository.prevalent_direction
       threshold = handler.wind_threshold.indicators
-      @wind_text = WrfForecast::WindText.new(extreme_values, prevalent_direction, threshold)
+      @wind_text = WrfForecast::Text::WindText.new(extreme_values, prevalent_direction, threshold)
       nil
     end
 
@@ -102,7 +120,7 @@ module WrfForecast
       extreme_values = repository.extreme_values[:rain]
       hourly_rain = repository.hourly_rain
       threshold = handler.rain_threshold.indicators
-      @rain_text = WrfForecast::RainText.new(extreme_values, hourly_rain, threshold)
+      @rain_text = WrfForecast::Text::RainText.new(extreme_values, hourly_rain, threshold)
       nil
     end
 

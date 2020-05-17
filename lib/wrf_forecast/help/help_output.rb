@@ -1,7 +1,7 @@
 # @Author: Benjamin Held
 # @Date:   2019-05-07 10:03:48
 # @Last Modified by:   Benjamin Held
-# @Last Modified time: 2020-03-31 15:44:33
+# @Last Modified time: 2020-05-10 16:46:41
 
 require 'ruby_utils/help_output'
 
@@ -16,6 +16,8 @@ module WrfForecast
     def self.add_single_help_entries
       add_simple_text(:default, '     --default  ', 
             'runs the script with date as today at midnight and a 24 h forecast period')
+      add_simple_text(:warning, ' -w, --warning  ', 
+            'adds an additional text section containing warnings and significant weather')
       nil
     end
 
@@ -23,6 +25,8 @@ module WrfForecast
     def self.add_one_argument_help_entries
       add_single_argument_text(:date, ' -d, --date     ', ' <date>',
             '; specifies the start_date of the requested forecast')
+      add_single_argument_text(:offset, ' -o, --offset   ', ' <offset>',
+            '; specifies how many hours from the forecast should be skipped')
       add_single_argument_text(:period, ' -p, --period   ', ' <period>',
             '; specifies the forecast period')
       nil

@@ -2,12 +2,12 @@
 # @Author: Benjamin Held
 # @Date:   2020-03-20 13:27:03
 # @Last Modified by:   Benjamin Held
-# @Last Modified time: 2020-03-31 16:50:05
+# @Last Modified time: 2020-05-11 20:49:37
 
-require 'spec_helper'
-require 'wrf_library/wrf'
-require 'wrf_forecast/data/forecast_repository'
-require 'wrf_forecast/threshold'
+require "spec_helper"
+require "wrf_library/wrf"
+require "wrf_forecast/data/forecast_repository"
+require "wrf_forecast/threshold"
 
 describe WrfForecast::Threshold::RainThreshold do
 
@@ -19,10 +19,10 @@ describe WrfForecast::Threshold::RainThreshold do
         repository = WrfForecast::ForecastRepository.new(handler)
         rain_values = repository.hourly_rain
         indicators = WrfForecast::Threshold::RainThreshold.new(rain_values)
-        expect(indicators.indicators[:strong_rain]).to eq(false)
-        expect(indicators.indicators[:heavy_rain]).to eq(false)
-        expect(indicators.indicators[:extreme_rain]).to eq(false)
-        expect(indicators.indicators[:continous_rain]).to eq(false)
+        expect(indicators.indicators[:strong_rain].is_active).to eq(false)
+        expect(indicators.indicators[:heavy_rain].is_active).to eq(false)
+        expect(indicators.indicators[:extreme_rain].is_active).to eq(false)
+        expect(indicators.indicators[:continous_rain].is_active).to eq(false)
       end
     end
   end
@@ -34,10 +34,10 @@ describe WrfForecast::Threshold::RainThreshold do
                          0,  0,  0,  0,  0,  0,  0,  0,  0,  0, 
                          0,  0,  0,  0 ]
         indicators = WrfForecast::Threshold::RainThreshold.new(rain_values)
-        expect(indicators.indicators[:strong_rain]).to eq(false)
-        expect(indicators.indicators[:heavy_rain]).to eq(false)
-        expect(indicators.indicators[:extreme_rain]).to eq(false)
-        expect(indicators.indicators[:continous_rain]).to eq(false)
+        expect(indicators.indicators[:strong_rain].is_active).to eq(false)
+        expect(indicators.indicators[:heavy_rain].is_active).to eq(false)
+        expect(indicators.indicators[:extreme_rain].is_active).to eq(false)
+        expect(indicators.indicators[:continous_rain].is_active).to eq(false)
       end
     end
   end  
@@ -49,10 +49,10 @@ describe WrfForecast::Threshold::RainThreshold do
                          0,  1, 16,  1,  0,  0,  0, 10,  5,  0, 
                          0,  0,  0,  0 ]
         indicators = WrfForecast::Threshold::RainThreshold.new(rain_values)
-        expect(indicators.indicators[:strong_rain]).to eq(true)
-        expect(indicators.indicators[:heavy_rain]).to eq(false)
-        expect(indicators.indicators[:extreme_rain]).to eq(false)
-        expect(indicators.indicators[:continous_rain]).to eq(false)
+        expect(indicators.indicators[:strong_rain].is_active).to eq(true)
+        expect(indicators.indicators[:heavy_rain].is_active).to eq(false)
+        expect(indicators.indicators[:extreme_rain].is_active).to eq(false)
+        expect(indicators.indicators[:continous_rain].is_active).to eq(false)
       end
     end
   end  
@@ -64,10 +64,10 @@ describe WrfForecast::Threshold::RainThreshold do
                          0,  1, 26,  1,  0,  0,  0,  0,  5,  0, 
                          0,  0,  0,  0 ]
         indicators = WrfForecast::Threshold::RainThreshold.new(rain_values)
-        expect(indicators.indicators[:strong_rain]).to eq(true)
-        expect(indicators.indicators[:heavy_rain]).to eq(true)
-        expect(indicators.indicators[:extreme_rain]).to eq(false)
-        expect(indicators.indicators[:continous_rain]).to eq(false)
+        expect(indicators.indicators[:strong_rain].is_active).to eq(true)
+        expect(indicators.indicators[:heavy_rain].is_active).to eq(true)
+        expect(indicators.indicators[:extreme_rain].is_active).to eq(false)
+        expect(indicators.indicators[:continous_rain].is_active).to eq(false)
       end
     end
   end
@@ -79,10 +79,10 @@ describe WrfForecast::Threshold::RainThreshold do
                          0,  1, 41,  1,  0,  0,  0,  0,  0,  0, 
                          0,  0,  0,  0 ]
         indicators = WrfForecast::Threshold::RainThreshold.new(rain_values)
-        expect(indicators.indicators[:strong_rain]).to eq(true)
-        expect(indicators.indicators[:heavy_rain]).to eq(true)
-        expect(indicators.indicators[:extreme_rain]).to eq(true)
-        expect(indicators.indicators[:continous_rain]).to eq(false)
+        expect(indicators.indicators[:strong_rain].is_active).to eq(true)
+        expect(indicators.indicators[:heavy_rain].is_active).to eq(true)
+        expect(indicators.indicators[:extreme_rain].is_active).to eq(true)
+        expect(indicators.indicators[:continous_rain].is_active).to eq(false)
       end
     end
   end
@@ -94,10 +94,10 @@ describe WrfForecast::Threshold::RainThreshold do
                          2,  2,  2,  2,  2,  2,  2,  2,  2,  2, 
                          0,  0,  0,  0 ]
         indicators = WrfForecast::Threshold::RainThreshold.new(rain_values)
-        expect(indicators.indicators[:strong_rain]).to eq(false)
-        expect(indicators.indicators[:heavy_rain]).to eq(false)
-        expect(indicators.indicators[:extreme_rain]).to eq(false)
-        expect(indicators.indicators[:continous_rain]).to eq(true)
+        expect(indicators.indicators[:strong_rain].is_active).to eq(false)
+        expect(indicators.indicators[:heavy_rain].is_active).to eq(false)
+        expect(indicators.indicators[:extreme_rain].is_active).to eq(false)
+        expect(indicators.indicators[:continous_rain].is_active).to eq(true)
       end
     end
   end

@@ -1,7 +1,7 @@
 # @Author: Benjamin Held
 # @Date:   2015-06-12 10:45:36
 # @Last Modified by:   Benjamin Held
-# @Last Modified time: 2020-04-12 16:01:17
+# @Last Modified time: 2020-05-05 17:32:34
 
 module WrfForecast
 
@@ -24,6 +24,7 @@ module WrfForecast
           when *@mapping[:default] then create_defaults
           when *@mapping[:offset] then create_argument_entry(:offset)
           when *@mapping[:period] then create_argument_entry(:period)
+          when *@mapping[:warning] then @parameters[:warning] = true
           when /-[a-z]|--[a-z]+/ then raise_invalid_parameter(arg)
         else
           raise_invalid_parameter(arg)
@@ -37,6 +38,7 @@ module WrfForecast
         @mapping[:default] = ['--default']
         @mapping[:offset] = ['-o', '--offset']
         @mapping[:period] = ['-p', '--period']
+        @mapping[:warning] = ['-w', '--warning']
       end
 
       # method to set the default values when parameter --default is set

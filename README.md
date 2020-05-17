@@ -29,6 +29,11 @@ WRF forecast help:
  -d, --date     argument: <date>; specifies the start_date of the requested forecast
      --default  runs the script with date as today at midnight and a 24 h forecast period
  -p, --period   argument: <period>; specifies the forecast period
+ -w, --warning  adds an additional text section containing warnings and significant weather
+```
+When using this as a gem the main entry point is passing the arguments to the main module:
+```
+WrfForecast.initialize(['--default', '-o', '6', "../files/Ber.d01.TS"])
 ```
 
 ## Examples
@@ -43,6 +48,16 @@ Weather forecast of Hannover for the 2020-03-30 00:00:00 +0200.
 Today will be a cold day. The maximum temperature will reach up to 16 degrees celsius. The minimum temperature will be -1 degrees celsius.
 The wind will be normal and will reach up to 24 km/h from northeast. The mean wind will be 17 km/h.
 The forecast does not predict rain.
+```
+When using the parameter `-w` or `--warning` the forecast text will be extended by a warning section:
+```
+Weather forecast of Berlin-Schöneberg for the 2020-05-16 00:00:00 +0200.
+
+Today will be a normal day. The maximum temperature will reach up to 18 degrees celsius. The minimum temperature will be 6 degrees celsius.
+The wind will be normal and will reach up to 25 km/h from west. The mean wind will be 15 km/h.
+The forecast does predict normal rain with a maximum of 0.1 mm in 1 hour and some dry periods during the day.
+
+Warnings: -
 ```
 
 ## License
