@@ -2,7 +2,7 @@
 # @Author: Benjamin Held
 # @Date:   2020-03-24 15:49:26
 # @Last Modified by:   Benjamin Held
-# @Last Modified time: 2020-05-14 16:58:49
+# @Last Modified time: 2020-05-18 17:36:16
 
 module WrfForecast
 
@@ -20,6 +20,7 @@ module WrfForecast
       # @param [RainThreshold] thresholds the rain threshold
       def initialize(extreme_values, hourly_rain, thresholds)
         @hourly_rain = hourly_rain
+        calculate_rainsum
         super(extreme_values, thresholds)
       end
 
@@ -27,6 +28,8 @@ module WrfForecast
 
       # @return [Array] the hourly rain sums
       attr_reader :hourly_rain
+      # @return [Float] the daily rain sum
+      attr_reader :rain_sum
 
       # method to generate the forecast text for the rain
       def generate_forecast_text
@@ -63,7 +66,7 @@ module WrfForecast
       def create_rain_text
         text = " rain with a maximum of "
         if (@thresholds[:continous_rain].is_active)
-          text.concat(get_rain_sum.ceil.to_s)
+          text.concat(@rain_sum.ceil.to_s)
           text.concat(" mm in 24 hours")
         else
           text.concat(@extreme_values.maximum.round(1).to_s)
@@ -87,13 +90,13 @@ module WrfForecast
         return false
       end
 
-      # method to get the total rain of the day
-      def get_rain_sum
-        sum = 0
+      # method to calculate the total rain of the day
+      def calculate_rainsum
+        @rain_sum = 0
         @hourly_rain.each { |value|
-          sum += value
+          @rain_sum += value
         }
-        return sum
+        nil
       end
 
     end
