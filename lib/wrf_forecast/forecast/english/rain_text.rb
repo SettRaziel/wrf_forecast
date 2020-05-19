@@ -2,7 +2,7 @@
 # @Author: Benjamin Held
 # @Date:   2020-03-24 15:49:26
 # @Last Modified by:   Benjamin Held
-# @Last Modified time: 2020-05-19 17:46:19
+# @Last Modified time: 2020-05-19 21:57:37
 
 module WrfForecast
 
@@ -44,11 +44,13 @@ module WrfForecast
       end
 
       # method to generate the warning text for the measurand
+      # @return [String] the warning text
       def generate_warning_text
         @warnings
       end
 
       # method to generate the text about the day
+      # @return [String] the substring containing the rain intensity
       def create_intensity_text
         intensity = "normal"
         intensity = "strong" if (is_threshold_active?(:strong_rain))
@@ -63,6 +65,7 @@ module WrfForecast
       end
 
       # method to generate the text with rain values
+      # @return [String] the substring containing the precipitation amount
       def create_rain_text
         text = " rain with a maximum of "
         if (@thresholds[:continous_rain].is_active)
@@ -86,6 +89,7 @@ module WrfForecast
       end
 
       # method to check if it should rain in the forecast time
+      # @return [boolean] the information if it rains during the day
       def shall_it_rain?
         @hourly_rain.each { |value|
           return true if (value > 0.05)
