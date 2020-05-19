@@ -2,7 +2,7 @@
 # @Author: Benjamin Held
 # @Date:   2020-03-24 15:49:26
 # @Last Modified by:   Benjamin Held
-# @Last Modified time: 2020-05-18 17:36:16
+# @Last Modified time: 2020-05-19 17:46:19
 
 module WrfForecast
 
@@ -67,16 +67,19 @@ module WrfForecast
         text = " rain with a maximum of "
         if (@thresholds[:continous_rain].is_active)
           text.concat(@rain_sum.ceil.to_s)
-          text.concat(" mm in 24 hours")
+          text.concat(" mm in 24 hours.")
         else
           text.concat(@extreme_values.maximum.round(1).to_s)
-          text.concat(" mm in 1 hour")
+          text.concat(" mm in 1 hour and up to ")
+          text.concat(@rain_sum.ceil.to_s)
+          text.concat(" mm for the day.")
         end
 
+        text.concat(" There are ")
         if (@extreme_values.minimum.round(5) == 0.0)
-          text.concat(" and some dry periods ")
+          text.concat("some dry periods ")
         else
-          text.concat(" and no dry periods ")
+          text.concat("no dry periods ")
         end
         text.concat("during the day.")
         return text
