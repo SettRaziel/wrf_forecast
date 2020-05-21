@@ -2,7 +2,7 @@
 # @Author: Benjamin Held
 # @Date:   2020-03-19 08:04:09
 # @Last Modified by:   Benjamin Held
-# @Last Modified time: 2020-05-13 22:30:53
+# @Last Modified time: 2020-05-21 10:50:34
 
 module WrfForecast
 
@@ -26,8 +26,8 @@ module WrfForecast
       def initialize_indicators
         add_indicator(:ice_day, true, "ice day (temperature does not exceed 0 degrees celsius)")
         add_indicator(:frost_day, false, "frost day (temperature will fall below 0 degrees celsius)")
-        add_indicator(:summer_day, false, "summer day (temperature will exceed 25 degress celsius)")
-        add_indicator(:hot_day, false, "hot day (temperature will exceed 30 degress celsius)")
+        add_indicator(:summer_day, false, "summer day (temperature will exceed 25 degrees celsius)")
+        add_indicator(:hot_day, false, "hot day (temperature will exceed 30 degrees celsius)")
         add_indicator(:tropical_night, true, 
           "tropical night (temperature does not fall below 20 degrees celsius)")
         nil

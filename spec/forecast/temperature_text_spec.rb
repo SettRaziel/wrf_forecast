@@ -2,7 +2,7 @@
 # @Author: Benjamin Held
 # @Date:   2020-03-22 16:34:27
 # @Last Modified by:   Benjamin Held
-# @Last Modified time: 2020-05-14 16:47:46
+# @Last Modified time: 2020-05-21 10:52:12
 
 require "spec_helper"
 require "ruby_utils/statistic"
@@ -176,7 +176,7 @@ describe WrfForecast::Text::TemperatureText do
         indicators = WrfForecast::Threshold::TemperatureThreshold.new(temperature_values)
         extreme_values = RubyUtils::ExtremeValues.new(288.15, 301.05)
         forecast = WrfForecast::Text::TemperatureText.new(extreme_values, indicators.indicators)
-        expected = "summer day (temperature will exceed 25 degress celsius)"
+        expected = "summer day (temperature will exceed 25 degrees celsius)"
         expect(forecast.warnings).to eq(expected)
       end
     end
@@ -194,7 +194,7 @@ describe WrfForecast::Text::TemperatureText do
         indicators = WrfForecast::Threshold::TemperatureThreshold.new(temperature_values)
         extreme_values = RubyUtils::ExtremeValues.new(294.15, 305.25)
         forecast = WrfForecast::Text::TemperatureText.new(extreme_values, indicators.indicators)
-        expected = "hot day (temperature will exceed 30 degress celsius)"
+        expected = "hot day (temperature will exceed 30 degrees celsius)"
         expected.concat("\ntropical night (temperature does not fall below 20 degrees celsius)")
         expect(forecast.warnings).to eq(expected)
       end
