@@ -2,7 +2,7 @@
 # @Author: Benjamin Held
 # @Date:   2020-03-24 15:49:26
 # @Last Modified by:   Benjamin Held
-# @Last Modified time: 2020-05-14 16:58:49
+# @Last Modified time: 2020-05-19 21:57:37
 
 module WrfForecast
 
@@ -20,6 +20,7 @@ module WrfForecast
       # @param [RainThreshold] thresholds the rain threshold
       def initialize(extreme_values, hourly_rain, thresholds)
         @hourly_rain = hourly_rain
+        calculate_rainsum
         super(extreme_values, thresholds)
       end
 
@@ -27,6 +28,8 @@ module WrfForecast
 
       # @return [Array] the hourly rain sums
       attr_reader :hourly_rain
+      # @return [Float] the daily rain sum
+      attr_reader :rain_sum
 
       # method to generate the forecast text for the rain
       def generate_forecast_text
@@ -41,11 +44,13 @@ module WrfForecast
       end
 
       # method to generate the warning text for the measurand
+      # @return [String] the warning text
       def generate_warning_text
         @warnings
       end
 
       # method to generate the text about the day
+      # @return [String] the substring containing the rain intensity
       def create_intensity_text
         intensity = "normal"
         intensity = "strong" if (is_threshold_active?(:strong_rain))
@@ -60,26 +65,31 @@ module WrfForecast
       end
 
       # method to generate the text with rain values
+      # @return [String] the substring containing the precipitation amount
       def create_rain_text
         text = " rain with a maximum of "
         if (@thresholds[:continous_rain].is_active)
-          text.concat(get_rain_sum.ceil.to_s)
-          text.concat(" mm in 24 hours")
+          text.concat(@rain_sum.ceil.to_s)
+          text.concat(" mm in 24 hours.")
         else
           text.concat(@extreme_values.maximum.round(1).to_s)
-          text.concat(" mm in 1 hour")
+          text.concat(" mm in 1 hour and up to ")
+          text.concat(@rain_sum.ceil.to_s)
+          text.concat(" mm for the day.")
         end
 
+        text.concat(" There are ")
         if (@extreme_values.minimum.round(5) == 0.0)
-          text.concat(" and some dry periods ")
+          text.concat("some dry periods ")
         else
-          text.concat(" and no dry periods ")
+          text.concat("no dry periods ")
         end
         text.concat("during the day.")
         return text
       end
 
       # method to check if it should rain in the forecast time
+      # @return [boolean] the information if it rains during the day
       def shall_it_rain?
         @hourly_rain.each { |value|
           return true if (value > 0.05)
@@ -87,13 +97,13 @@ module WrfForecast
         return false
       end
 
-      # method to get the total rain of the day
-      def get_rain_sum
-        sum = 0
+      # method to calculate the total rain of the day
+      def calculate_rainsum
+        @rain_sum = 0
         @hourly_rain.each { |value|
-          sum += value
+          @rain_sum += value
         }
-        return sum
+        nil
       end
 
     end

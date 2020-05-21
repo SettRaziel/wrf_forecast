@@ -2,7 +2,7 @@
 # @Author: Benjamin Held
 # @Date:   2020-03-20 21:08:30
 # @Last Modified by:   Benjamin Held
-# @Last Modified time: 2020-05-17 14:18:25
+# @Last Modified time: 2020-05-19 17:46:58
 
 require "spec_helper"
 require "wrf_forecast"
@@ -83,7 +83,8 @@ describe WrfForecast do
         expected.concat("The wind will be normal and will reach up to ")
         expected.concat("17 km/h from northeast. The mean wind will be 11 km/h.\n")
         expected.concat("The forecast does predict normal rain with a maximum of ")
-        expected.concat("0.3 mm in 1 hour and some dry periods during the day.")
+        expected.concat("0.3 mm in 1 hour and up to 1 mm for the day.")
+        expected.concat(" There are some dry periods during the day.")
         expect(WrfForecast.output_forecast).to eq(expected)
         expect(parameters[:date]).to eq(timestamp)
         expect(parameters[:period]).to eq("24")
@@ -108,7 +109,8 @@ describe WrfForecast do
         expected.concat("The wind will be normal and will reach up to ")
         expected.concat("19 km/h from northeast. The mean wind will be 12 km/h.\n")
         expected.concat("The forecast does predict normal rain with a maximum of ")
-        expected.concat("0.3 mm in 1 hour and some dry periods during the day.")
+        expected.concat("0.3 mm in 1 hour and up to 1 mm for the day.")
+        expected.concat(" There are some dry periods during the day.")
         expect(WrfForecast.output_forecast).to eq(expected)
         expect(parameters[:date]).to eq(timestamp)
         expect(parameters[:period]).to eq("24")
@@ -182,7 +184,8 @@ describe WrfForecast do
         expected.concat("The wind will be normal and will reach up to ")
         expected.concat("17 km/h from northeast. The mean wind will be 11 km/h.\n")
         expected.concat("The forecast does predict normal rain with a maximum of ")
-        expected.concat("0.3 mm in 1 hour and some dry periods during the day.\n\n")
+        expected.concat("0.3 mm in 1 hour and up to 1 mm for the day.")
+        expected.concat(" There are some dry periods during the day.\n\n")
         expected.concat("Warnings: -")
         expect(WrfForecast.output_forecast).to eq(expected)
         expect(parameters[:date]).to eq(timestamp)

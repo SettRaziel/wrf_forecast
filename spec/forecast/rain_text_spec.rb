@@ -2,7 +2,7 @@
 # @Author: Benjamin Held
 # @Date:   2020-03-24 16:47:58
 # @Last Modified by:   Benjamin Held
-# @Last Modified time: 2020-05-13 18:33:20
+# @Last Modified time: 2020-05-19 17:47:40
 
 require "spec_helper"
 require "ruby_utils/statistic"
@@ -21,7 +21,8 @@ describe WrfForecast::Text::RainText do
         extreme_values = RubyUtils::ExtremeValues.new(0, 2)
         forecast = WrfForecast::Text::RainText.new(extreme_values, rain_values, indicators.indicators)
         expected = "The forecast does predict normal rain with a maximum of "
-        expected.concat("2 mm in 1 hour and some dry periods during the day.")
+        expected.concat("2 mm in 1 hour and up to 8 mm for the day.")
+        expected.concat(" There are some dry periods during the day.")
         expect(forecast.text).to match(expected)
       end
     end
@@ -37,7 +38,8 @@ describe WrfForecast::Text::RainText do
         extreme_values = RubyUtils::ExtremeValues.new(0, 16)
         forecast = WrfForecast::Text::RainText.new(extreme_values, rain_values, indicators.indicators)
         expected = "The forecast does predict strong rain with a maximum of "
-        expected.concat("16 mm in 1 hour and some dry periods during the day.")
+        expected.concat("16 mm in 1 hour and up to 33 mm for the day.")
+        expected.concat(" There are some dry periods during the day.")
         expect(forecast.text).to eq(expected)
       end
     end
@@ -53,7 +55,8 @@ describe WrfForecast::Text::RainText do
         extreme_values = RubyUtils::ExtremeValues.new(0, 26)
         forecast = WrfForecast::Text::RainText.new(extreme_values, rain_values, indicators.indicators)
         expected = "The forecast does predict heavy rain with a maximum of "
-        expected.concat("26 mm in 1 hour and some dry periods during the day.")
+        expected.concat("26 mm in 1 hour and up to 33 mm for the day.")
+        expected.concat(" There are some dry periods during the day.")       
         expect(forecast.text).to match(expected)
       end
     end
@@ -69,7 +72,8 @@ describe WrfForecast::Text::RainText do
         extreme_values = RubyUtils::ExtremeValues.new(0, 41)
         forecast = WrfForecast::Text::RainText.new(extreme_values, rain_values, indicators.indicators)
         expected = "The forecast does predict extreme rain with a maximum of "
-        expected.concat("41 mm in 1 hour and some dry periods during the day.")
+        expected.concat("41 mm in 1 hour and up to 43 mm for the day.")
+        expected.concat(" There are some dry periods during the day.")        
         expect(forecast.text).to match(expected)
       end
     end
@@ -85,7 +89,7 @@ describe WrfForecast::Text::RainText do
         extreme_values = RubyUtils::ExtremeValues.new(1, 2)
         forecast = WrfForecast::Text::RainText.new(extreme_values, rain_values, indicators.indicators)
         expected = "The forecast does predict continous rain with a maximum of "
-        expected.concat("44 mm in 24 hours and no dry periods during the day.")
+        expected.concat("44 mm in 24 hours. There are no dry periods during the day.")
         expect(forecast.text).to match(expected)
       end
     end
