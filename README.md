@@ -5,7 +5,7 @@
 
 Repository for the creation of an automated weather forecast based on station forecast data.
 
-Current version: v0.1.4
+Current version: v0.1.5
 
 ## Features
 The scripts will create forecast information bases on the given input and the api method that is called.
@@ -55,7 +55,7 @@ Weather forecast of Berlin-Schöneberg for the 2020-05-16 00:00:00 +0200.
 
 Today will be a normal day. The maximum temperature will reach up to 18 degrees celsius. The minimum temperature will be 6 degrees celsius.
 The wind will be normal and will reach up to 25 km/h from west. The mean wind will be 15 km/h.
-The forecast does predict normal rain with a maximum of 0.1 mm in 1 hour and some dry periods during the day.
+The forecast does predict normal rain with a maximum of 0.1 mm in 1 hour and up to 1 mm for the day. There are some dry periods during the day.
 
 Warnings: -
 ```

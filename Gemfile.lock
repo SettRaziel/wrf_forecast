@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/SettRaziel/ruby_utils
-  revision: 061de9533eeb162293db813a3eee041547265c32
+  revision: 02a48ffec16afae232bde49e6ba8d892790ae5bf
   specs:
     ruby_utils (0.0.1)
 
@@ -14,7 +14,7 @@ GIT
 PATH
   remote: .
   specs:
-    wrf_forecast (0.1.4)
+    wrf_forecast (0.1.5)
       wrf_library (~> 0.0.1)
 
 GEM
