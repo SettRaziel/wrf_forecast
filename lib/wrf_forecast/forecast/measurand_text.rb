@@ -2,12 +2,16 @@
 # @Author: Benjamin Held
 # @Date:   2020-05-06 17:57:19
 # @Last Modified by:   Benjamin Held
-# @Last Modified time: 2020-05-13 18:22:32
+# @Last Modified time: 2020-05-21 20:59:03
 
 module WrfForecast
 
+  # This module holds all classes that specify forecast texts and warnings for a given measurand
   module Text
 
+    # This abstract class serves as the prarent class to measurand specific forecast texts. It contains the
+    # resulting forecast text for the measurand based on the input data and the warnings specified in the
+    # corresponding threshold class.
     class MeasurandText
 
       # @return [String] the forecast text for the measurand
