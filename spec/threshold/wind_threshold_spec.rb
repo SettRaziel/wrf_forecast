@@ -2,7 +2,7 @@
 # @Author: Benjamin Held
 # @Date:   2020-03-19 16:54:37
 # @Last Modified by:   Benjamin Held
-# @Last Modified time: 2020-05-11 20:48:55
+# @Last Modified time: 2020-05-29 20:16:09
 
 require "spec_helper"
 require "wrf_library/wrf"
@@ -19,6 +19,7 @@ describe WrfForecast::Threshold::WindThreshold do
         repository = WrfForecast::ForecastRepository.new(handler)
         windspeed_values = repository.forecast_data[:wind_speed]
         indicators = WrfForecast::Threshold::WindThreshold.new(windspeed_values)
+        expect(indicators.indicators[:windy_day].is_active).to eq(false)        
         expect(indicators.indicators[:squall_day].is_active).to eq(false)
         expect(indicators.indicators[:storm_squall_day].is_active).to eq(false)
         expect(indicators.indicators[:storm_day].is_active).to eq(false)
@@ -36,6 +37,7 @@ describe WrfForecast::Threshold::WindThreshold do
                              12, 12, 14, 16, 13, 17, 14, 17, 18, 20,
                              18, 16, 14, 12, 10,  8,  6,  5,  5,  5 ]
         indicators = WrfForecast::Threshold::WindThreshold.new(windspeed_values)
+        expect(indicators.indicators[:windy_day].is_active).to eq(true)        
         expect(indicators.indicators[:squall_day].is_active).to eq(true)
         expect(indicators.indicators[:storm_squall_day].is_active).to eq(false)
         expect(indicators.indicators[:storm_day].is_active).to eq(false)
@@ -53,6 +55,7 @@ describe WrfForecast::Threshold::WindThreshold do
                              22, 22, 24, 26, 23, 27, 24, 19, 18, 20,
                              18, 16, 14, 12, 10,  8,  6,  5,  5,  5 ]
         indicators = WrfForecast::Threshold::WindThreshold.new(windspeed_values)
+        expect(indicators.indicators[:windy_day].is_active).to eq(true)        
         expect(indicators.indicators[:squall_day].is_active).to eq(true)
         expect(indicators.indicators[:storm_squall_day].is_active).to eq(true)
         expect(indicators.indicators[:storm_day].is_active).to eq(false)
@@ -70,6 +73,7 @@ describe WrfForecast::Threshold::WindThreshold do
                              22, 24, 27, 29, 29, 27, 24, 19, 18, 20,
                              18, 16, 14, 12, 10,  8,  6,  5,  5,  5 ]
         indicators = WrfForecast::Threshold::WindThreshold.new(windspeed_values)
+        expect(indicators.indicators[:windy_day].is_active).to eq(true)      
         expect(indicators.indicators[:squall_day].is_active).to eq(true)
         expect(indicators.indicators[:storm_squall_day].is_active).to eq(true)
         expect(indicators.indicators[:storm_day].is_active).to eq(true)
@@ -87,6 +91,7 @@ describe WrfForecast::Threshold::WindThreshold do
                              29, 30, 33, 29, 29, 27, 24, 19, 18, 20,
                              18, 16, 14, 12, 14, 15, 12, 15, 14, 12 ]
         indicators = WrfForecast::Threshold::WindThreshold.new(windspeed_values)
+        expect(indicators.indicators[:windy_day].is_active).to eq(true)
         expect(indicators.indicators[:squall_day].is_active).to eq(true)
         expect(indicators.indicators[:storm_squall_day].is_active).to eq(true)
         expect(indicators.indicators[:storm_day].is_active).to eq(true)
@@ -96,7 +101,7 @@ describe WrfForecast::Threshold::WindThreshold do
   end
 
   describe ".new" do
-    context "given an array of wind data for a normal day" do
+    context "given an array of wind data for a windy day" do
       it "generate and check wind indicators" do
         windspeed_values = [  0,  0,  0,  0,  0,  0,  0,  0,  0,  0, 
                               1,  1,  1,  1,  2,  2,  2,  2,  3,  3,
@@ -104,6 +109,25 @@ describe WrfForecast::Threshold::WindThreshold do
                              10, 10,  9,  9,  8,  8,  8,  7,  8,  6,
                               5,  5,  4,  3,  4,  4,  3,  2,  1,  0 ]
         indicators = WrfForecast::Threshold::WindThreshold.new(windspeed_values)
+        expect(indicators.indicators[:windy_day].is_active).to eq(true)
+        expect(indicators.indicators[:squall_day].is_active).to eq(false)
+        expect(indicators.indicators[:storm_squall_day].is_active).to eq(false)
+        expect(indicators.indicators[:storm_day].is_active).to eq(false)
+        expect(indicators.indicators[:hurricane_day].is_active).to eq(false)
+      end
+    end
+  end
+
+  describe ".new" do
+    context "given an array of wind data for a normal day" do
+      it "generate and check wind indicators" do
+        windspeed_values = [  0,  0,  0,  0,  0,  0,  0,  0,  0,  0, 
+                              1,  1,  1,  1,  2,  2,  2,  2,  3,  3,
+                              4,  5,  7,  7,  9,  9,  8,  8,  8,  8, 
+                              9,  9,  9,  9,  8,  8,  8,  7,  8,  6,
+                              5,  5,  4,  3,  4,  4,  3,  2,  1,  0 ]
+        indicators = WrfForecast::Threshold::WindThreshold.new(windspeed_values)
+        expect(indicators.indicators[:windy_day].is_active).to eq(false)
         expect(indicators.indicators[:squall_day].is_active).to eq(false)
         expect(indicators.indicators[:storm_squall_day].is_active).to eq(false)
         expect(indicators.indicators[:storm_day].is_active).to eq(false)
