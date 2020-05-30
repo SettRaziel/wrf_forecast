@@ -2,7 +2,7 @@
 # @Author: Benjamin Held
 # @Date:   2020-03-23 16:57:26
 # @Last Modified by:   Benjamin Held
-# @Last Modified time: 2020-05-13 18:26:31
+# @Last Modified time: 2020-05-30 21:50:09
 
 require "spec_helper"
 require "ruby_utils/statistic"
@@ -16,13 +16,31 @@ describe WrfForecast::Text::WindText do
       it "generate and check wind forecast text" do
         windspeed_values = [  0,  0,  0,  0,  0,  0,  0,  0,  0,  0, 
                               1,  1,  1,  1,  2,  2,  2,  2,  3,  3,
+                              4,  5,  7,  7,  9,  9,  9,  9,  9,  9, 
+                              9,  9,  9,  9,  8,  8,  8,  7,  8,  6,
+                              5,  5,  4,  3,  4,  4,  3,  2,  1,  0 ]
+        indicators = WrfForecast::Threshold::WindThreshold.new(windspeed_values)
+        extreme_values = RubyUtils::ExtremeValues.new(0,  9)
+        forecast = WrfForecast::Text::WindText.new(extreme_values, nil, indicators.indicators)
+        expected = "The wind will be normal and will reach up to "
+        expected.concat("33 km/h from circulatory directions. The mean wind will be 17 km/h.")
+        expect(forecast.text).to eq(expected)
+      end
+    end
+  end
+
+  describe ".new" do
+    context "given an array of wind data for a windy day" do
+      it "generate and check wind forecast text" do
+        windspeed_values = [  0,  0,  0,  0,  0,  0,  0,  0,  0,  0, 
+                              1,  1,  1,  1,  2,  2,  2,  2,  3,  3,
                               4,  5,  7,  7,  9,  9, 11, 11, 11, 11, 
                              10, 10,  9,  9,  8,  8,  8,  7,  8,  6,
                               5,  5,  4,  3,  4,  4,  3,  2,  1,  0 ]
         indicators = WrfForecast::Threshold::WindThreshold.new(windspeed_values)
         extreme_values = RubyUtils::ExtremeValues.new(0, 11)
         forecast = WrfForecast::Text::WindText.new(extreme_values, nil, indicators.indicators)
-        expected = "The wind will be normal and will reach up to "
+        expected = "The wind will be windy and will reach up to "
         expected.concat("40 km/h from circulatory directions. The mean wind will be 20 km/h.")
         expect(forecast.text).to eq(expected)
       end
@@ -106,13 +124,30 @@ describe WrfForecast::Text::WindText do
       it "generate and check wind warning text" do
         windspeed_values = [  0,  0,  0,  0,  0,  0,  0,  0,  0,  0, 
                               1,  1,  1,  1,  2,  2,  2,  2,  3,  3,
+                              4,  5,  7,  7,  9,  9,  9,  9,  9,  9, 
+                              9,  9,  9,  9,  8,  8,  8,  7,  8,  6,
+                              5,  5,  4,  3,  4,  4,  3,  2,  1,  0 ]
+        indicators = WrfForecast::Threshold::WindThreshold.new(windspeed_values)
+        extreme_values = RubyUtils::ExtremeValues.new(0, 9)
+        forecast = WrfForecast::Text::WindText.new(extreme_values, nil, indicators.indicators)
+        expect(forecast.warnings).to be_empty
+      end
+    end
+  end
+
+  describe ".new" do
+    context "given an array of wind data for a windy day" do
+      it "generate and check wind warning text" do
+        windspeed_values = [  0,  0,  0,  0,  0,  0,  0,  0,  0,  0, 
+                              1,  1,  1,  1,  2,  2,  2,  2,  3,  3,
                               4,  5,  7,  7,  9,  9, 11, 11, 11, 11, 
                              10, 10,  9,  9,  8,  8,  8,  7,  8,  6,
                               5,  5,  4,  3,  4,  4,  3,  2,  1,  0 ]
         indicators = WrfForecast::Threshold::WindThreshold.new(windspeed_values)
         extreme_values = RubyUtils::ExtremeValues.new(0, 11)
         forecast = WrfForecast::Text::WindText.new(extreme_values, nil, indicators.indicators)
-        expect(forecast.warnings).to be_empty
+        expected = "windy day (wind speed exceeds 9 m/s, 33 km/h, 5 bft)"
+        expect(forecast.warnings).to eq(expected)
       end
     end
   end

@@ -2,7 +2,7 @@
 # @Author: Benjamin Held
 # @Date:   2020-03-23 16:27:56
 # @Last Modified by:   Benjamin Held
-# @Last Modified time: 2020-05-14 16:59:00
+# @Last Modified time: 2020-05-30 21:42:52
 
 module WrfForecast
 
@@ -62,6 +62,7 @@ module WrfForecast
       # method to generate the text about the day
       def create_strength_text
         wind_strength = "normal"
+        wind_strength = "windy" if (is_threshold_active?(:windy_day))
         wind_strength = "squall" if (is_threshold_active?(:squall_day))
         wind_strength = "stormy" if (is_threshold_active?(:storm_squall_day))
         wind_strength = "very stromy" if (is_threshold_active?(:storm_day))
