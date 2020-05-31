@@ -1,7 +1,7 @@
 # @Author: Benjamin Held
 # @Date:   2019-05-08 15:34:21
 # @Last Modified by:   Benjamin Held
-# @Last Modified time: 2020-05-21 10:37:50
+# @Last Modified time: 2020-05-31 16:38:16
   
 require 'ruby_utils/parameter_converter'  
 require 'wrf_library/wrf'
@@ -26,8 +26,14 @@ module WrfForecast
     # @param [Array] arguments the input values from the terminal input ARGV
     def initialize(arguments)
       @parameter_handler = Parameter::ParameterHandler.new(arguments)
-      initialize_wrf_handler
-      initialize_forecast
+      if (!parameter_handler.repository.parameters[:help] && 
+          !parameter_handler.repository.parameters[:version])
+        initialize_wrf_handler
+        initialize_forecast
+      else
+        @wrf_handler = nil
+        @forecast_handler = nil
+      end
     end
 
     private
