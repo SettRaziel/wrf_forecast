@@ -28,6 +28,7 @@ WRF forecast help:
  -v, --version  prints the current version of the project
  -d, --date     argument: <date>; specifies the start_date of the requested forecast
      --default  runs the script with date as today at midnight and a 24 h forecast period
+ -o, --offset   argument: <offset>; specifies how many hours from the forecast should be skipped
  -p, --period   argument: <period>; specifies the forecast period
  -w, --warning  adds an additional text section containing warnings and significant weather
 ```
