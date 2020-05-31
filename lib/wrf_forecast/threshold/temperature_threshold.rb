@@ -2,7 +2,7 @@
 # @Author: Benjamin Held
 # @Date:   2020-03-19 08:04:09
 # @Last Modified by:   Benjamin Held
-# @Last Modified time: 2020-05-21 10:50:34
+# @Last Modified time: 2020-05-31 17:26:05
 
 module WrfForecast
 
@@ -37,11 +37,11 @@ module WrfForecast
       # @param [Array] data_values the input values
       def determine_indicators(data_values)
         data_values.each { |value|
-          @indicators[:ice_day].is_active = false if (value > 273.15)
-          @indicators[:frost_day].is_active = true if (value < 273.15)
-          @indicators[:summer_day].is_active = true if (value >= 298.15)
-          @indicators[:hot_day].is_active = true if (value >= 303.15)
-          @indicators[:tropical_night].is_active = false if (value < 293.15)
+          change_indicator(:ice_day, false, value > 273.15)
+          change_indicator(:frost_day, true, value < 273.15)
+          change_indicator(:summer_day, true, value > 298.15)
+          change_indicator(:hot_day, true, value > 303.15)
+          change_indicator(:tropical_night, false, value < 293.15)
         }
         nil
       end
