@@ -2,7 +2,7 @@
 # @Author: Benjamin Held
 # @Date:   2020-03-20 21:08:30
 # @Last Modified by:   Benjamin Held
-# @Last Modified time: 2020-05-21 10:38:03
+# @Last Modified time: 2020-05-31 16:40:43
 
 require "spec_helper"
 require "wrf_forecast"
@@ -196,7 +196,47 @@ describe WrfForecast do
     end
   end
 
-  describe "#initialize" do
+    describe "#output_forecast" do
+    context "given an array with version option" do
+      it "initialize the handler and repositories correctly, check for no warnings" do
+        expect {
+          WrfForecast.initialize(["--version"])
+          WrfForecast.output_forecast
+        }.to output("Error: Module not initialized. Run WrfForecast.new(ARGV)".red + "\n" + \
+                    "For help type: ruby <script> --help".green + "\n").to_stdout
+      end
+    end
+  end
+
+  describe "#get_warnings" do
+    context "given an array of parameters with timestamp and warnings" do
+      it "initialize the handler and repositories correctly, check warnings" do
+        timestamp = Time.parse("00:00").to_s
+        arguments = ["-d", timestamp, "-w", File.join(__dir__,"../files/Ber_24.d01.TS")]
+        WrfForecast.initialize(arguments)
+        warnings = WrfForecast.get_warnings
+        expect(warnings[:air_temperature].size).to eq(1)
+        expected = "frost day (temperature will fall below 0 degrees celsius)"
+        expect(warnings[:air_temperature][0].warning_text).to eq(expected)
+        expect(warnings[:wind_speed]).to be_empty
+        expect(warnings[:rain]).to be_empty
+      end
+    end
+  end
+
+  describe "#get_warnings" do
+    context "given an array with help option" do
+      it "initialize application, check for error message" do
+        expect {
+          WrfForecast.initialize(["--help"])
+          WrfForecast.get_warnings
+        }.to output("Error: Module not initialized. Run WrfForecast.new(ARGV)".red + "\n" + \
+                    "For help type: ruby <script> --help".green + "\n").to_stdout
+      end
+    end
+  end
+
+  describe "#get_warnings" do
     context "given an array of parameters with default option" do
       it "initialize the handler and repositories correctly, check for no warnings" do
         arguments = ["--default", File.join(__dir__,"../files/Ber.d01.TS")]
@@ -209,13 +249,29 @@ describe WrfForecast do
     end
   end
 
-  describe "#get_warnings" do
-    context "given an array of parameters with default option" do
-      it "initialize the handler and repositories correctly, check for no warnings" do
+  describe "#print_help" do
+    context "given only the help parameter as an argument" do
+      it "initialize application correctly and print help text" do
         expect { 
-          WrfForecast.initialize()
-          WrfForecast.get_warnings
-        }.to raise_error(ArgumentError)
+          arguments = ["--help"]
+          WrfForecast.initialize(arguments)
+          WrfForecast.print_help
+        }.to output("script usage:".red + " ruby <script> [parameters] <filename>\n" + \
+                    "help usage :".green + "              ruby <script> (-h | --help)\n" + \
+                    "help usage for parameter:".green + " ruby <script> <parameter> (-h | --help)\n" + \
+                    "WRF forecast help:".light_yellow + "\n" + \
+                    " -h, --help     ".light_blue + "show help text\n" + \
+                    " -v, --version  ".light_blue + "prints the current version of the project\n" + \
+                    "     --default  ".light_blue +  \
+                    "runs the script with date as today at midnight and a 24 h forecast period\n" + \
+                    " -w, --warning  ".light_blue +  \
+                    "adds an additional text section containing warnings and significant weather\n" + \
+                    " -d, --date     ".light_blue + "argument:".red + " <date>".yellow  + \
+                    "; specifies the start_date of the requested forecast\n" + \
+                    " -o, --offset   ".light_blue + "argument:".red + " <offset>".yellow  + \
+                    "; specifies how many hours from the forecast should be skipped\n" + \
+                    " -p, --period   ".light_blue + "argument:".red + " <period>".yellow  + \
+                    "; specifies the forecast period\n").to_stdout
       end
     end
   end
@@ -251,6 +307,8 @@ describe WrfForecast do
     context "given the module" do
       it "print the version text" do
         expect {
+          arguments = ["--version"]
+          WrfForecast.initialize(arguments)
           WrfForecast.print_version
         }.to output("wrf_forecast version 0.1.5".yellow + "\n" + \
                     "Created by Benjamin Held (March 2019)".yellow + "\n").to_stdout
