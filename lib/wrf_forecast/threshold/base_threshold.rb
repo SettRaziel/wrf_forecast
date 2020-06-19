@@ -2,7 +2,7 @@
 # @Author: Benjamin Held
 # @Date:   2020-03-19 14:02:55
 # @Last Modified by:   Benjamin Held
-# @Last Modified time: 2020-05-11 20:52:54
+# @Last Modified time: 2020-05-31 17:16:07
 
 require "ruby_utils/string"
 require "wrf_forecast/threshold/threshold_value"
@@ -42,6 +42,14 @@ module WrfForecast
       def add_indicator(identifier, is_active, warning_text)
         @indicators[identifier] = 
           WrfForecast::Threshold::ThresholdValue.new(identifier, is_active, warning_text)
+      end
+
+      # method to change a given indicator to the given flag if the condition if met
+      # @param [Symbol] identifier the symbol that identifies the threshold
+      # @param [boolean] flag the bool flag that should be set
+      # @param [boolean] condition the condition bool for which the flag should be set
+      def change_indicator(identifier, flag, condition)
+        @indicators[identifier].is_active = flag if (condition)
       end
 
       # method to check if the data sample offers enough data for the indicators

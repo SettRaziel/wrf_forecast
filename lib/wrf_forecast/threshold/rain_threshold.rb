@@ -2,7 +2,7 @@
 # @Author: Benjamin Held
 # @Date:   2020-03-20 12:14:58
 # @Last Modified by:   Benjamin Held
-# @Last Modified time: 2020-05-13 18:44:18
+# @Last Modified time: 2020-05-31 17:29:03
 
 module WrfForecast
 
@@ -36,16 +36,14 @@ module WrfForecast
         sum = 0
         rain_hours = 0
         data_values.each { |value|
-          @indicators[:strong_rain].is_active = true if (value > 15.0)
-          @indicators[:heavy_rain].is_active = true if (value > 25.0)
-          @indicators[:extreme_rain].is_active = true  if (value > 40.0)
-          rain_hours += 1 if (value > 1.5)
+          change_indicator(:strong_rain, true, value > 15.0)
+          change_indicator(:heavy_rain, true, value > 25.0)
+          change_indicator(:extreme_rain, true, value > 40.0)
+          rain_hours += 1 if (value > 1.5) # hourly rain > 1.5 mm required for continous rain check
           sum += value
         }
 
-        if (sum > 30.0 && rain_hours > 6)
-          @indicators[:continous_rain].is_active = true
-        end
+        change_indicator(:continous_rain, true, (sum > 30.0 && rain_hours > 6))
         nil
       end
 

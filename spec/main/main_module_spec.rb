@@ -2,7 +2,7 @@
 # @Author: Benjamin Held
 # @Date:   2020-03-20 21:08:30
 # @Last Modified by:   Benjamin Held
-# @Last Modified time: 2020-05-31 16:40:43
+# @Last Modified time: 2020-05-31 17:22:06
 
 require "spec_helper"
 require "wrf_forecast"
@@ -170,7 +170,7 @@ describe WrfForecast do
   end
 
   describe "#output_forecast" do
-    context "given an array of parameters with default and warings" do
+    context "given an array of parameters with default and warnings" do
       it "initialize the handler and repositories correctly, create output" do
         arguments = ["--default", "-w", File.join(__dir__,"../files/Ber.d01.TS")]
         WrfForecast.initialize(arguments)

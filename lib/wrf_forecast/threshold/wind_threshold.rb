@@ -2,7 +2,7 @@
 # @Author: Benjamin Held
 # @Date:   2020-03-19 13:59:43
 # @Last Modified by:   Benjamin Held
-# @Last Modified time: 2020-05-29 20:02:51
+# @Last Modified time: 2020-05-31 17:13:57
 
 module WrfForecast
 
@@ -38,11 +38,11 @@ module WrfForecast
       # @param [Array] data_values the input values
       def determine_indicators(data_values)
         data_values.each { |value|
-          @indicators[:windy_day].is_active = true if (value > 9.0)
-          @indicators[:squall_day].is_active = true if (value > 14.0)
-          @indicators[:storm_squall_day].is_active = true if (value > 24.0)
-          @indicators[:storm_day].is_active = true if (value > 28.0)
-          @indicators[:hurricane_day].is_active = true if (value > 32.0)
+          change_indicator(:windy_day, true, value > 9.0)
+          change_indicator(:squall_day, true, value > 14.0)
+          change_indicator(:storm_squall_day, true, value > 24.0)
+          change_indicator(:storm_day, true, value > 28.0)
+          change_indicator(:hurricane_day, true, value > 32.0)
         }
         nil
       end

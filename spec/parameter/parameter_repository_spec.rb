@@ -2,7 +2,7 @@
 # @Author: Benjamin Held
 # @Date:   2020-03-16 20:11:41
 # @Last Modified by:   Benjamin Held
-# @Last Modified time: 2020-05-05 17:30:28
+# @Last Modified time: 2020-06-05 22:23:41
 
 require 'spec_helper'
 require 'wrf_forecast/parameter'
@@ -65,6 +65,17 @@ describe WrfForecast::Parameter::ParameterRepository do
     context "given an invalid parameter" do
       it "raise an argument error" do
         arguments = ['-1', 'filename']
+        expect { 
+          WrfForecast::Parameter::ParameterRepository.new(arguments)
+        }.to raise_error(ArgumentError)
+      end
+    end
+  end
+
+  describe ".new" do
+    context "given an invalid parameter" do
+      it "raise an argument error" do
+        arguments = ['--error', 'filename']
         expect { 
           WrfForecast::Parameter::ParameterRepository.new(arguments)
         }.to raise_error(ArgumentError)
