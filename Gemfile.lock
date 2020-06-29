@@ -14,7 +14,7 @@ GIT
 PATH
   remote: .
   specs:
-    wrf_forecast (0.1.5)
+    wrf_forecast (0.1.6)
       wrf_library (~> 0.0.1)
 
 GEM
