@@ -62,9 +62,9 @@ Warnings: -
 ```
 
 ## License
-see LICENSE
+see [LICENSE](https://github.com/SettRaziel/wrf_forecast/blob/development/LICENSE)
 
-## Todo
-* Basic project structure
+## Todos and Issues
+check [issues](https://github.com/SettRaziel/wrf_forecast/issues)
 
 created by: Benjamin Held, Feburary 2019
