@@ -2,7 +2,7 @@
 # @Author: Benjamin Held
 # @Date:   2020-03-16 20:11:41
 # @Last Modified by:   Benjamin Held
-# @Last Modified time: 2020-06-05 22:23:41
+# @Last Modified time: 2020-07-23 20:49:34
 
 require 'spec_helper'
 require 'wrf_forecast/parameter'
@@ -119,6 +119,26 @@ describe WrfForecast::Parameter::ParameterRepository do
         arguments = ['-o', '12', 'filename']
         parameter_repository = WrfForecast::Parameter::ParameterRepository.new(arguments)
         expect(parameter_repository.parameters[:offset]).to eq('12')
+      end
+    end
+  end
+
+  describe ".new" do
+    context "given the warning flag" do
+      it "create the repository with the correct flags" do
+        arguments = ['-s', 'filename']
+        parameter_repository = WrfForecast::Parameter::ParameterRepository.new(arguments)
+        expect(parameter_repository.parameters[:save]).to eq(true)
+      end
+    end
+  end
+
+  describe ".new" do
+    context "given the warning flag" do
+      it "create the repository with the correct flags" do
+        arguments = ['--save', 'filename']
+        parameter_repository = WrfForecast::Parameter::ParameterRepository.new(arguments)
+        expect(parameter_repository.parameters[:save]).to eq(true)
       end
     end
   end

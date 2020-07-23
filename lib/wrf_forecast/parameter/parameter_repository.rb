@@ -1,7 +1,7 @@
 # @Author: Benjamin Held
 # @Date:   2015-06-12 10:45:36
 # @Last Modified by:   Benjamin Held
-# @Last Modified time: 2020-05-05 17:32:34
+# @Last Modified time: 2020-07-23 20:47:48
 
 module WrfForecast
 
@@ -24,6 +24,7 @@ module WrfForecast
           when *@mapping[:default] then create_defaults
           when *@mapping[:offset] then create_argument_entry(:offset)
           when *@mapping[:period] then create_argument_entry(:period)
+          when *@mapping[:save] then @parameters[:save] = true
           when *@mapping[:warning] then @parameters[:warning] = true
           when /-[a-z]|--[a-z]+/ then raise_invalid_parameter(arg)
         else
@@ -34,17 +35,18 @@ module WrfForecast
 
       # method to define the input string values that will match a given paramter symbol
       def define_mapping
-        @mapping[:date] = ['-d', '--date']
-        @mapping[:default] = ['--default']
-        @mapping[:offset] = ['-o', '--offset']
-        @mapping[:period] = ['-p', '--period']
-        @mapping[:warning] = ['-w', '--warning']
+        @mapping[:date] = ["-d", "--date"]
+        @mapping[:default] = ["--default"]
+        @mapping[:offset] = ["-o", "--offset"]
+        @mapping[:period] = ["-p", "--period"]
+        @mapping[:save] = ["-s", "--save"]
+        @mapping[:warning] = ["-w", "--warning"]
       end
 
       # method to set the default values when parameter --default is set
       def create_defaults
-        @parameters[:date] = Time.parse('00:00').to_s
-        @parameters[:period] = '24'
+        @parameters[:date] = Time.parse("00:00").to_s
+        @parameters[:period] = "24"
         @parameters[:default] = true
       end
 
