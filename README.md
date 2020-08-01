@@ -44,21 +44,22 @@ ruby wrf_forecast.rb --default <filename>
 ```
 will lead to a forecast text like this:
 ```
-Weather forecast of Hannover for the 2020-03-30 00:00:00 +0200.
+Weather forecast of Hannover for the 2020-08-01 00:00:00 +0200.
 
-Today will be a cold day. The maximum temperature will reach up to 16 degrees celsius. The minimum temperature will be -1 degrees celsius.
-The wind will be normal and will reach up to 24 km/h from northeast. The mean wind will be 17 km/h.
-The forecast does not predict rain.
+Today will be a hot day. The maximum temperature will reach up to 33 degrees celsius. The minimum temperature will be 14 degrees celsius.
+The wind will be normal and will reach up to 16 km/h from southeast. The mean wind will be 9 km/h.
+The forecast does predict normal rain with a maximum of 1.8 mm in 1 hour and up to 4 mm for the day. There are some dry periods during the day.
 ```
 When using the parameter `-w` or `--warning` the forecast text will be extended by a warning section:
 ```
-Weather forecast of Berlin-Schöneberg for the 2020-05-16 00:00:00 +0200.
+Weather forecast of Berlin-Schöneberg for the 2020-08-01 00:00:00 +0200.
 
-Today will be a normal day. The maximum temperature will reach up to 18 degrees celsius. The minimum temperature will be 6 degrees celsius.
-The wind will be normal and will reach up to 25 km/h from west. The mean wind will be 15 km/h.
-The forecast does predict normal rain with a maximum of 0.1 mm in 1 hour and up to 1 mm for the day. There are some dry periods during the day.
+Today will be a summer day. The maximum temperature will reach up to 27 degrees celsius. The minimum temperature will be 13 degrees celsius.
+The wind will be normal and will reach up to 16 km/h from southeast. The mean wind will be 12 km/h.
+The forecast does not predict rain.
 
-Warnings: -
+Warnings:
+summer day (temperature will exceed 25 degrees celsius) 
 ```
 
 ## License
