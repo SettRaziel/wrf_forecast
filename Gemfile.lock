@@ -6,7 +6,7 @@ GIT
 
 GIT
   remote: https://github.com/SettRaziel/wrf_library
-  revision: 40b6785d1a8d91c1e375384a5686fc3808ee9c6e
+  revision: a5b480b952d0c268f109c680a733379674f875fa
   specs:
     wrf_library (0.0.1)
       ruby_utils (~> 0.0.1)
