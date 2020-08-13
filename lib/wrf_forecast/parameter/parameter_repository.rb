@@ -1,7 +1,7 @@
 # @Author: Benjamin Held
 # @Date:   2015-06-12 10:45:36
 # @Last Modified by:   Benjamin Held
-# @Last Modified time: 2020-07-23 20:47:48
+# @Last Modified time: 2020-08-13 18:31:14
 
 module WrfForecast
 
@@ -24,7 +24,7 @@ module WrfForecast
           when *@mapping[:default] then create_defaults
           when *@mapping[:offset] then create_argument_entry(:offset)
           when *@mapping[:period] then create_argument_entry(:period)
-          when *@mapping[:save] then @parameters[:save] = true
+          when *@mapping[:json] then @parameters[:json] = true
           when *@mapping[:warning] then @parameters[:warning] = true
           when /-[a-z]|--[a-z]+/ then raise_invalid_parameter(arg)
         else
@@ -39,7 +39,7 @@ module WrfForecast
         @mapping[:default] = ["--default"]
         @mapping[:offset] = ["-o", "--offset"]
         @mapping[:period] = ["-p", "--period"]
-        @mapping[:save] = ["-s", "--save"]
+        @mapping[:json] = ["-j", "--json"]
         @mapping[:warning] = ["-w", "--warning"]
       end
 
