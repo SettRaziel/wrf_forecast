@@ -2,7 +2,7 @@
 # @Author: Benjamin Held
 # @Date:   2020-03-16 20:59:23
 # @Last Modified by:   Benjamin Held
-# @Last Modified time: 2020-05-10 16:48:55
+# @Last Modified time: 2020-08-14 22:33:21
 
 require 'spec_helper'
 require 'wrf_forecast/help/help_output'
@@ -29,6 +29,18 @@ describe WrfForecast::HelpOutput do
         }.to output("WRF forecast help:".light_yellow + "\n" + \
                     " -w, --warning  ".light_blue +  \
                     "adds an additional text section containing warnings and significant weather\n").to_stdout
+      end
+    end
+  end
+
+  describe "#print_help_for" do
+    context "given a simple help entry" do
+      it "print the help text for :warning" do
+        expect { 
+          WrfForecast::HelpOutput.print_help_for(:json) 
+        }.to output("WRF forecast help:".light_yellow + "\n" + \
+                    " -j, --json  ".light_blue +  \
+                    "returns the forecast values not as a text but a json object\n").to_stdout
       end
     end
   end
@@ -82,6 +94,8 @@ describe WrfForecast::HelpOutput do
                     " -v, --version  ".light_blue + "prints the current version of the project\n" + \
                     "     --default  ".light_blue +  \
                     "runs the script with date as today at midnight and a 24 h forecast period\n" + \
+                    " -j, --json  ".light_blue +  \
+                    "returns the forecast values not as a text but a json object\n" + \
                     " -w, --warning  ".light_blue +  \
                     "adds an additional text section containing warnings and significant weather\n" + \
                     " -d, --date     ".light_blue + "argument:".red + " <date>".yellow  + \

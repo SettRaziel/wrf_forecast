@@ -2,7 +2,7 @@
 # @Author: Benjamin Held
 # @Date:   2020-03-20 21:08:30
 # @Last Modified by:   Benjamin Held
-# @Last Modified time: 2020-06-29 07:49:56
+# @Last Modified time: 2020-08-14 22:35:08
 
 require "spec_helper"
 require "wrf_forecast"
@@ -264,6 +264,8 @@ describe WrfForecast do
                     " -v, --version  ".light_blue + "prints the current version of the project\n" + \
                     "     --default  ".light_blue +  \
                     "runs the script with date as today at midnight and a 24 h forecast period\n" + \
+                    " -j, --json  ".light_blue +  \
+                    "returns the forecast values not as a text but a json object\n" + \
                     " -w, --warning  ".light_blue +  \
                     "adds an additional text section containing warnings and significant weather\n" + \
                     " -d, --date     ".light_blue + "argument:".red + " <date>".yellow  + \
