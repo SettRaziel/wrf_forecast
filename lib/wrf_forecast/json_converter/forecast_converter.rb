@@ -2,7 +2,7 @@
 # @Author: Benjamin Held
 # @Date:   2020-08-02 18:05:10
 # @Last Modified by:   Benjamin Held
-# @Last Modified time: 2020-08-07 19:09:53
+# @Last Modified time: 2020-08-16 18:37:32
 
 module WrfForecast
 
@@ -25,8 +25,8 @@ module WrfForecast
       # @return [ForecastRepository] the data repository with the forecast data
       attr_reader :forecast
 
-      # implementation of the abstract parent method. In addition to the data stored by
-      # the parent class, the wrf data also stores data aber the considered grid point
+      # implementation of the abstract parent method. Since there is no additional data
+      # the method returns an empty hash
       # @return [Hash] the key-value hash for the json output
       def add_additions
         return Hash.new()

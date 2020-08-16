@@ -1,7 +1,7 @@
 # @Author: Benjamin Held
 # @Date:   2019-05-08 15:34:21
 # @Last Modified by:   Benjamin Held
-# @Last Modified time: 2020-06-29 07:50:01
+# @Last Modified time: 2020-08-16 22:24:01
   
 require 'ruby_utils/parameter_converter'  
 require 'wrf_library/wrf'
@@ -84,10 +84,14 @@ module WrfForecast
     nil
   end    
 
-  # singleton method check for the forecast text and return it
+  # singleton method check for the forecast handler and return the forecast based
+  # on the given parameters
   # @return [String] if initialized the created forecast text, else nil
   def self.output_forecast
     if (@forecast_handler != nil)
+      if (@parameter_handler.repository.parameters[:json])
+        return @forecast_handler.generate_json_output
+      end
       forecast = @forecast_handler.text.get_complete_text
       if (@parameter_handler.repository.parameters[:warning])
         forecast.concat("\n\n").concat(@forecast_handler.text.warnings)

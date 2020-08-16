@@ -2,7 +2,7 @@
 # @Author: Benjamin Held
 # @Date:   2020-03-20 21:08:30
 # @Last Modified by:   Benjamin Held
-# @Last Modified time: 2020-08-14 22:35:08
+# @Last Modified time: 2020-08-16 22:20:45
 
 require "spec_helper"
 require "wrf_forecast"
@@ -191,6 +191,24 @@ describe WrfForecast do
         expect(parameters[:date]).to eq(timestamp)
         expect(parameters[:period]).to eq("24")
         expect(WrfForecast.wrf_handler.data_repository.repository.size).to eq(1124)
+        expect(WrfForecast.forecast_handler).to be_truthy
+      end
+    end
+  end
+
+  describe "#output_forecast" do
+    context "given an array of parameters with default and warnings" do
+      it "initialize the handler and repositories correctly, create output" do
+        timestamp = Date.new(2020, 06, 29).to_s
+        arguments = ["-d", timestamp, "-p", "24", "-j", File.join(__dir__,"../files/Ber_24.d01.TS")]
+        WrfForecast.initialize(arguments)
+        parameters = WrfForecast.parameter_handler.repository.parameters
+
+        expected = File.read(File.join(__dir__,"../files/expected_output.json"))
+        expect(WrfForecast.output_forecast).to eq(expected)
+        expect(parameters[:date]).to eq(timestamp)
+        expect(parameters[:period]).to eq("24")
+        expect(WrfForecast.wrf_handler.data_repository.repository.size).to eq(994)
         expect(WrfForecast.forecast_handler).to be_truthy
       end
     end
