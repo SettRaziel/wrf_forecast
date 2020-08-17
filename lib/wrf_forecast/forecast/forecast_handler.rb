@@ -2,7 +2,7 @@
 # @Author: Benjamin Held
 # @Date:   2020-03-21 17:34:42
 # @Last Modified by:   Benjamin Held
-# @Last Modified time: 2020-08-11 22:19:53
+# @Last Modified time: 2020-08-17 14:31:06
 
 require 'wrf_forecast/data'
 require 'wrf_forecast/forecast/forecast_text'
@@ -30,7 +30,7 @@ module WrfForecast
       meta_data = wrf_handler.data_repository.meta_data
       @text = WrfForecast::ForecastText.new(meta_data, @repository, @threshold_handler)
       @json_converter = WrfForecast::JsonConverter::ForecastJsonConverter.
-                        new(wrf_handler.data_repository, repository)
+                        new(wrf_handler.data_repository, repository, @threshold_handler.warnings)
     end
 
     # method to generate a json representation of the forecast data

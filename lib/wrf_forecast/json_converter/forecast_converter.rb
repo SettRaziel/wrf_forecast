@@ -2,7 +2,7 @@
 # @Author: Benjamin Held
 # @Date:   2020-08-02 18:05:10
 # @Last Modified by:   Benjamin Held
-# @Last Modified time: 2020-08-16 18:37:32
+# @Last Modified time: 2020-08-17 15:00:29
 
 module WrfForecast
 
@@ -13,17 +13,22 @@ module WrfForecast
     class ForecastJsonConverter < WrfLibrary::JsonConverter::BaseStationJsonConverter
 
       # initialization
-      # @param [DataRepository] data_repository the complete data
-      # @param [ForecastRepository] forecast_repository the specific forecast data
-      def initialize(data_repository, forecast_repository)
-        @forecast = forecast_repository
-        super(data_repository)
+      # @param [DataRepository] data the complete data
+      # @param [ForecastRepository] forecast the specific forecast data
+      # @param [Hash] warnings the mapping of measurand and triggered thresholds for the current forecast
+      def initialize(data, forecast, warnings)
+        @forecast = forecast
+        @warnings = warnings
+        super(data)
       end
 
       private
 
       # @return [ForecastRepository] the data repository with the forecast data
       attr_reader :forecast
+
+      # @return [Hash] the mapping of measurand and triggered thresholds for the current forecast
+      attr_reader :warnings
 
       # implementation of the abstract parent method. Since there is no additional data
       # the method returns an empty hash
@@ -40,6 +45,7 @@ module WrfForecast
         measurands[:temperature] = generate_temperature_values
         measurands[:wind_speed] = generate_wind_values
         measurands[:rain] = generate_rain_values
+        measurands[:warnings] = generate_warnings
         return measurands
       end
 
@@ -72,6 +78,17 @@ module WrfForecast
           rain_sum += value
         }
         values[:sum] = rain_sum.round(3)
+        return values
+      end
+
+      # method to create the output array for the warnings
+      def generate_warnings
+        values = Array.new()
+        @warnings.each_value { |value|
+          value.each { |element|
+            values << element.warning_text
+          }
+        }
         return values
       end
 
