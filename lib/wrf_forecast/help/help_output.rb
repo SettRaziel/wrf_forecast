@@ -1,7 +1,7 @@
 # @Author: Benjamin Held
 # @Date:   2019-05-07 10:03:48
 # @Last Modified by:   Benjamin Held
-# @Last Modified time: 2020-08-14 22:33:37
+# @Last Modified time: 2020-08-18 14:03:31
 
 require "ruby_utils/help_output"
 
@@ -18,8 +18,6 @@ module WrfForecast
             "runs the script with date as today at midnight and a 24 h forecast period")
       add_simple_text(:json, " -j, --json  ", 
             "returns the forecast values not as a text but a json object")
-      add_simple_text(:warning, " -w, --warning  ", 
-            "adds an additional text section containing warnings and significant weather")
       nil
     end
 

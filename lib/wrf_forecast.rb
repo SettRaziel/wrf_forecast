@@ -1,7 +1,7 @@
 # @Author: Benjamin Held
 # @Date:   2019-05-08 15:34:21
 # @Last Modified by:   Benjamin Held
-# @Last Modified time: 2020-08-16 22:24:01
+# @Last Modified time: 2020-08-18 14:09:03
   
 require 'ruby_utils/parameter_converter'  
 require 'wrf_library/wrf'
@@ -93,9 +93,7 @@ module WrfForecast
         return @forecast_handler.generate_json_output
       end
       forecast = @forecast_handler.text.get_complete_text
-      if (@parameter_handler.repository.parameters[:warning])
-        forecast.concat("\n\n").concat(@forecast_handler.text.warnings)
-      end
+      forecast.concat("\n\n").concat(@forecast_handler.text.warnings)
       return forecast
     else
       print_error("Error: Module not initialized. Run WrfForecast.new(ARGV)")

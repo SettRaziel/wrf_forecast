@@ -2,7 +2,7 @@
 # @Author: Benjamin Held
 # @Date:   2020-03-16 20:11:41
 # @Last Modified by:   Benjamin Held
-# @Last Modified time: 2020-08-13 18:30:33
+# @Last Modified time: 2020-08-18 14:06:29
 
 require 'spec_helper'
 require 'wrf_forecast/parameter'
@@ -189,26 +189,6 @@ describe WrfForecast::Parameter::ParameterRepository do
         arguments = ['--json', 'filename']
         parameter_repository = WrfForecast::Parameter::ParameterRepository.new(arguments)
         expect(parameter_repository.parameters[:json]).to eq(true)
-      end
-    end
-  end
-
-  describe ".new" do
-    context "given the warning flag" do
-      it "create the repository with the correct flags" do
-        arguments = ['-w', 'filename']
-        parameter_repository = WrfForecast::Parameter::ParameterRepository.new(arguments)
-        expect(parameter_repository.parameters[:warning]).to eq(true)
-      end
-    end
-  end
-
-  describe ".new" do
-    context "given the warning flag" do
-      it "create the repository with the correct flags" do
-        arguments = ['--warning', 'filename']
-        parameter_repository = WrfForecast::Parameter::ParameterRepository.new(arguments)
-        expect(parameter_repository.parameters[:warning]).to eq(true)
       end
     end
   end

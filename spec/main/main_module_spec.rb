@@ -2,7 +2,7 @@
 # @Author: Benjamin Held
 # @Date:   2020-03-20 21:08:30
 # @Last Modified by:   Benjamin Held
-# @Last Modified time: 2020-08-16 22:20:45
+# @Last Modified time: 2020-08-18 14:11:03
 
 require "spec_helper"
 require "wrf_forecast"
@@ -35,7 +35,9 @@ describe WrfForecast do
         expected.concat(" The minimum temperature will be -4 degrees celsius.\n")
         expected.concat("The wind will be normal and will reach up to ")
         expected.concat("23 km/h from west. The mean wind will be 16 km/h.\n")
-        expected.concat("The forecast does not predict rain.")
+        expected.concat("The forecast does not predict rain.\n\n")
+        expected.concat("Warnings: \n")
+        expected.concat("frost day (temperature will fall below 0 degrees celsius)")
         expect(WrfForecast.output_forecast).to eq(expected)
         expect(parameters[:date]).to eq(timestamp)
         expect(parameters[:period]).to eq("24")
@@ -59,7 +61,9 @@ describe WrfForecast do
         expected.concat(" The minimum temperature will be -4 degrees celsius.\n")
         expected.concat("The wind will be normal and will reach up to ")
         expected.concat("23 km/h from west. The mean wind will be 16 km/h.\n")
-        expected.concat("The forecast does not predict rain.")
+        expected.concat("The forecast does not predict rain.\n\n")
+        expected.concat("Warnings: \n")
+        expected.concat("frost day (temperature will fall below 0 degrees celsius)")
         expect(WrfForecast.output_forecast).to eq(expected)
         expect(parameters[:date]).to eq(timestamp)
         expect(WrfForecast.wrf_handler.data_repository.repository.size).to eq(994)
@@ -84,7 +88,8 @@ describe WrfForecast do
         expected.concat("17 km/h from northeast. The mean wind will be 11 km/h.\n")
         expected.concat("The forecast does predict normal rain with a maximum of ")
         expected.concat("0.3 mm in 1 hour and up to 1 mm for the day.")
-        expected.concat(" There are some dry periods during the day.")
+        expected.concat(" There are some dry periods during the day.\n\n")
+        expected.concat("Warnings: -")
         expect(WrfForecast.output_forecast).to eq(expected)
         expect(parameters[:date]).to eq(timestamp)
         expect(parameters[:period]).to eq("24")
@@ -110,7 +115,9 @@ describe WrfForecast do
         expected.concat("19 km/h from northeast. The mean wind will be 12 km/h.\n")
         expected.concat("The forecast does predict normal rain with a maximum of ")
         expected.concat("0.3 mm in 1 hour and up to 1 mm for the day.")
-        expected.concat(" There are some dry periods during the day.")
+        expected.concat(" There are some dry periods during the day.\n\n")
+        expected.concat("Warnings: \n")
+        expected.concat("frost day (temperature will fall below 0 degrees celsius)")
         expect(WrfForecast.output_forecast).to eq(expected)
         expect(parameters[:date]).to eq(timestamp)
         expect(parameters[:period]).to eq("24")
@@ -134,7 +141,9 @@ describe WrfForecast do
         expected.concat(" The minimum temperature will be -2 degrees celsius.\n")
         expected.concat("The wind will be normal and will reach up to ")
         expected.concat("27 km/h from northeast. The mean wind will be 21 km/h.\n")
-        expected.concat("The forecast does not predict rain.")
+        expected.concat("The forecast does not predict rain.\n\n")
+        expected.concat("Warnings: \n")
+        expected.concat("frost day (temperature will fall below 0 degrees celsius)")
         expect(WrfForecast.output_forecast).to eq(expected)
         expect(parameters[:date]).to eq(timestamp)
         expect(parameters[:period]).to eq("24")
@@ -148,7 +157,7 @@ describe WrfForecast do
     context "given an array of parameters with timestamp and warnings" do
       it "initialize the handler and repositories correctly, create output" do
         timestamp = Time.parse("00:00").to_s
-        arguments = ["-d", timestamp, "-w", File.join(__dir__,"../files/Ber_24.d01.TS")]
+        arguments = ["-d", timestamp, File.join(__dir__,"../files/Ber_24.d01.TS")]
         WrfForecast.initialize(arguments)
         parameters = WrfForecast.parameter_handler.repository.parameters
 
@@ -172,7 +181,7 @@ describe WrfForecast do
   describe "#output_forecast" do
     context "given an array of parameters with default and warnings" do
       it "initialize the handler and repositories correctly, create output" do
-        arguments = ["--default", "-w", File.join(__dir__,"../files/Ber.d01.TS")]
+        arguments = ["--default", File.join(__dir__,"../files/Ber.d01.TS")]
         WrfForecast.initialize(arguments)
         parameters = WrfForecast.parameter_handler.repository.parameters
 
@@ -230,7 +239,7 @@ describe WrfForecast do
     context "given an array of parameters with timestamp and warnings" do
       it "initialize the handler and repositories correctly, check warnings" do
         timestamp = Time.parse("00:00").to_s
-        arguments = ["-d", timestamp, "-w", File.join(__dir__,"../files/Ber_24.d01.TS")]
+        arguments = ["-d", timestamp, File.join(__dir__,"../files/Ber_24.d01.TS")]
         WrfForecast.initialize(arguments)
         warnings = WrfForecast.get_warnings
         expect(warnings[:air_temperature].size).to eq(1)
@@ -284,8 +293,6 @@ describe WrfForecast do
                     "runs the script with date as today at midnight and a 24 h forecast period\n" + \
                     " -j, --json  ".light_blue +  \
                     "returns the forecast values not as a text but a json object\n" + \
-                    " -w, --warning  ".light_blue +  \
-                    "adds an additional text section containing warnings and significant weather\n" + \
                     " -d, --date     ".light_blue + "argument:".red + " <date>".yellow  + \
                     "; specifies the start_date of the requested forecast\n" + \
                     " -o, --offset   ".light_blue + "argument:".red + " <offset>".yellow  + \
