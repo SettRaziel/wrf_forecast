@@ -2,7 +2,7 @@
 # @Author: Benjamin Held
 # @Date:   2020-03-16 20:11:41
 # @Last Modified by:   Benjamin Held
-# @Last Modified time: 2020-08-18 14:06:29
+# @Last Modified time: 2020-08-18 16:05:33
 
 require 'spec_helper'
 require 'wrf_forecast/parameter'
@@ -74,6 +74,17 @@ describe WrfForecast::Parameter::ParameterRepository do
     context "given no arguments for the initialization" do
       it "raise an argument error" do
         arguments = [ ]
+        expect { 
+          WrfForecast::Parameter::ParameterRepository.new(arguments)
+        }.to raise_error(ArgumentError)
+      end
+    end
+  end
+
+  describe ".new" do
+    context "given an invalid parameter" do
+      it "raise an argument error" do
+        arguments = ['test', 'filename']
         expect { 
           WrfForecast::Parameter::ParameterRepository.new(arguments)
         }.to raise_error(ArgumentError)

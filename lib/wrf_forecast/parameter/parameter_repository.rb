@@ -1,7 +1,7 @@
 # @Author: Benjamin Held
 # @Date:   2015-06-12 10:45:36
 # @Last Modified by:   Benjamin Held
-# @Last Modified time: 2020-08-18 14:03:02
+# @Last Modified time: 2020-08-18 16:10:34
 
 module WrfForecast
 
@@ -25,7 +25,6 @@ module WrfForecast
           when *@mapping[:offset] then create_argument_entry(:offset)
           when *@mapping[:period] then create_argument_entry(:period)
           when *@mapping[:json] then @parameters[:json] = true
-          when /-[a-z]|--[a-z]+/ then raise_invalid_parameter(arg)
         else
           raise_invalid_parameter(arg)
         end
