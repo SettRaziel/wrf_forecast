@@ -28,9 +28,9 @@ WRF forecast help:
  -v, --version  prints the current version of the project
  -d, --date     argument: <date>; specifies the start_date of the requested forecast
      --default  runs the script with date as today at midnight and a 24 h forecast period
+ -j, --json     returns the forecast values not as a text but a json object     
  -o, --offset   argument: <offset>; specifies how many hours from the forecast should be skipped
  -p, --period   argument: <period>; specifies the forecast period
- -w, --warning  adds an additional text section containing warnings and significant weather
 ```
 When using this as a gem the main entry point is passing the arguments to the main module:
 ```
@@ -44,21 +44,60 @@ ruby wrf_forecast.rb --default <filename>
 ```
 will lead to a forecast text like this:
 ```
-Weather forecast of Hannover for the 2020-03-30 00:00:00 +0200.
+Weather forecast of Berlin-Schöneberg for the 2020-08-19 00:00:00 +0200
 
-Today will be a cold day. The maximum temperature will reach up to 16 degrees celsius. The minimum temperature will be -1 degrees celsius.
-The wind will be normal and will reach up to 24 km/h from northeast. The mean wind will be 17 km/h.
+Today will be a summer day. The maximum temperature will reach up to 27 degrees celsius. The minimum temperature will be 15 degrees celsius.
+The wind will be normal and will reach up to 11 km/h from west. The mean wind will be 7 km/h.
 The forecast does not predict rain.
-```
-When using the parameter `-w` or `--warning` the forecast text will be extended by a warning section:
-```
-Weather forecast of Berlin-Schöneberg for the 2020-05-16 00:00:00 +0200.
 
-Today will be a normal day. The maximum temperature will reach up to 18 degrees celsius. The minimum temperature will be 6 degrees celsius.
-The wind will be normal and will reach up to 25 km/h from west. The mean wind will be 15 km/h.
-The forecast does predict normal rain with a maximum of 0.1 mm in 1 hour and up to 1 mm for the day. There are some dry periods during the day.
+Warnings:
+summer day (temperature will exceed 25 degrees celsius)
+```
+or with no warnings present:
+```
+Weather forecast of Husum for the 2020-08-19 00:00:00 +0200
 
-Warnings: -
+Today will be a normal day. The maximum temperature will reach up to 25 degrees celsius. The minimum temperature will be 14 degrees celsius.
+The wind will be normal and will reach up to 19 km/h from southwest. The mean wind will be 11 km/h.
+The forecast does not predict rain.
+
+Warnings: - 
+```
+With the new parameter `-j` or `--json` the output will be converted to a json object:
+```
+{
+  "meta_data": {
+    "station": {
+      "name": "Berlin-Schöneberg",
+      "descriptor": "Ber",
+      "elevation": 44.2,
+      "coordinate": {
+        "x": 13.36,
+        "y": 52.49
+      }
+    },
+    "start_date": "2020-08-19 00:00:00 +0200"
+  },
+  "weather_data": {
+    "temperature": {
+      "minimum": 288.491,
+      "maximum": 298.396
+    },
+    "wind_speed": {
+      "minimum": 0.401,
+      "maximum": 3.691,
+      "prevalent_direction": "northwest"
+    },
+    "rain": {
+      "minimum": 0.0,
+      "maximum": 0.027,
+      "sum": 0.056
+    },
+    "warnings": [
+      "summer day (temperature will exceed 25 degrees celsius)"
+    ]
+  }
+}
 ```
 
 ## License
