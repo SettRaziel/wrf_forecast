@@ -31,6 +31,7 @@ WRF forecast help:
  -j, --json     returns the forecast values not as a text but a json object     
  -o, --offset   argument: <offset>; specifies how many hours from the forecast should be skipped
  -p, --period   argument: <period>; specifies the forecast period
+ -s, --save     argument: <target>; specifies the output file where the results are saved
 ```
 When using this as a gem the main entry point is passing the arguments to the main module:
 ```

@@ -2,7 +2,7 @@
 # @Author: Benjamin Held
 # @Date:   2020-03-20 21:08:30
 # @Last Modified by:   Benjamin Held
-# @Last Modified time: 2020-08-18 14:11:03
+# @Last Modified time: 2020-08-20 20:20:47
 
 require "spec_helper"
 require "wrf_forecast"
@@ -298,7 +298,9 @@ describe WrfForecast do
                     " -o, --offset   ".light_blue + "argument:".red + " <offset>".yellow  + \
                     "; specifies how many hours from the forecast should be skipped\n" + \
                     " -p, --period   ".light_blue + "argument:".red + " <period>".yellow  + \
-                    "; specifies the forecast period\n").to_stdout
+                    "; specifies the forecast period\n" + \
+                    " -s, --save     ".light_blue + "argument:".red + " <target>".yellow  + \
+                    "; specifies the output file where the results are saved\n").to_stdout
       end
     end
   end

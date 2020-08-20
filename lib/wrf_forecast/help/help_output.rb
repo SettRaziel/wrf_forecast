@@ -1,7 +1,7 @@
 # @Author: Benjamin Held
 # @Date:   2019-05-07 10:03:48
 # @Last Modified by:   Benjamin Held
-# @Last Modified time: 2020-08-18 14:03:31
+# @Last Modified time: 2020-08-20 20:17:48
 
 require "ruby_utils/help_output"
 
@@ -29,6 +29,8 @@ module WrfForecast
             "; specifies how many hours from the forecast should be skipped")
       add_single_argument_text(:period, " -p, --period   ", " <period>",
             "; specifies the forecast period")
+      add_single_argument_text(:save, " -s, --save     ", " <target>",
+            "; specifies the output file where the results are saved")
       nil
     end
 
