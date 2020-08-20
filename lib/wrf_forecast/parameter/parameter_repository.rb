@@ -1,7 +1,7 @@
 # @Author: Benjamin Held
 # @Date:   2015-06-12 10:45:36
 # @Last Modified by:   Benjamin Held
-# @Last Modified time: 2020-08-18 16:10:34
+# @Last Modified time: 2020-08-20 10:11:29
 
 module WrfForecast
 
@@ -22,9 +22,10 @@ module WrfForecast
         case arg
           when *@mapping[:date] then create_argument_entry(:date)
           when *@mapping[:default] then create_defaults
+          when *@mapping[:json] then @parameters[:json] = true
           when *@mapping[:offset] then create_argument_entry(:offset)
           when *@mapping[:period] then create_argument_entry(:period)
-          when *@mapping[:json] then @parameters[:json] = true
+          when *@mapping[:save] then create_argument_entry(:save)
         else
           raise_invalid_parameter(arg)
         end
@@ -35,9 +36,10 @@ module WrfForecast
       def define_mapping
         @mapping[:date] = ["-d", "--date"]
         @mapping[:default] = ["--default"]
+        @mapping[:json] = ["-j", "--json"]
         @mapping[:offset] = ["-o", "--offset"]
         @mapping[:period] = ["-p", "--period"]
-        @mapping[:json] = ["-j", "--json"]
+        @mapping[:save] = ["-s", "--save"]
       end
 
       # method to set the default values when parameter --default is set
