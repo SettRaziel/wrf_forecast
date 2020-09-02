@@ -1,7 +1,7 @@
 # @Author: Benjamin Held
 # @Date:   2019-05-08 15:34:21
 # @Last Modified by:   Benjamin Held
-# @Last Modified time: 2020-08-18 14:09:03
+# @Last Modified time: 2020-09-02 21:41:42
   
 require 'ruby_utils/parameter_converter'  
 require 'wrf_library/wrf'
@@ -90,13 +90,30 @@ module WrfForecast
   def self.output_forecast
     if (@forecast_handler != nil)
       if (@parameter_handler.repository.parameters[:json])
-        return @forecast_handler.generate_json_output
+        output = @forecast_handler.generate_json_output
+      else
+        output = @forecast_handler.text.get_complete_text
+        output.concat("\n\n").concat(@forecast_handler.text.warnings)
       end
-      forecast = @forecast_handler.text.get_complete_text
-      forecast.concat("\n\n").concat(@forecast_handler.text.warnings)
-      return forecast
+      save_forecast(output)
+      return output
     else
       print_error("Error: Module not initialized. Run WrfForecast.new(ARGV)")
+    end
+    nil
+  end
+
+  # singleton method to save the forecast output if the given parameter is set
+  # @param [String] output the output that should be saved
+  def self.save_forecast(output)
+    if (contains_parameter?(:save))
+      if (output != nil)
+        file = File.open(@parameter_handler.repository.parameters[:save], "w")
+        file.write(output)
+        file.close
+      else
+        print_error("Error: No output was generated or it is nil.")
+      end
     end
     nil
   end

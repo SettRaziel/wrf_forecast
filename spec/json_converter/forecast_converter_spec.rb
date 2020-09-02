@@ -2,7 +2,7 @@
 # @Author: Benjamin Held
 # @Date:   2020-08-03 18:31:20
 # @Last Modified by:   Benjamin Held
-# @Last Modified time: 2020-08-17 14:59:46
+# @Last Modified time: 2020-09-02 21:05:04
 
 require 'spec_helper'
 require 'wrf_forecast/json_converter'
@@ -15,7 +15,6 @@ describe WrfForecast::JsonConverter::ForecastJsonConverter do
       it "read it and create the correct json output" do
         wrf_handler = WrfLibrary::Wrf::WrfHandler.new(File.join(__dir__,"../files/Ber_24.d01.TS"), Date.new(2020, 06, 29))
         forecast_handler = WrfForecast::ForecastHandler.new(wrf_handler)
-        warnings = forecast_handler.threshold_handler.warnings
         converter = WrfForecast::JsonConverter::ForecastJsonConverter.
                     new(wrf_handler.data_repository, forecast_handler.repository, forecast_handler.threshold_handler.warnings)
         converter.convert(__dir__)

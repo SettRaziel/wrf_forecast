@@ -2,7 +2,7 @@
 # @Author: Benjamin Held
 # @Date:   2020-03-20 21:08:30
 # @Last Modified by:   Benjamin Held
-# @Last Modified time: 2020-08-20 20:20:47
+# @Last Modified time: 2020-09-02 21:45:23
 
 require "spec_helper"
 require "wrf_forecast"
@@ -48,7 +48,7 @@ describe WrfForecast do
   end
 
   describe "#output_forecast" do
-    context "given an array of parameters with timestamp option" do
+    context "given an array of parameters with timestamp values" do
       it "initialize the handler and repositories correctly, create output" do
         timestamp = Time.parse("00:00").to_s
         arguments = ["-d", timestamp, File.join(__dir__,"../files/Ber_24.d01.TS")]
@@ -73,7 +73,7 @@ describe WrfForecast do
   end
 
   describe "#output_forecast" do
-    context "given an array of parameters with deafult option" do
+    context "given an array of parameters with default values" do
       it "initialize the handler and repositories correctly, create output" do
         arguments = ["--default", File.join(__dir__,"../files/Ber.d01.TS")]
         WrfForecast.initialize(arguments)
@@ -100,7 +100,7 @@ describe WrfForecast do
   end
 
   describe "#output_forecast" do
-    context "given an array of parameters with default and offset" do
+    context "given an array of parameters with default values and offset flag" do
       it "initialize the handler and repositories correctly, create output" do
         arguments = ["--default", "-o", "6", File.join(__dir__,"../files/Ber.d01.TS")]
         WrfForecast.initialize(arguments)
@@ -128,7 +128,7 @@ describe WrfForecast do
   end
 
   describe "#output_forecast" do
-    context "given an array of parameters with default and offset" do
+    context "given an array of parameters with default values and offset" do
       it "initialize the handler and repositories correctly, create output" do
         arguments = ["--default", "-o", "24", File.join(__dir__,"../files/Ber.d01.TS")]
         WrfForecast.initialize(arguments)
@@ -154,7 +154,7 @@ describe WrfForecast do
   end
 
   describe "#output_forecast" do
-    context "given an array of parameters with timestamp and warnings" do
+    context "given an array of parameters with timestamp flag" do
       it "initialize the handler and repositories correctly, create output" do
         timestamp = Time.parse("00:00").to_s
         arguments = ["-d", timestamp, File.join(__dir__,"../files/Ber_24.d01.TS")]
@@ -179,7 +179,7 @@ describe WrfForecast do
   end
 
   describe "#output_forecast" do
-    context "given an array of parameters with default and warnings" do
+    context "given an array of parameters with default values" do
       it "initialize the handler and repositories correctly, create output" do
         arguments = ["--default", File.join(__dir__,"../files/Ber.d01.TS")]
         WrfForecast.initialize(arguments)
@@ -206,7 +206,7 @@ describe WrfForecast do
   end
 
   describe "#output_forecast" do
-    context "given an array of parameters with default and warnings" do
+    context "given an array of parameters with default values and json flag" do
       it "initialize the handler and repositories correctly, create output" do
         timestamp = Date.new(2020, 06, 29).to_s
         arguments = ["-d", timestamp, "-p", "24", "-j", File.join(__dir__,"../files/Ber_24.d01.TS")]
@@ -223,7 +223,76 @@ describe WrfForecast do
     end
   end
 
-    describe "#output_forecast" do
+  describe "#output_forecast" do
+    context "given an array of parameters with default values, json flag and save option" do
+      it "initialize the handler and repositories correctly, create and save output" do
+        timestamp = Date.new(2020, 06, 29).to_s
+        output_file = File.join(__dir__,"output.json")
+        arguments = ["-d", timestamp, "-p", "24", "-s", output_file , "-j", File.join(__dir__,"../files/Ber_24.d01.TS")]
+        WrfForecast.initialize(arguments)
+        parameters = WrfForecast.parameter_handler.repository.parameters
+
+        expect(parameters[:save]).to eq(output_file)
+        expected = File.read(File.join(__dir__,"../files/expected_output.json"))
+        expect(WrfForecast.output_forecast).to eq(expected)
+        expect(FileUtils.compare_file(output_file, File.join(__dir__,"../files/expected_output.json"))).to be_truthy
+        expect(parameters[:date]).to eq(timestamp)
+        expect(parameters[:period]).to eq("24")
+        expect(WrfForecast.wrf_handler.data_repository.repository.size).to eq(994)
+        expect(WrfForecast.forecast_handler).to be_truthy
+
+        # clean up data from the test and catch errors since they should not let the test fail
+        File.delete(output_file)
+      end
+    end
+  end
+
+  describe "#output_forecast" do
+    context "given an array of parameters with default values and save option" do
+      it "initialize the handler and repositories correctly, create output" do
+        output_file = File.join(__dir__,"output")
+        arguments = ["--default", "-s", output_file, File.join(__dir__,"../files/Ber_24.d01.TS")]
+        WrfForecast.initialize(arguments)
+        parameters = WrfForecast.parameter_handler.repository.parameters
+
+        timestamp = Time.parse("00:00").to_s
+        WrfForecast.output_forecast
+        expected = "Weather forecast of Berlin for the #{timestamp}.\n\n"
+        expected.concat("Today will be a cold day.")
+        expected.concat(" The maximum temperature will reach up to 10 degrees celsius.")
+        expected.concat(" The minimum temperature will be -4 degrees celsius.\n")
+        expected.concat("The wind will be normal and will reach up to ")
+        expected.concat("23 km/h from west. The mean wind will be 16 km/h.\n")
+        expected.concat("The forecast does not predict rain.\n\n")
+        expected.concat("Warnings: \n")
+        expected.concat("frost day (temperature will fall below 0 degrees celsius)")
+        expect(File.read(output_file)).to eq(expected)
+        expect(parameters[:date]).to eq(timestamp)
+        expect(parameters[:period]).to eq("24")
+        expect(WrfForecast.wrf_handler.data_repository.repository.size).to eq(994)
+        expect(WrfForecast.forecast_handler).to be_truthy
+
+        # clean up data from the test and catch errors since they should not let the test fail
+        File.delete(output_file)
+
+      end
+    end
+  end
+
+  describe "#save_forecast" do
+    context "given nil as a parameter for save_forecast" do
+      it "print the error message" do
+        expect {
+          arguments = ["--default", "-s", "no_file", File.join(__dir__,"../files/Ber_24.d01.TS")]
+          WrfForecast.initialize(arguments)
+          WrfForecast.save_forecast(nil)
+        }.to output("Error: No output was generated or it is nil.".red + "\n" + \
+                    "For help type: ruby <script> --help".green + "\n").to_stdout
+      end
+    end
+  end
+
+  describe "#output_forecast" do
     context "given an array with version option" do
       it "initialize the handler and repositories correctly, check for no warnings" do
         expect {
