@@ -21,8 +21,7 @@ begin
   Coveralls.wear!
 rescue LoadError; end
 
-Dir[File.join(__dir__,"../lib/*.rb")].each {|file| require file }
-Dir[File.join(__dir__,"../lib/**/*.rb")].each {|file| require file }
+require 'wrf_forecast'
 
 RSpec.configure do |config|
   # rspec-expectations config goes here. You can use an alternate

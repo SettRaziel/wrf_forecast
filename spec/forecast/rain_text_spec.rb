@@ -2,7 +2,7 @@
 # @Author: Benjamin Held
 # @Date:   2020-03-24 16:47:58
 # @Last Modified by:   Benjamin Held
-# @Last Modified time: 2020-05-19 17:47:40
+# @Last Modified time: 2020-08-03 20:41:43
 
 require "spec_helper"
 require "ruby_utils/statistic"
@@ -80,7 +80,7 @@ describe WrfForecast::Text::RainText do
   end
 
   describe ".new" do
-    context "given an array of rain data for a day with continous rain" do
+    context "given an array of rain data for a day with continous rain and no dry period" do
       it "generate and check rain forecast text" do
         rain_values = [  2,  2,  2,  2,  2,  2,  2,  2,  2,  2, 
                          2,  2,  2,  2,  2,  2,  2,  2,  2,  2, 
@@ -90,6 +90,22 @@ describe WrfForecast::Text::RainText do
         forecast = WrfForecast::Text::RainText.new(extreme_values, rain_values, indicators.indicators)
         expected = "The forecast does predict continous rain with a maximum of "
         expected.concat("44 mm in 24 hours. There are no dry periods during the day.")
+        expect(forecast.text).to match(expected)
+      end
+    end
+  end
+
+  describe ".new" do
+    context "given an array of rain data for a day with continous rain and a dry period" do
+      it "generate and check rain forecast text" do
+        rain_values = [  2,  2,  2,  2,  2,  2,  2,  2,  2,  2, 
+                         2,  2,  2,  2,  2,  2,  2,  2,  2,  2, 
+                         1,  1,  0,  0 ]
+        indicators = WrfForecast::Threshold::RainThreshold.new(rain_values)
+        extreme_values = RubyUtils::ExtremeValues.new(0, 2)
+        forecast = WrfForecast::Text::RainText.new(extreme_values, rain_values, indicators.indicators)
+        expected = "The forecast does predict continous rain with a maximum of "
+        expected.concat("42 mm in 24 hours. There are some dry periods during the day.")
         expect(forecast.text).to match(expected)
       end
     end

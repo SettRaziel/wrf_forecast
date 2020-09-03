@@ -2,7 +2,9 @@
 # @Author: Benjamin Held
 # @Date:   2020-03-23 16:27:56
 # @Last Modified by:   Benjamin Held
-# @Last Modified time: 2020-05-30 21:42:52
+# @Last Modified time: 2020-08-06 19:55:21
+
+require 'wrf_forecast/data/directions'
 
 module WrfForecast
 
@@ -20,7 +22,6 @@ module WrfForecast
       # @param [WindThreshold] thresholds the wind threshold
       def initialize(extreme_values, prevalent_direction, thresholds)
         @prevalent_direction = prevalent_direction
-        initialize_directions
         super(extreme_values, thresholds)
       end
 
@@ -28,22 +29,6 @@ module WrfForecast
 
       # @return [Symbol] the prevalent wind direction
       attr_reader :prevalent_direction
-      # @return [Hash] the mapping of direction and direction name
-      attr_reader :directions
-
-      # method to initialize the mapping from direction to direction text
-      def initialize_directions
-        @directions = Hash.new()
-        @directions[:N]  = "north"
-        @directions[:S]  = "south"
-        @directions[:W]  = "west"
-        @directions[:E]  = "east"
-        @directions[:NW] = "northwest"
-        @directions[:NE] = "northeast"
-        @directions[:SW] = "southwest"
-        @directions[:SE] = "southeast"
-        nil
-      end
 
       # method to generate the forecast text for the wind
       def generate_forecast_text
@@ -88,7 +73,7 @@ module WrfForecast
         if (@prevalent_direction == nil)
           return "circulatory directions"
         end
-        return @directions[@prevalent_direction]
+        return WrfForecast::Directions.new().get_direction_string(@prevalent_direction)
       end
 
     end

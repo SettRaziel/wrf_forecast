@@ -2,11 +2,12 @@
 # @Author: Benjamin Held
 # @Date:   2020-03-21 17:34:42
 # @Last Modified by:   Benjamin Held
-# @Last Modified time: 2020-04-21 17:46:33
+# @Last Modified time: 2020-08-17 14:31:06
 
-require 'wrf_forecast/data/forecast_repository'
-require 'wrf_forecast/threshold'
+require 'wrf_forecast/data'
 require 'wrf_forecast/forecast/forecast_text'
+require 'wrf_forecast/json_converter'
+require 'wrf_forecast/threshold'
 
 module WrfForecast
 
@@ -28,7 +29,20 @@ module WrfForecast
       @threshold_handler = WrfForecast::Threshold::ThresholdHandler.new(@repository)
       meta_data = wrf_handler.data_repository.meta_data
       @text = WrfForecast::ForecastText.new(meta_data, @repository, @threshold_handler)
+      @json_converter = WrfForecast::JsonConverter::ForecastJsonConverter.
+                        new(wrf_handler.data_repository, repository, @threshold_handler.warnings)
     end
+
+    # method to generate a json representation of the forecast data
+    # @return [String] the json converted forecast information
+    def generate_json_output
+      @json_converter.convert
+    end
+    
+    private
+
+    # @return [ForecastJsonConverter] the json converter
+    attr_reader :json_converter
 
   end
 

@@ -1,0 +1,33 @@
+{
+  "meta_data": {
+    "station": {
+      "name": "Berlin",
+      "descriptor": "Ber",
+      "elevation": 44.2,
+      "coordinate": {
+        "x": 13.36,
+        "y": 52.49
+      }
+    },
+    "start_date": "2020-06-29"
+  },
+  "weather_data": {
+    "temperature": {
+      "minimum": 269.893,
+      "maximum": 282.696
+    },
+    "wind_speed": {
+      "minimum": 2.568,
+      "maximum": 6.22,
+      "prevalent_direction": "west"
+    },
+    "rain": {
+      "minimum": 0.0,
+      "maximum": 0.001,
+      "sum": 0.001
+    },
+    "warnings": [
+      "frost day (temperature will fall below 0 degrees celsius)"
+    ]
+  }
+}
