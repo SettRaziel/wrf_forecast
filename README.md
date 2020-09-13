@@ -104,6 +104,14 @@ With the new parameter `-j` or `--json` the output will be converted to a json o
 ## License
 see [LICENSE](https://github.com/SettRaziel/wrf_forecast/blob/development/LICENSE)
 
+## Contributing
+* Fork it
+* Create your feature branch (git checkout -b my-new-feature)
+* Commit your changes (git commit -am 'add some feature')
+* Push to the branch (git push origin my-new-feature)
+* Create an issue describing your work
+* Create a new pull request
+
 ## Todos and Issues
 check [issues](https://github.com/SettRaziel/wrf_forecast/issues)
 
