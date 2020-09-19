@@ -2,10 +2,10 @@
 # @Author: Benjamin Held
 # @Date:   2020-03-12 19:16:02
 # @Last Modified by:   Benjamin Held
-# @Last Modified time: 2020-04-21 19:31:05
+# @Last Modified time: 2020-09-19 22:05:55
 
-require 'spec_helper'
-require 'wrf_forecast/data/wind_direction_repository'
+require "spec_helper"
+require "wrf_forecast/data/wind_direction_repository"
 
 describe WrfForecast::WindDirectionRepository do
 

@@ -2,10 +2,10 @@
 # @Author: Benjamin Held
 # @Date:   2020-03-16 20:59:23
 # @Last Modified by:   Benjamin Held
-# @Last Modified time: 2020-08-20 20:20:27
+# @Last Modified time: 2020-09-19 22:07:35
 
-require 'spec_helper'
-require 'wrf_forecast/help/help_output'
+require "spec_helper"
+require "wrf_forecast/help/help_output"
 
 describe WrfForecast::HelpOutput do
 

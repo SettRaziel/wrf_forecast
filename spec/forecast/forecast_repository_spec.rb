@@ -2,11 +2,11 @@
 # @Author: Benjamin Held
 # @Date:   2020-03-08 18:13:30
 # @Last Modified by:   Benjamin Held
-# @Last Modified time: 2020-04-21 19:31:26
+# @Last Modified time: 2020-09-19 22:06:59
 
-require 'spec_helper'
-require 'wrf_library/wrf'
-require 'wrf_forecast/data/forecast_repository'
+require "spec_helper"
+require "wrf_library/wrf"
+require "wrf_forecast/data/forecast_repository"
 
 describe WrfForecast::ForecastRepository do
 

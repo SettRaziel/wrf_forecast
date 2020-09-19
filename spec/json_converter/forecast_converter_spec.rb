@@ -2,11 +2,11 @@
 # @Author: Benjamin Held
 # @Date:   2020-08-03 18:31:20
 # @Last Modified by:   Benjamin Held
-# @Last Modified time: 2020-09-02 21:05:04
+# @Last Modified time: 2020-09-19 22:07:49
 
-require 'spec_helper'
-require 'wrf_forecast/json_converter'
-require 'fileutils'
+require "spec_helper"
+require "wrf_forecast/json_converter"
+require "fileutils"
 
 describe WrfForecast::JsonConverter::ForecastJsonConverter do
 

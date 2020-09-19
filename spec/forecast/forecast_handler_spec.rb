@@ -2,13 +2,13 @@
 # @Author: Benjamin Held
 # @Date:   2020-03-21 19:45:31
 # @Last Modified by:   Benjamin Held
-# @Last Modified time: 2020-08-11 22:17:39
+# @Last Modified time: 2020-09-19 22:06:16
 
-require 'spec_helper'
-require 'wrf_library/wrf'
-require 'wrf_forecast/data/forecast_repository'
-require 'wrf_forecast/threshold'
-require 'wrf_forecast/forecast/forecast_handler'
+require "spec_helper"
+require "wrf_library/wrf"
+require "wrf_forecast/data/forecast_repository"
+require "wrf_forecast/threshold"
+require "wrf_forecast/forecast/forecast_handler"
 
 describe WrfForecast::ForecastHandler do
 

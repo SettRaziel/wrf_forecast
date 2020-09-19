@@ -14,14 +14,14 @@
 #
 # See http://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration
 
-require 'rspec'
 
 begin
   require "coveralls"
   Coveralls.wear!
 rescue LoadError; end
 
-require 'wrf_forecast'
+require "rspec"
+require "wrf_forecast"
 
 RSpec.configure do |config|
   # rspec-expectations config goes here. You can use an alternate
