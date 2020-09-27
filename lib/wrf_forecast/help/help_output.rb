@@ -1,7 +1,7 @@
 # @Author: Benjamin Held
 # @Date:   2019-05-07 10:03:48
 # @Last Modified by:   Benjamin Held
-# @Last Modified time: 2020-08-20 20:17:48
+# @Last Modified time: 2020-09-27 20:40:04
 
 require "ruby_utils/help_output"
 
@@ -39,6 +39,7 @@ module WrfForecast
       nil
     end
 
+    # method to print the header of the help output
     def self.print_help_head
       puts "script usage:".red + " ruby <script> [parameters] <filename>"
       puts "help usage :".green + "              ruby <script> (-h | --help)"
@@ -59,7 +60,7 @@ module WrfForecast
 
       # method to set the name of the script project
     def self.get_script_name
-        "WRF forecast"
+      "WRF forecast"
     end
     
   end
