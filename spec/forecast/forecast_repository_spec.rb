@@ -2,7 +2,7 @@
 # @Author: Benjamin Held
 # @Date:   2020-03-08 18:13:30
 # @Last Modified by:   Benjamin Held
-# @Last Modified time: 2020-09-19 22:06:59
+# @Last Modified time: 2020-10-07 18:46:26
 
 require "spec_helper"
 require "wrf_library/wrf"
@@ -10,10 +10,11 @@ require "wrf_forecast/data/forecast_repository"
 
 describe WrfForecast::ForecastRepository do
 
+  handler = WrfLibrary::Wrf::WrfHandler.new(File.join(__dir__,"../files/Ber.d01.TS"), Date.new(2020, 06, 29))
+
   describe ".new" do
     context "given a meteogram output file and the date" do
       it "initialize handler, fill the forecast data, check temperature values" do
-        handler = WrfLibrary::Wrf::WrfHandler.new(File.join(__dir__,"../files/Ber.d01.TS"), Date.new(2015, 06, 29))
         repository = WrfForecast::ForecastRepository.new(handler)
         temperature_values = repository.forecast_data[:air_temperature]
         expect(temperature_values.size).to eq(3420)
@@ -26,7 +27,6 @@ describe WrfForecast::ForecastRepository do
   describe ".new" do
     context "given a meteogram output file and the date" do
       it "initialize handler, fill the forecast data, check temperature extremes" do
-        handler = WrfLibrary::Wrf::WrfHandler.new(File.join(__dir__,"../files/Ber.d01.TS"), Date.new(2016, 06, 29))
         repository = WrfForecast::ForecastRepository.new(handler)
         extreme_values = repository.extreme_values[:air_temperature]
         expect(extreme_values.maximum.round(3)).to eq(283.01)
@@ -38,7 +38,6 @@ describe WrfForecast::ForecastRepository do
   describe ".new" do
     context "given a meteogram output file and the date" do
       it "initialize handler, fill the forecast data, check wind speed values" do
-        handler = WrfLibrary::Wrf::WrfHandler.new(File.join(__dir__,"../files/Ber.d01.TS"), Date.new(2017, 06, 29))
         repository = WrfForecast::ForecastRepository.new(handler)
         windspeed_values = repository.forecast_data[:wind_speed]
         expect(windspeed_values.size).to eq(3420)
@@ -51,7 +50,6 @@ describe WrfForecast::ForecastRepository do
   describe ".new" do
     context "given a meteogram output file and the date" do
       it "initialize handler, fill the forecast data, check speed extremes" do
-        handler = WrfLibrary::Wrf::WrfHandler.new(File.join(__dir__,"../files/Ber.d01.TS"), Date.new(2018, 06, 29))
         repository = WrfForecast::ForecastRepository.new(handler)
         extreme_values = repository.extreme_values[:wind_speed]
         expect(extreme_values.maximum.round(3)).to eq(7.473)
@@ -63,7 +61,6 @@ describe WrfForecast::ForecastRepository do
   describe ".new" do
     context "given a meteogram output file and the date" do
       it "initialize handler, fill the forecast data, check wind direction values" do
-        handler = WrfLibrary::Wrf::WrfHandler.new(File.join(__dir__,"../files/Ber.d01.TS"), Date.new(2019, 06, 29))
         repository = WrfForecast::ForecastRepository.new(handler)
         direction_values = repository.forecast_data[:wind_direction]
         expect(direction_values.size).to eq(3420)
@@ -76,7 +73,6 @@ describe WrfForecast::ForecastRepository do
   describe ".new" do
     context "given a meteogram output file and the date" do
       it "initialize handler, fill the forecast data, check wind direction distribution" do
-        handler = WrfLibrary::Wrf::WrfHandler.new(File.join(__dir__,"../files/Ber.d01.TS"), Date.new(2020, 06, 29))
         repository = WrfForecast::ForecastRepository.new(handler)
         distribution = repository.direction_distribution
         expect(distribution[:N]).to eq(306)
@@ -94,7 +90,6 @@ describe WrfForecast::ForecastRepository do
   describe ".new" do
     context "given a meteogram output file and the date" do
       it "initialize handler, fill the forecast data, check rain data values" do
-        handler = WrfLibrary::Wrf::WrfHandler.new(File.join(__dir__,"../files/Ber.d01.TS"), Date.new(2020, 06, 29))
         repository = WrfForecast::ForecastRepository.new(handler)
         rain_data = repository.forecast_data[:rain]
         expect(rain_data.size).to eq(3420)
@@ -107,7 +102,6 @@ describe WrfForecast::ForecastRepository do
   describe ".new" do
     context "given a meteogram output file and the date" do
       it "initialize handler, fill the forecast data, check hourly rain sum values" do
-        handler = WrfLibrary::Wrf::WrfHandler.new(File.join(__dir__,"../files/Ber.d01.TS"), Date.new(2020, 06, 29))
         repository = WrfForecast::ForecastRepository.new(handler)
         rain_sum = repository.hourly_rain
         expect(rain_sum.size).to eq(84)
@@ -120,7 +114,6 @@ describe WrfForecast::ForecastRepository do
   describe ".new" do
     context "given a meteogram output file and the date" do
       it "initialize handler, fill the forecast data, check rain sum extreme values" do
-        handler = WrfLibrary::Wrf::WrfHandler.new(File.join(__dir__,"../files/Ber.d01.TS"), Date.new(2020, 06, 29))
         repository = WrfForecast::ForecastRepository.new(handler)
         extreme_values = repository.extreme_values[:rain]
         expect(extreme_values.maximum.round(3)).to eq(0.334)
