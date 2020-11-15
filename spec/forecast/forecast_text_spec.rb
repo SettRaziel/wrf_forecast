@@ -2,7 +2,7 @@
 # @Author: Benjamin Held
 # @Date:   2020-03-26 12:56:07
 # @Last Modified by:   Benjamin Held
-# @Last Modified time: 2020-11-15 20:59:50
+# @Last Modified time: 2020-11-15 21:10:23
 
 require "spec_helper"
 require "time"
@@ -14,7 +14,7 @@ describe WrfForecast::ForecastText do
     context "given a meteogram output file and the date" do
       it "initialize handler, fill the forecast data, create forecast for Berlin" do
         wrf_handler = WrfLibrary::Wrf::Handler.new(File.join(__dir__,"../files/Ber_24.d01.TS"), 
-                                                  Time.parse("2020-02-23"))
+                                                  Time.parse("2020-02-23 00:00:00 +0100"))
         repository = WrfForecast::ForecastRepository.new(wrf_handler)
         threshold_handler = WrfForecast::Threshold::ThresholdHandler.new(repository)
         meta_data = wrf_handler.data_repository.meta_data
@@ -35,7 +35,7 @@ describe WrfForecast::ForecastText do
     context "given a meteogram output file and the date" do
       it "initialize handler, fill the forecast data, create text parts for Berlin" do
         wrf_handler = WrfLibrary::Wrf::Handler.new(File.join(__dir__,"../files/Ber_24.d01.TS"), 
-                                                  Time.parse("2020-02-23"))
+                                                  Time.parse("2020-02-23 00:00:00 +0100"))
         repository = WrfForecast::ForecastRepository.new(wrf_handler)
         threshold_handler = WrfForecast::Threshold::ThresholdHandler.new(repository)
         meta_data = wrf_handler.data_repository.meta_data
@@ -58,7 +58,7 @@ describe WrfForecast::ForecastText do
     context "given a meteogram output file and the date" do
       it "initialize handler, fill the forecast data, create forecast for Hannover" do
         wrf_handler = WrfLibrary::Wrf::Handler.new(File.join(__dir__,"../files/Han_24.d01.TS"), 
-                                                  Time.parse("2020-03-27"))
+                                                  Time.parse("2020-03-27 00:00:00 +0100"))
         repository = WrfForecast::ForecastRepository.new(wrf_handler)
         threshold_handler = WrfForecast::Threshold::ThresholdHandler.new(repository)
         meta_data = wrf_handler.data_repository.meta_data
@@ -79,7 +79,7 @@ describe WrfForecast::ForecastText do
     context "given a meteogram output file and the date" do
       it "initialize handler, fill the forecast data, create text parts for Hannover" do
         wrf_handler = WrfLibrary::Wrf::Handler.new(File.join(__dir__,"../files/Han_24.d01.TS"), 
-                                                  Time.parse("2020-03-27"))
+                                                  Time.parse("2020-03-27 00:00:00 +0100"))
         repository = WrfForecast::ForecastRepository.new(wrf_handler)
         threshold_handler = WrfForecast::Threshold::ThresholdHandler.new(repository)
         meta_data = wrf_handler.data_repository.meta_data
@@ -101,7 +101,7 @@ describe WrfForecast::ForecastText do
     context "given a meteogram output file and the date" do
       it "initialize handler, fill the forecast data, create warnings for Berlin" do
         wrf_handler = WrfLibrary::Wrf::Handler.new(File.join(__dir__,"../files/Ber_24.d01.TS"), 
-                                                  Time.parse("2020-03-27"))
+                                                  Time.parse("2020-03-27 00:00:00 +0100"))
         repository = WrfForecast::ForecastRepository.new(wrf_handler)
         threshold_handler = WrfForecast::Threshold::ThresholdHandler.new(repository)
         meta_data = wrf_handler.data_repository.meta_data
@@ -117,7 +117,7 @@ describe WrfForecast::ForecastText do
     context "given a meteogram output file and the date" do
       it "initialize handler, fill the forecast data, create warnings for Hannover" do
         wrf_handler = WrfLibrary::Wrf::Handler.new(File.join(__dir__,"../files/Han_24.d01.TS"), 
-                                                  Time.parse("2020-03-27"))
+                                                  Time.parse("2020-03-27 00:00:00 +0100"))
         repository = WrfForecast::ForecastRepository.new(wrf_handler)
         threshold_handler = WrfForecast::Threshold::ThresholdHandler.new(repository)
         meta_data = wrf_handler.data_repository.meta_data
