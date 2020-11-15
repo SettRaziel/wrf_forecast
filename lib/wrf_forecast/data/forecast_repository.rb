@@ -1,7 +1,7 @@
 # @Author: Benjamin Held
 # @Date:   2020-02-14 19:44:57
 # @Last Modified by:   Benjamin Held
-# @Last Modified time: 2020-04-27 14:38:54
+# @Last Modified time: 2020-11-15 21:02:13
 
 require 'ruby_utils/statistic'
 require 'wrf_forecast/data/wind_direction_repository'
@@ -99,14 +99,14 @@ module WrfForecast
       @hourly_rain = Array.new()
       # when using an offset, start with the current value as delta
       previous_hour = rain_data[0]
-      previous_timestamp = time_data[0].floor
-      rain_data.zip(time_data).each { |rain, timestamp|
+      previous_timestamp = @time_data[0].hour
+      rain_data.zip(@time_data).each { |rain, timestamp|
         # detect new hour, when the leading number increases by one
-        if (timestamp.floor > previous_timestamp.floor)
+        if (timestamp.hour != previous_timestamp)
           @hourly_rain << rain - previous_hour
           previous_hour = rain
         end
-        previous_timestamp = timestamp
+        previous_timestamp = timestamp.hour
       }
 
       # workaround to satisfy the current requirement for daily values
