@@ -2,9 +2,10 @@
 # @Author: Benjamin Held
 # @Date:   2020-03-19 16:54:37
 # @Last Modified by:   Benjamin Held
-# @Last Modified time: 2020-05-29 20:16:09
+# @Last Modified time: 2020-11-15 20:49:45
 
 require "spec_helper"
+require "time"
 require "wrf_library/wrf"
 require "wrf_forecast/data/forecast_repository"
 require "wrf_forecast/threshold"
@@ -14,8 +15,8 @@ describe WrfForecast::Threshold::WindThreshold do
   describe ".new" do
     context "given a meteogram output file and the date" do
       it "initialize handler, fill the forecast data, check wind indicators" do
-        handler = WrfLibrary::Wrf::WrfHandler.new(File.join(__dir__,"../files/Ber_24.d01.TS"), 
-                                                  Date.new(2020, 02, 23))
+        handler = WrfLibrary::Wrf::Handler.new(File.join(__dir__,"../files/Ber_24.d01.TS"), 
+                                                  Time.parse("2020-02-23"))
         repository = WrfForecast::ForecastRepository.new(handler)
         windspeed_values = repository.forecast_data[:wind_speed]
         indicators = WrfForecast::Threshold::WindThreshold.new(windspeed_values)

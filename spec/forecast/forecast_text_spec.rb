@@ -2,9 +2,10 @@
 # @Author: Benjamin Held
 # @Date:   2020-03-26 12:56:07
 # @Last Modified by:   Benjamin Held
-# @Last Modified time: 2020-05-15 18:32:32
+# @Last Modified time: 2020-11-15 21:10:23
 
 require "spec_helper"
+require "time"
 require "wrf_forecast/forecast/forecast_text"
 
 describe WrfForecast::ForecastText do
@@ -12,13 +13,13 @@ describe WrfForecast::ForecastText do
   describe ".new" do
     context "given a meteogram output file and the date" do
       it "initialize handler, fill the forecast data, create forecast for Berlin" do
-        wrf_handler = WrfLibrary::Wrf::WrfHandler.new(File.join(__dir__,"../files/Ber_24.d01.TS"), 
-                                                  Date.new(2020, 02, 23))
+        wrf_handler = WrfLibrary::Wrf::Handler.new(File.join(__dir__,"../files/Ber_24.d01.TS"), 
+                                                  Time.parse("2020-02-23 00:00:00 +0100"))
         repository = WrfForecast::ForecastRepository.new(wrf_handler)
         threshold_handler = WrfForecast::Threshold::ThresholdHandler.new(repository)
         meta_data = wrf_handler.data_repository.meta_data
         text = WrfForecast::ForecastText.new(meta_data, repository, threshold_handler)
-        expected = "Weather forecast of Berlin for the 2020-02-23.\n\n"
+        expected = "Weather forecast of Berlin for the 2020-02-23 00:00:00 +0100.\n\n"
         expected.concat("Today will be a cold day.")
         expected.concat(" The maximum temperature will reach up to 10 degrees celsius.")
         expected.concat(" The minimum temperature will be -4 degrees celsius.\n")
@@ -33,13 +34,13 @@ describe WrfForecast::ForecastText do
   describe ".new" do
     context "given a meteogram output file and the date" do
       it "initialize handler, fill the forecast data, create text parts for Berlin" do
-        wrf_handler = WrfLibrary::Wrf::WrfHandler.new(File.join(__dir__,"../files/Ber_24.d01.TS"), 
-                                                  Date.new(2020, 02, 23))
+        wrf_handler = WrfLibrary::Wrf::Handler.new(File.join(__dir__,"../files/Ber_24.d01.TS"), 
+                                                  Time.parse("2020-02-23 00:00:00 +0100"))
         repository = WrfForecast::ForecastRepository.new(wrf_handler)
         threshold_handler = WrfForecast::Threshold::ThresholdHandler.new(repository)
         meta_data = wrf_handler.data_repository.meta_data
         text = WrfForecast::ForecastText.new(meta_data, repository, threshold_handler)
-        expected_header = "Weather forecast of Berlin for the 2020-02-23"
+        expected_header = "Weather forecast of Berlin for the 2020-02-23 00:00:00 +0100"
         expected_body = "Today will be a cold day."
         expected_body.concat(" The maximum temperature will reach up to 10 degrees celsius.")
         expected_body.concat(" The minimum temperature will be -4 degrees celsius.\n")
@@ -56,13 +57,13 @@ describe WrfForecast::ForecastText do
   describe ".new" do
     context "given a meteogram output file and the date" do
       it "initialize handler, fill the forecast data, create forecast for Hannover" do
-        wrf_handler = WrfLibrary::Wrf::WrfHandler.new(File.join(__dir__,"../files/Han_24.d01.TS"), 
-                                                  Date.new(2020, 03, 27))
+        wrf_handler = WrfLibrary::Wrf::Handler.new(File.join(__dir__,"../files/Han_24.d01.TS"), 
+                                                  Time.parse("2020-03-27 00:00:00 +0100"))
         repository = WrfForecast::ForecastRepository.new(wrf_handler)
         threshold_handler = WrfForecast::Threshold::ThresholdHandler.new(repository)
         meta_data = wrf_handler.data_repository.meta_data
         text = WrfForecast::ForecastText.new(meta_data, repository, threshold_handler)
-        expected = "Weather forecast of Hannover for the 2020-03-27.\n\n"
+        expected = "Weather forecast of Hannover for the 2020-03-27 00:00:00 +0100.\n\n"
         expected.concat("Today will be a cold day.")
         expected.concat(" The maximum temperature will reach up to 16 degrees celsius.")
         expected.concat(" The minimum temperature will be -1 degrees celsius.\n")
@@ -77,13 +78,13 @@ describe WrfForecast::ForecastText do
   describe ".new" do
     context "given a meteogram output file and the date" do
       it "initialize handler, fill the forecast data, create text parts for Hannover" do
-        wrf_handler = WrfLibrary::Wrf::WrfHandler.new(File.join(__dir__,"../files/Han_24.d01.TS"), 
-                                                  Date.new(2020, 03, 27))
+        wrf_handler = WrfLibrary::Wrf::Handler.new(File.join(__dir__,"../files/Han_24.d01.TS"), 
+                                                  Time.parse("2020-03-27 00:00:00 +0100"))
         repository = WrfForecast::ForecastRepository.new(wrf_handler)
         threshold_handler = WrfForecast::Threshold::ThresholdHandler.new(repository)
         meta_data = wrf_handler.data_repository.meta_data
         text = WrfForecast::ForecastText.new(meta_data, repository, threshold_handler)
-        expected_header = "Weather forecast of Hannover for the 2020-03-27"
+        expected_header = "Weather forecast of Hannover for the 2020-03-27 00:00:00 +0100"
         expected_body = "Today will be a cold day."
         expected_body.concat(" The maximum temperature will reach up to 16 degrees celsius.")
         expected_body.concat(" The minimum temperature will be -1 degrees celsius.\n")
@@ -99,8 +100,8 @@ describe WrfForecast::ForecastText do
   describe ".new" do
     context "given a meteogram output file and the date" do
       it "initialize handler, fill the forecast data, create warnings for Berlin" do
-        wrf_handler = WrfLibrary::Wrf::WrfHandler.new(File.join(__dir__,"../files/Ber_24.d01.TS"), 
-                                                  Date.new(2020, 03, 27))
+        wrf_handler = WrfLibrary::Wrf::Handler.new(File.join(__dir__,"../files/Ber_24.d01.TS"), 
+                                                  Time.parse("2020-03-27 00:00:00 +0100"))
         repository = WrfForecast::ForecastRepository.new(wrf_handler)
         threshold_handler = WrfForecast::Threshold::ThresholdHandler.new(repository)
         meta_data = wrf_handler.data_repository.meta_data
@@ -115,8 +116,8 @@ describe WrfForecast::ForecastText do
   describe ".new" do
     context "given a meteogram output file and the date" do
       it "initialize handler, fill the forecast data, create warnings for Hannover" do
-        wrf_handler = WrfLibrary::Wrf::WrfHandler.new(File.join(__dir__,"../files/Han_24.d01.TS"), 
-                                                  Date.new(2020, 03, 27))
+        wrf_handler = WrfLibrary::Wrf::Handler.new(File.join(__dir__,"../files/Han_24.d01.TS"), 
+                                                  Time.parse("2020-03-27 00:00:00 +0100"))
         repository = WrfForecast::ForecastRepository.new(wrf_handler)
         threshold_handler = WrfForecast::Threshold::ThresholdHandler.new(repository)
         meta_data = wrf_handler.data_repository.meta_data

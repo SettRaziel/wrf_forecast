@@ -2,9 +2,10 @@
 # @Author: Benjamin Held
 # @Date:   2020-08-03 18:31:20
 # @Last Modified by:   Benjamin Held
-# @Last Modified time: 2020-09-19 22:07:49
+# @Last Modified time: 2020-11-15 21:13:25
 
 require "spec_helper"
+require "time"
 require "wrf_forecast/json_converter"
 require "fileutils"
 
@@ -13,7 +14,7 @@ describe WrfForecast::JsonConverter::ForecastJsonConverter do
   describe ".convert" do
     context "given a meteogram output file" do
       it "read it and create the correct json output" do
-        wrf_handler = WrfLibrary::Wrf::WrfHandler.new(File.join(__dir__,"../files/Ber_24.d01.TS"), Date.new(2020, 06, 29))
+        wrf_handler = WrfLibrary::Wrf::Handler.new(File.join(__dir__,"../files/Ber_24.d01.TS"), Time.parse("2020-06-29 00:00:00 +0200"))
         forecast_handler = WrfForecast::ForecastHandler.new(wrf_handler)
         converter = WrfForecast::JsonConverter::ForecastJsonConverter.
                     new(wrf_handler.data_repository, forecast_handler.repository, forecast_handler.threshold_handler.warnings)

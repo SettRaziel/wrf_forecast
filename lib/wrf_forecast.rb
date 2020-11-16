@@ -1,13 +1,14 @@
 # @Author: Benjamin Held
 # @Date:   2019-05-08 15:34:21
 # @Last Modified by:   Benjamin Held
-# @Last Modified time: 2020-10-10 16:49:42
+# @Last Modified time: 2020-11-15 20:54:48
   
-require 'ruby_utils/parameter_converter'  
-require 'wrf_library/wrf'
-require 'wrf_forecast/parameter'
-require 'wrf_forecast/help/help_output'
-require 'wrf_forecast/forecast/forecast_handler'
+require "ruby_utils/parameter_converter"
+require "time"
+require "wrf_library/wrf"
+require "wrf_forecast/parameter"
+require "wrf_forecast/help/help_output"
+require "wrf_forecast/forecast/forecast_handler"
 
 # This module is the main entry point and will be called from the main forecast script
 module WrfForecast
@@ -15,7 +16,7 @@ module WrfForecast
   # Dummy class to get access to the instance variables
   class << self
 
-    # @return [WrfHandler] the repository storing the datasets
+    # @return [Handler] the repository storing the datasets
     attr_reader :wrf_handler
     # @return [Parameter::ParameterHandler] the handler controlling the parameters
     attr_reader :parameter_handler
@@ -41,7 +42,7 @@ module WrfForecast
     # method to initialize the wrf handler based on the available parameter
     def initialize_wrf_handler
       filename = @parameter_handler.repository.parameters[:file]
-      time = @parameter_handler.repository.parameters[:date]
+      time = Time.parse(@parameter_handler.repository.parameters[:date])
       # use 24 hours for a forecast right now to create a forecast text for a day
 
       if (contains_parameter?(:offset) && contains_parameter?(:period))
@@ -49,13 +50,13 @@ module WrfForecast
                @parameter_handler.repository.parameters[:period])
         offset = RubyUtils::ParameterConverter.convert_float_parameter(
                @parameter_handler.repository.parameters[:offset])
-        @wrf_handler = WrfLibrary::Wrf::WrfHandler.new(filename, time, period, offset)
+        @wrf_handler = WrfLibrary::Wrf::Handler.new(filename, time, period, offset)
       elsif (@parameter_handler.repository.parameters[:period] != nil)
         period = RubyUtils::ParameterConverter.convert_float_parameter(
                @parameter_handler.repository.parameters[:period])
-        @wrf_handler = WrfLibrary::Wrf::WrfHandler.new(filename, time, period)
+        @wrf_handler = WrfLibrary::Wrf::Handler.new(filename, time, period)
       else
-        @wrf_handler = WrfLibrary::Wrf::WrfHandler.new(filename, time)
+        @wrf_handler = WrfLibrary::Wrf::Handler.new(filename, time)
       end
       nil
     end
@@ -130,8 +131,8 @@ module WrfForecast
 
   # call to print version number and author
   def self.print_version
-    puts 'wrf_forecast version 0.1.7'.yellow
-    puts 'Created by Benjamin Held (March 2019)'.yellow
+    puts "wrf_forecast version 0.1.7".yellow
+    puts "Created by Benjamin Held (March 2019)".yellow
     nil
   end
 
@@ -139,7 +140,7 @@ module WrfForecast
   # @param [String] message message string with error message
   def self.print_error(message)
     puts "#{message}".red
-    puts 'For help type: ruby <script> --help'.green
+    puts "For help type: ruby <script> --help".green
     nil
   end
 
