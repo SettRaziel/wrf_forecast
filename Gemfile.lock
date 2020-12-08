@@ -1,12 +1,12 @@
 GIT
   remote: https://github.com/SettRaziel/ruby_utils
-  revision: ac4a3fb0483d44a4203d2d8d8b3106f780f8fc2c
+  revision: 37ae9320dc916956ede5fa4ea09b428cab7340a7
   specs:
     ruby_utils (0.0.1)
 
 GIT
   remote: https://github.com/SettRaziel/wrf_library
-  revision: 8bc2f529444a639f8cf76e94fb74a22cb8563b03
+  revision: d1c94a465ab02a2745b6ab34177c4508199397d7
   specs:
     wrf_library (0.1.0)
       ruby_utils (~> 0.0.1)
