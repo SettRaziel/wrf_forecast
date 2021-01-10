@@ -1,14 +1,14 @@
 GIT
   remote: https://github.com/SettRaziel/ruby_utils
-  revision: 37ae9320dc916956ede5fa4ea09b428cab7340a7
+  revision: d3c4e59e4206454e066eebef3d07f605b21c1328
   specs:
     ruby_utils (0.0.1)
 
 GIT
   remote: https://github.com/SettRaziel/wrf_library
-  revision: d1c94a465ab02a2745b6ab34177c4508199397d7
+  revision: 648aefeb232b425b2b789b2e01ce275f9e1215d1
   specs:
-    wrf_library (0.1.0)
+    wrf_library (0.2.0)
       ruby_utils (~> 0.0.1)
 
 PATH
@@ -16,7 +16,7 @@ PATH
   specs:
     wrf_forecast (0.1.8)
       ruby_utils (~> 0.0.1)
-      wrf_library (~> 0.1.0)
+      wrf_library (~> 0.2.0)
 
 GEM
   remote: https://rubygems.org/
@@ -28,22 +28,22 @@ GEM
       thor (>= 0.19.4, < 2.0)
       tins (~> 1.6)
     diff-lcs (1.4.4)
-    docile (1.3.2)
-    json (2.3.1)
-    rake (13.0.1)
+    docile (1.3.4)
+    json (2.5.1)
+    rake (13.0.3)
     rspec (3.10.0)
       rspec-core (~> 3.10.0)
       rspec-expectations (~> 3.10.0)
       rspec-mocks (~> 3.10.0)
-    rspec-core (3.10.0)
+    rspec-core (3.10.1)
       rspec-support (~> 3.10.0)
-    rspec-expectations (3.10.0)
+    rspec-expectations (3.10.1)
       diff-lcs (>= 1.2.0, < 2.0)
       rspec-support (~> 3.10.0)
-    rspec-mocks (3.10.0)
+    rspec-mocks (3.10.1)
       diff-lcs (>= 1.2.0, < 2.0)
       rspec-support (~> 3.10.0)
-    rspec-support (3.10.0)
+    rspec-support (3.10.1)
     simplecov (0.16.1)
       docile (~> 1.1)
       json (>= 1.8, < 3)
