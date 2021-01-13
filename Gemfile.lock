@@ -6,9 +6,9 @@ GIT
 
 GIT
   remote: https://github.com/SettRaziel/wrf_library
-  revision: 648aefeb232b425b2b789b2e01ce275f9e1215d1
+  revision: db83bbf5e13b720e10e738da6380c8a58af021d3
   specs:
-    wrf_library (0.2.0)
+    wrf_library (0.3.0)
       ruby_utils (~> 0.0.1)
 
 PATH
@@ -16,7 +16,7 @@ PATH
   specs:
     wrf_forecast (0.1.8)
       ruby_utils (~> 0.0.1)
-      wrf_library (~> 0.2.0)
+      wrf_library (~> 0.3.0)
 
 GEM
   remote: https://rubygems.org/
@@ -53,7 +53,7 @@ GEM
     term-ansicolor (1.7.1)
       tins (~> 1.0)
     thor (1.0.1)
-    tins (1.26.0)
+    tins (1.28.0)
       sync
 
 PLATFORMS
