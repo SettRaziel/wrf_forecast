@@ -47,6 +47,7 @@ will lead to a forecast text like this:
 ```
 Weather forecast of Berlin-Schöneberg for the 2020-08-19 00:00:00 +0200
 
+Sunrise: 05:56, Sunset: 20:23
 Today will be a summer day. The maximum temperature will reach up to 27 degrees celsius. The minimum temperature will be 15 degrees celsius.
 The wind will be normal and will reach up to 11 km/h from west. The mean wind will be 7 km/h.
 The forecast does not predict rain.
@@ -58,6 +59,7 @@ or with no warnings present:
 ```
 Weather forecast of Husum for the 2020-08-19 00:00:00 +0200
 
+Sunrise: 06:08, Sunset: 20:45
 Today will be a normal day. The maximum temperature will reach up to 25 degrees celsius. The minimum temperature will be 14 degrees celsius.
 The wind will be normal and will reach up to 19 km/h from southwest. The mean wind will be 11 km/h.
 The forecast does not predict rain.
