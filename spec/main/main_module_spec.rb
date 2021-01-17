@@ -2,7 +2,7 @@
 # @Author: Benjamin Held
 # @Date:   2020-03-20 21:08:30
 # @Last Modified by:   Benjamin Held
-# @Last Modified time: 2020-12-11 22:28:59
+# @Last Modified time: 2021-01-17 20:17:01
 
 require "spec_helper"
 require "time"
@@ -28,9 +28,11 @@ describe WrfForecast do
         arguments = ["--default", File.join(__dir__,"../files/Ber_24.d01.TS")]
         WrfForecast.initialize(arguments)
         parameters = WrfForecast.parameter_handler.repository.parameters
+        suntime = WrfForecast::Text::SuntimeText.new(WrfForecast.wrf_handler.data_repository.meta_data)
 
         timestamp = Time.parse("00:00").to_s
         expected = "Weather forecast of Berlin for the #{timestamp}.\n\n"
+        expected.concat(suntime.text).concat("\n")
         expected.concat("Today will be a cold day.")
         expected.concat(" The maximum temperature will reach up to 10 degrees celsius.")
         expected.concat(" The minimum temperature will be -4 degrees celsius.\n")
@@ -55,8 +57,10 @@ describe WrfForecast do
         arguments = ["-d", timestamp, File.join(__dir__,"../files/Ber_24.d01.TS")]
         WrfForecast.initialize(arguments)
         parameters = WrfForecast.parameter_handler.repository.parameters
+        suntime = WrfForecast::Text::SuntimeText.new(WrfForecast.wrf_handler.data_repository.meta_data)
 
         expected = "Weather forecast of Berlin for the #{timestamp}.\n\n"
+        expected.concat(suntime.text).concat("\n")
         expected.concat("Today will be a cold day.")
         expected.concat(" The maximum temperature will reach up to 10 degrees celsius.")
         expected.concat(" The minimum temperature will be -4 degrees celsius.\n")
@@ -79,9 +83,11 @@ describe WrfForecast do
         arguments = ["--default", File.join(__dir__,"../files/Ber.d01.TS")]
         WrfForecast.initialize(arguments)
         parameters = WrfForecast.parameter_handler.repository.parameters
+        suntime = WrfForecast::Text::SuntimeText.new(WrfForecast.wrf_handler.data_repository.meta_data)
 
         timestamp = Time.parse("00:00").to_s
         expected = "Weather forecast of Berlin for the #{timestamp}.\n\n"
+        expected.concat(suntime.text).concat("\n")
         expected.concat("Today will be a normal day.")
         expected.concat(" The maximum temperature will reach up to 10 degrees celsius.")
         expected.concat(" The minimum temperature will be 1 degrees celsius.\n")
@@ -106,9 +112,11 @@ describe WrfForecast do
         arguments = ["--default", "-o", "6", File.join(__dir__,"../files/Ber.d01.TS")]
         WrfForecast.initialize(arguments)
         parameters = WrfForecast.parameter_handler.repository.parameters
+        suntime = WrfForecast::Text::SuntimeText.new(WrfForecast.wrf_handler.data_repository.meta_data)
 
         timestamp = Time.parse("00:00").to_s
         expected = "Weather forecast of Berlin for the #{timestamp}.\n\n"
+        expected.concat(suntime.text).concat("\n")
         expected.concat("Today will be a cold day.")
         expected.concat(" The maximum temperature will reach up to 10 degrees celsius.")
         expected.concat(" The minimum temperature will be -1 degrees celsius.\n")
@@ -134,9 +142,11 @@ describe WrfForecast do
         arguments = ["--default", "-o", "24", File.join(__dir__,"../files/Ber.d01.TS")]
         WrfForecast.initialize(arguments)
         parameters = WrfForecast.parameter_handler.repository.parameters
+        suntime = WrfForecast::Text::SuntimeText.new(WrfForecast.wrf_handler.data_repository.meta_data)
 
         timestamp = Time.parse("00:00").to_s
         expected = "Weather forecast of Berlin for the #{timestamp}.\n\n"
+        expected.concat(suntime.text).concat("\n")
         expected.concat("Today will be a cold day.")
         expected.concat(" The maximum temperature will reach up to 7 degrees celsius.")
         expected.concat(" The minimum temperature will be -2 degrees celsius.\n")
@@ -161,8 +171,10 @@ describe WrfForecast do
         arguments = ["-d", timestamp, File.join(__dir__,"../files/Ber_24.d01.TS")]
         WrfForecast.initialize(arguments)
         parameters = WrfForecast.parameter_handler.repository.parameters
+        suntime = WrfForecast::Text::SuntimeText.new(WrfForecast.wrf_handler.data_repository.meta_data)
 
         expected = "Weather forecast of Berlin for the #{timestamp}.\n\n"
+        expected.concat(suntime.text).concat("\n")
         expected.concat("Today will be a cold day.")
         expected.concat(" The maximum temperature will reach up to 10 degrees celsius.")
         expected.concat(" The minimum temperature will be -4 degrees celsius.\n")
@@ -185,9 +197,11 @@ describe WrfForecast do
         arguments = ["--default", File.join(__dir__,"../files/Ber.d01.TS")]
         WrfForecast.initialize(arguments)
         parameters = WrfForecast.parameter_handler.repository.parameters
+        suntime = WrfForecast::Text::SuntimeText.new(WrfForecast.wrf_handler.data_repository.meta_data)
 
         timestamp = Time.parse("00:00").to_s
         expected = "Weather forecast of Berlin for the #{timestamp}.\n\n"
+        expected.concat(suntime.text).concat("\n")
         expected.concat("Today will be a normal day.")
         expected.concat(" The maximum temperature will reach up to 10 degrees celsius.")
         expected.concat(" The minimum temperature will be 1 degrees celsius.\n")
@@ -255,10 +269,12 @@ describe WrfForecast do
         arguments = ["--default", "-s", output_file, File.join(__dir__,"../files/Ber_24.d01.TS")]
         WrfForecast.initialize(arguments)
         parameters = WrfForecast.parameter_handler.repository.parameters
+        suntime = WrfForecast::Text::SuntimeText.new(WrfForecast.wrf_handler.data_repository.meta_data)
 
         timestamp = Time.parse("00:00").to_s
         WrfForecast.output_forecast
         expected = "Weather forecast of Berlin for the #{timestamp}.\n\n"
+        expected.concat(suntime.text).concat("\n")
         expected.concat("Today will be a cold day.")
         expected.concat(" The maximum temperature will reach up to 10 degrees celsius.")
         expected.concat(" The minimum temperature will be -4 degrees celsius.\n")
