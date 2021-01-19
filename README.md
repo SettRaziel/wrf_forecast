@@ -79,7 +79,11 @@ With the new parameter `-j` or `--json` the output will be converted to a json o
         "y": 52.49
       }
     },
-    "start_date": "2020-08-19 00:00:00 +0200"
+    "start_date": "2020-08-19 00:00:00 +0200",
+    "suntime": {
+      "sunrise": "2020-08-19 05:56:00 +0200",
+      "sunset": "2020-08-19 20:23:00 +0200"
+    }
   },
   "weather_data": {
     "temperature": {
