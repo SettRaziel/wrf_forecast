@@ -2,7 +2,9 @@
 # @Author: Benjamin Held
 # @Date:   2020-08-02 18:05:10
 # @Last Modified by:   Benjamin Held
-# @Last Modified time: 2020-08-17 15:00:29
+# @Last Modified time: 2021-01-19 19:14:22
+
+require "wrf_library/sun_equation"
 
 module WrfForecast
 
@@ -34,7 +36,12 @@ module WrfForecast
       # the method returns an empty hash
       # @return [Hash] the key-value hash for the json output
       def add_additions
-        return Hash.new()
+          date = @data.meta_data.start_date
+          coordinate = @data.meta_data.station.coordinate
+          sunrise = WrfLibrary::SunEquation.calculate_sunrise_time(date, coordinate.x, coordinate.y)
+          sunset = WrfLibrary::SunEquation.calculate_sunset_time(date, coordinate.x, coordinate.y)
+          { :suntime => { :sunrise => convert_suntime(date, sunrise), 
+                          :sunset => convert_suntime(date, sunset) } }
       end
 
       # implementation of the abstract parent method to create valid json objects
@@ -90,6 +97,17 @@ module WrfForecast
           }
         }
         return values
+      end
+
+      # method to convert a float hourstamp to a valid time object
+      # @param [Time] forecast_data the start date of the forecast
+      # @param [Float] float_time the suntime hour as a float
+      # @return [Time] the suntime as a time object
+      def convert_suntime(forecast_date, float_time)
+        hours = float_time.floor
+        minutes = (float_time.round(2) % 1 * 60).round(0)
+        Time.new(forecast_date.year, forecast_date.month, forecast_date.day, hours, minutes, 00, 
+                 forecast_date.strftime("%:z"))
       end
 
     end

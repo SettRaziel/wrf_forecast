@@ -2,7 +2,7 @@
 # @Author: Benjamin Held
 # @Date:   2020-03-22 10:46:55
 # @Last Modified by:   Benjamin Held
-# @Last Modified time: 2020-11-15 20:35:51
+# @Last Modified time: 2021-01-17 19:57:25
 
 require 'wrf_forecast/data/forecast_repository'
 require 'wrf_forecast/threshold'
@@ -29,6 +29,7 @@ module WrfForecast
       initialize_temperature_text(forecast_repository, threshold_handler)
       initialize_wind_text(forecast_repository, threshold_handler)
       initialize_rain_text(forecast_repository, threshold_handler)
+      @suntime_text = WrfForecast::Text::SuntimeText.new(meta_data)
       create_header(meta_data)
       create_body
       create_warnings
@@ -44,12 +45,14 @@ module WrfForecast
 
     private
 
-    # @return [TemperatureText] the class generating the temperature forecast
+    # @return [TemperatureText] the class generating the temperature forecast text
     attr_reader :temperature_text
-    # @return [WindText] the class generating the wind forecast
+    # @return [WindText] the class generating the wind forecast text
     attr_reader :wind_text
-    # @return [RainText] the class generating the rain forecast
+    # @return [RainText] the class generating the rain forecast text
     attr_reader :rain_text
+    # @return [SuntimeText] the class generating the suntime text
+    attr_reader :suntime_text
 
     # method to create the header line for the text forecast
     # @param [WrfMetaData] meta_data the meta data for the forecast
@@ -65,7 +68,8 @@ module WrfForecast
 
     # method to create the body text for the text forecast
     def create_body
-      @body = @temperature_text.text.concat("\n")
+      @body = @suntime_text.text.concat("\n")
+      @body.concat(@temperature_text.text).concat("\n")
       @body.concat(@wind_text.text).concat("\n")
       @body.concat(@rain_text.text)
       nil

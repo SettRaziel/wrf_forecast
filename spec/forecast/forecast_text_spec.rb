@@ -2,7 +2,7 @@
 # @Author: Benjamin Held
 # @Date:   2020-03-26 12:56:07
 # @Last Modified by:   Benjamin Held
-# @Last Modified time: 2020-11-15 21:10:23
+# @Last Modified time: 2021-01-17 20:06:30
 
 require "spec_helper"
 require "time"
@@ -20,6 +20,7 @@ describe WrfForecast::ForecastText do
         meta_data = wrf_handler.data_repository.meta_data
         text = WrfForecast::ForecastText.new(meta_data, repository, threshold_handler)
         expected = "Weather forecast of Berlin for the 2020-02-23 00:00:00 +0100.\n\n"
+        expected.concat("Sunrise: 07:07, Sunset: 17:34\n")
         expected.concat("Today will be a cold day.")
         expected.concat(" The maximum temperature will reach up to 10 degrees celsius.")
         expected.concat(" The minimum temperature will be -4 degrees celsius.\n")
@@ -41,7 +42,8 @@ describe WrfForecast::ForecastText do
         meta_data = wrf_handler.data_repository.meta_data
         text = WrfForecast::ForecastText.new(meta_data, repository, threshold_handler)
         expected_header = "Weather forecast of Berlin for the 2020-02-23 00:00:00 +0100"
-        expected_body = "Today will be a cold day."
+        expected_body = "Sunrise: 07:07, Sunset: 17:34\n"
+        expected_body.concat("Today will be a cold day.")
         expected_body.concat(" The maximum temperature will reach up to 10 degrees celsius.")
         expected_body.concat(" The minimum temperature will be -4 degrees celsius.\n")
         expected_body.concat("The wind will be normal and will reach up to ")
@@ -64,6 +66,7 @@ describe WrfForecast::ForecastText do
         meta_data = wrf_handler.data_repository.meta_data
         text = WrfForecast::ForecastText.new(meta_data, repository, threshold_handler)
         expected = "Weather forecast of Hannover for the 2020-03-27 00:00:00 +0100.\n\n"
+        expected.concat("Sunrise: 06:06, Sunset: 18:47\n")
         expected.concat("Today will be a cold day.")
         expected.concat(" The maximum temperature will reach up to 16 degrees celsius.")
         expected.concat(" The minimum temperature will be -1 degrees celsius.\n")
@@ -85,7 +88,8 @@ describe WrfForecast::ForecastText do
         meta_data = wrf_handler.data_repository.meta_data
         text = WrfForecast::ForecastText.new(meta_data, repository, threshold_handler)
         expected_header = "Weather forecast of Hannover for the 2020-03-27 00:00:00 +0100"
-        expected_body = "Today will be a cold day."
+        expected_body = "Sunrise: 06:06, Sunset: 18:47\n"
+        expected_body.concat("Today will be a cold day.")
         expected_body.concat(" The maximum temperature will reach up to 16 degrees celsius.")
         expected_body.concat(" The minimum temperature will be -1 degrees celsius.\n")
         expected_body.concat("The wind will be normal and will reach up to ")
