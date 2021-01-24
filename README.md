@@ -11,10 +11,12 @@ Current version: v0.1.8
 The scripts will create forecast information bases on the given input and the api method that is called.
 Initially there will be two types of forecast available:
   * a general weather forecast for a given location for the specified day with the default information
-    * minimal/maximal air temperature for the day
-    * wind information
-    * rain information
+    * minimal/maximal air temperature for the day (done)
+    * wind information (done)
+    * rain information (done)
     * air pressure information
+    * warnings if measurand thresholds are exceeded (done)
+  * the times for sunrise and sunset (done)
   * a specified bicycle suggestion, if it is feasible to drive to work by bike today
     * serveral special limitations apply like start time, end time
 

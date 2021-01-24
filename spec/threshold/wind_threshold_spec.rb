@@ -2,7 +2,7 @@
 # @Author: Benjamin Held
 # @Date:   2020-03-19 16:54:37
 # @Last Modified by:   Benjamin Held
-# @Last Modified time: 2020-11-15 20:49:45
+# @Last Modified time: 2021-01-24 08:57:55
 
 require "spec_helper"
 require "time"
@@ -89,7 +89,7 @@ describe WrfForecast::Threshold::WindThreshold do
         windspeed_values = [  2,  2,  2,  2,  2,  2,  4,  4,  4,  4, 
                               8,  9,  8,  7, 10, 12, 12, 11, 13, 13,
                              14, 15, 17, 17, 21, 23, 26, 25, 26, 28, 
-                             29, 30, 33, 29, 29, 27, 24, 19, 18, 20,
+                             29, 30, 34, 29, 29, 27, 24, 19, 18, 20,
                              18, 16, 14, 12, 14, 15, 12, 15, 14, 12 ]
         indicators = WrfForecast::Threshold::WindThreshold.new(windspeed_values)
         expect(indicators.indicators[:windy_day].is_active).to eq(true)
