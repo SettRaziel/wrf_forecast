@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/SettRaziel/ruby_utils
-  revision: d3c4e59e4206454e066eebef3d07f605b21c1328
+  revision: a5f9bfff554cb97947589e570de22f5a3719bf3a
   specs:
     ruby_utils (0.0.1)
 
@@ -14,7 +14,7 @@ GIT
 PATH
   remote: .
   specs:
-    wrf_forecast (0.1.8)
+    wrf_forecast (0.2.0)
       ruby_utils (~> 0.0.1)
       wrf_library (~> 0.3.0)
 
@@ -40,10 +40,10 @@ GEM
     rspec-expectations (3.10.1)
       diff-lcs (>= 1.2.0, < 2.0)
       rspec-support (~> 3.10.0)
-    rspec-mocks (3.10.1)
+    rspec-mocks (3.10.2)
       diff-lcs (>= 1.2.0, < 2.0)
       rspec-support (~> 3.10.0)
-    rspec-support (3.10.1)
+    rspec-support (3.10.2)
     simplecov (0.16.1)
       docile (~> 1.1)
       json (>= 1.8, < 3)
@@ -52,7 +52,7 @@ GEM
     sync (0.5.0)
     term-ansicolor (1.7.1)
       tins (~> 1.0)
-    thor (1.0.1)
+    thor (1.1.0)
     tins (1.28.0)
       sync
 
