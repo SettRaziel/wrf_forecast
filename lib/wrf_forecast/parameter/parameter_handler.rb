@@ -1,7 +1,7 @@
 # @Author: Benjamin Held
 # @Date:   2015-07-20 11:23:58
 # @Last Modified by:   Benjamin Held
-# @Last Modified time: 2020-04-13 13:57:05
+# @Last Modified time: 2021-02-09 20:35:54
 
 module WrfForecast
 
@@ -22,7 +22,6 @@ module WrfForecast
 
       # private method with calls of the different validations methods
       def validate_parameters
-        check_for_valid_filepath if (@repository.parameters[:file])
         check_occurrence(:offset, :period) if (@repository.parameters[:offset])
       end
 
