@@ -1,7 +1,7 @@
 # @Author: Benjamin Held
 # @Date:   2015-07-20 11:23:58
 # @Last Modified by:   Benjamin Held
-# @Last Modified time: 2021-02-09 20:35:54
+# @Last Modified time: 2021-02-15 12:45:50
 
 module WrfForecast
 
@@ -32,6 +32,9 @@ module WrfForecast
             !(@repository.parameters[:help] || @repository.parameters[:version]))
           raise ArgumentError, "Error: Parameter date is not set" 
         end
+
+        # check mandatory file parameter
+        check_mandatory_parameter(:file)
       end
 
     end
