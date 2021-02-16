@@ -2,7 +2,7 @@
 # @Author: Benjamin Held
 # @Date:   2020-03-20 21:08:30
 # @Last Modified by:   Benjamin Held
-# @Last Modified time: 2021-02-09 20:32:16
+# @Last Modified time: 2021-02-16 18:28:22
 
 require "spec_helper"
 require "time"
@@ -379,7 +379,7 @@ describe WrfForecast do
                     "; optional parameter that indicates a filepath to a readable file\n" + \
                     "     --default  ".light_blue +  \
                     "runs the script with date as today at midnight and a 24 h forecast period\n" + \
-                    " -j, --json  ".light_blue +  \
+                    " -j, --json     ".light_blue +  \
                     "returns the forecast values not as a text but a json object\n" + \
                     " -d, --date     ".light_blue + "argument:".red + " <date>".yellow  + \
                     "; specifies the start_date of the requested forecast\n" + \

@@ -16,7 +16,7 @@ PATH
   specs:
     wrf_forecast (0.2.0)
       ruby_utils (~> 0.1.0, >= 0.1.0)
-      wrf_library (~> 0.3.0)
+      wrf_library (~> 0.3.1, >= 0.1.0)
 
 GEM
   remote: https://rubygems.org/
