@@ -2,7 +2,7 @@
 # @Author: Benjamin Held
 # @Date:   2020-03-16 20:59:23
 # @Last Modified by:   Benjamin Held
-# @Last Modified time: 2020-09-19 22:07:35
+# @Last Modified time: 2021-02-16 18:28:06
 
 require "spec_helper"
 require "wrf_forecast/help/help_output"
@@ -27,7 +27,7 @@ describe WrfForecast::HelpOutput do
         expect { 
           WrfForecast::HelpOutput.print_help_for(:json) 
         }.to output("WRF forecast help:".light_yellow + "\n" + \
-                    " -j, --json  ".light_blue +  \
+                    " -j, --json     ".light_blue +  \
                     "returns the forecast values not as a text but a json object\n").to_stdout
       end
     end
@@ -92,9 +92,11 @@ describe WrfForecast::HelpOutput do
                     "WRF forecast help:".light_yellow + "\n" + \
                     " -h, --help     ".light_blue + "show help text\n" + \
                     " -v, --version  ".light_blue + "prints the current version of the project\n" + \
+                    " -f, --file     ".light_blue + "argument:".red + " <file>".yellow + \
+                    "; optional parameter that indicates a filepath to a readable file\n" + \
                     "     --default  ".light_blue +  \
                     "runs the script with date as today at midnight and a 24 h forecast period\n" + \
-                    " -j, --json  ".light_blue +  \
+                    " -j, --json     ".light_blue +  \
                     "returns the forecast values not as a text but a json object\n" + \
                     " -d, --date     ".light_blue + "argument:".red + " <date>".yellow  + \
                     "; specifies the start_date of the requested forecast\n" + \

@@ -1,22 +1,22 @@
 GIT
   remote: https://github.com/SettRaziel/ruby_utils
-  revision: a5f9bfff554cb97947589e570de22f5a3719bf3a
+  revision: 72e0fd0baf4e82a628f23f3d59c525f88a6a87dd
   specs:
-    ruby_utils (0.0.1)
+    ruby_utils (0.1.1)
 
 GIT
   remote: https://github.com/SettRaziel/wrf_library
-  revision: db83bbf5e13b720e10e738da6380c8a58af021d3
+  revision: fe33b1ccc3e7954005d4cc1aee2bf62755314d9f
   specs:
-    wrf_library (0.3.0)
-      ruby_utils (~> 0.0.1)
+    wrf_library (0.3.1)
+      ruby_utils (~> 0.1.0, >= 0.1.0)
 
 PATH
   remote: .
   specs:
     wrf_forecast (0.2.0)
-      ruby_utils (~> 0.0.1)
-      wrf_library (~> 0.3.0)
+      ruby_utils (~> 0.1.0, >= 0.1.0)
+      wrf_library (~> 0.3.1, >= 0.1.0)
 
 GEM
   remote: https://rubygems.org/

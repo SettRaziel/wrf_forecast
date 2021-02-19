@@ -1,7 +1,7 @@
 # @Author: Benjamin Held
 # @Date:   2019-05-07 10:03:48
 # @Last Modified by:   Benjamin Held
-# @Last Modified time: 2020-09-27 20:40:04
+# @Last Modified time: 2021-02-16 18:27:20
 
 require "ruby_utils/help_output"
 
@@ -16,7 +16,7 @@ module WrfForecast
     def self.add_single_help_entries
       add_simple_text(:default, "     --default  ", 
             "runs the script with date as today at midnight and a 24 h forecast period")
-      add_simple_text(:json, " -j, --json  ", 
+      add_simple_text(:json, " -j, --json     ", 
             "returns the forecast values not as a text but a json object")
       nil
     end

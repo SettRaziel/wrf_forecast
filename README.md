@@ -28,9 +28,10 @@ help usage for parameter: ruby <script> <parameter> (-h | --help)
 WRF forecast help:
  -h, --help     show help text
  -v, --version  prints the current version of the project
- -d, --date     argument: <date>; specifies the start_date of the requested forecast
+ -f, --file     argument: <file>; optional parameter that indicates a filepath to a readable file
      --default  runs the script with date as today at midnight and a 24 h forecast period
- -j, --json     returns the forecast values not as a text but a json object     
+ -j, --json     returns the forecast values not as a text but a json object
+ -d, --date     argument: <date>; specifies the start_date of the requested forecast
  -o, --offset   argument: <offset>; specifies how many hours from the forecast should be skipped
  -p, --period   argument: <period>; specifies the forecast period
  -s, --save     argument: <target>; specifies the output file where the results are saved
