@@ -1,7 +1,7 @@
 # @Author: Benjamin Held
 # @Date:   2019-05-08 15:34:21
 # @Last Modified by:   Benjamin Held
-# @Last Modified time: 2021-01-29 16:24:25
+# @Last Modified time: 2021-02-21 12:37:51
   
 require "ruby_utils/parameter_converter"
 require "time"
@@ -131,7 +131,7 @@ module WrfForecast
 
   # call to print version number and author
   def self.print_version
-    puts "wrf_forecast version 0.2.0".yellow
+    puts "wrf_forecast version 0.2.1".yellow
     puts "Created by Benjamin Held (March 2019)".yellow
     nil
   end
