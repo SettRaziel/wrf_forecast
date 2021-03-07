@@ -1,7 +1,7 @@
 # @Author: Benjamin Held
 # @Date:   2015-07-20 11:23:58
 # @Last Modified by:   Benjamin Held
-# @Last Modified time: 2021-02-15 12:45:50
+# @Last Modified time: 2021-03-07 20:31:18
 
 module WrfForecast
 
@@ -27,11 +27,8 @@ module WrfForecast
 
       # private method to the specified parameter constraints
       def check_parameter_constraints
-        # check for mandatory date when help or version is not used
-        if (!@repository.parameters[:date] &&
-            !(@repository.parameters[:help] || @repository.parameters[:version]))
-          raise ArgumentError, "Error: Parameter date is not set" 
-        end
+        # check mandatory date parameter
+        check_mandatory_parameter(:date)
 
         # check mandatory file parameter
         check_mandatory_parameter(:file)
