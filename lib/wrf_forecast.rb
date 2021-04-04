@@ -1,10 +1,6 @@
-# @Author: Benjamin Held
-# @Date:   2019-05-08 15:34:21
-# @Last Modified by:   Benjamin Held
-# @Last Modified time: 2021-02-21 12:37:51
-  
 require "ruby_utils/parameter_converter"
 require "time"
+require "i18n"
 require "wrf_library/wrf"
 require "wrf_forecast/parameter"
 require "wrf_forecast/help/help_output"
@@ -26,6 +22,7 @@ module WrfForecast
     # main entry point and initialization
     # @param [Array] arguments the input values from the terminal input ARGV
     def initialize(arguments)
+      I18n.load_path << Dir[File.expand_path("../config/locales") + "/*.yml"]
       @parameter_handler = Parameter::ParameterHandler.new(arguments)
       if (!parameter_handler.repository.parameters[:help] && 
           !parameter_handler.repository.parameters[:version])
