@@ -8,8 +8,8 @@ Gem::Specification.new do |s|
   s.homepage      = "https://github.com/settraziel/wrf_forecast"
   s.licenses      = "MIT"
 
-  s.files         = Dir["lib/**/*.rb"] + ["README.md", "LICENSE"]
-  s.require_paths = ["lib"]
+  s.files         = Dir["lib/**/*.rb"] + Dir["config/locales/*.yml"] + ["README.md", "LICENSE"]
+  s.require_paths = ["lib", "config"]
 
   s.required_ruby_version = ">= 2.4"
 
