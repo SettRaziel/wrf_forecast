@@ -1,9 +1,3 @@
-#!/usr/bin/ruby
-# @Author: Benjamin Held
-# @Date:   2020-03-19 08:04:09
-# @Last Modified by:   Benjamin Held
-# @Last Modified time: 2020-05-31 17:26:05
-
 module WrfForecast
 
   module Threshold
@@ -24,12 +18,11 @@ module WrfForecast
 
       # initialization of the required indicators
       def initialize_indicators
-        add_indicator(:ice_day, true, "ice day (temperature does not exceed 0 degrees celsius)")
-        add_indicator(:frost_day, false, "frost day (temperature will fall below 0 degrees celsius)")
-        add_indicator(:summer_day, false, "summer day (temperature will exceed 25 degrees celsius)")
-        add_indicator(:hot_day, false, "hot day (temperature will exceed 30 degrees celsius)")
-        add_indicator(:tropical_night, true, 
-          "tropical night (temperature does not fall below 20 degrees celsius)")
+        add_indicator(:ice_day, true, I18n.t("threshold.temperature.ice_day"))
+        add_indicator(:frost_day, false, I18n.t("threshold.temperature.frost_day"))
+        add_indicator(:summer_day, false, I18n.t("threshold.temperature.summer_day"))
+        add_indicator(:hot_day, false, I18n.t("threshold.temperature.hot_day"))
+        add_indicator(:tropical_night, true, I18n.t("threshold.temperature.tropical_night"))
         nil
       end
 
