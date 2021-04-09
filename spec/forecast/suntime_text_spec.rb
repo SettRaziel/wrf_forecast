@@ -1,12 +1,6 @@
-#!/usr/bin/ruby
-# @Author: Benjamin Held
-# @Date:   2021-01-12 22:14:15
-# @Last Modified by:   Benjamin Held
-# @Last Modified time: 2021-01-13 20:21:16
-
 require "spec_helper"
 require "time"
-require "wrf_forecast/forecast/english/suntime_text"
+require "wrf_forecast/forecast/suntime_text"
 
 describe WrfForecast::Text::SuntimeText do
 
