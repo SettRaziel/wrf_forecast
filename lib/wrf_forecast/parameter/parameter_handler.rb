@@ -1,8 +1,3 @@
-# @Author: Benjamin Held
-# @Date:   2015-07-20 11:23:58
-# @Last Modified by:   Benjamin Held
-# @Last Modified time: 2021-03-07 20:31:18
-
 module WrfForecast
 
   module Parameter
