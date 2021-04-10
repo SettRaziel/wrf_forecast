@@ -1,9 +1,3 @@
-#!/usr/bin/ruby
-# @Author: Benjamin Held
-# @Date:   2020-03-20 21:08:30
-# @Last Modified by:   Benjamin Held
-# @Last Modified time: 2021-02-21 12:38:05
-
 require "spec_helper"
 require "time"
 require "wrf_forecast"
@@ -383,6 +377,8 @@ describe WrfForecast do
                     "returns the forecast values not as a text but a json object\n" + \
                     " -d, --date     ".light_blue + "argument:".red + " <date>".yellow  + \
                     "; specifies the start_date of the requested forecast\n" + \
+                    " -l, --locale   ".light_blue + "argument:".red + " <locale>".yellow  + \
+                    "; specifies the locale in which the forecast should be printed\n" + \
                     " -o, --offset   ".light_blue + "argument:".red + " <offset>".yellow  + \
                     "; specifies how many hours from the forecast should be skipped\n" + \
                     " -p, --period   ".light_blue + "argument:".red + " <period>".yellow  + \
