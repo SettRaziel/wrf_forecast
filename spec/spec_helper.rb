@@ -22,9 +22,8 @@ rescue LoadError; end
 
 require "rspec"
 require "wrf_forecast"
-require "i18n"
 
-I18n.load_path << Dir[File.expand_path("./config/locales") + "/*.yml"]
+WrfForecast::LocaleConfiguration.initialize_locale("./config/locales")
 
 RSpec.configure do |config|
   # rspec-expectations config goes here. You can use an alternate

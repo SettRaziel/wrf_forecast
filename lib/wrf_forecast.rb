@@ -1,10 +1,10 @@
-require "ruby_utils/parameter_converter"
 require "time"
-require "i18n"
+require "ruby_utils/parameter_converter"
 require "wrf_library/wrf"
 require "wrf_forecast/parameter"
 require "wrf_forecast/help/help_output"
 require "wrf_forecast/forecast/forecast_handler"
+require "wrf_forecast/locale_configuration"
 
 # This module is the main entry point and will be called from the main forecast script
 module WrfForecast
@@ -22,7 +22,7 @@ module WrfForecast
     # main entry point and initialization
     # @param [Array] arguments the input values from the terminal input ARGV
     def initialize(arguments)
-      I18n.load_path << Dir[File.expand_path("../config/locales") + "/*.yml"]
+      WrfForecast::LocaleConfiguration.initialize_locale("../config/locales")
       @parameter_handler = Parameter::ParameterHandler.new(arguments)
       if (!parameter_handler.repository.parameters[:help] && 
           !parameter_handler.repository.parameters[:version])
