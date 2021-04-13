@@ -1,9 +1,3 @@
-#!/usr/bin/ruby
-# @Author: Benjamin Held
-# @Date:   2020-03-12 19:16:02
-# @Last Modified by:   Benjamin Held
-# @Last Modified time: 2020-10-06 21:30:21
-
 require "spec_helper"
 require "wrf_forecast/data/wind_direction_repository"
 

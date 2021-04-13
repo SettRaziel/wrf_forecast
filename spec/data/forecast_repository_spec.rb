@@ -1,9 +1,3 @@
-#!/usr/bin/ruby
-# @Author: Benjamin Held
-# @Date:   2020-03-08 18:13:30
-# @Last Modified by:   Benjamin Held
-# @Last Modified time: 2020-11-15 20:52:27
-
 require "spec_helper"
 require "time"
 require "wrf_library/wrf"
