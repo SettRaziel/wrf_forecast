@@ -1,9 +1,3 @@
-#!/usr/bin/ruby
-# @Author: Benjamin Held
-# @Date:   2020-03-20 13:27:03
-# @Last Modified by:   Benjamin Held
-# @Last Modified time: 2020-11-15 20:50:14
-
 require "spec_helper"
 require "wrf_library/wrf"
 require "wrf_forecast/data/forecast_repository"
@@ -112,5 +106,20 @@ describe WrfForecast::Threshold::RainThreshold do
       end
     end
   end
+
+  describe ".new" do
+    context "given an array of rain data for a normal day" do
+      it "generate and check rain threshold texts" do
+        rain_values = [  0,  1,  1,  2,  2,  1,  1,  0,  0,  0, 
+                         0,  0,  0,  0,  0,  0,  0,  0,  0,  0, 
+                         0,  0,  0,  0 ]
+        indicators = WrfForecast::Threshold::RainThreshold.new(rain_values)
+        expect(indicators.indicators[:strong_rain].warning_text).to eq(I18n.t("threshold.rain.strong_rain"))
+        expect(indicators.indicators[:heavy_rain].warning_text).to eq(I18n.t("threshold.rain.heavy_rain"))
+        expect(indicators.indicators[:extreme_rain].warning_text).to eq(I18n.t("threshold.rain.extreme_rain"))
+        expect(indicators.indicators[:continous_rain].warning_text).to eq(I18n.t("threshold.rain.continous_rain"))
+      end
+    end
+  end  
 
 end
