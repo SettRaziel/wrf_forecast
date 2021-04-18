@@ -1,9 +1,3 @@
-#!/usr/bin/ruby
-# @Author: Benjamin Held
-# @Date:   2020-03-22 16:34:27
-# @Last Modified by:   Benjamin Held
-# @Last Modified time: 2020-05-21 10:52:12
-
 require "spec_helper"
 require "ruby_utils/statistic"
 require "wrf_forecast/threshold"
@@ -23,9 +17,12 @@ describe WrfForecast::Text::TemperatureText do
         indicators = WrfForecast::Threshold::TemperatureThreshold.new(temperature_values)
         extreme_values = RubyUtils::ExtremeValues.new(265.15, 272.15)
         forecast = WrfForecast::Text::TemperatureText.new(extreme_values, indicators.indicators)
-        expected = "Today will be a very frosty day."
-        expected.concat(" The maximum temperature will reach up to -1 degrees celsius.")
-        expected.concat(" The minimum temperature will be -8 degrees celsius.")
+        expected = I18n.t("forecast_text.temperature.text_start")
+        expected.concat(I18n.t("forecast_text.temperature.warmth_very_frosty"))
+        expected.concat(I18n.t("forecast_text.temperature.text_day")).concat(".")
+        expected.concat(I18n.t("forecast_text.temperature.text_maximum")).concat("-1")
+        expected.concat(I18n.t("forecast_text.temperature.text_minimum")).concat("-8")
+        expected.concat(I18n.t("forecast_text.temperature.text_finish"))
         expect(forecast.text).to eq(expected)
       end
     end
@@ -43,9 +40,12 @@ describe WrfForecast::Text::TemperatureText do
         indicators = WrfForecast::Threshold::TemperatureThreshold.new(temperature_values)
         extreme_values = RubyUtils::ExtremeValues.new(265.15, 274.15)
         forecast = WrfForecast::Text::TemperatureText.new(extreme_values, indicators.indicators)
-        expected = "Today will be a cold day."
-        expected.concat(" The maximum temperature will reach up to 1 degrees celsius.")
-        expected.concat(" The minimum temperature will be -8 degrees celsius.")
+        expected = I18n.t("forecast_text.temperature.text_start")
+        expected.concat(I18n.t("forecast_text.temperature.warmth_cold"))
+        expected.concat(I18n.t("forecast_text.temperature.text_day")).concat(".")
+        expected.concat(I18n.t("forecast_text.temperature.text_maximum")).concat("1")
+        expected.concat(I18n.t("forecast_text.temperature.text_minimum")).concat("-8")
+        expected.concat(I18n.t("forecast_text.temperature.text_finish"))
         expect(forecast.text).to eq(expected)
       end
     end
@@ -63,9 +63,12 @@ describe WrfForecast::Text::TemperatureText do
         indicators = WrfForecast::Threshold::TemperatureThreshold.new(temperature_values)
         extreme_values = RubyUtils::ExtremeValues.new(275.15, 282.15)
         forecast = WrfForecast::Text::TemperatureText.new(extreme_values, indicators.indicators)
-        expected = "Today will be a normal day."
-        expected.concat(" The maximum temperature will reach up to 9 degrees celsius.")
-        expected.concat(" The minimum temperature will be 2 degrees celsius.")
+        expected = I18n.t("forecast_text.temperature.text_start")
+        expected.concat(I18n.t("forecast_text.temperature.warmth_normal"))
+        expected.concat(I18n.t("forecast_text.temperature.text_day")).concat(".")
+        expected.concat(I18n.t("forecast_text.temperature.text_maximum")).concat("9")
+        expected.concat(I18n.t("forecast_text.temperature.text_minimum")).concat("2")
+        expected.concat(I18n.t("forecast_text.temperature.text_finish"))
         expect(forecast.text).to eq(expected)
       end
     end
@@ -83,9 +86,12 @@ describe WrfForecast::Text::TemperatureText do
         indicators = WrfForecast::Threshold::TemperatureThreshold.new(temperature_values)
         extreme_values = RubyUtils::ExtremeValues.new(288.15, 301.05)
         forecast = WrfForecast::Text::TemperatureText.new(extreme_values, indicators.indicators)
-        expected = "Today will be a summer day."
-        expected.concat(" The maximum temperature will reach up to 28 degrees celsius.")
-        expected.concat(" The minimum temperature will be 15 degrees celsius.")
+        expected = I18n.t("forecast_text.temperature.text_start")
+        expected.concat(I18n.t("forecast_text.temperature.warmth_summer"))
+        expected.concat(I18n.t("forecast_text.temperature.text_day")).concat(".")
+        expected.concat(I18n.t("forecast_text.temperature.text_maximum")).concat("28")
+        expected.concat(I18n.t("forecast_text.temperature.text_minimum")).concat("15")
+        expected.concat(I18n.t("forecast_text.temperature.text_finish"))      
         expect(forecast.text).to eq(expected)
       end
     end
@@ -103,9 +109,13 @@ describe WrfForecast::Text::TemperatureText do
         indicators = WrfForecast::Threshold::TemperatureThreshold.new(temperature_values)
         extreme_values = RubyUtils::ExtremeValues.new(294.15, 305.25)
         forecast = WrfForecast::Text::TemperatureText.new(extreme_values, indicators.indicators)
-        expected = "Today will be a hot day with a tropical night."
-        expected.concat(" The maximum temperature will reach up to 33 degrees celsius.")
-        expected.concat(" The minimum temperature will be 21 degrees celsius.")
+        expected = I18n.t("forecast_text.temperature.text_start")
+        expected.concat(I18n.t("forecast_text.temperature.warmth_hot"))
+        expected.concat(I18n.t("forecast_text.temperature.text_day"))
+        expected.concat(I18n.t("forecast_text.temperature.warmth_tropical")).concat(".")
+        expected.concat(I18n.t("forecast_text.temperature.text_maximum")).concat("33")
+        expected.concat(I18n.t("forecast_text.temperature.text_minimum")).concat("21")
+        expected.concat(I18n.t("forecast_text.temperature.text_finish"))
         expect(forecast.text).to eq(expected)
       end
     end
@@ -123,8 +133,7 @@ describe WrfForecast::Text::TemperatureText do
         indicators = WrfForecast::Threshold::TemperatureThreshold.new(temperature_values)
         extreme_values = RubyUtils::ExtremeValues.new(265.15, 272.15)
         forecast = WrfForecast::Text::TemperatureText.new(extreme_values, indicators.indicators)
-        expected = "ice day (temperature does not exceed 0 degrees celsius)"
-        expect(forecast.warnings).to eq(expected)
+        expect(forecast.warnings).to eq(I18n.t("threshold.temperature.ice_day"))
       end
     end
   end
@@ -141,8 +150,7 @@ describe WrfForecast::Text::TemperatureText do
         indicators = WrfForecast::Threshold::TemperatureThreshold.new(temperature_values)
         extreme_values = RubyUtils::ExtremeValues.new(265.15, 274.15)
         forecast = WrfForecast::Text::TemperatureText.new(extreme_values, indicators.indicators)
-        expected = "frost day (temperature will fall below 0 degrees celsius)"
-        expect(forecast.warnings).to eq(expected)
+        expect(forecast.warnings).to eq(I18n.t("threshold.temperature.frost_day"))
       end
     end
   end
@@ -176,8 +184,7 @@ describe WrfForecast::Text::TemperatureText do
         indicators = WrfForecast::Threshold::TemperatureThreshold.new(temperature_values)
         extreme_values = RubyUtils::ExtremeValues.new(288.15, 301.05)
         forecast = WrfForecast::Text::TemperatureText.new(extreme_values, indicators.indicators)
-        expected = "summer day (temperature will exceed 25 degrees celsius)"
-        expect(forecast.warnings).to eq(expected)
+        expect(forecast.warnings).to eq(I18n.t("threshold.temperature.summer_day"))
       end
     end
   end
@@ -194,8 +201,8 @@ describe WrfForecast::Text::TemperatureText do
         indicators = WrfForecast::Threshold::TemperatureThreshold.new(temperature_values)
         extreme_values = RubyUtils::ExtremeValues.new(294.15, 305.25)
         forecast = WrfForecast::Text::TemperatureText.new(extreme_values, indicators.indicators)
-        expected = "hot day (temperature will exceed 30 degrees celsius)"
-        expected.concat("\ntropical night (temperature does not fall below 20 degrees celsius)")
+        expected = I18n.t("threshold.temperature.hot_day")
+        expected.concat("\n").concat(I18n.t("threshold.temperature.tropical_night"))
         expect(forecast.warnings).to eq(expected)
       end
     end
