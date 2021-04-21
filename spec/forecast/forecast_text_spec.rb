@@ -79,6 +79,10 @@ describe WrfForecast::ForecastText do
 
   describe ".new" do
     context "given a meteogram output file and the date" do
+      before (:all) do
+        WrfForecast::LocaleConfiguration.change_locale(:de)
+      end
+
       it "initialize handler, fill the forecast data, create text parts for Berlin" do
         wrf_handler = WrfLibrary::Wrf::Handler.new(File.join(__dir__,"../files/Ber_24.d01.TS"), 
                                                   Time.parse("2020-02-23 00:00:00 +0100"))
@@ -89,6 +93,10 @@ describe WrfForecast::ForecastText do
 
         expect(text.header).to eq(get_berlin_header)
         expect(text.body).to eq(get_berlin_body)
+      end
+      
+      after(:all) do
+        WrfForecast::LocaleConfiguration.change_locale(:en)
       end
     end
   end
