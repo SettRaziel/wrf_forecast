@@ -290,6 +290,38 @@ describe WrfForecast do
     end
   end
 
+  describe "#output_forecast" do
+    context "given an array of parameters with default option" do
+      it "initialize the handler and repositories correctly, create forecast" do
+        arguments = ["--default", "-l", "de", "-f", File.join(__dir__,"../files/Ber_24.d01.TS")]
+        WrfForecast.initialize(arguments)
+        parameters = WrfForecast.parameter_handler.repository.parameters
+        suntime = WrfForecast::Text::SuntimeText.new(WrfForecast.wrf_handler.data_repository.meta_data)
+
+        timestamp = Time.parse("00:00").to_s
+        expected = "Wetterbericht von Berlin für den #{timestamp}.\n\n"
+        expected.concat(suntime.text).concat("\n")
+        expected.concat("Heute wird es ein kalter Tag.")
+        expected.concat(" Die Temperatur erreicht Werte bis 10 Grad Celsius")
+        expected.concat(" und sinkt bis auf Werte um -4 Grad Celsius.\n")
+        expected.concat("Der Wind weht normal und erreicht maximale Geschwindigkeiten ")
+        expected.concat("von 23 km/h aus West. Die mittlere Geschwindigkeit beträgt 16 km/h.\n")
+        expected.concat("Die Vorhersage prognostiziert keinen Niederschlag.\n\n")
+        expected.concat("Warnungen: \n")
+        expected.concat("Frosttag (Temperatur fällt unter 0 Grad Celsius)")
+        expect(WrfForecast.output_forecast).to eq(expected)
+        expect(parameters[:date]).to eq(timestamp)
+        expect(parameters[:period]).to eq("24")
+        expect(WrfForecast.wrf_handler.data_repository.repository.size).to eq(994)
+        expect(WrfForecast.forecast_handler).to be_truthy
+      end
+      
+      after(:all) do
+        WrfForecast::LocaleConfiguration.change_locale(:en)
+      end
+    end
+  end
+
   describe "#save_forecast" do
     context "given nil as a parameter for save_forecast" do
       it "print the error message" do
