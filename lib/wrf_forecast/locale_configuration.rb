@@ -20,6 +20,18 @@ module WrfForecast
       nil
     end
 
+    # module method to determine the correct locale from a given string
+    # @param [String] locale_string the desired locale in its short string representation
+    def self.determine_locale(locale_string)
+      case locale_string
+        when "de" then change_locale(:de)
+        when "en" then change_locale(:en)
+      else
+        puts "Warning: found no match for locale #{locale_string}."
+      end
+      nil
+    end
+
   end
 
 end

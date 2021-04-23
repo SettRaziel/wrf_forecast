@@ -22,8 +22,9 @@ module WrfForecast
     # main entry point and initialization
     # @param [Array] arguments the input values from the terminal input ARGV
     def initialize(arguments)
-      WrfForecast::LocaleConfiguration.initialize_locale("../config/locales")
       @parameter_handler = Parameter::ParameterHandler.new(arguments)
+      initialize_locale
+
       if (!parameter_handler.repository.parameters[:help] && 
           !parameter_handler.repository.parameters[:version])
         initialize_wrf_handler
@@ -67,6 +68,17 @@ module WrfForecast
     # method the check if the given parameter has been set
     def contains_parameter?(symbol)
       @parameter_handler.repository.parameters[symbol] != nil
+    end
+
+    # method to laod the available locale files and set a specific locale
+    # if the locale parameter is set
+    def initialize_locale
+      WrfForecast::LocaleConfiguration.initialize_locale("../config/locales")
+      if (contains_parameter?(:locale))
+        locale_string = @parameter_handler.repository.parameters[:locale]
+        WrfForecast::LocaleConfiguration.determine_locale(locale_string)
+      end
+      nil
     end
 
   end
