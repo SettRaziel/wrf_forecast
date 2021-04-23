@@ -1,9 +1,3 @@
-#!/usr/bin/ruby
-# @Author: Benjamin Held
-# @Date:   2020-03-17 17:19:08
-# @Last Modified by:   Benjamin Held
-# @Last Modified time: 2021-02-15 12:41:53
-
 require "spec_helper"
 require "wrf_forecast/parameter"
 

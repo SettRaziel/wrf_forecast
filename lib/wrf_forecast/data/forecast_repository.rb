@@ -1,8 +1,3 @@
-# @Author: Benjamin Held
-# @Date:   2020-02-14 19:44:57
-# @Last Modified by:   Benjamin Held
-# @Last Modified time: 2020-11-15 21:02:13
-
 require 'ruby_utils/statistic'
 require 'wrf_forecast/data/wind_direction_repository'
 

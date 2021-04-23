@@ -1,8 +1,3 @@
-# @Author: Benjamin Held
-# @Date:   2015-06-12 10:45:36
-# @Last Modified by:   Benjamin Held
-# @Last Modified time: 2020-08-20 10:11:29
-
 module WrfForecast
 
   # Parent module which holdes the classes dealing with reading and validating
@@ -23,6 +18,7 @@ module WrfForecast
           when *@mapping[:date] then create_argument_entry(:date)
           when *@mapping[:default] then create_defaults
           when *@mapping[:json] then @parameters[:json] = true
+          when *@mapping[:locale] then create_argument_entry(:locale)
           when *@mapping[:offset] then create_argument_entry(:offset)
           when *@mapping[:period] then create_argument_entry(:period)
           when *@mapping[:save] then create_argument_entry(:save)
@@ -37,6 +33,7 @@ module WrfForecast
         @mapping[:date] = ["-d", "--date"]
         @mapping[:default] = ["--default"]
         @mapping[:json] = ["-j", "--json"]
+        @mapping[:locale] = ["-l", "--locale"]
         @mapping[:offset] = ["-o", "--offset"]
         @mapping[:period] = ["-p", "--period"]
         @mapping[:save] = ["-s", "--save"]

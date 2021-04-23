@@ -1,9 +1,3 @@
-#!/usr/bin/ruby
-# @Author: Benjamin Held
-# @Date:   2020-03-23 16:27:56
-# @Last Modified by:   Benjamin Held
-# @Last Modified time: 2020-08-06 19:55:21
-
 require 'wrf_forecast/data/directions'
 
 module WrfForecast
@@ -32,7 +26,7 @@ module WrfForecast
 
       # method to generate the forecast text for the wind
       def generate_forecast_text
-        @text = "The wind will be "
+        @text = I18n.t("forecast_text.wind.text_start")
         @text.concat(create_strength_text)
         @text.concat(create_wind_text)
         nil
@@ -46,32 +40,38 @@ module WrfForecast
 
       # method to generate the text about the day
       def create_strength_text
-        wind_strength = "normal"
-        wind_strength = "windy" if (is_threshold_active?(:windy_day))
-        wind_strength = "squall" if (is_threshold_active?(:squall_day))
-        wind_strength = "stormy" if (is_threshold_active?(:storm_squall_day))
-        wind_strength = "very stromy" if (is_threshold_active?(:storm_day))
-        wind_strength = "extremly stromy" if (is_threshold_active?(:hurricane_day))
+        wind_strength = I18n.t("forecast_text.wind.strength_normal")
+        if (is_threshold_active?(:hurricane_day))
+         wind_strength = I18n.t("forecast_text.wind.strength_extremly_stormy")
+        elsif (is_threshold_active?(:storm_day))
+          wind_strength = I18n.t("forecast_text.wind.strength_very_stormy")
+        elsif (is_threshold_active?(:storm_squall_day))
+          wind_strength = I18n.t("forecast_text.wind.strength_stormy")
+        elsif (is_threshold_active?(:squall_day))
+          wind_strength = I18n.t("forecast_text.wind.strength_squall")
+        elsif (is_threshold_active?(:windy_day))
+          wind_strength = I18n.t("forecast_text.wind.strength_windy")
+        end
         return wind_strength
       end
 
       # method to generate the text with wind values
       def create_wind_text
-        text = " and will reach up to "
+        text = I18n.t("forecast_text.wind.text_maximum")
         text.concat((@extreme_values.maximum * 3.6).ceil.to_s)
-        text.concat(" km/h from ")
+        text.concat(I18n.t("forecast_text.wind.text_maximum_unit"))
         text.concat(create_prevalent_direction_text)
-        text.concat(". The mean wind will be ")
+        text.concat(I18n.t("forecast_text.wind.text_mean"))
         mean = (@extreme_values.maximum + @extreme_values.minimum) / 2.0
         text.concat((mean * 3.6).ceil.to_s)
-        text.concat(" km/h.")
+        text.concat(I18n.t("forecast_text.wind.text_finish"))
         return text
       end
 
       # method to create the text for the prevalent wind direction
       def create_prevalent_direction_text
         if (@prevalent_direction == nil)
-          return "circulatory directions"
+          return I18n.t("forecast_text.wind.direction_circular")
         end
         return WrfForecast::Directions.new().get_direction_string(@prevalent_direction)
       end

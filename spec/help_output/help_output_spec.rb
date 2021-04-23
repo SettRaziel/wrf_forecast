@@ -1,9 +1,3 @@
-#!/usr/bin/ruby
-# @Author: Benjamin Held
-# @Date:   2020-03-16 20:59:23
-# @Last Modified by:   Benjamin Held
-# @Last Modified time: 2021-02-16 18:28:06
-
 require "spec_helper"
 require "wrf_forecast/help/help_output"
 
@@ -57,6 +51,18 @@ describe WrfForecast::HelpOutput do
     end
   end
 
+describe "#print_help_for" do
+    context "given a one element help entry" do
+      it "print the help text for :locale" do
+        expect { 
+          WrfForecast::HelpOutput.print_help_for(:locale) 
+        }.to output("WRF forecast help:".light_yellow + "\n" + \
+                    " -l, --locale   ".light_blue + "argument:".red + " <locale>".yellow  + \
+                    "; specifies the locale in which the forecast should be printed\n").to_stdout
+      end
+    end
+  end
+
   describe "#print_help_for" do
     context "given a one element help entry" do
       it "print the help text for :offset" do
@@ -100,6 +106,8 @@ describe WrfForecast::HelpOutput do
                     "returns the forecast values not as a text but a json object\n" + \
                     " -d, --date     ".light_blue + "argument:".red + " <date>".yellow  + \
                     "; specifies the start_date of the requested forecast\n" + \
+                    " -l, --locale   ".light_blue + "argument:".red + " <locale>".yellow  + \
+                    "; specifies the locale in which the forecast should be printed\n" + \
                     " -o, --offset   ".light_blue + "argument:".red + " <offset>".yellow  + \
                     "; specifies how many hours from the forecast should be skipped\n" + \
                     " -p, --period   ".light_blue + "argument:".red + " <period>".yellow  + \

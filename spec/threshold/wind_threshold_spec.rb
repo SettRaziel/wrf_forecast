@@ -1,9 +1,3 @@
-#!/usr/bin/ruby
-# @Author: Benjamin Held
-# @Date:   2020-03-19 16:54:37
-# @Last Modified by:   Benjamin Held
-# @Last Modified time: 2021-01-24 08:57:55
-
 require "spec_helper"
 require "time"
 require "wrf_library/wrf"
@@ -144,6 +138,24 @@ describe WrfForecast::Threshold::WindThreshold do
           wind_values = [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 ]
           WrfForecast::Threshold::WindThreshold.new(wind_values)
         }.to raise_error(ArgumentError)
+      end
+    end
+  end
+
+  describe ".new" do
+    context "given an array of wind data for a normal day" do
+      it "generate and check wind threshold texts" do
+        windspeed_values = [  0,  0,  0,  0,  0,  0,  0,  0,  0,  0, 
+                              1,  1,  1,  1,  2,  2,  2,  2,  3,  3,
+                              4,  5,  7,  7,  9,  9,  8,  8,  8,  8, 
+                              9,  9,  9,  9,  8,  8,  8,  7,  8,  6,
+                              5,  5,  4,  3,  4,  4,  3,  2,  1,  0 ]
+        indicators = WrfForecast::Threshold::WindThreshold.new(windspeed_values)
+        expect(indicators.indicators[:windy_day].warning_text).to eq(I18n.t("threshold.wind.windy_day"))
+        expect(indicators.indicators[:squall_day].warning_text).to eq(I18n.t("threshold.wind.squall_day"))
+        expect(indicators.indicators[:storm_squall_day].warning_text).to eq(I18n.t("threshold.wind.storm_squall_day"))
+        expect(indicators.indicators[:storm_day].warning_text).to eq(I18n.t("threshold.wind.storm_day"))
+        expect(indicators.indicators[:hurricane_day].warning_text).to eq(I18n.t("threshold.wind.hurricane_day"))
       end
     end
   end

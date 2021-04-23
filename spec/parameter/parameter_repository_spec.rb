@@ -1,9 +1,3 @@
-#!/usr/bin/ruby
-# @Author: Benjamin Held
-# @Date:   2020-03-16 20:11:41
-# @Last Modified by:   Benjamin Held
-# @Last Modified time: 2021-02-08 21:48:37
-
 require "spec_helper"
 require "wrf_forecast/parameter"
 
@@ -220,6 +214,26 @@ describe WrfForecast::Parameter::ParameterRepository do
         arguments = ["--save", "output", "--file", "filename"]
         parameter_repository = WrfForecast::Parameter::ParameterRepository.new(arguments)
         expect(parameter_repository.parameters[:save]).to eq("output")
+      end
+    end
+  end
+
+  describe ".new" do
+    context "given the one element locale flag with only one argument" do
+      it "create the repository with the correct flags" do
+        arguments = ["-l", "de"]
+        parameter_repository = WrfForecast::Parameter::ParameterRepository.new(arguments)
+        expect(parameter_repository.parameters[:locale]).to eq("de")
+      end
+    end
+  end
+
+  describe ".new" do
+    context "given the one element locale flag with only one argument" do
+      it "create the repository with the correct flags" do
+        arguments = ["--locale", "es"]
+        parameter_repository = WrfForecast::Parameter::ParameterRepository.new(arguments)
+        expect(parameter_repository.parameters[:locale]).to eq("es")
       end
     end
   end

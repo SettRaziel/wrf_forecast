@@ -1,9 +1,3 @@
-#!/usr/bin/ruby
-# @Author: Benjamin Held
-# @Date:   2020-03-20 12:14:58
-# @Last Modified by:   Benjamin Held
-# @Last Modified time: 2020-05-31 17:29:03
-
 module WrfForecast
 
   module Threshold
@@ -23,10 +17,10 @@ module WrfForecast
 
       # initialization of the required indicators
       def initialize_indicators
-        add_indicator(:strong_rain, false, "strong rain (hourly rain sum exceeds 15 mm per hour)")
-        add_indicator(:heavy_rain, false, "heavy rain (hourly rain sum exceeds 25 mm per hour)")
-        add_indicator(:extreme_rain, false, "extreme rain (hourly rain sum exceeds 40 mm per hour)")
-        add_indicator(:continous_rain, false, "continous rain (rain sum exceeds 30 mm per 24 hours)")
+        add_indicator(:strong_rain, false, I18n.t("threshold.rain.strong_rain"))
+        add_indicator(:heavy_rain, false, I18n.t("threshold.rain.heavy_rain"))
+        add_indicator(:extreme_rain, false, I18n.t("threshold.rain.extreme_rain"))
+        add_indicator(:continous_rain, false, I18n.t("threshold.rain.continous_rain"))
         nil
       end
 

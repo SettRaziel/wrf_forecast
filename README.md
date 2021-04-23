@@ -32,6 +32,7 @@ WRF forecast help:
      --default  runs the script with date as today at midnight and a 24 h forecast period
  -j, --json     returns the forecast values not as a text but a json object
  -d, --date     argument: <date>; specifies the start_date of the requested forecast
+ -l, --locale   argument: <locale>; specifies the locale in which the forecast should be printed
  -o, --offset   argument: <offset>; specifies how many hours from the forecast should be skipped
  -p, --period   argument: <period>; specifies the forecast period
  -s, --save     argument: <target>; specifies the output file where the results are saved

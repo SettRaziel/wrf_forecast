@@ -23,6 +23,8 @@ rescue LoadError; end
 require "rspec"
 require "wrf_forecast"
 
+WrfForecast::LocaleConfiguration.initialize_locale("./config/locales")
+
 RSpec.configure do |config|
   # rspec-expectations config goes here. You can use an alternate
   # assertion/expectation library such as wrong or the stdlib/minitest

@@ -1,9 +1,3 @@
-#!/usr/bin/ruby
-# @Author: Benjamin Held
-# @Date:   2020-05-11 17:49:09
-# @Last Modified by:   Benjamin Held
-# @Last Modified time: 2020-05-11 20:57:19
-
 module WrfForecast
 
   module Threshold

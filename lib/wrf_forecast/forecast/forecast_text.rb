@@ -1,9 +1,3 @@
-#!/usr/bin/ruby
-# @Author: Benjamin Held
-# @Date:   2020-03-22 10:46:55
-# @Last Modified by:   Benjamin Held
-# @Last Modified time: 2021-01-17 19:57:25
-
 require 'wrf_forecast/data/forecast_repository'
 require 'wrf_forecast/threshold'
 require 'wrf_forecast/text'
@@ -59,9 +53,9 @@ module WrfForecast
     def create_header(meta_data)
       station = meta_data.station
       start_date = meta_data.start_date
-      @header = 'Weather forecast of '
+      @header = I18n.t("forecast_text.main.header_start")
       @header.concat(station.name)
-      @header.concat(' for the ')
+      @header.concat(I18n.t("forecast_text.main.header_conn"))
       @header.concat(start_date.to_s)
       nil
     end
@@ -85,9 +79,9 @@ module WrfForecast
       @warnings.concat("\n") if (!@rain_text.warnings.empty?)
       @warnings.concat(@rain_text.warnings)
       if (@warnings.empty?)
-        @warnings = "Warnings: -"
+        @warnings = "#{I18n.t("forecast_text.main.warnings")}-"
       else
-        @warnings = "Warnings: ".concat(@warnings)
+        @warnings = I18n.t("forecast_text.main.warnings").concat(@warnings)
       end
       nil
     end

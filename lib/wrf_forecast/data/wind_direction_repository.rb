@@ -1,9 +1,3 @@
-#!/usr/bin/ruby
-# @Author: Benjamin Held
-# @Date:   2020-03-12 19:05:50
-# @Last Modified by:   Benjamin Held
-# @Last Modified time: 2020-03-31 16:25:31
-
 module WrfForecast
 
   # This class serves as the creation and storage component of a wind direction distribution

@@ -1,9 +1,3 @@
-#!/usr/bin/ruby
-# @Author: Benjamin Held
-# @Date:   2021-01-12 22:07:19
-# @Last Modified by:   Benjamin Held
-# @Last Modified time: 2021-01-14 22:57:37
-
 require "wrf_library/sun_equation"
 
 module WrfForecast
@@ -34,7 +28,7 @@ module WrfForecast
       # @return [String] the text part for the sunrise
       def generate_sunrise_text(date, coordinate)
         sunrise = WrfLibrary::SunEquation.calculate_sunrise_time(date, coordinate.x, coordinate.y)
-        text = "Sunrise: "
+        text = I18n.t("forecast_text.suntime.sunrise")
         text.concat(format_time(sunrise))
       end
 
@@ -44,7 +38,7 @@ module WrfForecast
       # @return [String] the text part for the sunset
       def generate_sunset_text(date, coordinate)
         sunset = WrfLibrary::SunEquation.calculate_sunset_time(date, coordinate.x, coordinate.y)
-        text = "Sunset: "
+        text = I18n.t("forecast_text.suntime.sunset")
         text.concat(format_time(sunset))
       end
 
