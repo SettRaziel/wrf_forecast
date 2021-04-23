@@ -1,9 +1,3 @@
-#!/usr/bin/ruby
-# @Author: Benjamin Held
-# @Date:   2020-05-06 17:57:19
-# @Last Modified by:   Benjamin Held
-# @Last Modified time: 2020-05-21 20:59:03
-
 module WrfForecast
 
   # This module holds all classes that specify forecast texts and warnings for a given measurand

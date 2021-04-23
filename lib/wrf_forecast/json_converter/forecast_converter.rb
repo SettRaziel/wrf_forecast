@@ -1,9 +1,3 @@
-#!/usr/bin/ruby
-# @Author: Benjamin Held
-# @Date:   2020-08-02 18:05:10
-# @Last Modified by:   Benjamin Held
-# @Last Modified time: 2021-01-19 19:14:22
-
 require "wrf_library/sun_equation"
 
 module WrfForecast

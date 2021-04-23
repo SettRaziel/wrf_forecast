@@ -1,9 +1,3 @@
-#!/usr/bin/ruby
-# @Author: Benjamin Held
-# @Date:   2020-03-21 17:34:42
-# @Last Modified by:   Benjamin Held
-# @Last Modified time: 2020-08-17 14:31:06
-
 require 'wrf_forecast/data'
 require 'wrf_forecast/forecast/forecast_text'
 require 'wrf_forecast/json_converter'
