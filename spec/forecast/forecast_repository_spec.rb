@@ -105,7 +105,7 @@ describe WrfForecast::ForecastRepository do
       it "initialize handler, fill the forecast data, check hourly rain sum values" do
         repository = WrfForecast::ForecastRepository.new(handler)
         rain_sum = repository.hourly_rain
-        expect(rain_sum.size).to eq(84)
+        expect(rain_sum.size).to eq(85)
         expect(rain_sum[0].round(3)).to eq(0.0)
         expect(rain_sum[8].round(3)).to eq(0.272)
       end
