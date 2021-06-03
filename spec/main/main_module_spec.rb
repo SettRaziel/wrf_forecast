@@ -80,7 +80,7 @@ describe WrfForecast do
   describe "#output_forecast" do
     context "given an array of parameters with default values" do
       it "initialize the handler and repositories correctly, create output" do
-        arguments = ["--default", "-f", File.join(__dir__,"../files/Ber.d01.TS")]
+        arguments = ["--default", "-f", BERLIN_DATA.to_path]
         WrfForecast.initialize(arguments)
         parameters = WrfForecast.parameter_handler.repository.parameters
         suntime = WrfForecast::Text::SuntimeText.new(WrfForecast.wrf_handler.data_repository.meta_data)
@@ -109,7 +109,7 @@ describe WrfForecast do
   describe "#output_forecast" do
     context "given an array of parameters with default values and offset flag" do
       it "initialize the handler and repositories correctly, create output" do
-        arguments = ["--default", "-o", "6", "--file", File.join(__dir__,"../files/Ber.d01.TS")]
+        arguments = ["--default", "-o", "6", "--file", BERLIN_DATA.to_path]
         WrfForecast.initialize(arguments)
         parameters = WrfForecast.parameter_handler.repository.parameters
         suntime = WrfForecast::Text::SuntimeText.new(WrfForecast.wrf_handler.data_repository.meta_data)
@@ -139,7 +139,7 @@ describe WrfForecast do
   describe "#output_forecast" do
     context "given an array of parameters with default values and offset" do
       it "initialize the handler and repositories correctly, create output" do
-        arguments = ["--default", "-o", "24", "-f", File.join(__dir__,"../files/Ber.d01.TS")]
+        arguments = ["--default", "-o", "24", "-f", BERLIN_DATA.to_path]
         WrfForecast.initialize(arguments)
         parameters = WrfForecast.parameter_handler.repository.parameters
         suntime = WrfForecast::Text::SuntimeText.new(WrfForecast.wrf_handler.data_repository.meta_data)
@@ -194,7 +194,7 @@ describe WrfForecast do
   describe "#output_forecast" do
     context "given an array of parameters with default values" do
       it "initialize the handler and repositories correctly, create output" do
-        arguments = ["--default", "-f", File.join(__dir__,"../files/Ber.d01.TS")]
+        arguments = ["--default", "-f", BERLIN_DATA.to_path]
         WrfForecast.initialize(arguments)
         parameters = WrfForecast.parameter_handler.repository.parameters
         suntime = WrfForecast::Text::SuntimeText.new(WrfForecast.wrf_handler.data_repository.meta_data)
@@ -352,7 +352,7 @@ describe WrfForecast do
   describe "#get_warnings" do
     context "given an array of parameters with default option" do
       it "initialize the handler and repositories correctly, check for no warnings" do
-        arguments = ["--default", "-f", File.join(__dir__,"../files/Ber.d01.TS")]
+        arguments = ["--default", "-f", BERLIN_DATA.to_path]
         WrfForecast.initialize(arguments)
         warnings = WrfForecast.get_warnings
         expect(warnings[:air_temperature]).to be_empty
