@@ -11,7 +11,7 @@ require "wrf_forecast/data/forecast_repository"
 
 describe WrfForecast::ForecastRepository do
 
-  handler = WrfLibrary::Wrf::Handler.new(File.join(__dir__,"../files/Ber.d01.TS"), Time.parse("2020-06-29"))
+  handler = WrfLibrary::Wrf::Handler.new(BERLIN_DATA, Time.parse("2020-06-29"))
 
   describe ".new" do
     context "given a meteogram output file and the date" do

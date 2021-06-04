@@ -15,8 +15,7 @@ describe WrfForecast::Threshold::WindThreshold do
   describe ".new" do
     context "given a meteogram output file and the date" do
       it "initialize handler, fill the forecast data, check wind indicators" do
-        handler = WrfLibrary::Wrf::Handler.new(File.join(__dir__,"../files/Ber_24.d01.TS"), 
-                                                  Time.parse("2020-02-23"))
+        handler = WrfLibrary::Wrf::Handler.new(BERLIN_SMALL_DATA, Time.parse("2020-02-23"))
         repository = WrfForecast::ForecastRepository.new(handler)
         windspeed_values = repository.forecast_data[:wind_speed]
         indicators = WrfForecast::Threshold::WindThreshold.new(windspeed_values)
