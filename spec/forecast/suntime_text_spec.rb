@@ -24,8 +24,7 @@ describe WrfForecast::Text::SuntimeText do
   describe ".new" do
     context "given a meteogram output file and the date" do
       it "initialize handler, fill the forecast data, create suntime text for Hannover" do
-        wrf_handler = WrfLibrary::Wrf::Handler.new(File.join(__dir__,"../files/Han_24.d01.TS"), 
-                                                  Time.parse("2014-06-29 00:00:00 +0200"))
+        wrf_handler = WrfLibrary::Wrf::Handler.new(HANNOVER_SMALL_DATA, Time.parse("2014-06-29 00:00:00 +0200"))
         meta_data = wrf_handler.data_repository.meta_data
         suntime = WrfForecast::Text::SuntimeText.new(meta_data)
         expect(suntime.text).to eq("Sunrise: 05:02, Sunset: 21:47")
