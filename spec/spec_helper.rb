@@ -14,12 +14,16 @@
 #
 # See http://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration
 
-
 begin
   require "simplecov"
   SimpleCov.minimum_coverage_by_file(90)
   SimpleCov.start
 rescue LoadError; end
+
+DATA_ROOT = Pathname.new(__dir__).join("files/").expand_path
+BERLIN_DATA = DATA_ROOT.join("Ber_d01_TS")
+BERLIN_SMALL_DATA = DATA_ROOT.join("Ber_24_d01_TS")
+HANNOVER_SMALL_DATA = DATA_ROOT.join("Han_24_d01_TS")
 
 require "rspec"
 require "wrf_forecast"
