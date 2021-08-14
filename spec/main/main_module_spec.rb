@@ -293,7 +293,7 @@ describe WrfForecast do
   describe "#output_forecast" do
     context "given an array of parameters with default option" do
       it "initialize the handler and repositories correctly, create forecast" do
-        arguments = ["--default", "-l", "de", "-f", File.join(__dir__,"../files/Ber_24.d01.TS")]
+        arguments = ["--default", "-l", "de", "-f", BERLIN_SMALL_DATA.to_path]
         WrfForecast.initialize(arguments)
         parameters = WrfForecast.parameter_handler.repository.parameters
         suntime = WrfForecast::Text::SuntimeText.new(WrfForecast.wrf_handler.data_repository.meta_data)

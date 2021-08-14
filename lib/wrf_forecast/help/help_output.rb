@@ -1,4 +1,4 @@
-require "ruby_utils/help_output"
+require "ruby_utils/base_help_output"
 
 module WrfForecast
 
