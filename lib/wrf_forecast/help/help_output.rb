@@ -3,7 +3,7 @@ require "ruby_utils/help_output"
 module WrfForecast
 
   # Output class for help text
-  class HelpOutput < RubyUtils::BasicHelpOutput
+  class HelpOutput < RubyUtils::BaseHelpOutput
 
     private
 

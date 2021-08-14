@@ -140,7 +140,7 @@ module WrfForecast
 
   # call to print version number and author
   def self.print_version
-    puts "wrf_forecast version 0.2.1".yellow
+    puts "wrf_forecast version 0.2.2".yellow
     puts "Created by Benjamin Held (March 2019)".yellow
     nil
   end

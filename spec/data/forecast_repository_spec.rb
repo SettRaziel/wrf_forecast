@@ -5,7 +5,7 @@ require "wrf_forecast/data/forecast_repository"
 
 describe WrfForecast::ForecastRepository do
 
-  handler = WrfLibrary::Wrf::Handler.new(File.join(__dir__,"../files/Ber.d01.TS"), Time.parse("2020-06-29"))
+  handler = WrfLibrary::Wrf::Handler.new(BERLIN_DATA, Time.parse("2020-06-29"))
 
   describe ".new" do
     context "given a meteogram output file and the date" do
@@ -99,7 +99,7 @@ describe WrfForecast::ForecastRepository do
       it "initialize handler, fill the forecast data, check hourly rain sum values" do
         repository = WrfForecast::ForecastRepository.new(handler)
         rain_sum = repository.hourly_rain
-        expect(rain_sum.size).to eq(84)
+        expect(rain_sum.size).to eq(85)
         expect(rain_sum[0].round(3)).to eq(0.0)
         expect(rain_sum[8].round(3)).to eq(0.272)
       end

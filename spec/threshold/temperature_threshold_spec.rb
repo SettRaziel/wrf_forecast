@@ -8,8 +8,7 @@ describe WrfForecast::Threshold::TemperatureThreshold do
   describe ".new" do
     context "given a meteogram output file and the date" do
       it "initialize handler, fill the forecast data, check temperature indicators" do
-        handler = WrfLibrary::Wrf::Handler.new(File.join(__dir__,"../files/Ber_24.d01.TS"), 
-                                                  Time.parse("2020-02-23"))
+        handler = WrfLibrary::Wrf::Handler.new(BERLIN_SMALL_DATA, Time.parse("2020-02-23"))
         temperature_values = handler.retrieve_data_set(:air_temperature)
         indicators = WrfForecast::Threshold::TemperatureThreshold.new(temperature_values)
         expect(indicators.indicators[:ice_day].is_active).to eq(false)

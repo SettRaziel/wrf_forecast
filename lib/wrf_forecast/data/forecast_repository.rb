@@ -104,10 +104,7 @@ module WrfForecast
         previous_timestamp = timestamp.hour
       }
 
-      # workaround to satisfy the current requirement for daily values
-      if (hourly_rain.size < 24)
-        @hourly_rain << rain_data[rain_data.size-1] - previous_hour
-      end
+      @hourly_rain << rain_data[rain_data.size-1] - previous_hour
       @extreme_values[:rain] = RubyUtils::Statistic.extreme_values(@hourly_rain)
       nil
     end

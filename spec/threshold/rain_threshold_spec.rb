@@ -8,8 +8,7 @@ describe WrfForecast::Threshold::RainThreshold do
   describe ".new" do
     context "given a meteogram output file and the date" do
       it "initialize handler, fill the forecast data, check rain indicators" do
-        handler = WrfLibrary::Wrf::Handler.new(File.join(__dir__,"../files/Ber_24.d01.TS"), 
-                                                  Time.parse("2020-02-23"))
+        handler = WrfLibrary::Wrf::Handler.new(BERLIN_SMALL_DATA, Time.parse("2020-02-23"))
         repository = WrfForecast::ForecastRepository.new(handler)
         rain_values = repository.hourly_rain
         indicators = WrfForecast::Threshold::RainThreshold.new(rain_values)

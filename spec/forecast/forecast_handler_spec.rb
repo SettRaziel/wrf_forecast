@@ -6,8 +6,7 @@ require "wrf_forecast/threshold"
 require "wrf_forecast/forecast/forecast_handler"
 
 describe WrfForecast::ForecastHandler do
-  wrf_handler = WrfLibrary::Wrf::Handler.new(File.join(__dir__,"../files/Ber_24.d01.TS"), 
-                                            Time.parse("2020-02-23"))
+  wrf_handler = WrfLibrary::Wrf::Handler.new(BERLIN_SMALL_DATA, Time.parse("2020-02-23"))
 
   describe ".new" do
     context "given a meteogram output file and the date" do

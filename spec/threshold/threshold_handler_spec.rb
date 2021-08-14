@@ -9,8 +9,7 @@ describe WrfForecast::Threshold::ThresholdHandler do
   describe ".new" do
     context "given a meteogram output file and the date" do
       it "initialize handler, forecast data and handler and check initialization" do
-        wrf_handler = WrfLibrary::Wrf::Handler.new(File.join(__dir__,"../files/Ber_24.d01.TS"), 
-                                                  Time.parse("2020-02-23"))
+        wrf_handler = WrfLibrary::Wrf::Handler.new(BERLIN_SMALL_DATA, Time.parse("2020-02-23"))
         repository = WrfForecast::ForecastRepository.new(wrf_handler)
         threshold_handler = WrfForecast::Threshold::ThresholdHandler.new(repository)
         expect(threshold_handler.temperature_threshold).to be_truthy
@@ -26,8 +25,7 @@ describe WrfForecast::Threshold::ThresholdHandler do
   describe ".new" do
     context "given a meteogram output file and the date" do
       it "initialize handler, forecast data and handler and check threshold warnings" do
-        wrf_handler = WrfLibrary::Wrf::Handler.new(File.join(__dir__,"../files/Ber_24.d01.TS"), 
-                                                  Time.parse("2020-02-23"))
+        wrf_handler = WrfLibrary::Wrf::Handler.new(BERLIN_SMALL_DATA, Time.parse("2020-02-23"))
         repository = WrfForecast::ForecastRepository.new(wrf_handler)
         threshold_handler = WrfForecast::Threshold::ThresholdHandler.new(repository)
         expect(threshold_handler.warnings[:air_temperature].size).to eq(1)
@@ -41,8 +39,7 @@ describe WrfForecast::Threshold::ThresholdHandler do
   describe ".new" do
     context "given a meteogram output file and the date" do
       it "initialize handler, forecast data and handler and check threshold warnings" do
-        wrf_handler = WrfLibrary::Wrf::Handler.new(File.join(__dir__,"../files/Han_24.d01.TS"), 
-                                                  Time.parse("2020-02-23"))
+        wrf_handler = WrfLibrary::Wrf::Handler.new(HANNOVER_SMALL_DATA, Time.parse("2020-02-23"))
         repository = WrfForecast::ForecastRepository.new(wrf_handler)
         threshold_handler = WrfForecast::Threshold::ThresholdHandler.new(repository)
         expect(threshold_handler.warnings[:air_temperature].size).to eq(1)
