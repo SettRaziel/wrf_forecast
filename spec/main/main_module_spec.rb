@@ -160,9 +160,9 @@ describe WrfForecast do
 
   describe "#output_forecast" do
     context "given an array of parameters with timestamp flag" do
-      it "initialize the handler and repositories correctly, create output" do
+      it "initialize the handler with en locale and repositories correctly, create output" do
         timestamp = Time.parse("00:00").to_s
-        arguments = ["-d", timestamp, "--file", BERLIN_SMALL_DATA.to_path]
+        arguments = ["-d", timestamp, "-l", "es", "--file", BERLIN_SMALL_DATA.to_path]
         WrfForecast.initialize(arguments)
         parameters = WrfForecast.parameter_handler.repository.parameters
         suntime = WrfForecast::Text::SuntimeText.new(WrfForecast.wrf_handler.data_repository.meta_data)
@@ -188,7 +188,7 @@ describe WrfForecast do
   describe "#output_forecast" do
     context "given an array of parameters with default values" do
       it "initialize the handler and repositories correctly, create output" do
-        arguments = ["--default", "-f", BERLIN_DATA.to_path]
+        arguments = ["--default", "-l", "en", "-f", BERLIN_DATA.to_path]
         WrfForecast.initialize(arguments)
         parameters = WrfForecast.parameter_handler.repository.parameters
         suntime = WrfForecast::Text::SuntimeText.new(WrfForecast.wrf_handler.data_repository.meta_data)
