@@ -1,4 +1,5 @@
 require "time"
+require "pathname"
 require "ruby_utils/parameter_converter"
 require "wrf_library/wrf"
 require "wrf_forecast/parameter"
@@ -73,7 +74,8 @@ module WrfForecast
     # method to laod the available locale files and set a specific locale
     # if the locale parameter is set
     def initialize_locale
-      WrfForecast::LocaleConfiguration.initialize_locale("../config/locales")
+      WrfForecast::LocaleConfiguration.initialize_locale(
+        Pathname.new(__dir__).join("../config/locales").expand_path)
       if (contains_parameter?(:locale))
         locale_string = @parameter_handler.repository.parameters[:locale]
         WrfForecast::LocaleConfiguration.determine_locale(locale_string)
