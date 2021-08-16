@@ -1,9 +1,3 @@
-#!/usr/bin/ruby
-# @Author: Benjamin Held
-# @Date:   2020-03-19 13:59:43
-# @Last Modified by:   Benjamin Held
-# @Last Modified time: 2021-01-24 08:56:46
-
 module WrfForecast
 
   module Threshold
@@ -25,12 +19,11 @@ module WrfForecast
 
       # initialization of the required indicators
       def initialize_indicators
-        add_indicator(:windy_day, false, "windy day (wind speed exceeds 9 m/s, 33 km/h, 5 bft)")
-        add_indicator(:squall_day, false, "squall day (wind speed exceeds 14 m/s, 51 km/h, 7 bft)")
-        add_indicator(:storm_squall_day, false, 
-                      "storm squall day (wind speed exceeds 24 m/s, 87 km/h, 9 bft)")
-        add_indicator(:storm_day, false, "storm day (wind speed exceeds 28 m/s, 101 km/h, 10 bft)")
-        add_indicator(:hurricane_day, false, "hurricane day (wind speed exceeds 33 m/s, 119 km/h, 11 bft)")
+        add_indicator(:windy_day, false, I18n.t("threshold.wind.windy_day"))
+        add_indicator(:squall_day, false, I18n.t("threshold.wind.squall_day"))
+        add_indicator(:storm_squall_day, false, I18n.t("threshold.wind.storm_squall_day"))
+        add_indicator(:storm_day, false, I18n.t("threshold.wind.storm_day"))
+        add_indicator(:hurricane_day, false, I18n.t("threshold.wind.hurricane_day"))
         nil
       end
 

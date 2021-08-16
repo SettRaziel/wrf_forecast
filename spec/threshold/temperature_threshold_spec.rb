@@ -1,9 +1,3 @@
-#!/usr/bin/ruby
-# @Author: Benjamin Held
-# @Date:   2020-03-19 10:01:28
-# @Last Modified by:   Benjamin Held
-# @Last Modified time: 2020-11-15 20:50:04
-
 require "spec_helper"
 require "time"
 require "wrf_library/wrf"
@@ -147,6 +141,25 @@ describe WrfForecast::Threshold::TemperatureThreshold do
           temperature_values = [ 296, 296, 296, 295, 295, 295, 294, 294, 294, 294 ]
           WrfForecast::Threshold::TemperatureThreshold.new(temperature_values)
         }.to raise_error(ArgumentError)
+      end
+    end
+  end
+
+  describe ".new" do
+    context "given an array of temperature data for a hot tropical day" do
+      it "generate and check temperature threshold texts" do
+        temperature_values = [ 296, 296, 296, 295, 295, 295, 294, 294, 294, 294, 
+                               295, 295, 296, 296, 297, 297, 298, 298, 299, 299,
+                               300, 300, 301, 301, 302, 302, 303, 303, 304, 304, 
+                               305, 305, 304, 304, 303, 303, 302, 302, 301, 300,
+                               299, 299, 298, 298, 297, 297, 296, 296, 296, 296
+                             ]
+        indicators = WrfForecast::Threshold::TemperatureThreshold.new(temperature_values)
+        expect(indicators.indicators[:ice_day].warning_text).to eq(I18n.t("threshold.temperature.ice_day"))
+        expect(indicators.indicators[:frost_day].warning_text).to eq(I18n.t("threshold.temperature.frost_day"))
+        expect(indicators.indicators[:summer_day].warning_text).to eq(I18n.t("threshold.temperature.summer_day"))
+        expect(indicators.indicators[:hot_day].warning_text).to eq(I18n.t("threshold.temperature.hot_day"))
+        expect(indicators.indicators[:tropical_night].warning_text).to eq(I18n.t("threshold.temperature.tropical_night"))
       end
     end
   end

@@ -1,9 +1,3 @@
-#!/usr/bin/ruby
-# @Author: Benjamin Held
-# @Date:   2020-03-21 17:38:16
-# @Last Modified by:   Benjamin Held
-# @Last Modified time: 2020-05-11 20:46:26
-
 require "wrf_forecast/data/forecast_repository"
 
 module WrfForecast

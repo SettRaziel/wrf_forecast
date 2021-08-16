@@ -1,9 +1,3 @@
-#!/usr/bin/ruby
-# @Author: Benjamin Held
-# @Date:   2020-03-22 11:32:06
-# @Last Modified by:   Benjamin Held
-# @Last Modified time: 2020-05-14 16:59:18
-
 module WrfForecast
 
   module Text
@@ -19,7 +13,7 @@ module WrfForecast
 
       # method to generate the forecast text for the temperature
       def generate_forecast_text
-        @text = "Today will be a "
+        @text = I18n.t("forecast_text.temperature.text_start")
         @text.concat(create_warmth_text).concat(".")
         @text.concat(create_temperature_text)
         nil
@@ -36,15 +30,22 @@ module WrfForecast
 
       # method to generate the text about the day
       def create_warmth_text
-        warmth = "normal"
-        warmth = "cold" if (@thresholds[:frost_day].is_active)
-        warmth = "very frosty" if (is_threshold_active?(:ice_day))
-        warmth = "summer" if (is_threshold_active?(:summer_day))
-        warmth = "hot" if (is_threshold_active?(:hot_day))
+        warmth = I18n.t("forecast_text.temperature.warmth_normal")
+        if (is_threshold_active?(:ice_day))
+          warmth = I18n.t("forecast_text.temperature.warmth_very_frosty")
+        elsif (@thresholds[:frost_day].is_active)
+          warmth = I18n.t("forecast_text.temperature.warmth_cold")
+        end
 
-        warmth.concat(" day")
+        if (is_threshold_active?(:hot_day))
+          warmth = I18n.t("forecast_text.temperature.warmth_hot")
+        elsif (is_threshold_active?(:summer_day))
+          warmth = I18n.t("forecast_text.temperature.warmth_summer")
+        end
+
+        warmth.concat(I18n.t("forecast_text.temperature.text_day"))
         if (@thresholds[:tropical_night].is_active)
-          warmth.concat(" with a tropical night")
+          warmth.concat(I18n.t("forecast_text.temperature.warmth_tropical"))
           @warnings.concat("\n") if (!@warnings.empty?)
           @warnings.concat(@thresholds[:tropical_night].warning_text)
         end
@@ -53,11 +54,11 @@ module WrfForecast
 
       # method to generate the text with temperature values
       def create_temperature_text
-        text = " The maximum temperature will reach up to "
+        text = I18n.t("forecast_text.temperature.text_maximum")
         text.concat((@extreme_values.maximum - 273.15).ceil.to_s)
-        text.concat(" degrees celsius. The minimum temperature will be ")
+        text.concat(I18n.t("forecast_text.temperature.text_minimum"))
         text.concat((@extreme_values.minimum - 273.15).floor.to_s)
-        text.concat(" degrees celsius.")
+        text.concat(I18n.t("forecast_text.temperature.text_finish"))
         return text
       end
       

@@ -1,14 +1,11 @@
-# @Author: Benjamin Held
-# @Date:   2019-05-08 15:34:21
-# @Last Modified by:   Benjamin Held
-# @Last Modified time: 2021-02-21 12:37:51
-  
-require "ruby_utils/parameter_converter"
 require "time"
+require "pathname"
+require "ruby_utils/parameter_converter"
 require "wrf_library/wrf"
 require "wrf_forecast/parameter"
 require "wrf_forecast/help/help_output"
 require "wrf_forecast/forecast/forecast_handler"
+require "wrf_forecast/locale_configuration"
 
 # This module is the main entry point and will be called from the main forecast script
 module WrfForecast
@@ -27,6 +24,8 @@ module WrfForecast
     # @param [Array] arguments the input values from the terminal input ARGV
     def initialize(arguments)
       @parameter_handler = Parameter::ParameterHandler.new(arguments)
+      initialize_locale
+
       if (!parameter_handler.repository.parameters[:help] && 
           !parameter_handler.repository.parameters[:version])
         initialize_wrf_handler
@@ -70,6 +69,18 @@ module WrfForecast
     # method the check if the given parameter has been set
     def contains_parameter?(symbol)
       @parameter_handler.repository.parameters[symbol] != nil
+    end
+
+    # method to laod the available locale files and set a specific locale
+    # if the locale parameter is set
+    def initialize_locale
+      WrfForecast::LocaleConfiguration.initialize_locale(
+        Pathname.new(__dir__).join("../config/locales").expand_path)
+      if (contains_parameter?(:locale))
+        locale_string = @parameter_handler.repository.parameters[:locale]
+        WrfForecast::LocaleConfiguration.determine_locale(locale_string)
+      end
+      nil
     end
 
   end

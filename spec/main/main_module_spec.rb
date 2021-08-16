@@ -1,9 +1,3 @@
-#!/usr/bin/ruby
-# @Author: Benjamin Held
-# @Date:   2020-03-20 21:08:30
-# @Last Modified by:   Benjamin Held
-# @Last Modified time: 2021-02-21 12:38:05
-
 require "spec_helper"
 require "time"
 require "wrf_forecast"
@@ -166,9 +160,9 @@ describe WrfForecast do
 
   describe "#output_forecast" do
     context "given an array of parameters with timestamp flag" do
-      it "initialize the handler and repositories correctly, create output" do
+      it "initialize the handler with en locale and repositories correctly, create output" do
         timestamp = Time.parse("00:00").to_s
-        arguments = ["-d", timestamp, "--file", BERLIN_SMALL_DATA.to_path]
+        arguments = ["-d", timestamp, "-l", "es", "--file", BERLIN_SMALL_DATA.to_path]
         WrfForecast.initialize(arguments)
         parameters = WrfForecast.parameter_handler.repository.parameters
         suntime = WrfForecast::Text::SuntimeText.new(WrfForecast.wrf_handler.data_repository.meta_data)
@@ -194,7 +188,7 @@ describe WrfForecast do
   describe "#output_forecast" do
     context "given an array of parameters with default values" do
       it "initialize the handler and repositories correctly, create output" do
-        arguments = ["--default", "-f", BERLIN_DATA.to_path]
+        arguments = ["--default", "-l", "en", "-f", BERLIN_DATA.to_path]
         WrfForecast.initialize(arguments)
         parameters = WrfForecast.parameter_handler.repository.parameters
         suntime = WrfForecast::Text::SuntimeText.new(WrfForecast.wrf_handler.data_repository.meta_data)
@@ -296,6 +290,38 @@ describe WrfForecast do
     end
   end
 
+  describe "#output_forecast" do
+    context "given an array of parameters with default option" do
+      it "initialize the handler and repositories correctly, create forecast" do
+        arguments = ["--default", "-l", "de", "-f", BERLIN_SMALL_DATA.to_path]
+        WrfForecast.initialize(arguments)
+        parameters = WrfForecast.parameter_handler.repository.parameters
+        suntime = WrfForecast::Text::SuntimeText.new(WrfForecast.wrf_handler.data_repository.meta_data)
+
+        timestamp = Time.parse("00:00").to_s
+        expected = "Wetterbericht von Berlin für den #{timestamp}.\n\n"
+        expected.concat(suntime.text).concat("\n")
+        expected.concat("Heute wird es ein kalter Tag.")
+        expected.concat(" Die Temperatur erreicht Werte bis 10 Grad Celsius")
+        expected.concat(" und sinkt bis auf Werte um -4 Grad Celsius.\n")
+        expected.concat("Der Wind weht normal und erreicht maximale Geschwindigkeiten ")
+        expected.concat("von 23 km/h aus West. Die mittlere Geschwindigkeit beträgt 16 km/h.\n")
+        expected.concat("Die Vorhersage prognostiziert keinen Niederschlag.\n\n")
+        expected.concat("Warnungen: \n")
+        expected.concat("Frosttag (Temperatur fällt unter 0 Grad Celsius)")
+        expect(WrfForecast.output_forecast).to eq(expected)
+        expect(parameters[:date]).to eq(timestamp)
+        expect(parameters[:period]).to eq("24")
+        expect(WrfForecast.wrf_handler.data_repository.repository.size).to eq(994)
+        expect(WrfForecast.forecast_handler).to be_truthy
+      end
+      
+      after(:all) do
+        WrfForecast::LocaleConfiguration.change_locale(:en)
+      end
+    end
+  end
+
   describe "#save_forecast" do
     context "given nil as a parameter for save_forecast" do
       it "print the error message" do
@@ -383,6 +409,8 @@ describe WrfForecast do
                     "returns the forecast values not as a text but a json object\n" + \
                     " -d, --date     ".light_blue + "argument:".red + " <date>".yellow  + \
                     "; specifies the start_date of the requested forecast\n" + \
+                    " -l, --locale   ".light_blue + "argument:".red + " <locale>".yellow  + \
+                    "; specifies the locale in which the forecast should be printed\n" + \
                     " -o, --offset   ".light_blue + "argument:".red + " <offset>".yellow  + \
                     "; specifies how many hours from the forecast should be skipped\n" + \
                     " -p, --period   ".light_blue + "argument:".red + " <period>".yellow  + \

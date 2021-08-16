@@ -1,12 +1,64 @@
-#!/usr/bin/ruby
-# @Author: Benjamin Held
-# @Date:   2020-03-26 12:56:07
-# @Last Modified by:   Benjamin Held
-# @Last Modified time: 2021-01-17 20:06:30
-
 require "spec_helper"
 require "time"
 require "wrf_forecast/forecast/forecast_text"
+
+def get_berlin_header
+  expected_header = I18n.t("forecast_text.main.header_start").concat("Berlin")
+  expected_header.concat(I18n.t("forecast_text.main.header_conn"))
+  expected_header.concat("2020-02-23 00:00:00 +0100")
+end
+
+def get_berlin_body
+  expected_body = I18n.t("forecast_text.suntime.sunrise").concat("07:07, ")
+  expected_body.concat(I18n.t("forecast_text.suntime.sunset")).concat("17:34\n")
+
+  expected_body.concat(I18n.t("forecast_text.temperature.text_start"))
+  expected_body.concat(I18n.t("forecast_text.temperature.warmth_cold"))
+  expected_body.concat(I18n.t("forecast_text.temperature.text_day")).concat(".")
+  expected_body.concat(I18n.t("forecast_text.temperature.text_maximum")).concat("10")
+  expected_body.concat(I18n.t("forecast_text.temperature.text_minimum")).concat("-4")
+  expected_body.concat(I18n.t("forecast_text.temperature.text_finish")).concat("\n")
+
+
+  expected_body.concat(I18n.t("forecast_text.wind.text_start"))
+  expected_body.concat(I18n.t("forecast_text.wind.strength_normal"))
+  expected_body.concat(I18n.t("forecast_text.wind.text_maximum")).concat("23")
+  expected_body.concat(I18n.t("forecast_text.wind.text_maximum_unit"))
+  expected_body.concat(I18n.t("direction.west"))
+  expected_body.concat(I18n.t("forecast_text.wind.text_mean")).concat("16")
+  expected_body.concat(I18n.t("forecast_text.wind.text_finish")).concat("\n")
+
+  expected_body.concat(I18n.t("forecast_text.rain.no_rain"))
+end
+
+def get_hannover_header
+  expected_header = I18n.t("forecast_text.main.header_start").concat("Hannover")
+  expected_header.concat(I18n.t("forecast_text.main.header_conn"))
+  expected_header.concat("2020-03-27 00:00:00 +0100")
+end
+
+def get_hannover_body
+  expected_body = I18n.t("forecast_text.suntime.sunrise").concat("06:06, ")
+  expected_body.concat(I18n.t("forecast_text.suntime.sunset")).concat("18:47\n")
+
+  expected_body.concat(I18n.t("forecast_text.temperature.text_start"))
+  expected_body.concat(I18n.t("forecast_text.temperature.warmth_cold"))
+  expected_body.concat(I18n.t("forecast_text.temperature.text_day")).concat(".")
+  expected_body.concat(I18n.t("forecast_text.temperature.text_maximum")).concat("16")
+  expected_body.concat(I18n.t("forecast_text.temperature.text_minimum")).concat("-1")
+  expected_body.concat(I18n.t("forecast_text.temperature.text_finish")).concat("\n")
+
+
+  expected_body.concat(I18n.t("forecast_text.wind.text_start"))
+  expected_body.concat(I18n.t("forecast_text.wind.strength_normal"))
+  expected_body.concat(I18n.t("forecast_text.wind.text_maximum")).concat("24")
+  expected_body.concat(I18n.t("forecast_text.wind.text_maximum_unit"))
+  expected_body.concat(I18n.t("direction.northeast"))
+  expected_body.concat(I18n.t("forecast_text.wind.text_mean")).concat("17")
+  expected_body.concat(I18n.t("forecast_text.wind.text_finish")).concat("\n")
+
+  expected_body.concat(I18n.t("forecast_text.rain.no_rain"))
+end
 
 describe WrfForecast::ForecastText do
 
@@ -18,14 +70,7 @@ describe WrfForecast::ForecastText do
         threshold_handler = WrfForecast::Threshold::ThresholdHandler.new(repository)
         meta_data = wrf_handler.data_repository.meta_data
         text = WrfForecast::ForecastText.new(meta_data, repository, threshold_handler)
-        expected = "Weather forecast of Berlin for the 2020-02-23 00:00:00 +0100.\n\n"
-        expected.concat("Sunrise: 07:07, Sunset: 17:34\n")
-        expected.concat("Today will be a cold day.")
-        expected.concat(" The maximum temperature will reach up to 10 degrees celsius.")
-        expected.concat(" The minimum temperature will be -4 degrees celsius.\n")
-        expected.concat("The wind will be normal and will reach up to ")
-        expected.concat("23 km/h from west. The mean wind will be 16 km/h.\n")
-        expected.concat("The forecast does not predict rain.")
+        expected = "#{get_berlin_header}.\n\n#{get_berlin_body}"
         expect(text.get_complete_text).to eq(expected)
       end
     end
@@ -33,23 +78,23 @@ describe WrfForecast::ForecastText do
 
   describe ".new" do
     context "given a meteogram output file and the date" do
+      before (:all) do
+        WrfForecast::LocaleConfiguration.change_locale(:de)
+      end
+
       it "initialize handler, fill the forecast data, create text parts for Berlin" do
         wrf_handler = WrfLibrary::Wrf::Handler.new(BERLIN_SMALL_DATA, Time.parse("2020-02-23 00:00:00 +0100"))
         repository = WrfForecast::ForecastRepository.new(wrf_handler)
         threshold_handler = WrfForecast::Threshold::ThresholdHandler.new(repository)
         meta_data = wrf_handler.data_repository.meta_data
         text = WrfForecast::ForecastText.new(meta_data, repository, threshold_handler)
-        expected_header = "Weather forecast of Berlin for the 2020-02-23 00:00:00 +0100"
-        expected_body = "Sunrise: 07:07, Sunset: 17:34\n"
-        expected_body.concat("Today will be a cold day.")
-        expected_body.concat(" The maximum temperature will reach up to 10 degrees celsius.")
-        expected_body.concat(" The minimum temperature will be -4 degrees celsius.\n")
-        expected_body.concat("The wind will be normal and will reach up to ")
-        expected_body.concat("23 km/h from west. The mean wind will be 16 km/h.\n")
-        expected_body.concat("The forecast does not predict rain.")
-        expect(text.get_complete_text).to eq(expected_header.dup.concat(".\n\n").concat(expected_body))
-        expect(text.header).to eq(expected_header)
-        expect(text.body).to eq(expected_body)
+
+        expect(text.header).to eq(get_berlin_header)
+        expect(text.body).to eq(get_berlin_body)
+      end
+      
+      after(:all) do
+        WrfForecast::LocaleConfiguration.change_locale(:en)
       end
     end
   end
@@ -62,14 +107,7 @@ describe WrfForecast::ForecastText do
         threshold_handler = WrfForecast::Threshold::ThresholdHandler.new(repository)
         meta_data = wrf_handler.data_repository.meta_data
         text = WrfForecast::ForecastText.new(meta_data, repository, threshold_handler)
-        expected = "Weather forecast of Hannover for the 2020-03-27 00:00:00 +0100.\n\n"
-        expected.concat("Sunrise: 06:06, Sunset: 18:47\n")
-        expected.concat("Today will be a cold day.")
-        expected.concat(" The maximum temperature will reach up to 16 degrees celsius.")
-        expected.concat(" The minimum temperature will be -1 degrees celsius.\n")
-        expected.concat("The wind will be normal and will reach up to ")
-        expected.concat("24 km/h from northeast. The mean wind will be 17 km/h.\n")
-        expected.concat("The forecast does not predict rain.")
+        expected = "#{get_hannover_header}.\n\n#{get_hannover_body}"
         expect(text.get_complete_text).to eq(expected)
       end
     end
@@ -83,16 +121,9 @@ describe WrfForecast::ForecastText do
         threshold_handler = WrfForecast::Threshold::ThresholdHandler.new(repository)
         meta_data = wrf_handler.data_repository.meta_data
         text = WrfForecast::ForecastText.new(meta_data, repository, threshold_handler)
-        expected_header = "Weather forecast of Hannover for the 2020-03-27 00:00:00 +0100"
-        expected_body = "Sunrise: 06:06, Sunset: 18:47\n"
-        expected_body.concat("Today will be a cold day.")
-        expected_body.concat(" The maximum temperature will reach up to 16 degrees celsius.")
-        expected_body.concat(" The minimum temperature will be -1 degrees celsius.\n")
-        expected_body.concat("The wind will be normal and will reach up to ")
-        expected_body.concat("24 km/h from northeast. The mean wind will be 17 km/h.\n")
-        expected_body.concat("The forecast does not predict rain.")
-        expect(text.header).to eq(expected_header)
-        expect(text.body).to eq(expected_body)
+
+        expect(text.header).to eq(get_hannover_header)
+        expect(text.body).to eq(get_hannover_body)
       end
     end
   end
@@ -105,8 +136,8 @@ describe WrfForecast::ForecastText do
         threshold_handler = WrfForecast::Threshold::ThresholdHandler.new(repository)
         meta_data = wrf_handler.data_repository.meta_data
         text = WrfForecast::ForecastText.new(meta_data, repository, threshold_handler)
-        expected_warnings = "Warnings: \n"
-        expected_warnings.concat("frost day (temperature will fall below 0 degrees celsius)")
+        expected_warnings = I18n.t("forecast_text.main.warnings").concat("\n")
+        expected_warnings.concat(I18n.t("threshold.temperature.frost_day"))
         expect(text.warnings).to eq(expected_warnings)
       end
     end
@@ -120,8 +151,8 @@ describe WrfForecast::ForecastText do
         threshold_handler = WrfForecast::Threshold::ThresholdHandler.new(repository)
         meta_data = wrf_handler.data_repository.meta_data
         text = WrfForecast::ForecastText.new(meta_data, repository, threshold_handler)
-        expected_warnings = "Warnings: \n"
-        expected_warnings.concat("frost day (temperature will fall below 0 degrees celsius)")
+        expected_warnings = I18n.t("forecast_text.main.warnings").concat("\n")
+        expected_warnings.concat(I18n.t("threshold.temperature.frost_day"))
         expect(text.warnings).to eq(expected_warnings)
       end
     end

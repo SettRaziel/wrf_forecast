@@ -1,9 +1,3 @@
-#!/usr/bin/ruby
-# @Author: Benjamin Held
-# @Date:   2020-03-24 16:47:58
-# @Last Modified by:   Benjamin Held
-# @Last Modified time: 2020-08-03 20:41:43
-
 require "spec_helper"
 require "ruby_utils/statistic"
 require "wrf_forecast/threshold"
@@ -20,9 +14,14 @@ describe WrfForecast::Text::RainText do
         indicators = WrfForecast::Threshold::RainThreshold.new(rain_values)
         extreme_values = RubyUtils::ExtremeValues.new(0, 2)
         forecast = WrfForecast::Text::RainText.new(extreme_values, rain_values, indicators.indicators)
-        expected = "The forecast does predict normal rain with a maximum of "
-        expected.concat("2 mm in 1 hour and up to 8 mm for the day.")
-        expected.concat(" There are some dry periods during the day.")
+        expected = I18n.t("forecast_text.rain.rain_start")
+        expected.concat(I18n.t("forecast_text.rain.intensity_normal"))
+        expected.concat(I18n.t("forecast_text.rain.text_maximum"))
+        expected.concat("2").concat(I18n.t("forecast_text.rain.text_amount_hour"))
+        expected.concat("8").concat(I18n.t("forecast_text.rain.text_amount_day"))
+        expected.concat(I18n.t("forecast_text.rain.text_period_start"))
+        expected.concat(I18n.t("forecast_text.rain.text_period_some_dry"))
+        expected.concat(I18n.t("forecast_text.rain.text_period_finish"))
         expect(forecast.text).to match(expected)
       end
     end
@@ -37,9 +36,14 @@ describe WrfForecast::Text::RainText do
         indicators = WrfForecast::Threshold::RainThreshold.new(rain_values)
         extreme_values = RubyUtils::ExtremeValues.new(0, 16)
         forecast = WrfForecast::Text::RainText.new(extreme_values, rain_values, indicators.indicators)
-        expected = "The forecast does predict strong rain with a maximum of "
-        expected.concat("16 mm in 1 hour and up to 33 mm for the day.")
-        expected.concat(" There are some dry periods during the day.")
+        expected = I18n.t("forecast_text.rain.rain_start")
+        expected.concat(I18n.t("forecast_text.rain.intensity_strong"))
+        expected.concat(I18n.t("forecast_text.rain.text_maximum"))
+        expected.concat("16").concat(I18n.t("forecast_text.rain.text_amount_hour"))
+        expected.concat("33").concat(I18n.t("forecast_text.rain.text_amount_day"))
+        expected.concat(I18n.t("forecast_text.rain.text_period_start"))
+        expected.concat(I18n.t("forecast_text.rain.text_period_some_dry"))
+        expected.concat(I18n.t("forecast_text.rain.text_period_finish"))
         expect(forecast.text).to eq(expected)
       end
     end
@@ -54,9 +58,14 @@ describe WrfForecast::Text::RainText do
         indicators = WrfForecast::Threshold::RainThreshold.new(rain_values)
         extreme_values = RubyUtils::ExtremeValues.new(0, 26)
         forecast = WrfForecast::Text::RainText.new(extreme_values, rain_values, indicators.indicators)
-        expected = "The forecast does predict heavy rain with a maximum of "
-        expected.concat("26 mm in 1 hour and up to 33 mm for the day.")
-        expected.concat(" There are some dry periods during the day.")       
+        expected = I18n.t("forecast_text.rain.rain_start")
+        expected.concat(I18n.t("forecast_text.rain.intensity_heavy"))
+        expected.concat(I18n.t("forecast_text.rain.text_maximum"))
+        expected.concat("26").concat(I18n.t("forecast_text.rain.text_amount_hour"))
+        expected.concat("33").concat(I18n.t("forecast_text.rain.text_amount_day"))
+        expected.concat(I18n.t("forecast_text.rain.text_period_start"))
+        expected.concat(I18n.t("forecast_text.rain.text_period_some_dry"))
+        expected.concat(I18n.t("forecast_text.rain.text_period_finish"))
         expect(forecast.text).to match(expected)
       end
     end
@@ -71,9 +80,14 @@ describe WrfForecast::Text::RainText do
         indicators = WrfForecast::Threshold::RainThreshold.new(rain_values)
         extreme_values = RubyUtils::ExtremeValues.new(0, 41)
         forecast = WrfForecast::Text::RainText.new(extreme_values, rain_values, indicators.indicators)
-        expected = "The forecast does predict extreme rain with a maximum of "
-        expected.concat("41 mm in 1 hour and up to 43 mm for the day.")
-        expected.concat(" There are some dry periods during the day.")        
+        expected = I18n.t("forecast_text.rain.rain_start")
+        expected.concat(I18n.t("forecast_text.rain.intensity_extreme"))
+        expected.concat(I18n.t("forecast_text.rain.text_maximum"))
+        expected.concat("41").concat(I18n.t("forecast_text.rain.text_amount_hour"))
+        expected.concat("43").concat(I18n.t("forecast_text.rain.text_amount_day"))
+        expected.concat(I18n.t("forecast_text.rain.text_period_start"))
+        expected.concat(I18n.t("forecast_text.rain.text_period_some_dry"))
+        expected.concat(I18n.t("forecast_text.rain.text_period_finish"))
         expect(forecast.text).to match(expected)
       end
     end
@@ -88,8 +102,13 @@ describe WrfForecast::Text::RainText do
         indicators = WrfForecast::Threshold::RainThreshold.new(rain_values)
         extreme_values = RubyUtils::ExtremeValues.new(1, 2)
         forecast = WrfForecast::Text::RainText.new(extreme_values, rain_values, indicators.indicators)
-        expected = "The forecast does predict continous rain with a maximum of "
-        expected.concat("44 mm in 24 hours. There are no dry periods during the day.")
+        expected = I18n.t("forecast_text.rain.rain_start")
+        expected.concat(I18n.t("forecast_text.rain.intensity_continous"))
+        expected.concat(I18n.t("forecast_text.rain.text_maximum"))
+        expected.concat("44").concat(I18n.t("forecast_text.rain.text_continous"))
+        expected.concat(I18n.t("forecast_text.rain.text_period_start"))
+        expected.concat(I18n.t("forecast_text.rain.text_period_no_dry"))
+        expected.concat(I18n.t("forecast_text.rain.text_period_finish"))
         expect(forecast.text).to match(expected)
       end
     end
@@ -104,8 +123,13 @@ describe WrfForecast::Text::RainText do
         indicators = WrfForecast::Threshold::RainThreshold.new(rain_values)
         extreme_values = RubyUtils::ExtremeValues.new(0, 2)
         forecast = WrfForecast::Text::RainText.new(extreme_values, rain_values, indicators.indicators)
-        expected = "The forecast does predict continous rain with a maximum of "
-        expected.concat("42 mm in 24 hours. There are some dry periods during the day.")
+        expected = I18n.t("forecast_text.rain.rain_start")
+        expected.concat(I18n.t("forecast_text.rain.intensity_continous"))
+        expected.concat(I18n.t("forecast_text.rain.text_maximum"))
+        expected.concat("42").concat(I18n.t("forecast_text.rain.text_continous"))
+        expected.concat(I18n.t("forecast_text.rain.text_period_start"))
+        expected.concat(I18n.t("forecast_text.rain.text_period_some_dry"))
+        expected.concat(I18n.t("forecast_text.rain.text_period_finish"))
         expect(forecast.text).to match(expected)
       end
     end
@@ -134,8 +158,7 @@ describe WrfForecast::Text::RainText do
         indicators = WrfForecast::Threshold::RainThreshold.new(rain_values)
         extreme_values = RubyUtils::ExtremeValues.new(0, 16)
         forecast = WrfForecast::Text::RainText.new(extreme_values, rain_values, indicators.indicators)
-        expected = "strong rain (hourly rain sum exceeds 15 mm per hour)"
-        expect(forecast.warnings).to eq(expected)
+        expect(forecast.warnings).to eq(I18n.t("threshold.rain.strong_rain"))
       end
     end
   end
@@ -149,8 +172,7 @@ describe WrfForecast::Text::RainText do
         indicators = WrfForecast::Threshold::RainThreshold.new(rain_values)
         extreme_values = RubyUtils::ExtremeValues.new(0, 26)
         forecast = WrfForecast::Text::RainText.new(extreme_values, rain_values, indicators.indicators)
-        expected = "heavy rain (hourly rain sum exceeds 25 mm per hour)"
-        expect(forecast.warnings).to match(expected)
+        expect(forecast.warnings).to match(I18n.t("threshold.rain.heavy_rain"))
       end
     end
   end
@@ -164,8 +186,7 @@ describe WrfForecast::Text::RainText do
         indicators = WrfForecast::Threshold::RainThreshold.new(rain_values)
         extreme_values = RubyUtils::ExtremeValues.new(0, 41)
         forecast = WrfForecast::Text::RainText.new(extreme_values, rain_values, indicators.indicators)
-        expected = "extreme rain (hourly rain sum exceeds 40 mm per hour)"
-        expect(forecast.warnings).to match(expected)
+        expect(forecast.warnings).to match(I18n.t("threshold.rain.extreme_rain"))
       end
     end
   end
@@ -179,8 +200,7 @@ describe WrfForecast::Text::RainText do
         indicators = WrfForecast::Threshold::RainThreshold.new(rain_values)
         extreme_values = RubyUtils::ExtremeValues.new(1, 2)
         forecast = WrfForecast::Text::RainText.new(extreme_values, rain_values, indicators.indicators)
-        expected = "continous rain (rain sum exceeds 30 mm per 24 hours)"
-        expect(forecast.warnings).to match(expected)
+        expect(forecast.warnings).to match(I18n.t("threshold.rain.continous_rain"))
       end
     end
   end
@@ -194,8 +214,8 @@ describe WrfForecast::Text::RainText do
         indicators = WrfForecast::Threshold::RainThreshold.new(rain_values)
         extreme_values = RubyUtils::ExtremeValues.new(1, 2)
         forecast = WrfForecast::Text::RainText.new(extreme_values, rain_values, indicators.indicators)
-        expected = "strong rain (hourly rain sum exceeds 15 mm per hour)"
-        expected.concat("\ncontinous rain (rain sum exceeds 30 mm per 24 hours)")
+        expected = I18n.t("threshold.rain.strong_rain")
+        expected.concat("\n").concat(I18n.t("threshold.rain.continous_rain"))
         expect(forecast.warnings).to match(expected)
       end
     end

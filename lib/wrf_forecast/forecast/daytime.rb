@@ -1,8 +1,4 @@
-#!/usr/bin/ruby
-# @Author: Benjamin Held
-# @Date:   2020-02-18 17:21:17
-# @Last Modified by:   Benjamin Held
-# @Last Modified time: 2020-04-10 08:34:46
+require "i18n"
 
 module WrfForecast
 
@@ -11,15 +7,15 @@ module WrfForecast
   # @todo not used at the moment
   module Daytime
     # @return [String] string representation for the morning
-    MORNING = 'morning'
+    MORNING = I18n.t("forecast_text.daytime.morning")
     # @return [String] string representation for the noon
-    NOON = 'noon'
+    NOON = I18n.t("forecast_text.daytime.noon")
     # @return [String] string representation for the afternoon
-    AFTERNOON = 'afternoon'
+    AFTERNOON = I18n.t("forecast_text.daytime.afternoon")
     # @return [String] string representation for the evening    
-    EVENING = 'evening'
+    EVENING = I18n.t("forecast_text.daytime.evening")
     # @return [String] string representation for the night
-    NIGHT = 'night'
+    NIGHT = I18n.t("forecast_text.daytime.night")
   end
 
 end

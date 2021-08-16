@@ -1,9 +1,3 @@
-#!/usr/bin/ruby
-# @Author: Benjamin Held
-# @Date:   2020-05-08 16:53:00
-# @Last Modified by:   Benjamin Held
-# @Last Modified time: 2020-05-11 20:49:46
-
 require "spec_helper"
 require "wrf_forecast/threshold"
 

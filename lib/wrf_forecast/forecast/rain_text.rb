@@ -1,9 +1,3 @@
-#!/usr/bin/ruby
-# @Author: Benjamin Held
-# @Date:   2020-03-24 15:49:26
-# @Last Modified by:   Benjamin Held
-# @Last Modified time: 2020-05-19 21:57:37
-
 module WrfForecast
 
   module Text
@@ -34,9 +28,9 @@ module WrfForecast
       # method to generate the forecast text for the rain
       def generate_forecast_text
         if (!shall_it_rain?)
-          @text = "The forecast does not predict rain."
+          @text = I18n.t("forecast_text.rain.no_rain")
         else
-          @text = "The forecast does predict "
+          @text = I18n.t("forecast_text.rain.rain_start")
           @text.concat(create_intensity_text)
           @text.concat(create_rain_text)
         end
@@ -52,12 +46,17 @@ module WrfForecast
       # method to generate the text about the day
       # @return [String] the substring containing the rain intensity
       def create_intensity_text
-        intensity = "normal"
-        intensity = "strong" if (is_threshold_active?(:strong_rain))
-        intensity = "heavy" if (is_threshold_active?(:heavy_rain))
-        intensity = "extreme" if (is_threshold_active?(:extreme_rain))
+        intensity = I18n.t("forecast_text.rain.intensity_normal")
+        if (is_threshold_active?(:extreme_rain))
+          intensity = I18n.t("forecast_text.rain.intensity_extreme")
+        elsif (is_threshold_active?(:heavy_rain))
+          intensity = I18n.t("forecast_text.rain.intensity_heavy")
+        elsif (is_threshold_active?(:strong_rain))
+          intensity = I18n.t("forecast_text.rain.intensity_strong")
+        end
+
         if (@thresholds[:continous_rain].is_active)
-          intensity = "continous"
+          intensity = I18n.t("forecast_text.rain.intensity_continous")
           @warnings.concat"\n" if (!@warnings.empty?)
           @warnings.concat(@thresholds[:continous_rain].warning_text)
         end
@@ -67,24 +66,24 @@ module WrfForecast
       # method to generate the text with rain values
       # @return [String] the substring containing the precipitation amount
       def create_rain_text
-        text = " rain with a maximum of "
+        text = I18n.t("forecast_text.rain.text_maximum")
         if (@thresholds[:continous_rain].is_active)
           text.concat(@rain_sum.ceil.to_s)
-          text.concat(" mm in 24 hours.")
+          text.concat(I18n.t("forecast_text.rain.text_continous"))
         else
           text.concat(@extreme_values.maximum.round(1).to_s)
-          text.concat(" mm in 1 hour and up to ")
+          text.concat(I18n.t("forecast_text.rain.text_amount_hour"))
           text.concat(@rain_sum.ceil.to_s)
-          text.concat(" mm for the day.")
+          text.concat(I18n.t("forecast_text.rain.text_amount_day"))
         end
 
-        text.concat(" There are ")
+        text.concat(I18n.t("forecast_text.rain.text_period_start"))
         if (@extreme_values.minimum.round(5) == 0.0)
-          text.concat("some dry periods ")
+          text.concat(I18n.t("forecast_text.rain.text_period_some_dry"))
         else
-          text.concat("no dry periods ")
+          text.concat(I18n.t("forecast_text.rain.text_period_no_dry"))
         end
-        text.concat("during the day.")
+        text.concat(I18n.t("forecast_text.rain.text_period_finish"))
         return text
       end
 

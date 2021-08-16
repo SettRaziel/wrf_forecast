@@ -1,9 +1,3 @@
-#!/usr/bin/ruby
-# @Author: Benjamin Held
-# @Date:   2020-08-03 18:31:20
-# @Last Modified by:   Benjamin Held
-# @Last Modified time: 2020-11-15 21:13:25
-
 require "spec_helper"
 require "time"
 require "wrf_forecast/json_converter"
