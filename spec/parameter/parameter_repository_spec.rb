@@ -238,4 +238,24 @@ describe WrfForecast::Parameter::ParameterRepository do
     end
   end
 
+  describe ".new" do
+    context "given the one element save flag with only one argument" do
+      it "create the repository with the correct flags" do
+        arguments = ["-a", "-f", "filename"]
+        parameter_repository = WrfForecast::Parameter::ParameterRepository.new(arguments)
+        expect(parameter_repository.parameters[:aggregate]).to be_truthy
+      end
+    end
+  end
+
+  describe ".new" do
+    context "given the one element save flag with only one argument" do
+      it "create the repository with the correct flags" do
+        arguments = ["--aggregate", "--file", "filename"]
+        parameter_repository = WrfForecast::Parameter::ParameterRepository.new(arguments)
+        expect(parameter_repository.parameters[:aggregate]).to be_truthy
+      end
+    end
+  end
+
 end
