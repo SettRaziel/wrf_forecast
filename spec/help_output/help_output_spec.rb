@@ -96,9 +96,9 @@ describe "#print_help_for" do
                     "help usage :".green + "              ruby <script> (-h | --help)\n" + \
                     "help usage for parameter:".green + " ruby <script> <parameter> (-h | --help)\n" + \
                     "WRF forecast help:".light_yellow + "\n" + \
-                    " -h, --help     ".light_blue + "show help text\n" + \
-                    " -v, --version  ".light_blue + "prints the current version of the project\n" + \
-                    " -f, --file     ".light_blue + "argument:".red + " <file>".yellow + \
+                    " -h, --help      ".light_blue + "show help text\n" + \
+                    " -v, --version   ".light_blue + "prints the current version of the project\n" + \
+                    " -f, --file      ".light_blue + "argument:".red + " <file>".yellow + \
                     "; optional parameter that indicates a filepath to a readable file\n" + \
                     "     --default  ".light_blue +  \
                     "runs the script with date as today at midnight and a 24 h forecast period\n" + \
