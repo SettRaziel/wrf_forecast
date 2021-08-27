@@ -403,19 +403,21 @@ describe WrfForecast do
                     " -v, --version   ".light_blue + "prints the current version of the project\n" + \
                     " -f, --file      ".light_blue + "argument:".red + " <file>".yellow + \
                     "; optional parameter that indicates a filepath to a readable file\n" + \
-                    "     --default  ".light_blue +  \
+                    " -a, --aggregate ".light_blue + \
+                    "creates hourly values of the measurands in a json object\n" + \
+                    "     --default   ".light_blue +  \
                     "runs the script with date as today at midnight and a 24 h forecast period\n" + \
-                    " -j, --json     ".light_blue +  \
+                    " -j, --json      ".light_blue +  \
                     "returns the forecast values not as a text but a json object\n" + \
-                    " -d, --date     ".light_blue + "argument:".red + " <date>".yellow  + \
+                    " -d, --date      ".light_blue + "argument:".red + " <date>".yellow  + \
                     "; specifies the start_date of the requested forecast\n" + \
-                    " -l, --locale   ".light_blue + "argument:".red + " <locale>".yellow  + \
+                    " -l, --locale    ".light_blue + "argument:".red + " <locale>".yellow  + \
                     "; specifies the locale in which the forecast should be printed\n" + \
-                    " -o, --offset   ".light_blue + "argument:".red + " <offset>".yellow  + \
+                    " -o, --offset    ".light_blue + "argument:".red + " <offset>".yellow  + \
                     "; specifies how many hours from the forecast should be skipped\n" + \
-                    " -p, --period   ".light_blue + "argument:".red + " <period>".yellow  + \
+                    " -p, --period    ".light_blue + "argument:".red + " <period>".yellow  + \
                     "; specifies the forecast period\n" + \
-                    " -s, --save     ".light_blue + "argument:".red + " <target>".yellow  + \
+                    " -s, --save      ".light_blue + "argument:".red + " <target>".yellow  + \
                     "; specifies the output file where the results are saved\n").to_stdout
       end
     end
@@ -429,7 +431,7 @@ describe WrfForecast do
           WrfForecast.initialize(arguments)
           WrfForecast.print_help
         }.to output("WRF forecast help:".light_yellow + "\n" + \
-                    "     --default  ".light_blue +  \
+                    "     --default   ".light_blue +  \
                     "runs the script with date as today at midnight and a 24 h forecast period\n").to_stdout
       end
     end

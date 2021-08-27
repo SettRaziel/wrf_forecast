@@ -9,24 +9,26 @@ module WrfForecast
 
     # method to specify and add the help entries with help text only
     def self.add_single_help_entries
-      add_simple_text(:default, "     --default  ", 
+      add_simple_text(:aggregate, " -a, --aggregate ",
+            "creates hourly values of the measurands in a json object")
+      add_simple_text(:default, "     --default   ", 
             "runs the script with date as today at midnight and a 24 h forecast period")
-      add_simple_text(:json, " -j, --json     ", 
+      add_simple_text(:json, " -j, --json      ", 
             "returns the forecast values not as a text but a json object")
       nil
     end
 
     # method to specify and add the help entries with help text and one argument
     def self.add_one_argument_help_entries
-      add_single_argument_text(:date, " -d, --date     ", " <date>",
+      add_single_argument_text(:date, " -d, --date      ", " <date>",
             "; specifies the start_date of the requested forecast")
-      add_single_argument_text(:locale, " -l, --locale   ", " <locale>",
+      add_single_argument_text(:locale, " -l, --locale    ", " <locale>",
             "; specifies the locale in which the forecast should be printed")
-      add_single_argument_text(:offset, " -o, --offset   ", " <offset>",
+      add_single_argument_text(:offset, " -o, --offset    ", " <offset>",
             "; specifies how many hours from the forecast should be skipped")
-      add_single_argument_text(:period, " -p, --period   ", " <period>",
+      add_single_argument_text(:period, " -p, --period    ", " <period>",
             "; specifies the forecast period")
-      add_single_argument_text(:save, " -s, --save     ", " <target>",
+      add_single_argument_text(:save, " -s, --save      ", " <target>",
             "; specifies the output file where the results are saved")
       nil
     end
