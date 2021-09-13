@@ -4,7 +4,7 @@ module WrfForecast
 
     # Child class to generate valid json output for the result data of a given wrf meteogram
     # result already stored in a data repository
-    class ForecastJsonConverter < WrfForecast::JsonConverter::ForecastStationJsonConverter
+    class TextForecastJsonConverter < WrfForecast::JsonConverter::ForecastStationJsonConverter
 
       private
 

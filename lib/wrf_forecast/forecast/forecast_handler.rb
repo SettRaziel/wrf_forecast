@@ -23,7 +23,7 @@ module WrfForecast
       @threshold_handler = WrfForecast::Threshold::ThresholdHandler.new(@repository)
       meta_data = wrf_handler.data_repository.meta_data
       @text = WrfForecast::ForecastText.new(meta_data, @repository, @threshold_handler)
-      @json_converter = WrfForecast::JsonConverter::ForecastJsonConverter.
+      @json_converter = WrfForecast::JsonConverter::TextForecastJsonConverter.
                         new(wrf_handler.data_repository, repository, @threshold_handler.warnings)
     end
 
