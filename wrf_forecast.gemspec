@@ -17,6 +17,6 @@ Gem::Specification.new do |s|
   s.add_development_dependency "rspec", "~> 3.9", ">= 3.9.0"
 
   s.add_dependency "ruby_utils", "~> 0.2.0", ">= 0.2.0"
-  s.add_dependency "wrf_library", "~> 0.4.0", ">= 0.4.0"
+  s.add_dependency "wrf_library", "~> 0.5.0", ">= 0.5.0"
   s.add_dependency "i18n", "~> 1.8.9", ">= 1.8.9"
 end
