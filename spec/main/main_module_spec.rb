@@ -222,7 +222,7 @@ describe WrfForecast do
         WrfForecast.initialize(arguments)
         parameters = WrfForecast.parameter_handler.repository.parameters
 
-        expected = File.read(File.join(__dir__,"../files/expected_output.json"))
+        expected = File.read(File.join(__dir__,"../files/expected_text_output.json"))
         expect(WrfForecast.output_forecast).to eq(expected)
         expect(parameters[:date]).to eq(timestamp)
         expect(parameters[:period]).to eq("24")
@@ -242,9 +242,9 @@ describe WrfForecast do
         parameters = WrfForecast.parameter_handler.repository.parameters
 
         expect(parameters[:save]).to eq(output_file)
-        expected = File.read(File.join(__dir__,"../files/expected_output.json"))
+        expected = File.read(File.join(__dir__,"../files/expected_text_output.json"))
         expect(WrfForecast.output_forecast).to eq(expected)
-        expect(FileUtils.compare_file(output_file, File.join(__dir__,"../files/expected_output.json"))).to be_truthy
+        expect(FileUtils.compare_file(output_file, File.join(__dir__,"../files/expected_text_output.json"))).to be_truthy
         expect(parameters[:date]).to eq(timestamp)
         expect(parameters[:period]).to eq("24")
         expect(WrfForecast.wrf_handler.data_repository.repository.size).to eq(994)

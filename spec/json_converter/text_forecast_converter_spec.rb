@@ -13,7 +13,7 @@ describe WrfForecast::JsonConverter::TextForecastJsonConverter do
         converter = WrfForecast::JsonConverter::TextForecastJsonConverter.
                     new(wrf_handler.data_repository, forecast_handler.repository, forecast_handler.threshold_handler.warnings)
         converter.convert(__dir__)
-        expect(FileUtils.compare_file(File.join(__dir__,"output.json"), File.join(__dir__,"../files/expected_output.json"))).to be_truthy
+        expect(FileUtils.compare_file(File.join(__dir__,"output.json"), File.join(__dir__,"../files/expected_text_output.json"))).to be_truthy
 
         # clean up data from the test and catch errors since they should not let the test fail
         File.delete(File.join(__dir__,"output.json"))
