@@ -13,10 +13,10 @@ Gem::Specification.new do |s|
 
   s.required_ruby_version = ">= 2.4"
 
-  s.add_development_dependency "rake",      "~> 13.0", ">= 13.0.1"
-  s.add_development_dependency "rspec", "~> 3.9", ">= 3.9.0"
+  s.add_development_dependency "rake", ">= 13.0.1"
+  s.add_development_dependency "rspec", ">= 3.9.0"
 
-  s.add_dependency "ruby_utils", "~> 0.2.0", ">= 0.2.0"
-  s.add_dependency "wrf_library", "~> 0.5.0", ">= 0.5.0"
-  s.add_dependency "i18n", "~> 1.8.9", ">= 1.8.9"
+  s.add_dependency "ruby_utils", ">= 0.2.0"
+  s.add_dependency "wrf_library", ">= 0.5.0"
+  s.add_dependency "i18n", ">= 1.8.9"
 end
