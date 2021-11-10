@@ -18,6 +18,7 @@ module WrfForecast
       # private method with calls of the different validations methods
       def validate_parameters
         check_occurrence(:offset, :period) if (@repository.parameters[:offset])
+        check_occurrence(:aggregate, :json) if (@repository.parameters[:aggregate])
       end
 
       # private method to the specified parameter constraints
