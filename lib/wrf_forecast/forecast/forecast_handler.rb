@@ -9,10 +9,6 @@ module WrfForecast
   # the forecast based on the given data
   class ForecastHandler
 
-    # @return [ForecastRepository] the repository with the rehashed forecast data
-    attr_reader :repository
-    # @return [ThresholdHandler] the handler with the threshold indicators
-    attr_reader :threshold_handler
     # @return [ForecastText] the class creation the forecast text
     attr_reader :text
 
@@ -32,11 +28,21 @@ module WrfForecast
     def generate_json_output
       @json_converter.convert
     end
+
+    # method to return the created warnings
+    # @return [Hash] the hash with the warnings
+    def get_warnings
+      threshold_handler.warnings
+    end
     
     private
 
     # @return [ForecastJsonConverter] the json converter
     attr_reader :json_converter
+    # @return [ForecastRepository] the repository with the rehashed forecast data
+    attr_reader :repository
+    # @return [ThresholdHandler] the handler with the threshold indicators
+    attr_reader :threshold_handler
 
   end
 

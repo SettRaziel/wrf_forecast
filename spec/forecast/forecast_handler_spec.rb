@@ -12,8 +12,6 @@ describe WrfForecast::ForecastHandler do
     context "given a meteogram output file and the date" do
       it "initialize handler, forecast data and handler and check initialization" do
         forecast_handler = WrfForecast::ForecastHandler.new(wrf_handler)
-        expect(forecast_handler.repository).to be_truthy
-        expect(forecast_handler.threshold_handler).to be_truthy
         expect(forecast_handler.text).to be_truthy
       end
     end

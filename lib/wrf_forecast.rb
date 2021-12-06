@@ -89,7 +89,7 @@ module WrfForecast
   # @return [Hash] if initialized the warning hash, else nil
   def self.get_warnings
     if (@forecast_handler != nil)
-      return @forecast_handler.threshold_handler.warnings
+      return @forecast_handler.get_warnings
     else
       print_error("Error: Module not initialized. Run WrfForecast.new(ARGV)")
     end
