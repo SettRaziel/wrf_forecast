@@ -21,7 +21,7 @@ describe WrfForecast::ForecastHandler do
     context "given a meteogram output file and the date" do
       it "initialize handler, forecast data and handler and check initialization" do
         forecast_handler = WrfForecast::ForecastHandler.new(wrf_handler)
-        expect(forecast_handler.generate_json_output.empty?).to be_falsy
+        expect(forecast_handler.generate_text_json_output.empty?).to be_falsy
       end
     end
   end

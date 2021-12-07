@@ -257,6 +257,30 @@ describe WrfForecast do
   end
 
   describe "#output_forecast" do
+    context "given an array of parameters with default values, json flag, aggregate and save option" do
+      it "initialize the handler and repositories correctly, create and save output" do
+        timestamp = "2021-06-29 00:00:00 +0200"
+        output_file = File.join(__dir__,"output.json")
+        arguments = ["-d", timestamp, "-p", "24", "-s", output_file, "-a", "-f", "-j", BERLIN_SMALL_DATA.to_path]
+        WrfForecast.initialize(arguments)
+        parameters = WrfForecast.parameter_handler.repository.parameters
+
+        expect(parameters[:save]).to eq(output_file)
+        expected = File.read(File.join(__dir__,"../files/expected_hourly_output.json"))
+        expect(WrfForecast.output_forecast).to eq(expected)
+        expect(FileUtils.compare_file(output_file, File.join(__dir__,"../files/expected_hourly_output.json"))).to be_truthy
+        expect(parameters[:date]).to eq(timestamp)
+        expect(parameters[:period]).to eq("24")
+        expect(WrfForecast.wrf_handler.data_repository.repository.size).to eq(994)
+        expect(WrfForecast.forecast_handler).to be_truthy
+
+        # clean up data from the test and catch errors since they should not let the test fail
+        File.delete(output_file)
+      end
+    end
+  end
+
+  describe "#output_forecast" do
     context "given an array of parameters with default values and save option" do
       it "initialize the handler and repositories correctly, create output" do
         output_file = File.join(__dir__,"output")

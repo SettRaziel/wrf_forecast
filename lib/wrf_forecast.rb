@@ -102,7 +102,11 @@ module WrfForecast
   def self.output_forecast
     if (@forecast_handler != nil)
       if (@parameter_handler.repository.parameters[:json])
-        output = @forecast_handler.generate_json_output
+        if (@parameter_handler.repository.parameters[:aggregate])
+          output = @forecast_handler.generate_hourly_json_output          
+        else
+          output = @forecast_handler.generate_text_json_output
+        end
       else
         output = @forecast_handler.text.get_complete_text
         output.concat("\n\n").concat(@forecast_handler.text.warnings)
