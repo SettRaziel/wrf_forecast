@@ -498,4 +498,14 @@ describe WrfForecast do
     end
   end
 
+  describe "#determine_json_output" do
+    context "given the method call of the private methode" do
+      it "should fail with an error due to the visibility" do
+        expect {
+          WrfForecast.determine_json_output
+        }.to raise_error(NoMethodError)
+      end
+    end
+  end
+
 end
