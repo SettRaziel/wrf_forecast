@@ -25,16 +25,17 @@ script usage: ruby <script> [parameters] <filename>
 help usage :              ruby <script> (-h | --help)
 help usage for parameter: ruby <script> <parameter> (-h | --help)
 WRF forecast help:
- -h, --help     show help text
- -v, --version  prints the current version of the project
- -f, --file     argument: <file>; optional parameter that indicates a filepath to a readable file
-     --default  runs the script with date as today at midnight and a 24 h forecast period
- -j, --json     returns the forecast values not as a text but a json object
- -d, --date     argument: <date>; specifies the start_date of the requested forecast
- -l, --locale   argument: <locale>; specifies the locale in which the forecast should be printed
- -o, --offset   argument: <offset>; specifies how many hours from the forecast should be skipped
- -p, --period   argument: <period>; specifies the forecast period
- -s, --save     argument: <target>; specifies the output file where the results are saved
+ -h, --help      show help text
+ -v, --version   prints the current version of the project
+ -f, --file      argument: <file>; optional parameter that indicates a filepath to a readable file
+ -a, --aggregate creates hourly values of the measurands in a json object
+     --default   runs the script with date as today at midnight and a 24 h forecast period
+ -j, --json      returns the forecast values not as a text but a json object
+ -d, --date      argument: <date>; specifies the start_date of the requested forecast
+ -l, --locale    argument: <locale>; specifies the locale in which the forecast should be printed
+ -o, --offset    argument: <offset>; specifies how many hours from the forecast should be skipped
+ -p, --period    argument: <period>; specifies the forecast period
+ -s, --save      argument: <target>; specifies the output file where the results are saved
 ```
 When using this as a gem the main entry point is passing the arguments to the main module:
 ```
@@ -69,7 +70,7 @@ The forecast does not predict rain.
 
 Warnings: - 
 ```
-With the new parameter `-j` or `--json` the output will be converted to a json object:
+With the parameter `-j` or `--json` the output will be converted to a json object:
 ```
 {
   "meta_data": {
@@ -103,6 +104,50 @@ With the new parameter `-j` or `--json` the output will be converted to a json o
       "maximum": 0.027,
       "sum": 0.056
     },
+    "warnings": [
+      "summer day (temperature will exceed 25 degrees celsius)"
+    ]
+  }
+}
+```
+or with parameter `-a` or `--aggregate` the hourly values of the forecast day will be generated:
+```
+{
+  "meta_data": {
+    "station": {
+      "name": "Berlin-Schöneberg",
+      "descriptor": "Ber",
+      "elevation": 44.2,
+      "coordinate": {
+        "x": 13.36,
+        "y": 52.49
+      }
+    },
+    "start_date": "2021-06-29 00:00:00 +0200",
+    "suntime": {
+      "sunrise": "2021-06-29 04:46:00 +0200",
+      "sunset": "2021-06-29 21:33:00 +0200"
+    }
+  },
+  "weather_data": {
+    "temperature": [
+      282.893,
+      282.721,
+      ...
+      285.98
+    ],
+    "wind_speed": [
+      2.855,
+      2.78,
+      ...
+      2.94
+    ],
+    "rain": [
+      0.0,
+      0.0,
+      ...
+      0.0
+    ],
     "warnings": [
       "summer day (temperature will exceed 25 degrees celsius)"
     ]
