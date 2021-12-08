@@ -9,7 +9,7 @@ describe WrfForecast::HelpOutput do
         expect { 
           WrfForecast::HelpOutput.print_help_for(:default) 
         }.to output("WRF forecast help:".light_yellow + "\n" + \
-                    "     --default  ".light_blue +  \
+                    "     --default   ".light_blue +  \
                     "runs the script with date as today at midnight and a 24 h forecast period\n").to_stdout
       end
     end
@@ -21,7 +21,7 @@ describe WrfForecast::HelpOutput do
         expect { 
           WrfForecast::HelpOutput.print_help_for(:json) 
         }.to output("WRF forecast help:".light_yellow + "\n" + \
-                    " -j, --json     ".light_blue +  \
+                    " -j, --json      ".light_blue +  \
                     "returns the forecast values not as a text but a json object\n").to_stdout
       end
     end
@@ -33,7 +33,7 @@ describe WrfForecast::HelpOutput do
         expect { 
           WrfForecast::HelpOutput.print_help_for(:period) 
         }.to output("WRF forecast help:".light_yellow + "\n" + \
-                    " -p, --period   ".light_blue + "argument:".red + " <period>".yellow  + \
+                    " -p, --period    ".light_blue + "argument:".red + " <period>".yellow  + \
                     "; specifies the forecast period\n").to_stdout
       end
     end
@@ -45,7 +45,7 @@ describe WrfForecast::HelpOutput do
         expect { 
           WrfForecast::HelpOutput.print_help_for(:date) 
         }.to output("WRF forecast help:".light_yellow + "\n" + \
-                    " -d, --date     ".light_blue + "argument:".red + " <date>".yellow  + \
+                    " -d, --date      ".light_blue + "argument:".red + " <date>".yellow  + \
                     "; specifies the start_date of the requested forecast\n").to_stdout
       end
     end
@@ -57,7 +57,7 @@ describe "#print_help_for" do
         expect { 
           WrfForecast::HelpOutput.print_help_for(:locale) 
         }.to output("WRF forecast help:".light_yellow + "\n" + \
-                    " -l, --locale   ".light_blue + "argument:".red + " <locale>".yellow  + \
+                    " -l, --locale    ".light_blue + "argument:".red + " <locale>".yellow  + \
                     "; specifies the locale in which the forecast should be printed\n").to_stdout
       end
     end
@@ -69,7 +69,7 @@ describe "#print_help_for" do
         expect { 
           WrfForecast::HelpOutput.print_help_for(:offset) 
         }.to output("WRF forecast help:".light_yellow + "\n" + \
-                    " -o, --offset   ".light_blue + "argument:".red + " <offset>".yellow  + \
+                    " -o, --offset    ".light_blue + "argument:".red + " <offset>".yellow  + \
                     "; specifies how many hours from the forecast should be skipped\n").to_stdout
       end
     end
@@ -81,8 +81,20 @@ describe "#print_help_for" do
         expect { 
           WrfForecast::HelpOutput.print_help_for(:save) 
         }.to output("WRF forecast help:".light_yellow + "\n" + \
-                    " -s, --save     ".light_blue + "argument:".red + " <target>".yellow  + \
+                    " -s, --save      ".light_blue + "argument:".red + " <target>".yellow  + \
                     "; specifies the output file where the results are saved\n").to_stdout
+      end
+    end
+  end
+
+    describe "#print_help_for" do
+    context "given a one element help entry" do
+      it "print the help text for :save" do
+        expect { 
+          WrfForecast::HelpOutput.print_help_for(:aggregate) 
+        }.to output("WRF forecast help:".light_yellow + "\n" + \
+                    " -a, --aggregate ".light_blue + \
+                    "creates hourly values of the measurands in a json object\n").to_stdout
       end
     end
   end
@@ -100,19 +112,21 @@ describe "#print_help_for" do
                     " -v, --version   ".light_blue + "prints the current version of the project\n" + \
                     " -f, --file      ".light_blue + "argument:".red + " <file>".yellow + \
                     "; optional parameter that indicates a filepath to a readable file\n" + \
-                    "     --default  ".light_blue +  \
+                    " -a, --aggregate ".light_blue + \
+                    "creates hourly values of the measurands in a json object\n" + \
+                    "     --default   ".light_blue +  \
                     "runs the script with date as today at midnight and a 24 h forecast period\n" + \
-                    " -j, --json     ".light_blue +  \
+                    " -j, --json      ".light_blue +  \
                     "returns the forecast values not as a text but a json object\n" + \
-                    " -d, --date     ".light_blue + "argument:".red + " <date>".yellow  + \
+                    " -d, --date      ".light_blue + "argument:".red + " <date>".yellow  + \
                     "; specifies the start_date of the requested forecast\n" + \
-                    " -l, --locale   ".light_blue + "argument:".red + " <locale>".yellow  + \
+                    " -l, --locale    ".light_blue + "argument:".red + " <locale>".yellow  + \
                     "; specifies the locale in which the forecast should be printed\n" + \
-                    " -o, --offset   ".light_blue + "argument:".red + " <offset>".yellow  + \
+                    " -o, --offset    ".light_blue + "argument:".red + " <offset>".yellow  + \
                     "; specifies how many hours from the forecast should be skipped\n" + \
-                    " -p, --period   ".light_blue + "argument:".red + " <period>".yellow  + \
+                    " -p, --period    ".light_blue + "argument:".red + " <period>".yellow  + \
                     "; specifies the forecast period\n" + \
-                    " -s, --save     ".light_blue + "argument:".red + " <target>".yellow  + \
+                    " -s, --save      ".light_blue + "argument:".red + " <target>".yellow  + \
                     "; specifies the output file where the results are saved\n").to_stdout
       end
     end

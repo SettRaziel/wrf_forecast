@@ -4,9 +4,10 @@ module WrfForecast
 
   module JsonConverter
 
-    # Child class to generate valid json output for the result data of a given wrf meteogram
-    # result already stored in a data repository
-    class ForecastJsonConverter < WrfLibrary::JsonConverter::BaseStationJsonConverter
+    # Abstract class to generate valid json output for the result data of a given wrf meteogram
+    # result already stored in a data repository with abstract implementations for the
+    # aggregation of the measurand data
+    class ForecastStationJsonConverter < WrfLibrary::JsonConverter::BaseStationJsonConverter
 
       # initialization
       # @param [DataRepository] data the complete data
@@ -50,36 +51,25 @@ module WrfForecast
         return measurands
       end
 
-      # method to create the output hash for the temperature values
+      # abstract method to create the output hash for the temperature values
+      # @raise [NotImplementedError] if the child class does not implement this
       def generate_temperature_values
-        extreme_values = @forecast.extreme_values[:air_temperature]
-        return { :minimum => extreme_values.minimum.round(3), 
-                 :maximum => extreme_values.maximum.round(3) }
+        fail NotImplementedError, " Error: the subclass #{self.class} needs " \
+        "to implement the method: #{__method__.to_s} from its base class".red
       end
 
-      # method to create the output hash for the wind values
+      # abstract method to create the output hash for the wind values
+      # @raise [NotImplementedError] if the child class does not implement this
       def generate_wind_values
-        extreme_values = @forecast.extreme_values[:wind_speed]
-        prevalent_direction = WrfForecast::Directions.new().get_direction_string(@forecast.prevalent_direction)
-        values = Hash.new()
-        values[:minimum] = extreme_values.minimum.round(3)
-        values[:maximum] = extreme_values.maximum.round(3)
-        values[:prevalent_direction] = prevalent_direction
-        return values
+        fail NotImplementedError, " Error: the subclass #{self.class} needs " \
+        "to implement the method: #{__method__.to_s} from its base class".red
       end
 
-      # method to create the output hash for the precipitation values
+      # abstract method to create the output hash for the precipitation values
+      # @raise [NotImplementedError] if the child class does not implement this
       def generate_rain_values
-        extreme_values = @forecast.extreme_values[:rain]
-        values = Hash.new()
-        values[:minimum] = extreme_values.minimum.round(3)
-        values[:maximum] = extreme_values.maximum.round(3)
-        rain_sum = 0
-        @forecast.hourly_rain.each { |value|
-          rain_sum += value
-        }
-        values[:sum] = rain_sum.round(3)
-        return values
+        fail NotImplementedError, " Error: the subclass #{self.class} needs " \
+        "to implement the method: #{__method__.to_s} from its base class".red
       end
 
       # method to create the output array for the warnings

@@ -46,4 +46,15 @@ describe WrfForecast::Parameter::ParameterHandler do
     end
   end
 
+  describe ".new" do
+    context "given the date and aggregate flag" do
+      it "create the repository and fail the parameter contrains due to missing json requirement" do
+        arguments = ["-d", "2020-06-29", "-a", "--file", "filename"]
+        expect {
+          WrfForecast::Parameter::ParameterHandler.new(arguments)
+        }.to raise_error(ArgumentError)
+      end
+    end
+  end
+
 end

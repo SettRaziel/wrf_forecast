@@ -222,7 +222,7 @@ describe WrfForecast do
         WrfForecast.initialize(arguments)
         parameters = WrfForecast.parameter_handler.repository.parameters
 
-        expected = File.read(File.join(__dir__,"../files/expected_output.json"))
+        expected = File.read(File.join(__dir__,"../files/expected_text_output.json"))
         expect(WrfForecast.output_forecast).to eq(expected)
         expect(parameters[:date]).to eq(timestamp)
         expect(parameters[:period]).to eq("24")
@@ -242,9 +242,33 @@ describe WrfForecast do
         parameters = WrfForecast.parameter_handler.repository.parameters
 
         expect(parameters[:save]).to eq(output_file)
-        expected = File.read(File.join(__dir__,"../files/expected_output.json"))
+        expected = File.read(File.join(__dir__,"../files/expected_text_output.json"))
         expect(WrfForecast.output_forecast).to eq(expected)
-        expect(FileUtils.compare_file(output_file, File.join(__dir__,"../files/expected_output.json"))).to be_truthy
+        expect(FileUtils.compare_file(output_file, File.join(__dir__,"../files/expected_text_output.json"))).to be_truthy
+        expect(parameters[:date]).to eq(timestamp)
+        expect(parameters[:period]).to eq("24")
+        expect(WrfForecast.wrf_handler.data_repository.repository.size).to eq(994)
+        expect(WrfForecast.forecast_handler).to be_truthy
+
+        # clean up data from the test and catch errors since they should not let the test fail
+        File.delete(output_file)
+      end
+    end
+  end
+
+  describe "#output_forecast" do
+    context "given an array of parameters with default values, json flag, aggregate and save option" do
+      it "initialize the handler and repositories correctly, create and save output" do
+        timestamp = "2021-06-29 00:00:00 +0200"
+        output_file = File.join(__dir__,"output.json")
+        arguments = ["-d", timestamp, "-p", "24", "-s", output_file, "-a", "-f", "-j", BERLIN_SMALL_DATA.to_path]
+        WrfForecast.initialize(arguments)
+        parameters = WrfForecast.parameter_handler.repository.parameters
+
+        expect(parameters[:save]).to eq(output_file)
+        expected = File.read(File.join(__dir__,"../files/expected_hourly_output.json"))
+        expect(WrfForecast.output_forecast).to eq(expected)
+        expect(FileUtils.compare_file(output_file, File.join(__dir__,"../files/expected_hourly_output.json"))).to be_truthy
         expect(parameters[:date]).to eq(timestamp)
         expect(parameters[:period]).to eq("24")
         expect(WrfForecast.wrf_handler.data_repository.repository.size).to eq(994)
@@ -403,19 +427,21 @@ describe WrfForecast do
                     " -v, --version   ".light_blue + "prints the current version of the project\n" + \
                     " -f, --file      ".light_blue + "argument:".red + " <file>".yellow + \
                     "; optional parameter that indicates a filepath to a readable file\n" + \
-                    "     --default  ".light_blue +  \
+                    " -a, --aggregate ".light_blue + \
+                    "creates hourly values of the measurands in a json object\n" + \
+                    "     --default   ".light_blue +  \
                     "runs the script with date as today at midnight and a 24 h forecast period\n" + \
-                    " -j, --json     ".light_blue +  \
+                    " -j, --json      ".light_blue +  \
                     "returns the forecast values not as a text but a json object\n" + \
-                    " -d, --date     ".light_blue + "argument:".red + " <date>".yellow  + \
+                    " -d, --date      ".light_blue + "argument:".red + " <date>".yellow  + \
                     "; specifies the start_date of the requested forecast\n" + \
-                    " -l, --locale   ".light_blue + "argument:".red + " <locale>".yellow  + \
+                    " -l, --locale    ".light_blue + "argument:".red + " <locale>".yellow  + \
                     "; specifies the locale in which the forecast should be printed\n" + \
-                    " -o, --offset   ".light_blue + "argument:".red + " <offset>".yellow  + \
+                    " -o, --offset    ".light_blue + "argument:".red + " <offset>".yellow  + \
                     "; specifies how many hours from the forecast should be skipped\n" + \
-                    " -p, --period   ".light_blue + "argument:".red + " <period>".yellow  + \
+                    " -p, --period    ".light_blue + "argument:".red + " <period>".yellow  + \
                     "; specifies the forecast period\n" + \
-                    " -s, --save     ".light_blue + "argument:".red + " <target>".yellow  + \
+                    " -s, --save      ".light_blue + "argument:".red + " <target>".yellow  + \
                     "; specifies the output file where the results are saved\n").to_stdout
       end
     end
@@ -429,7 +455,7 @@ describe WrfForecast do
           WrfForecast.initialize(arguments)
           WrfForecast.print_help
         }.to output("WRF forecast help:".light_yellow + "\n" + \
-                    "     --default  ".light_blue +  \
+                    "     --default   ".light_blue +  \
                     "runs the script with date as today at midnight and a 24 h forecast period\n").to_stdout
       end
     end
@@ -468,6 +494,16 @@ describe WrfForecast do
           WrfForecast.print_error("error message")
         }.to output("error message".red + "\n" + \
                     "For help type: ruby <script> --help".green + "\n").to_stdout
+      end
+    end
+  end
+
+  describe "#determine_json_output" do
+    context "given the method call of the private methode" do
+      it "should fail with an error due to the visibility" do
+        expect {
+          WrfForecast.determine_json_output
+        }.to raise_error(NoMethodError)
       end
     end
   end

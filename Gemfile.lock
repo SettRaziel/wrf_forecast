@@ -6,18 +6,18 @@ GIT
 
 GIT
   remote: https://github.com/SettRaziel/wrf_library
-  revision: 41610d27520fdc233be2357b4d8749206843521b
+  revision: 301c0e66d049e90fddf5acd19c6d2da3f5d3cad3
   specs:
-    wrf_library (0.4.0)
+    wrf_library (0.5.2)
       ruby_utils (~> 0.2.0, >= 0.1.0)
 
 PATH
   remote: .
   specs:
     wrf_forecast (0.2.2)
-      i18n (~> 1.8.9, >= 1.8.9)
-      ruby_utils (~> 0.2.0, >= 0.2.0)
-      wrf_library (~> 0.4.0, >= 0.4.0)
+      i18n (>= 1.8.9)
+      ruby_utils (>= 0.2.0)
+      wrf_library (>= 0.5.0)
 
 GEM
   remote: https://rubygems.org/
@@ -52,8 +52,8 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  rake (~> 13.0, >= 13.0.1)
-  rspec (~> 3.9, >= 3.9.0)
+  rake (>= 13.0.1)
+  rspec (>= 3.9.0)
   ruby_utils!
   simplecov
   wrf_forecast!

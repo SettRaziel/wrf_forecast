@@ -15,6 +15,7 @@ module WrfForecast
       # @param [String] arg the given argument
       def process_argument(arg)
         case arg
+          when *@mapping[:aggregate] then @parameters[:aggregate] = true
           when *@mapping[:date] then create_argument_entry(:date)
           when *@mapping[:default] then create_defaults
           when *@mapping[:json] then @parameters[:json] = true
@@ -30,6 +31,7 @@ module WrfForecast
 
       # method to define the input string values that will match a given paramter symbol
       def define_mapping
+        @mapping[:aggregate] = ["-a", "--aggregate"]
         @mapping[:date] = ["-d", "--date"]
         @mapping[:default] = ["--default"]
         @mapping[:json] = ["-j", "--json"]

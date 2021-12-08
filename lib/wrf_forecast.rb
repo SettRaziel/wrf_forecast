@@ -89,7 +89,7 @@ module WrfForecast
   # @return [Hash] if initialized the warning hash, else nil
   def self.get_warnings
     if (@forecast_handler != nil)
-      return @forecast_handler.threshold_handler.warnings
+      return @forecast_handler.get_warnings
     else
       print_error("Error: Module not initialized. Run WrfForecast.new(ARGV)")
     end
@@ -102,7 +102,7 @@ module WrfForecast
   def self.output_forecast
     if (@forecast_handler != nil)
       if (@parameter_handler.repository.parameters[:json])
-        output = @forecast_handler.generate_json_output
+        output = determine_json_output
       else
         output = @forecast_handler.text.get_complete_text
         output.concat("\n\n").concat(@forecast_handler.text.warnings)
@@ -153,6 +153,15 @@ module WrfForecast
     puts "#{message}".red
     puts "For help type: ruby <script> --help".green
     nil
+  end
+
+  # private method to determine which kind of json output needs to be created,
+  # based on the given script parameter json and aggregate
+  private_class_method def self.determine_json_output
+    if (@parameter_handler.repository.parameters[:aggregate])
+      return @forecast_handler.generate_hourly_json_output          
+    end
+    @forecast_handler.generate_text_json_output
   end
 
 end

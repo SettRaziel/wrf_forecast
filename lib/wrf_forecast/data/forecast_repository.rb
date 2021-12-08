@@ -1,5 +1,5 @@
 require 'ruby_utils/statistic'
-require 'wrf_forecast/data/wind_direction_repository'
+require 'wrf_library/data/wind_direction_repository'
 
 module WrfForecast
 
@@ -65,7 +65,7 @@ module WrfForecast
 
     # method to determine the wind direction distribution for the given data
     def generate_wind_direction_statistic
-      direction_repository = WrfForecast::WindDirectionRepository.new()
+      direction_repository = WrfLibrary::WindDirectionRepository.new()
       direction_repository.generate_direction_distribution(@forecast_data[:wind_direction])
       @direction_distribution = direction_repository.direction_distribution
       @prevalent_direction = direction_repository.determine_prevalent_direction
