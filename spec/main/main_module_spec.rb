@@ -481,7 +481,7 @@ describe WrfForecast do
           arguments = ["--version"]
           WrfForecast.initialize(arguments)
           WrfForecast.print_version
-        }.to output("wrf_forecast version 0.2.2".yellow + "\n" + \
+        }.to output("wrf_forecast version 0.3.0".yellow + "\n" + \
                     "Created by Benjamin Held (March 2019)".yellow + "\n").to_stdout
       end
     end
