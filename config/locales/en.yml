@@ -23,7 +23,7 @@ en:
       header_conn: " for the "
       warnings: "Warnings: "
     rain:
-      no_rain: "The forecast does not predict rain."
+      no_rain: "The forecast does not predict precipitation."
       rain_start: "The forecast does predict "
       intensity_normal: "normal"
       intensity_strong: "strong"
