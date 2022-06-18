@@ -39,10 +39,10 @@ de:
       text_period_no_dry: "keine trockenen Perioden "
       text_period_finish: "während des Tages."
     preciptation_form:
-      liquid: "rain"
-      snow: "snow"
-      freezing_rain: "freezing rain"
-      hail: "hail"
+      liquid: "Regen"
+      snow: "Schnee"
+      freezing_rain: "gefrierender Regen"
+      hail: "Hagel"      
     suntime:
       sunrise: "Sonnenaufgang: "
       sunset: "Sonnenuntergang: "

@@ -31,7 +31,8 @@ module WrfForecast
           @text = I18n.t("forecast_text.rain.no_rain")
         else
           @text = I18n.t("forecast_text.rain.rain_start")
-          @text.concat(create_intensity_text)
+          @text.concat(create_intensity_text).concat(" ")
+          @text.concat(I18n.t("forecast_text.preciptation_form.liquid")) # check for precipitation form
           @text.concat(create_rain_text)
         end
         nil

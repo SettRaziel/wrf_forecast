@@ -30,7 +30,7 @@ en:
       intensity_heavy: "heavy"
       intensity_extreme: "extreme"
       intensity_continous: "continous"
-      text_maximum: " rain with a maximum of "
+      text_maximum: " with a maximum of "
       text_continous: " mm in 24 hours."
       text_amount_hour: " mm in 1 hour and up to "
       text_amount_day: " mm for the day."
@@ -39,10 +39,10 @@ en:
       text_period_no_dry: "no dry periods "
       text_period_finish: "during the day."
     preciptation_form:
-      liquid: "Regen"
-      snow: "Schnee"
-      freezing_rain: "gefrierender Regen"
-      hail: "Hagel"      
+      liquid: "rain"
+      snow: "snow"
+      freezing_rain: "freezing rain"
+      hail: "hail"      
     suntime:
       sunrise: "Sunrise: "
       sunset: "Sunset: "
