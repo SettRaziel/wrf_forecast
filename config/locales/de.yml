@@ -30,7 +30,7 @@ de:
       intensity_heavy: "heftigen"
       intensity_extreme: "extremen"
       intensity_continous: "kontinuierlichen"
-      text_maximum: " Niederschlag mit einem Maximum von "
+      text_maximum: " mit einem Maximum von "
       text_continous: " mm in 24 Stunden."
       text_amount_hour: " mm in 1 Stunde und bis zu "
       text_amount_day: " mm über den Tag."
