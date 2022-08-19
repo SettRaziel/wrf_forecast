@@ -21,7 +21,7 @@ Initially there will be two types of forecast available:
 
 ## Usage
 ```
-script usage: ruby <script> [parameters] <filename>
+script usage: ruby <script> [parameters] (-f | --file) <filename>
 help usage :              ruby <script> (-h | --help)
 help usage for parameter: ruby <script> <parameter> (-h | --help)
 WRF forecast help:
@@ -39,13 +39,13 @@ WRF forecast help:
 ```
 When using this as a gem the main entry point is passing the arguments to the main module:
 ```
-WrfForecast.initialize(['--default', '-o', '6', "../files/Ber.d01.TS"])
+WrfForecast.initialize(['--default', '-o', '6', "-f", "../files/Ber.d01.TS"])
 ```
 
 ## Examples
 Reading a file with 24 h forecast data and creating a forecast with default parameters
 ```
-ruby wrf_forecast.rb --default <filename>
+ruby wrf_forecast.rb --default --file <filename>
 ```
 will lead to a forecast text like this:
 ```
