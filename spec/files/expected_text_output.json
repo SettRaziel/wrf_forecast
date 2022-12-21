@@ -28,7 +28,7 @@
     "rain": {
       "minimum": 0.0,
       "maximum": 0.001,
-      "sum": 0.001
+      "sum": 0.002
     },
     "warnings": [
       "frost day (temperature will fall below 0 degrees celsius)"

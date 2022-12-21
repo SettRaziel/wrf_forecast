@@ -1,5 +1,6 @@
 require 'ruby_utils/statistic'
 require 'wrf_library/data/wind_direction_repository'
+require "wrf_library/statistic"
 
 module WrfForecast
 
@@ -83,31 +84,16 @@ module WrfForecast
         rain_data << c + e
       }
       @forecast_data[:rain] = rain_data
-      calculate_hourly_rainsum
+      calculate_hourly_rainsum(wrf_handler)
       nil
     end
 
     # method to sum up the rain data into hourly rain sums
     # for that calculate the difference from the rain value at the start and end
     # of the currently checked hour
-    def calculate_hourly_rainsum
-      rain_data = @forecast_data[:rain]
-      hourly_rain = Array.new()
-      # when using an offset, start with the current value as delta
-      previous_hour = rain_data[0]
-      previous_timestamp = @time_data[0].hour
-      rain_data.zip(@time_data).each { |rain, timestamp|
-        # detect new hour, when the leading number increases by one
-        if (timestamp.hour != previous_timestamp)
-          hourly_rain << rain - previous_hour
-          previous_hour = rain
-        end
-        previous_timestamp = timestamp.hour
-      }
-
-      hourly_rain << rain_data[rain_data.size-1] - previous_hour
-      @hourly_values[:rain] = hourly_rain
-      @extreme_values[:rain] = RubyUtils::Statistic.extreme_values(hourly_rain)
+    def calculate_hourly_rainsum(wrf_handler)
+      @hourly_values[:rain] = WrfLibrary::Statistic::Hourly.calculate_hourly_rainsum(wrf_handler)
+      @extreme_values[:rain] = RubyUtils::Statistic.extreme_values(@hourly_values[:rain])
       nil
     end
 
