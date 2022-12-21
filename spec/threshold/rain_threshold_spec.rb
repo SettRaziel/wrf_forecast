@@ -10,7 +10,7 @@ describe WrfForecast::Threshold::RainThreshold do
       it "initialize handler, fill the forecast data, check rain indicators" do
         handler = WrfLibrary::Wrf::Handler.new(BERLIN_SMALL_DATA, Time.parse("2020-02-23"))
         repository = WrfForecast::ForecastRepository.new(handler)
-        rain_values = repository.hourly_rain
+        rain_values = repository.hourly_values[:rain]
         indicators = WrfForecast::Threshold::RainThreshold.new(rain_values)
         expect(indicators.indicators[:strong_rain].is_active).to eq(false)
         expect(indicators.indicators[:heavy_rain].is_active).to eq(false)

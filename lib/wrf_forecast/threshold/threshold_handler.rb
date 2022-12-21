@@ -23,7 +23,7 @@ module WrfForecast
         data = forecast_repository.forecast_data
         @temperature_threshold = WrfForecast::Threshold::TemperatureThreshold.new(data[:air_temperature])
         @wind_threshold = WrfForecast::Threshold::WindThreshold.new(data[:wind_speed])
-        @rain_threshold = WrfForecast::Threshold::RainThreshold.new(forecast_repository.hourly_rain)
+        @rain_threshold = WrfForecast::Threshold::RainThreshold.new(forecast_repository.hourly_values[:rain])
         collect_active_thresholds
       end
 

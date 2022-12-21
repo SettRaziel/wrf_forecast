@@ -15,14 +15,15 @@ module WrfForecast
     attr_reader :direction_distribution
     # @return [Symbol] the prevalent wind direction
     attr_reader :prevalent_direction
-    # @return [Array] the hourly rain sums
-    attr_reader :hourly_rain
+    # @return [Hash] the hourly values for the measurands
+    attr_reader :hourly_values
 
     # initialization
     # @param [WrfHandler] the wrf handler with the data
     def initialize(wrf_handler)
       @extreme_values = Hash.new()
       @forecast_data = Hash.new()
+      @hourly_values = Hash.new()
       @time_data = wrf_handler.retrieve_data_set(:forecast_time)
 
       add_temperature_data(wrf_handler)
@@ -91,21 +92,22 @@ module WrfForecast
     # of the currently checked hour
     def calculate_hourly_rainsum
       rain_data = @forecast_data[:rain]
-      @hourly_rain = Array.new()
+      hourly_rain = Array.new()
       # when using an offset, start with the current value as delta
       previous_hour = rain_data[0]
       previous_timestamp = @time_data[0].hour
       rain_data.zip(@time_data).each { |rain, timestamp|
         # detect new hour, when the leading number increases by one
         if (timestamp.hour != previous_timestamp)
-          @hourly_rain << rain - previous_hour
+          hourly_rain << rain - previous_hour
           previous_hour = rain
         end
         previous_timestamp = timestamp.hour
       }
 
-      @hourly_rain << rain_data[rain_data.size-1] - previous_hour
-      @extreme_values[:rain] = RubyUtils::Statistic.extreme_values(@hourly_rain)
+      hourly_rain << rain_data[rain_data.size-1] - previous_hour
+      @hourly_values[:rain] = hourly_rain
+      @extreme_values[:rain] = RubyUtils::Statistic.extreme_values(hourly_rain)
       nil
     end
 

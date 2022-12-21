@@ -115,7 +115,7 @@ module WrfForecast
     # @param [ThresholdHandler] handler the handler with the indicators
     def initialize_rain_text(repository, handler)
       extreme_values = repository.extreme_values[:rain]
-      hourly_rain = repository.hourly_rain
+      hourly_rain = repository.hourly_values[:rain]
       threshold = handler.rain_threshold.indicators
       @rain_text = WrfForecast::Text::RainText.new(extreme_values, hourly_rain, threshold)
       nil

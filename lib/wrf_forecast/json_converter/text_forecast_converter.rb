@@ -33,7 +33,7 @@ module WrfForecast
         values[:minimum] = extreme_values.minimum.round(3)
         values[:maximum] = extreme_values.maximum.round(3)
         rain_sum = 0
-        @forecast.hourly_rain.each { |value|
+        @forecast.hourly_values[:rain].each { |value|
           rain_sum += value
         }
         values[:sum] = rain_sum.round(3)
