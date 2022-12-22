@@ -80,18 +80,8 @@ module WrfForecast
       cumulus_rain = wrf_handler.retrieve_data_set(:cumulus_rainfall)
       explicit_rain = wrf_handler.retrieve_data_set(:explicit_rainfall)
       rain_data = Array.new()
-      cumulus_rain.zip(explicit_rain).each { |c, e| 
-        rain_data << c + e
-      }
+      cumulus_rain.zip(explicit_rain).each { |c, e| rain_data << c + e }
       @forecast_data[:rain] = rain_data
-      calculate_hourly_rainsum(wrf_handler)
-      nil
-    end
-
-    # method to sum up the rain data into hourly rain sums
-    # for that calculate the difference from the rain value at the start and end
-    # of the currently checked hour
-    def calculate_hourly_rainsum(wrf_handler)
       @hourly_values[:rain] = WrfLibrary::Statistic::Hourly.calculate_hourly_rainsum(wrf_handler)
       @extreme_values[:rain] = RubyUtils::Statistic.extreme_values(@hourly_values[:rain])
       nil
