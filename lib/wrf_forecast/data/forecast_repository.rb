@@ -42,6 +42,8 @@ module WrfForecast
     def add_temperature_data(wrf_handler)
       temperature = wrf_handler.retrieve_data_set(:air_temperature)
       @forecast_data[:air_temperature] = temperature
+      @hourly_values[:air_temperature] = WrfLibrary::Statistic::Hourly.
+                                         calculate_hourly_means(:air_temperature, wrf_handler)
       @extreme_values[:air_temperature] = RubyUtils::Statistic.extreme_values(temperature)    
       nil
     end

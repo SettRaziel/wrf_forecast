@@ -21,6 +21,18 @@ describe WrfForecast::ForecastRepository do
 
   describe ".new" do
     context "given a meteogram output file and the date" do
+      it "initialize handler, fill the forecast data, check hourly temperature means" do
+        repository = WrfForecast::ForecastRepository.new(handler)
+        temperature_means = repository.hourly_values[:air_temperature]
+        expect(temperature_means.size).to eq(85)
+        expect(temperature_means[0].round(3)).to eq(279.555)
+        expect(temperature_means[50].round(3)).to eq(270.695)
+      end
+    end
+  end
+
+  describe ".new" do
+    context "given a meteogram output file and the date" do
       it "initialize handler, fill the forecast data, check temperature extremes" do
         repository = WrfForecast::ForecastRepository.new(handler)
         extreme_values = repository.extreme_values[:air_temperature]
