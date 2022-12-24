@@ -61,6 +61,8 @@ module WrfForecast
         wind_direction << Math.atan2(u, v) * r2d + 180
       }
       @forecast_data[:wind_speed] = wind_speed
+      @hourly_values[:wind_speed] = WrfLibrary::Statistic::Hourly.
+                                    calculate_hourly_windspeed_means(wrf_handler)
       @forecast_data[:wind_direction] = wind_direction
       @extreme_values[:wind_speed] = RubyUtils::Statistic.extreme_values(wind_speed)
       generate_wind_direction_statistic
