@@ -19,7 +19,7 @@ module WrfForecast
     attr_reader :hourly_rain
 
     # initialization
-    # @param [WrfHandler] the wrf handler with the data
+    # @param [WrfHandler] wrf_handler the wrf handler with the data
     def initialize(wrf_handler)
       @extreme_values = Hash.new()
       @forecast_data = Hash.new()

@@ -18,7 +18,7 @@ module WrfForecast
       attr_reader :warnings
 
       # initialization
-      # @param [ForecastRepository] the forecast repository holding the forecast data
+      # @param [ForecastRepository] forecast_repository the forecast repository holding the forecast data
       def initialize(forecast_repository)
         data = forecast_repository.forecast_data
         @temperature_threshold = WrfForecast::Threshold::TemperatureThreshold.new(data[:air_temperature])

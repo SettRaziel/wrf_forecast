@@ -84,7 +84,7 @@ module WrfForecast
       end
 
       # method to convert a float hourstamp to a valid time object
-      # @param [Time] forecast_data the start date of the forecast
+      # @param [Time] forecast_date the start date of the forecast
       # @param [Float] float_time the suntime hour as a float
       # @return [Time] the suntime as a time object
       def convert_suntime(forecast_date, float_time)
