@@ -23,7 +23,7 @@ module WrfForecast
     # main entry point and initialization
     # @param [Array] arguments the input values from the terminal input ARGV
     def initialize(arguments)
-      @parameter_handler = Parameter::ParameterHandler.new(arguments)
+      @parameter_handler = WrfForecast::Parameter::ParameterHandler.new(arguments)
       initialize_locale
 
       if (!parameter_handler.repository.parameters[:help] && 
