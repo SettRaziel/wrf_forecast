@@ -70,6 +70,10 @@ The forecast does not predict rain.
 
 Warnings: - 
 ```
+The same forecast can be achieved by setting the required parameters manually:
+```
+ruby wrf_forecast.rb --date "2020-08-19 00:00" --period 24 --file <filename>
+```
 With the parameter `-j` or `--json` the output will be converted to a json object:
 ```
 {
