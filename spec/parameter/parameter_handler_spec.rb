@@ -9,6 +9,7 @@ describe WrfForecast::Parameter::ParameterHandler do
         arguments = ["-d", "2020-06-29", "--file", "filename"]
         parameter_handler = WrfForecast::Parameter::ParameterHandler.new(arguments)
         expect(parameter_handler.repository.parameters[:date]).to eq("2020-06-29")
+        expect(parameter_handler.repository.parameters[:period]).to eq("24")
       end
     end
   end

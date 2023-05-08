@@ -72,6 +72,34 @@ describe WrfForecast do
   end
 
   describe "#output_forecast" do
+    context "given an array of parameters with timestamp values" do
+      it "initialize the handler and repositories correctly, create output" do
+        timestamp = Time.parse("00:00").to_s
+        arguments = ["-d", timestamp, "--file", BERLIN_DATA.to_path]
+        WrfForecast.initialize(arguments)
+        parameters = WrfForecast.parameter_handler.repository.parameters
+        suntime = WrfForecast::Text::SuntimeText.new(WrfForecast.wrf_handler.data_repository.meta_data)
+
+        expected = "Weather forecast of Berlin for the #{timestamp}.\n\n"
+        expected.concat(suntime.text).concat("\n")
+        expected.concat("Today will be a normal day.")
+        expected.concat(" The maximum temperature will reach up to 10 degrees celsius.")
+        expected.concat(" The minimum temperature will be 1 degrees celsius.\n")
+        expected.concat("The wind will be normal and will reach up to ")
+        expected.concat("17 km/h from northeast. The mean wind will be 11 km/h.\n")
+        expected.concat("The forecast does predict normal rain with a maximum of ")
+        expected.concat("0.3 mm in 1 hour and up to 1 mm for the day.")
+        expected.concat(" There are some dry periods during the day.\n\n")
+        expected.concat("Warnings: -")
+        expect(WrfForecast.output_forecast).to eq(expected)
+        expect(parameters[:date]).to eq(timestamp)
+        expect(WrfForecast.wrf_handler.data_repository.repository.size).to eq(1124)
+        expect(WrfForecast.forecast_handler).to be_truthy
+      end
+    end
+  end
+
+  describe "#output_forecast" do
     context "given an array of parameters with default values" do
       it "initialize the handler and repositories correctly, create output" do
         arguments = ["--default", "-f", BERLIN_DATA.to_path]
