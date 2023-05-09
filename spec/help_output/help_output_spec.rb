@@ -34,7 +34,7 @@ describe WrfForecast::HelpOutput do
           WrfForecast::HelpOutput.print_help_for(:period) 
         }.to output("WRF forecast help:".light_yellow + "\n" + \
                     " -p, --period    ".light_blue + "argument:".red + " <period>".yellow  + \
-                    "; specifies the forecast period\n").to_stdout
+                    "; specifies the forecast period, if not set a default of 24 is set\n").to_stdout
       end
     end
   end
@@ -125,7 +125,7 @@ describe "#print_help_for" do
                     " -o, --offset    ".light_blue + "argument:".red + " <offset>".yellow  + \
                     "; specifies how many hours from the forecast should be skipped\n" + \
                     " -p, --period    ".light_blue + "argument:".red + " <period>".yellow  + \
-                    "; specifies the forecast period\n" + \
+                    "; specifies the forecast period, if not set a default of 24 is set\n" + \
                     " -s, --save      ".light_blue + "argument:".red + " <target>".yellow  + \
                     "; specifies the output file where the results are saved\n").to_stdout
       end
