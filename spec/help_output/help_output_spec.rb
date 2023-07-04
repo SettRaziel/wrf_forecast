@@ -89,7 +89,7 @@ describe "#print_help_for" do
 
     describe "#print_help_for" do
     context "given a one element help entry" do
-      it "print the help text for :save" do
+      it "print the help text for :aggregate" do
         expect { 
           WrfForecast::HelpOutput.print_help_for(:aggregate) 
         }.to output("WRF forecast help:".light_yellow + "\n" + \
