@@ -27,7 +27,7 @@ module WrfForecast
       add_single_argument_text(:offset, " -o, --offset    ", " <offset>",
             "; specifies how many hours from the forecast should be skipped")
       add_single_argument_text(:period, " -p, --period    ", " <period>",
-            "; specifies the forecast period")
+            "; specifies the forecast period, if not set a default of 24 is set")
       add_single_argument_text(:save, " -s, --save      ", " <target>",
             "; specifies the output file where the results are saved")
       nil

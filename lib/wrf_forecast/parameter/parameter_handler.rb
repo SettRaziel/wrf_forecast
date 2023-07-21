@@ -28,6 +28,9 @@ module WrfForecast
 
         # check mandatory file parameter
         check_mandatory_parameter(:file)
+
+        # set default value for period if not set
+        @repository.parameters[:period] = "24" if (@repository.parameters[:period] == nil)
       end
 
     end
