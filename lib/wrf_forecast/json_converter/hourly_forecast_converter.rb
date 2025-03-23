@@ -22,6 +22,11 @@ module WrfForecast
       # @return [WrfHandler] the wrf handler with the data of the model run
       attr_accessor :wrf_handler
 
+      # method to create the output hash for the pressure values
+      def generate_pressure_values
+        WrfLibrary::Statistic::Hourly.calculate_hourly_means(:pressure, @wrf_handler)
+      end
+
       # method to create the output hash for the temperature values
       def generate_temperature_values
         WrfLibrary::Statistic::Hourly.calculate_hourly_means(:air_temperature, @wrf_handler)

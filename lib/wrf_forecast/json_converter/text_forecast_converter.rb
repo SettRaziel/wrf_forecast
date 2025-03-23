@@ -8,6 +8,13 @@ module WrfForecast
 
       private
 
+      # method to create the output hash for the pressure values
+      def generate_pressure_values
+        extreme_values = @forecast.extreme_values[:pressure]
+        return { :minimum => extreme_values.minimum.round(3), 
+                 :maximum => extreme_values.maximum.round(3) }
+      end
+
       # method to create the output hash for the temperature values
       def generate_temperature_values
         extreme_values = @forecast.extreme_values[:air_temperature]
