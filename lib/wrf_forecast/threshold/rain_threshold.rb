@@ -6,7 +6,7 @@ module WrfForecast
     # That means that this class can only work correctly if the data represents a time
     # span of up to 24 hours.
     # The indicators and thresholds are bases on the climate indicators of the german
-    # (weatherservice)[https://www.dwd.de/DE/wetter/warnungen_aktuell/kriterien/warnkriterien.html?nn=508722]:
+    # (weatherservice)[https://www.dwd.de/DE/wetter/warnungen_aktuell/kriterien/warnkriterien.html]:
     # * strong rain: the hourly rain sum exceeds 15 mm per hour
     # * heavy rain: the hourly rain sum exceeds 25 mm per hour
     # * extreme rain: the hourly rain sum exceeds 40 mm per hour

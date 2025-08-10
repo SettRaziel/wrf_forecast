@@ -6,7 +6,7 @@ module WrfForecast
     # That means that this class can only work correctly if the data represents a time
     # span of up to 24 hours.
     # The indicators and thresholds are bases on the climate indicators of the german
-    # (weatherservice)[https://www.dwd.de/DE/service/lexikon/lexikon_node.html]:
+    # (weatherservice)[https://www.dwd.de/DE/wetter/warnungen_aktuell/kriterien/warnkriterien.html]:
     # * ice day: the temperature of the day did not exceed 0.0 degrees celsius
     # * frost day: the temperature was below 0.0 degress celsius at least once
     # * summer day: the temperature did exceed 25.0 degress celsius at least once
