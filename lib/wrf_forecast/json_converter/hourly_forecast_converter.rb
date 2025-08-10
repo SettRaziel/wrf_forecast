@@ -23,16 +23,25 @@ module WrfForecast
       attr_accessor :wrf_handler
 
       # method to create the output hash for the temperature values
+      # @return [Array] the array with the hourly values
       def generate_temperature_values
         WrfLibrary::Statistic::Hourly.calculate_hourly_means(:air_temperature, @wrf_handler)
       end
 
-      # method to create the output hash for the wind values
-      def generate_wind_values
+      # method to create the output hash for the wind speed values
+      # @return [Array] the array with the hourly values  
+      def generate_windspeed_values
         WrfLibrary::Statistic::Hourly.calculate_hourly_windspeed_means(@wrf_handler)
       end
 
+      # method to create the output hash for wind direction values
+      # @return [Array] the array with the hourly values      
+      def generate_winddirection_values
+        WrfLibrary::Statistic::Hourly.calculate_hourly_winddirection_means(@wrf_handler)
+      end
+
       # method to create the output hash for the precipitation values
+      # @return [Array] the array with the hourly values      
       def generate_rain_values
         WrfLibrary::Statistic::Hourly.calculate_hourly_rainsum(@wrf_handler)        
       end

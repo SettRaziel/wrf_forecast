@@ -45,7 +45,8 @@ module WrfForecast
       def generate_data_values
         measurands = Hash.new()
         measurands[:temperature] = generate_temperature_values
-        measurands[:wind_speed] = generate_wind_values
+        measurands[:wind_speed] = generate_windspeed_values
+        measurands[:wind_direction] = generate_winddirection_values
         measurands[:rain] = generate_rain_values
         measurands[:warnings] = generate_warnings
         return measurands
@@ -58,9 +59,16 @@ module WrfForecast
         "to implement the method: #{__method__.to_s} from its base class".red
       end
 
-      # abstract method to create the output hash for the wind values
+      # abstract method to create the output hash for the wind speed values
       # @raise [NotImplementedError] if the child class does not implement this
-      def generate_wind_values
+      def generate_windspeed_values
+        fail NotImplementedError, " Error: the subclass #{self.class} needs " \
+        "to implement the method: #{__method__.to_s} from its base class".red
+      end
+
+      # abstract method to create the output hash for the wind direction values
+      # @raise [NotImplementedError] if the child class does not implement this
+      def generate_winddirection_values
         fail NotImplementedError, " Error: the subclass #{self.class} needs " \
         "to implement the method: #{__method__.to_s} from its base class".red
       end

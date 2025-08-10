@@ -22,7 +22,9 @@
     },
     "wind_speed": {
       "minimum": 2.568,
-      "maximum": 6.22,
+      "maximum": 6.22
+    },
+    "wind_direction": {
       "prevalent_direction": "west"
     },
     "rain": {
