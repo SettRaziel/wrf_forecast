@@ -1,5 +1,10 @@
 de:
   threshold:
+    pressure:
+      low_pressure: "geringer Luftdruck (Luftdruck kleiner 1005 hPa)"
+      very_low_pressure: "geringer Luftdruck (Luftdruck kleiner 990 hPa)"
+      high_pressure: "hoher Luftdruck (Luftdruck größer 1020 hPa)"
+      very_high_pressure: "hoher Luftdruck (Luftdruck größer 1035 hPa)"
     rain:
       strong_rain: "Starkregen (stündliche Niederschlagsumme übersteigt 15 mm)"
       heavy_rain: "heftiger Starkregen (stündliche Niederschlagsumme übersteigt 25 mm)"
@@ -22,6 +27,17 @@ de:
       header_start: "Wetterbericht von "
       header_conn: " für den "
       warnings: "Warnungen: "
+    pressure:
+      text_start: "Der Luftdruch wird heute "
+      text_continue: " hPa im Mittel betragen."
+      text_maximum: "Der maximale Luftdruck wird "
+      text_minimum: " hPa nicht über- und das Minimum "
+      text_finish: " hPa unterschreiten."
+      level_normal: "normal"
+      level_low: "gering"
+      level_very_low: "sehr gering"
+      level_high: "hoch"
+      level_very_high: "sehr hoch"
     rain:
       no_rain: "Die Vorhersage prognostiziert keinen Niederschlag."
       rain_start: "Die Vorhersage prognostiziert "

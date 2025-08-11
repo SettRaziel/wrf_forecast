@@ -1,5 +1,10 @@
 en:
   threshold:
+    pressure:
+      low_pressure: "low pressure (pressure below 1005 hPa)"
+      very_low_pressure: "low pressure (pressure below 990 hPa)"
+      high_pressure: "high pressure (pressure above 1020 hPa)"
+      very_high_pressure: "high pressure (pressure above 1035 hPa)"
     rain:
       strong_rain: "strong rain (hourly rain sum exceeds 15 mm per hour)"
       heavy_rain: "heavy rain (hourly rain sum exceeds 25 mm per hour)"
@@ -22,6 +27,17 @@ en:
       header_start: "Weather forecast of "
       header_conn: " for the "
       warnings: "Warnings: "
+    pressure:
+      text_start: "The pressure today will be "
+      text_continue: " hPa in the mean value."
+      text_maximum: "The maximum pressure will not rise above "
+      text_minimum: " hPa and the minimum will not be below "
+      text_finish: " hPa."
+      level_normal: "normal"
+      level_low: "low"
+      level_very_low: "very low"
+      level_high: "high"
+      level_very_high: "very high"
     rain:
       no_rain: "The forecast does not predict rain."
       rain_start: "The forecast does predict "
