@@ -49,7 +49,7 @@ module WrfForecast
           @warnings.concat("\n") if (!@warnings.empty?)
           @warnings.concat(@thresholds[:tropical_night].warning_text)
         end
-        return warmth
+        warmth
       end
 
       # method to generate the text with temperature values
@@ -59,7 +59,7 @@ module WrfForecast
         text.concat(I18n.t("forecast_text.temperature.text_minimum"))
         text.concat((@extreme_values.minimum - 273.15).floor.to_s)
         text.concat(I18n.t("forecast_text.temperature.text_finish"))
-        return text
+        text
       end
       
     end
