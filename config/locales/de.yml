@@ -29,6 +29,7 @@ de:
       warnings: "Warnungen: "
     pressure:
       text_start: "Der Luftdruch wird heute "
+      text_with: " und "
       text_continue: " hPa im Mittel betragen."
       text_maximum: "Der maximale Luftdruck wird "
       text_minimum: " hPa nicht über- und das Minimum "

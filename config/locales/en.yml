@@ -29,6 +29,7 @@ en:
       warnings: "Warnings: "
     pressure:
       text_start: "The pressure today will be "
+      text_with: " with "
       text_continue: " hPa in the mean value."
       text_maximum: "The maximum pressure will not rise above "
       text_minimum: " hPa and the minimum will not be below "
