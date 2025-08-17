@@ -28,9 +28,9 @@ de:
       header_conn: " für den "
       warnings: "Warnungen: "
     pressure:
-      text_start: "Der Luftdruch wird heute "
-      text_with: " und "
-      text_continue: " hPa im Mittel betragen."
+      text_start: "Der Luftdruck ist heute "
+      text_with: " und wird im Mittel "
+      text_continue: " hPa betragen."
       text_maximum: "Der maximale Luftdruck wird "
       text_minimum: " hPa nicht über- und das Minimum "
       text_finish: " hPa unterschreiten."
