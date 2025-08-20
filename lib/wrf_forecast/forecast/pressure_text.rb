@@ -30,12 +30,14 @@ module WrfForecast
       end
 
       # method to generate the warning text for the measurand
+      # @return [String] the warning text
       def generate_warning_text
         # no warning criterias
         @warnings
       end
 
       # method to generate the text about the day
+      # @return [String] the substring containing the pressure category
       def create_attribute_text
         attribute = I18n.t("forecast_text.pressure.level_normal")
         if (is_threshold_active?(:very_low_pressure))
@@ -51,6 +53,7 @@ module WrfForecast
       end
 
       # method to generate the text with air pressure values
+      # @return [String] the substring containing the pressure values and text conclusion
       def create_pressure_text
         text = I18n.t("forecast_text.pressure.text_maximum")
         text.concat((@extreme_values.maximum / 100).ceil.to_s)
