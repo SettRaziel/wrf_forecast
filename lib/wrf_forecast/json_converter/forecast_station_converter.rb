@@ -49,7 +49,7 @@ module WrfForecast
         measurands[:wind_speed] = generate_wind_values
         measurands[:rain] = generate_rain_values
         measurands[:warnings] = generate_warnings
-        return measurands
+        measurands
       end
 
       # abstract method to create the output hash for the temperature values
@@ -81,6 +81,7 @@ module WrfForecast
       end
 
       # method to create the output array for the warnings
+      # @return [Array] an array of Strings containing the warning texts
       def generate_warnings
         values = Array.new()
         @warnings.each_value { |value|
@@ -88,7 +89,7 @@ module WrfForecast
             values << element.warning_text
           }
         }
-        return values
+        values
       end
 
       # method to convert a float hourstamp to a valid time object
