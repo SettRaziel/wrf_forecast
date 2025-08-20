@@ -45,6 +45,7 @@ module WrfForecast
       puts "help usage for parameter:".green +
            " ruby <script> <parameter> (-h | --help)"
       puts "#{get_script_name} help:".light_yellow
+      nil
     end
 
     # method to print the invalid parameter combinations
@@ -57,7 +58,8 @@ module WrfForecast
       nil
     end
 
-      # method to set the name of the script project
+    # method to set the name of the script project
+    # @return [String] the script name
     def self.get_script_name
       "WRF forecast"
     end
