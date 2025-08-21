@@ -47,7 +47,7 @@ module WrfForecast
         threshold.indicators.each_value { |value| 
           active_thresholds << value if(value.is_active)
         }
-        return active_thresholds
+        active_thresholds
       end
 
     end

@@ -36,6 +36,7 @@ module WrfForecast
       def add_indicator(identifier, is_active, warning_text)
         @indicators[identifier] = 
           WrfForecast::Threshold::ThresholdValue.new(identifier, is_active, warning_text)
+        nil
       end
 
       # method to change a given indicator to the given flag if the condition if met
@@ -44,6 +45,7 @@ module WrfForecast
       # @param [boolean] condition the condition bool for which the flag should be set
       def change_indicator(identifier, flag, condition)
         @indicators[identifier].is_active = flag if (condition)
+        nil
       end
 
       # method to check if the data sample offers enough data for the indicators
@@ -57,6 +59,7 @@ module WrfForecast
         if (data_values.size < 48)
           raise ArgumentError, "Error: Lesser than 48 data values available for threshold."
         end
+        nil
       end
 
       # abstract method to initialize of the required indicators

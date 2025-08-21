@@ -48,6 +48,7 @@ module WrfForecast
         if (data_values.size < 24)
           raise ArgumentError, "Error: Not enough hourly data available for a forecast day."          
         end
+        nil
       end
 
     end
