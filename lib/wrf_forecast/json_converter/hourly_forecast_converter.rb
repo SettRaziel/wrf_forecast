@@ -36,8 +36,14 @@ module WrfForecast
 
       # method to create the output hash for the wind values
       # @return [Array] the array with the hourly wind values
-      def generate_wind_values
+      def generate_windspeed_values
         WrfLibrary::Statistic::Hourly.calculate_hourly_windspeed_means(@wrf_handler)
+      end
+
+      # method to create the output hash for wind direction values
+      # @return [Array] the array with the hourly values      
+      def generate_winddirection_values
+        WrfLibrary::Statistic::Hourly.calculate_hourly_winddirection_means(@wrf_handler)
       end
 
       # method to create the output hash for the precipitation values
