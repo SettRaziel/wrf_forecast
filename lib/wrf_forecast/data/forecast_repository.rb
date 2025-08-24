@@ -25,6 +25,7 @@ module WrfForecast
       @forecast_data = Hash.new()
       @time_data = wrf_handler.retrieve_data_set(:forecast_time)
 
+      add_pressure_data(wrf_handler)
       add_temperature_data(wrf_handler)
       add_windspeed_data(wrf_handler)
       add_rain_data(wrf_handler)
@@ -35,12 +36,21 @@ module WrfForecast
     # @return [Array] the time stamp data
     attr_reader :time_data
 
+    # method to add the pressure data und determine extreme values
+    # @param [WrfHandler] wrf_handler the wrf handler with the data
+    def add_pressure_data(wrf_handler)
+      pressure = wrf_handler.retrieve_data_set(:pressure)
+      @forecast_data[:pressure] = pressure
+      @extreme_values[:pressure] = RubyUtils::Statistic.extreme_values(pressure)
+      nil
+    end
+
     # method to add the temperature data und determine extreme values
     # @param [WrfHandler] wrf_handler the wrf handler with the data
     def add_temperature_data(wrf_handler)
       temperature = wrf_handler.retrieve_data_set(:air_temperature)
       @forecast_data[:air_temperature] = temperature
-      @extreme_values[:air_temperature] = RubyUtils::Statistic.extreme_values(temperature)    
+      @extreme_values[:air_temperature] = RubyUtils::Statistic.extreme_values(temperature)
       nil
     end
 
@@ -52,7 +62,7 @@ module WrfForecast
       v_component = wrf_handler.retrieve_data_set(:v_wind)
       wind_speed = Array.new()
       wind_direction = Array.new()
-      u_component.zip(v_component).each { |u, v| 
+      u_component.zip(v_component).each { |u, v|
         wind_speed << Math.sqrt(u**2+v**2)
         wind_direction << Math.atan2(u, v) * r2d + 180
       }

@@ -19,6 +19,13 @@ def get_berlin_body
   expected_body.concat(I18n.t("forecast_text.temperature.text_minimum")).concat("-4")
   expected_body.concat(I18n.t("forecast_text.temperature.text_finish")).concat("\n")
 
+  expected_body.concat(I18n.t("forecast_text.pressure.text_start"))
+  expected_body.concat(I18n.t("forecast_text.pressure.level_high"))
+  expected_body.concat(I18n.t("forecast_text.pressure.text_with")).concat("1014.0")
+  expected_body.concat(I18n.t("forecast_text.pressure.text_continue"))
+  expected_body.concat(I18n.t("forecast_text.pressure.text_maximum")).concat("1021")
+  expected_body.concat(I18n.t("forecast_text.pressure.text_minimum")).concat("1009")
+  expected_body.concat(I18n.t("forecast_text.pressure.text_finish")).concat("\n")
 
   expected_body.concat(I18n.t("forecast_text.wind.text_start"))
   expected_body.concat(I18n.t("forecast_text.wind.strength_normal"))
@@ -48,6 +55,13 @@ def get_hannover_body
   expected_body.concat(I18n.t("forecast_text.temperature.text_minimum")).concat("-1")
   expected_body.concat(I18n.t("forecast_text.temperature.text_finish")).concat("\n")
 
+  expected_body.concat(I18n.t("forecast_text.pressure.text_start"))
+  expected_body.concat(I18n.t("forecast_text.pressure.level_normal"))
+  expected_body.concat(I18n.t("forecast_text.pressure.text_with")).concat("1015.3")
+  expected_body.concat(I18n.t("forecast_text.pressure.text_continue"))
+  expected_body.concat(I18n.t("forecast_text.pressure.text_maximum")).concat("1017")
+  expected_body.concat(I18n.t("forecast_text.pressure.text_minimum")).concat("1012")
+  expected_body.concat(I18n.t("forecast_text.pressure.text_finish")).concat("\n")
 
   expected_body.concat(I18n.t("forecast_text.wind.text_start"))
   expected_body.concat(I18n.t("forecast_text.wind.strength_normal"))

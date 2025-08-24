@@ -20,6 +20,7 @@ module WrfForecast
     # the rehashed forecast data
     # @param [ThresholdHandler] threshold_handler the handler with the indicators
     def initialize(meta_data, forecast_repository, threshold_handler)
+      initialize_pressure_text(forecast_repository, threshold_handler)
       initialize_temperature_text(forecast_repository, threshold_handler)
       initialize_wind_text(forecast_repository, threshold_handler)
       initialize_rain_text(forecast_repository, threshold_handler)
@@ -39,6 +40,8 @@ module WrfForecast
 
     private
 
+    # @return [PressureText] the class generating the pressure forecast text
+    attr_reader :pressure_text
     # @return [TemperatureText] the class generating the temperature forecast text
     attr_reader :temperature_text
     # @return [WindText] the class generating the wind forecast text
@@ -64,6 +67,7 @@ module WrfForecast
     def create_body
       @body = @suntime_text.text.concat("\n")
       @body.concat(@temperature_text.text).concat("\n")
+      @body.concat(@pressure_text.text).concat("\n")
       @body.concat(@wind_text.text).concat("\n")
       @body.concat(@rain_text.text)
       nil
@@ -86,9 +90,19 @@ module WrfForecast
       nil
     end
 
+    # method to create the text for the pressure
+    # @param [ForecastRepository] repository the repository with the rehashed forecast data
+    # @param [ThresholdHandler] handler the handler with the indicators
+    def initialize_pressure_text(repository, handler)
+      extreme_values = repository.extreme_values[:pressure]
+      pressure_data = repository.forecast_data[:pressure]
+      threshold = handler.pressure_threshold.indicators
+      @pressure_text = WrfForecast::Text::PressureText.new(extreme_values, pressure_data, threshold)
+      nil
+    end
+
     # method to create the text for the air temperature
-    # @param [ForecastRepository] repository the repository with
-    # the rehashed forecast data
+    # @param [ForecastRepository] repository the repository with the rehashed forecast data
     # @param [ThresholdHandler] handler the handler with the indicators
     def initialize_temperature_text(repository, handler)
       extreme_values = repository.extreme_values[:air_temperature]
@@ -98,8 +112,7 @@ module WrfForecast
     end
 
     # method to create the text for the wind
-    # @param [ForecastRepository] repository the repository with
-    # the rehashed forecast data
+    # @param [ForecastRepository] repository the repository with the rehashed forecast data
     # @param [ThresholdHandler] handler the handler with the indicators
     def initialize_wind_text(repository, handler)
       extreme_values = repository.extreme_values[:wind_speed]
@@ -110,8 +123,7 @@ module WrfForecast
     end
 
     # method to create the text for the precipitation
-    # @param [ForecastRepository] repository the repository with
-    # the rehashed forecast data
+    # @param [ForecastRepository] repository the repository with the rehashed forecast data
     # @param [ThresholdHandler] handler the handler with the indicators
     def initialize_rain_text(repository, handler)
       extreme_values = repository.extreme_values[:rain]

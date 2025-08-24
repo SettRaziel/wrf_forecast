@@ -9,6 +9,29 @@ describe WrfForecast::ForecastRepository do
 
   describe ".new" do
     context "given a meteogram output file and the date" do
+      it "initialize handler, fill the forecast data, check pressure values" do
+        repository = WrfForecast::ForecastRepository.new(handler)
+        pressure_values = repository.forecast_data[:pressure]
+        expect(pressure_values.size).to eq(3420)
+        expect(pressure_values[0].round(3)).to eq(102060.688)
+        expect(pressure_values[4].round(3)).to eq(102065.234)
+      end
+    end
+  end
+
+  describe ".new" do
+    context "given a meteogram output file and the date" do
+      it "initialize handler, fill the forecast data, check pressure extremes" do
+        repository = WrfForecast::ForecastRepository.new(handler)
+        extreme_values = repository.extreme_values[:pressure]
+        expect(extreme_values.maximum.round(3)).to eq(103577.672)
+        expect(extreme_values.minimum.round(3)).to eq(101944.836)
+      end
+    end
+  end
+
+  describe ".new" do
+    context "given a meteogram output file and the date" do
       it "initialize handler, fill the forecast data, check temperature values" do
         repository = WrfForecast::ForecastRepository.new(handler)
         temperature_values = repository.forecast_data[:air_temperature]

@@ -39,6 +39,7 @@ module WrfForecast
         @mapping[:offset] = ["-o", "--offset"]
         @mapping[:period] = ["-p", "--period"]
         @mapping[:save] = ["-s", "--save"]
+        nil
       end
 
       # method to set the default values when parameter --default is set
@@ -46,6 +47,7 @@ module WrfForecast
         @parameters[:date] = Time.parse("00:00").to_s
         @parameters[:period] = "24"
         @parameters[:default] = true
+        nil
       end
 
     end

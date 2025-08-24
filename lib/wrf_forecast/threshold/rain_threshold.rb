@@ -5,8 +5,8 @@ module WrfForecast
     # This class determines the significant rain thresholds for a forecast day.
     # That means that this class can only work correctly if the data represents a time
     # span of up to 24 hours.
-    # The indicators and thresholds are bases on the climate indicators of the german
-    # (weatherservice)[https://www.dwd.de/DE/wetter/warnungen_aktuell/kriterien/warnkriterien.html?nn=508722]:
+    # The indicators and thresholds are based on the climate indicators of the german
+    # (weatherservice)[https://www.dwd.de/DE/wetter/warnungen_aktuell/kriterien/warnkriterien.html]:
     # * strong rain: the hourly rain sum exceeds 15 mm per hour
     # * heavy rain: the hourly rain sum exceeds 25 mm per hour
     # * extreme rain: the hourly rain sum exceeds 40 mm per hour
@@ -48,6 +48,7 @@ module WrfForecast
         if (data_values.size < 24)
           raise ArgumentError, "Error: Not enough hourly data available for a forecast day."          
         end
+        nil
       end
 
     end

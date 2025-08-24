@@ -157,6 +157,7 @@ module WrfForecast
 
   # private method to determine which kind of json output needs to be created,
   # based on the given script parameter json and aggregate
+  # @return [String] the json output as a string
   private_class_method def self.determine_json_output
     if (@parameter_handler.repository.parameters[:aggregate])
       return @forecast_handler.generate_hourly_json_output          

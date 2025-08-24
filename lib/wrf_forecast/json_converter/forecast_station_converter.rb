@@ -44,12 +44,20 @@ module WrfForecast
       # @return [Hash] the key-value hashes for the json output 
       def generate_data_values
         measurands = Hash.new()
+        measurands[:pressure] = generate_pressure_values
         measurands[:temperature] = generate_temperature_values
         measurands[:wind_speed] = generate_windspeed_values
         measurands[:wind_direction] = generate_winddirection_values
         measurands[:rain] = generate_rain_values
         measurands[:warnings] = generate_warnings
-        return measurands
+        measurands
+      end
+
+      # abstract method to create the output hash for the temperature values
+      # @raise [NotImplementedError] if the child class does not implement this
+      def generate_pressure_values
+        fail NotImplementedError, " Error: the subclass #{self.class} needs " \
+        "to implement the method: #{__method__.to_s} from its base class".red
       end
 
       # abstract method to create the output hash for the temperature values
@@ -81,6 +89,7 @@ module WrfForecast
       end
 
       # method to create the output array for the warnings
+      # @return [Array] an array of Strings containing the warning texts
       def generate_warnings
         values = Array.new()
         @warnings.each_value { |value|
@@ -88,7 +97,7 @@ module WrfForecast
             values << element.warning_text
           }
         }
-        return values
+        values
       end
 
       # method to convert a float hourstamp to a valid time object
