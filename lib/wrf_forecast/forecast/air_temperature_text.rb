@@ -7,7 +7,7 @@ module WrfForecast
     # warnings: the hot day contains the summer day and can have a tropical night or frost day
     # but exclude the ice day
     # the ice day contains the frost day, both exclude tropical night
-    class TemperatureText < MeasurandText
+    class AirTemperatureText < MeasurandText
 
       private
 

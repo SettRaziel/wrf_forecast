@@ -21,7 +21,7 @@ module WrfForecast
     # @param [ThresholdHandler] threshold_handler the handler with the indicators
     def initialize(meta_data, forecast_repository, threshold_handler)
       initialize_pressure_text(forecast_repository, threshold_handler)
-      initialize_temperature_text(forecast_repository, threshold_handler)
+      initialize_air_temperature_text(forecast_repository, threshold_handler)
       initialize_wind_text(forecast_repository, threshold_handler)
       initialize_rain_text(forecast_repository, threshold_handler)
       @suntime_text = WrfForecast::Text::SuntimeText.new(meta_data)
@@ -104,10 +104,10 @@ module WrfForecast
     # method to create the text for the air temperature
     # @param [ForecastRepository] repository the repository with the rehashed forecast data
     # @param [ThresholdHandler] handler the handler with the indicators
-    def initialize_temperature_text(repository, handler)
+    def initialize_air_temperature_text(repository, handler)
       extreme_values = repository.extreme_values[:air_temperature]
       threshold = handler.temperature_threshold.indicators
-      @temperature_text = WrfForecast::Text::TemperatureText.new(extreme_values, threshold)
+      @temperature_text = WrfForecast::Text::AirTemperatureText.new(extreme_values, threshold)
       nil
     end
 
