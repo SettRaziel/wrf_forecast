@@ -13,7 +13,7 @@ module WrfForecast
 
       # method to generate the forecast text for the temperature
       def generate_forecast_text
-        @text = I18n.t("forecast_text.temperature.text_start")
+        @text = I18n.t("forecast_text.air_temperature.text_start")
         @text.concat(create_warmth_text).concat(".")
         @text.concat(create_temperature_text)
         nil
@@ -31,22 +31,22 @@ module WrfForecast
       # method to generate the text about the day
       # @return [String] the substring containing the temperature category
       def create_warmth_text
-        warmth = I18n.t("forecast_text.temperature.warmth_normal")
+        warmth = I18n.t("forecast_text.air_temperature.warmth_normal")
         if (is_threshold_active?(:ice_day))
-          warmth = I18n.t("forecast_text.temperature.warmth_very_frosty")
+          warmth = I18n.t("forecast_text.air_temperature.warmth_very_frosty")
         elsif (@thresholds[:frost_day].is_active)
-          warmth = I18n.t("forecast_text.temperature.warmth_cold")
+          warmth = I18n.t("forecast_text.air_temperature.warmth_cold")
         end
 
         if (is_threshold_active?(:hot_day))
-          warmth = I18n.t("forecast_text.temperature.warmth_hot")
+          warmth = I18n.t("forecast_text.air_temperature.warmth_hot")
         elsif (is_threshold_active?(:summer_day))
-          warmth = I18n.t("forecast_text.temperature.warmth_summer")
+          warmth = I18n.t("forecast_text.air_temperature.warmth_summer")
         end
 
-        warmth.concat(I18n.t("forecast_text.temperature.text_day"))
+        warmth.concat(I18n.t("forecast_text.air_temperature.text_day"))
         if (@thresholds[:tropical_night].is_active)
-          warmth.concat(I18n.t("forecast_text.temperature.warmth_tropical"))
+          warmth.concat(I18n.t("forecast_text.air_temperature.warmth_tropical"))
           @warnings.concat("\n") if (!@warnings.empty?)
           @warnings.concat(@thresholds[:tropical_night].warning_text)
         end
@@ -56,11 +56,11 @@ module WrfForecast
       # method to generate the text with temperature values
       # @return [String] the substring containing the temperature values and text conclusion
       def create_temperature_text
-        text = I18n.t("forecast_text.temperature.text_maximum")
+        text = I18n.t("forecast_text.air_temperature.text_maximum")
         text.concat((@extreme_values.maximum - 273.15).ceil.to_s)
-        text.concat(I18n.t("forecast_text.temperature.text_minimum"))
+        text.concat(I18n.t("forecast_text.air_temperature.text_minimum"))
         text.concat((@extreme_values.minimum - 273.15).floor.to_s)
-        text.concat(I18n.t("forecast_text.temperature.text_finish"))
+        text.concat(I18n.t("forecast_text.air_temperature.text_finish"))
         text
       end
       

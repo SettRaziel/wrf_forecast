@@ -10,7 +10,7 @@ en:
       heavy_rain: "heavy rain (hourly rain sum exceeds 25 mm per hour)"
       extreme_rain: "extreme rain (hourly rain sum exceeds 40 mm per hour)"
       continous_rain: "continous rain (rain sum exceeds 30 mm per 24 hours)"
-    temperature:
+    air_temperature:
       ice_day: "ice day (temperature does not exceed 0 degrees celsius)"
       frost_day: "frost day (temperature will fall below 0 degrees celsius)"
       summer_day: "summer day (temperature will exceed 25 degrees celsius)"
@@ -58,7 +58,7 @@ en:
     suntime:
       sunrise: "Sunrise: "
       sunset: "Sunset: "
-    temperature:
+    air_temperature:
       text_start: "Today will be a "
       text_day: " day"
       text_maximum: " The maximum temperature will reach up to "

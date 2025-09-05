@@ -155,11 +155,11 @@ describe WrfForecast::Threshold::TemperatureThreshold do
                                299, 299, 298, 298, 297, 297, 296, 296, 296, 296
                              ]
         indicators = WrfForecast::Threshold::TemperatureThreshold.new(temperature_values)
-        expect(indicators.indicators[:ice_day].warning_text).to eq(I18n.t("threshold.temperature.ice_day"))
-        expect(indicators.indicators[:frost_day].warning_text).to eq(I18n.t("threshold.temperature.frost_day"))
-        expect(indicators.indicators[:summer_day].warning_text).to eq(I18n.t("threshold.temperature.summer_day"))
-        expect(indicators.indicators[:hot_day].warning_text).to eq(I18n.t("threshold.temperature.hot_day"))
-        expect(indicators.indicators[:tropical_night].warning_text).to eq(I18n.t("threshold.temperature.tropical_night"))
+        expect(indicators.indicators[:ice_day].warning_text).to eq(I18n.t("threshold.air_temperature.ice_day"))
+        expect(indicators.indicators[:frost_day].warning_text).to eq(I18n.t("threshold.air_temperature.frost_day"))
+        expect(indicators.indicators[:summer_day].warning_text).to eq(I18n.t("threshold.air_temperature.summer_day"))
+        expect(indicators.indicators[:hot_day].warning_text).to eq(I18n.t("threshold.air_temperature.hot_day"))
+        expect(indicators.indicators[:tropical_night].warning_text).to eq(I18n.t("threshold.air_temperature.tropical_night"))
       end
     end
   end

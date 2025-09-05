@@ -10,7 +10,7 @@ de:
       heavy_rain: "heftiger Starkregen (stündliche Niederschlagsumme übersteigt 25 mm)"
       extreme_rain: "extremer Starkregen (stündliche Niederschlagsumme übersteigt 40 mm)"
       continous_rain: "Dauerregen (Niederschlagssumme übersteigt 30 mm in 24 Stunden)"
-    temperature:
+    air_temperature:
       ice_day: "Eistag (Temperatur bleibt ganztägig unter 0 Grad Celsius)"
       frost_day: "Frosttag (Temperatur fällt unter 0 Grad Celsius)"
       summer_day: "Sommertag (Temperatur steigt über 25 Grad Celsius)"
@@ -58,7 +58,7 @@ de:
     suntime:
       sunrise: "Sonnenaufgang: "
       sunset: "Sonnenuntergang: "
-    temperature:
+    air_temperature:
       text_start: "Heute wird es ein "
       text_day: " Tag"
       text_maximum: " Die Temperatur erreicht Werte bis "

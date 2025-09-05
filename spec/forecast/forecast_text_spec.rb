@@ -12,12 +12,12 @@ def get_berlin_body
   expected_body = I18n.t("forecast_text.suntime.sunrise").concat("07:07, ")
   expected_body.concat(I18n.t("forecast_text.suntime.sunset")).concat("17:34\n")
 
-  expected_body.concat(I18n.t("forecast_text.temperature.text_start"))
-  expected_body.concat(I18n.t("forecast_text.temperature.warmth_cold"))
-  expected_body.concat(I18n.t("forecast_text.temperature.text_day")).concat(".")
-  expected_body.concat(I18n.t("forecast_text.temperature.text_maximum")).concat("10")
-  expected_body.concat(I18n.t("forecast_text.temperature.text_minimum")).concat("-4")
-  expected_body.concat(I18n.t("forecast_text.temperature.text_finish")).concat("\n")
+  expected_body.concat(I18n.t("forecast_text.air_temperature.text_start"))
+  expected_body.concat(I18n.t("forecast_text.air_temperature.warmth_cold"))
+  expected_body.concat(I18n.t("forecast_text.air_temperature.text_day")).concat(".")
+  expected_body.concat(I18n.t("forecast_text.air_temperature.text_maximum")).concat("10")
+  expected_body.concat(I18n.t("forecast_text.air_temperature.text_minimum")).concat("-4")
+  expected_body.concat(I18n.t("forecast_text.air_temperature.text_finish")).concat("\n")
 
   expected_body.concat(I18n.t("forecast_text.pressure.text_start"))
   expected_body.concat(I18n.t("forecast_text.pressure.level_high"))
@@ -48,12 +48,12 @@ def get_hannover_body
   expected_body = I18n.t("forecast_text.suntime.sunrise").concat("06:06, ")
   expected_body.concat(I18n.t("forecast_text.suntime.sunset")).concat("18:47\n")
 
-  expected_body.concat(I18n.t("forecast_text.temperature.text_start"))
-  expected_body.concat(I18n.t("forecast_text.temperature.warmth_cold"))
-  expected_body.concat(I18n.t("forecast_text.temperature.text_day")).concat(".")
-  expected_body.concat(I18n.t("forecast_text.temperature.text_maximum")).concat("16")
-  expected_body.concat(I18n.t("forecast_text.temperature.text_minimum")).concat("-1")
-  expected_body.concat(I18n.t("forecast_text.temperature.text_finish")).concat("\n")
+  expected_body.concat(I18n.t("forecast_text.air_temperature.text_start"))
+  expected_body.concat(I18n.t("forecast_text.air_temperature.warmth_cold"))
+  expected_body.concat(I18n.t("forecast_text.air_temperature.text_day")).concat(".")
+  expected_body.concat(I18n.t("forecast_text.air_temperature.text_maximum")).concat("16")
+  expected_body.concat(I18n.t("forecast_text.air_temperature.text_minimum")).concat("-1")
+  expected_body.concat(I18n.t("forecast_text.air_temperature.text_finish")).concat("\n")
 
   expected_body.concat(I18n.t("forecast_text.pressure.text_start"))
   expected_body.concat(I18n.t("forecast_text.pressure.level_normal"))
@@ -151,7 +151,7 @@ describe WrfForecast::ForecastText do
         meta_data = wrf_handler.data_repository.meta_data
         text = WrfForecast::ForecastText.new(meta_data, repository, threshold_handler)
         expected_warnings = I18n.t("forecast_text.main.warnings").concat("\n")
-        expected_warnings.concat(I18n.t("threshold.temperature.frost_day"))
+        expected_warnings.concat(I18n.t("threshold.air_temperature.frost_day"))
         expect(text.warnings).to eq(expected_warnings)
       end
     end
@@ -166,7 +166,7 @@ describe WrfForecast::ForecastText do
         meta_data = wrf_handler.data_repository.meta_data
         text = WrfForecast::ForecastText.new(meta_data, repository, threshold_handler)
         expected_warnings = I18n.t("forecast_text.main.warnings").concat("\n")
-        expected_warnings.concat(I18n.t("threshold.temperature.frost_day"))
+        expected_warnings.concat(I18n.t("threshold.air_temperature.frost_day"))
         expect(text.warnings).to eq(expected_warnings)
       end
     end
