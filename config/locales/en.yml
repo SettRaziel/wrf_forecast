@@ -10,6 +10,9 @@ en:
       heavy_rain: "heavy rain (hourly rain sum exceeds 25 mm per hour)"
       extreme_rain: "extreme rain (hourly rain sum exceeds 40 mm per hour)"
       continous_rain: "continous rain (rain sum exceeds 30 mm per 24 hours)"
+    apparent_temperature:
+      strong_heat_day: "strong thermal stress (apparent temperature exceeds 32 degrees celsius)"
+      extreme_heat_day: "extreme thermal stress (apparent temperature exceeds 32 degrees celsius)"
     air_temperature:
       ice_day: "ice day (temperature does not exceed 0 degrees celsius)"
       frost_day: "frost day (temperature will fall below 0 degrees celsius)"

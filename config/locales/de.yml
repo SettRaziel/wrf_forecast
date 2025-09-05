@@ -10,6 +10,9 @@ de:
       heavy_rain: "heftiger Starkregen (stündliche Niederschlagsumme übersteigt 25 mm)"
       extreme_rain: "extremer Starkregen (stündliche Niederschlagsumme übersteigt 40 mm)"
       continous_rain: "Dauerregen (Niederschlagssumme übersteigt 30 mm in 24 Stunden)"
+    apparent_temperature:
+      strong_heat_day: "Starke Wärmebelastung (Gefühlte Temperatur überschreitet 32 Grad Celsius"
+      extreme_heat_day: "Extreme Wärmebelastung (Gefühlte Temperatur überschreitet 38 Grad Celsius"
     air_temperature:
       ice_day: "Eistag (Temperatur bleibt ganztägig unter 0 Grad Celsius)"
       frost_day: "Frosttag (Temperatur fällt unter 0 Grad Celsius)"
