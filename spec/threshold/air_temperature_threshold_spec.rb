@@ -3,14 +3,14 @@ require "time"
 require "wrf_library/wrf"
 require "wrf_forecast/threshold"
 
-describe WrfForecast::Threshold::TemperatureThreshold do
+describe WrfForecast::Threshold::AirTemperatureThreshold do
 
   describe ".new" do
     context "given a meteogram output file and the date" do
       it "initialize handler, fill the forecast data, check temperature indicators" do
         handler = WrfLibrary::Wrf::Handler.new(BERLIN_SMALL_DATA, Time.parse("2020-02-23"))
         temperature_values = handler.retrieve_data_set(:air_temperature)
-        indicators = WrfForecast::Threshold::TemperatureThreshold.new(temperature_values)
+        indicators = WrfForecast::Threshold::AirTemperatureThreshold.new(temperature_values)
         expect(indicators.indicators[:ice_day].is_active).to eq(false)
         expect(indicators.indicators[:frost_day].is_active).to eq(true)
         expect(indicators.indicators[:summer_day].is_active).to eq(false)
@@ -29,7 +29,7 @@ describe WrfForecast::Threshold::TemperatureThreshold do
                                271, 271, 272, 272, 271, 271, 271, 270, 270, 270,
                                269, 269, 269, 269, 268, 268, 268, 268, 268, 267
                              ]
-        indicators = WrfForecast::Threshold::TemperatureThreshold.new(temperature_values)
+        indicators = WrfForecast::Threshold::AirTemperatureThreshold.new(temperature_values)
         expect(indicators.indicators[:ice_day].is_active).to eq(true)
         expect(indicators.indicators[:frost_day].is_active).to eq(true)
         expect(indicators.indicators[:summer_day].is_active).to eq(false)
@@ -48,7 +48,7 @@ describe WrfForecast::Threshold::TemperatureThreshold do
                                272, 272, 273, 274, 271, 271, 271, 270, 270, 270,
                                269, 269, 269, 269, 268, 268, 268, 268, 268, 267
                              ]
-        indicators = WrfForecast::Threshold::TemperatureThreshold.new(temperature_values)
+        indicators = WrfForecast::Threshold::AirTemperatureThreshold.new(temperature_values)
         expect(indicators.indicators[:ice_day].is_active).to eq(false)
         expect(indicators.indicators[:frost_day].is_active).to eq(true)
         expect(indicators.indicators[:summer_day].is_active).to eq(false)
@@ -67,7 +67,7 @@ describe WrfForecast::Threshold::TemperatureThreshold do
                                281, 281, 282, 282, 281, 281, 281, 280, 280, 280,
                                279, 279, 279, 279, 278, 278, 278, 278, 278, 277
                              ]
-        indicators = WrfForecast::Threshold::TemperatureThreshold.new(temperature_values)
+        indicators = WrfForecast::Threshold::AirTemperatureThreshold.new(temperature_values)
         expect(indicators.indicators[:ice_day].is_active).to eq(false)
         expect(indicators.indicators[:frost_day].is_active).to eq(false)
         expect(indicators.indicators[:summer_day].is_active).to eq(false)
@@ -86,7 +86,7 @@ describe WrfForecast::Threshold::TemperatureThreshold do
                                300, 301, 301, 300, 300, 299, 298, 297, 296, 295,
                                294, 294, 293, 293, 292, 292, 291, 291, 290, 290
                              ]
-        indicators = WrfForecast::Threshold::TemperatureThreshold.new(temperature_values)
+        indicators = WrfForecast::Threshold::AirTemperatureThreshold.new(temperature_values)
         expect(indicators.indicators[:ice_day].is_active).to eq(false)
         expect(indicators.indicators[:frost_day].is_active).to eq(false)
         expect(indicators.indicators[:summer_day].is_active).to eq(true)
@@ -105,7 +105,7 @@ describe WrfForecast::Threshold::TemperatureThreshold do
                                304, 304, 303, 302, 301, 300, 299, 298, 297, 296,
                                295, 294, 293, 293, 292, 292, 291, 291, 290, 290
                              ]
-        indicators = WrfForecast::Threshold::TemperatureThreshold.new(temperature_values)
+        indicators = WrfForecast::Threshold::AirTemperatureThreshold.new(temperature_values)
         expect(indicators.indicators[:ice_day].is_active).to eq(false)
         expect(indicators.indicators[:frost_day].is_active).to eq(false)
         expect(indicators.indicators[:summer_day].is_active).to eq(true)
@@ -124,7 +124,7 @@ describe WrfForecast::Threshold::TemperatureThreshold do
                                305, 305, 304, 304, 303, 303, 302, 302, 301, 300,
                                299, 299, 298, 298, 297, 297, 296, 296, 296, 296
                              ]
-        indicators = WrfForecast::Threshold::TemperatureThreshold.new(temperature_values)
+        indicators = WrfForecast::Threshold::AirTemperatureThreshold.new(temperature_values)
         expect(indicators.indicators[:ice_day].is_active).to eq(false)
         expect(indicators.indicators[:frost_day].is_active).to eq(false)
         expect(indicators.indicators[:summer_day].is_active).to eq(true)
@@ -139,7 +139,7 @@ describe WrfForecast::Threshold::TemperatureThreshold do
       it "try to generate the indicators and raise error" do
         expect {
           temperature_values = [ 296, 296, 296, 295, 295, 295, 294, 294, 294, 294 ]
-          WrfForecast::Threshold::TemperatureThreshold.new(temperature_values)
+          WrfForecast::Threshold::AirTemperatureThreshold.new(temperature_values)
         }.to raise_error(ArgumentError)
       end
     end
@@ -154,7 +154,7 @@ describe WrfForecast::Threshold::TemperatureThreshold do
                                305, 305, 304, 304, 303, 303, 302, 302, 301, 300,
                                299, 299, 298, 298, 297, 297, 296, 296, 296, 296
                              ]
-        indicators = WrfForecast::Threshold::TemperatureThreshold.new(temperature_values)
+        indicators = WrfForecast::Threshold::AirTemperatureThreshold.new(temperature_values)
         expect(indicators.indicators[:ice_day].warning_text).to eq(I18n.t("threshold.air_temperature.ice_day"))
         expect(indicators.indicators[:frost_day].warning_text).to eq(I18n.t("threshold.air_temperature.frost_day"))
         expect(indicators.indicators[:summer_day].warning_text).to eq(I18n.t("threshold.air_temperature.summer_day"))

@@ -12,7 +12,7 @@ module WrfForecast
     # * summer day: the temperature did exceed 25.0 degress celsius at least once
     # * hot day: the temperature did exceed 30.0 degress celsius at least once
     # * tropical night: the temperature of the day did not fall below 20.0 degrees celsius
-    class TemperatureThreshold < BaseThreshold
+    class AirTemperatureThreshold < BaseThreshold
 
       private
 

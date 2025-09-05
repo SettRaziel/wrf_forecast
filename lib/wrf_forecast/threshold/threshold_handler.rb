@@ -10,7 +10,7 @@ module WrfForecast
 
       # @return [PressureThreshold] the class holding the pressure thresholds
       attr_reader :pressure_threshold
-      # @return [TemperatureThreshold] the class holding the temperature thresholds
+      # @return [AirTemperatureThreshold] the class holding the temperature thresholds
       attr_reader :temperature_threshold
       # @return [WindThreshold] the class holding the wind thresholds
       attr_reader :wind_threshold
@@ -24,7 +24,7 @@ module WrfForecast
       def initialize(forecast_repository)
         data = forecast_repository.forecast_data
         @pressure_threshold = WrfForecast::Threshold::PressureThreshold.new(data[:pressure])
-        @temperature_threshold = WrfForecast::Threshold::TemperatureThreshold.new(data[:air_temperature])
+        @temperature_threshold = WrfForecast::Threshold::AirTemperatureThreshold.new(data[:air_temperature])
         @wind_threshold = WrfForecast::Threshold::WindThreshold.new(data[:wind_speed])
         @rain_threshold = WrfForecast::Threshold::RainThreshold.new(forecast_repository.hourly_rain)
         collect_active_thresholds

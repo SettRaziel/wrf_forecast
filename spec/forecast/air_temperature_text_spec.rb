@@ -14,7 +14,7 @@ describe WrfForecast::Text::AirTemperatureText do
                                271, 271, 272, 272, 271, 271, 271, 270, 270, 270,
                                269, 269, 269, 269, 268, 268, 268, 268, 268, 267
                              ]
-        indicators = WrfForecast::Threshold::TemperatureThreshold.new(temperature_values)
+        indicators = WrfForecast::Threshold::AirTemperatureThreshold.new(temperature_values)
         extreme_values = RubyUtils::ExtremeValues.new(265.15, 272.15)
         forecast = WrfForecast::Text::AirTemperatureText.new(extreme_values, indicators.indicators)
         expected = I18n.t("forecast_text.air_temperature.text_start")
@@ -37,7 +37,7 @@ describe WrfForecast::Text::AirTemperatureText do
                                272, 272, 273, 274, 271, 271, 271, 270, 270, 270,
                                269, 269, 269, 269, 268, 268, 268, 268, 268, 267
                              ]
-        indicators = WrfForecast::Threshold::TemperatureThreshold.new(temperature_values)
+        indicators = WrfForecast::Threshold::AirTemperatureThreshold.new(temperature_values)
         extreme_values = RubyUtils::ExtremeValues.new(265.15, 274.15)
         forecast = WrfForecast::Text::AirTemperatureText.new(extreme_values, indicators.indicators)
         expected = I18n.t("forecast_text.air_temperature.text_start")
@@ -60,7 +60,7 @@ describe WrfForecast::Text::AirTemperatureText do
                                281, 281, 282, 282, 281, 281, 281, 280, 280, 280,
                                279, 279, 279, 279, 278, 278, 278, 278, 278, 277
                              ]
-        indicators = WrfForecast::Threshold::TemperatureThreshold.new(temperature_values)
+        indicators = WrfForecast::Threshold::AirTemperatureThreshold.new(temperature_values)
         extreme_values = RubyUtils::ExtremeValues.new(275.15, 282.15)
         forecast = WrfForecast::Text::AirTemperatureText.new(extreme_values, indicators.indicators)
         expected = I18n.t("forecast_text.air_temperature.text_start")
@@ -83,7 +83,7 @@ describe WrfForecast::Text::AirTemperatureText do
                                300, 301, 301, 300, 300, 299, 298, 297, 296, 295,
                                294, 294, 293, 293, 292, 292, 291, 291, 290, 290
                              ]
-        indicators = WrfForecast::Threshold::TemperatureThreshold.new(temperature_values)
+        indicators = WrfForecast::Threshold::AirTemperatureThreshold.new(temperature_values)
         extreme_values = RubyUtils::ExtremeValues.new(288.15, 301.05)
         forecast = WrfForecast::Text::AirTemperatureText.new(extreme_values, indicators.indicators)
         expected = I18n.t("forecast_text.air_temperature.text_start")
@@ -106,7 +106,7 @@ describe WrfForecast::Text::AirTemperatureText do
                                305, 305, 304, 304, 303, 303, 302, 302, 301, 300,
                                299, 299, 298, 298, 297, 297, 296, 296, 296, 296
                              ]
-        indicators = WrfForecast::Threshold::TemperatureThreshold.new(temperature_values)
+        indicators = WrfForecast::Threshold::AirTemperatureThreshold.new(temperature_values)
         extreme_values = RubyUtils::ExtremeValues.new(294.15, 305.25)
         forecast = WrfForecast::Text::AirTemperatureText.new(extreme_values, indicators.indicators)
         expected = I18n.t("forecast_text.air_temperature.text_start")
@@ -130,7 +130,7 @@ describe WrfForecast::Text::AirTemperatureText do
                                271, 271, 272, 272, 271, 271, 271, 270, 270, 270,
                                269, 269, 269, 269, 268, 268, 268, 268, 268, 267
                              ]
-        indicators = WrfForecast::Threshold::TemperatureThreshold.new(temperature_values)
+        indicators = WrfForecast::Threshold::AirTemperatureThreshold.new(temperature_values)
         extreme_values = RubyUtils::ExtremeValues.new(265.15, 272.15)
         forecast = WrfForecast::Text::AirTemperatureText.new(extreme_values, indicators.indicators)
         expect(forecast.warnings).to eq(I18n.t("threshold.air_temperature.ice_day"))
@@ -147,7 +147,7 @@ describe WrfForecast::Text::AirTemperatureText do
                                272, 272, 273, 274, 271, 271, 271, 270, 270, 270,
                                269, 269, 269, 269, 268, 268, 268, 268, 268, 267
                              ]
-        indicators = WrfForecast::Threshold::TemperatureThreshold.new(temperature_values)
+        indicators = WrfForecast::Threshold::AirTemperatureThreshold.new(temperature_values)
         extreme_values = RubyUtils::ExtremeValues.new(265.15, 274.15)
         forecast = WrfForecast::Text::AirTemperatureText.new(extreme_values, indicators.indicators)
         expect(forecast.warnings).to eq(I18n.t("threshold.air_temperature.frost_day"))
@@ -164,7 +164,7 @@ describe WrfForecast::Text::AirTemperatureText do
                                281, 281, 282, 282, 281, 281, 281, 280, 280, 280,
                                279, 279, 279, 279, 278, 278, 278, 278, 278, 277
                              ]
-        indicators = WrfForecast::Threshold::TemperatureThreshold.new(temperature_values)
+        indicators = WrfForecast::Threshold::AirTemperatureThreshold.new(temperature_values)
         extreme_values = RubyUtils::ExtremeValues.new(275.15, 282.15)
         forecast = WrfForecast::Text::AirTemperatureText.new(extreme_values, indicators.indicators)
         expect(forecast.warnings).to be_empty
@@ -181,7 +181,7 @@ describe WrfForecast::Text::AirTemperatureText do
                                300, 301, 301, 300, 300, 299, 298, 297, 296, 295,
                                294, 294, 293, 293, 292, 292, 291, 291, 290, 290
                              ]
-        indicators = WrfForecast::Threshold::TemperatureThreshold.new(temperature_values)
+        indicators = WrfForecast::Threshold::AirTemperatureThreshold.new(temperature_values)
         extreme_values = RubyUtils::ExtremeValues.new(288.15, 301.05)
         forecast = WrfForecast::Text::AirTemperatureText.new(extreme_values, indicators.indicators)
         expect(forecast.warnings).to eq(I18n.t("threshold.air_temperature.summer_day"))
@@ -198,7 +198,7 @@ describe WrfForecast::Text::AirTemperatureText do
                                305, 305, 304, 304, 303, 303, 302, 302, 301, 300,
                                299, 299, 298, 298, 297, 297, 296, 296, 296, 296
                              ]
-        indicators = WrfForecast::Threshold::TemperatureThreshold.new(temperature_values)
+        indicators = WrfForecast::Threshold::AirTemperatureThreshold.new(temperature_values)
         extreme_values = RubyUtils::ExtremeValues.new(294.15, 305.25)
         forecast = WrfForecast::Text::AirTemperatureText.new(extreme_values, indicators.indicators)
         expected = I18n.t("threshold.air_temperature.hot_day")
