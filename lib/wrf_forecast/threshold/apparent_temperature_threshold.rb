@@ -25,8 +25,8 @@ module WrfForecast
       # @param [Array] data_values the input values
       def determine_indicators(data_values)
         data_values.each { |value|
-          change_indicator(:ice_day, true, value > 32.0)
-          change_indicator(:frost_day, true, value > 38.0)
+          change_indicator(:strong_heat_day, true, value > 32.0)
+          change_indicator(:extreme_heat_day, true, value > 38.0)
         }
         nil
       end
