@@ -22,7 +22,7 @@ module WrfForecast
       # method to generate the warning text for the measurand
       def generate_warning_text
         if (@thresholds[:frost_day].is_active && !@thresholds[:ice_day].is_active)
-          @warnings.concat"\n" if (!@warnings.empty?)
+          @warnings.concat("\n") if (!@warnings.empty?)
           @warnings.concat(@thresholds[:frost_day].warning_text)
         end  
         @warnings
