@@ -1,5 +1,14 @@
 en:
   threshold:
+    air_temperature:
+      ice_day: "ice day (temperature does not exceed 0 degrees celsius)"
+      frost_day: "frost day (temperature will fall below 0 degrees celsius)"
+      summer_day: "summer day (temperature will exceed 25 degrees celsius)"
+      hot_day: "hot day (temperature will exceed 30 degrees celsius)"
+      tropical_night: "tropical night (temperature does not fall below 20 degrees celsius)"    
+    apparent_temperature:
+      strong_heat_day: "strong thermal stress (apparent temperature exceeds 32 degrees celsius)"
+      extreme_heat_day: "extreme thermal stress (apparent temperature exceeds 32 degrees celsius)"
     pressure:
       low_pressure: "low pressure (pressure below 1005 hPa)"
       very_low_pressure: "low pressure (pressure below 990 hPa)"
@@ -10,15 +19,6 @@ en:
       heavy_rain: "heavy rain (hourly rain sum exceeds 25 mm per hour)"
       extreme_rain: "extreme rain (hourly rain sum exceeds 40 mm per hour)"
       continous_rain: "continous rain (rain sum exceeds 30 mm per 24 hours)"
-    apparent_temperature:
-      strong_heat_day: "strong thermal stress (apparent temperature exceeds 32 degrees celsius)"
-      extreme_heat_day: "extreme thermal stress (apparent temperature exceeds 32 degrees celsius)"
-    air_temperature:
-      ice_day: "ice day (temperature does not exceed 0 degrees celsius)"
-      frost_day: "frost day (temperature will fall below 0 degrees celsius)"
-      summer_day: "summer day (temperature will exceed 25 degrees celsius)"
-      hot_day: "hot day (temperature will exceed 30 degrees celsius)"
-      tropical_night: "tropical night (temperature does not fall below 20 degrees celsius)"
     wind:
       windy_day: "windy day (wind speed exceeds 9 m/s, 33 km/h, 5 bft)"
       squall_day: "squall day (wind speed exceeds 14 m/s, 51 km/h, 7 bft)"
@@ -30,6 +30,18 @@ en:
       header_start: "Weather forecast of "
       header_conn: " for the "
       warnings: "Warnings: "
+    air_temperature:
+      text_start: "Today will be a "
+      text_day: " day"
+      text_maximum: " The maximum temperature will reach up to "
+      text_minimum: " degrees celsius. The minimum temperature will be "
+      text_finish: " degrees celsius."
+      warmth_normal: "normal"
+      warmth_cold: "cold"
+      warmth_very_frosty: "very frosty"
+      warmth_summer: "summer" 
+      warmth_hot: "hot"
+      warmth_tropical: " with a tropical night"   
     pressure:
       text_start: "The pressure today will be "
       text_with: " with "
@@ -60,19 +72,7 @@ en:
       text_period_finish: "during the day."
     suntime:
       sunrise: "Sunrise: "
-      sunset: "Sunset: "
-    air_temperature:
-      text_start: "Today will be a "
-      text_day: " day"
-      text_maximum: " The maximum temperature will reach up to "
-      text_minimum: " degrees celsius. The minimum temperature will be "
-      text_finish: " degrees celsius."
-      warmth_normal: "normal"
-      warmth_cold: "cold"
-      warmth_very_frosty: "very frosty"
-      warmth_summer: "summer" 
-      warmth_hot: "hot"
-      warmth_tropical: " with a tropical night"
+      sunset: "Sunset: "    
     wind:
       text_start: "The wind will be "
       text_maximum: " and will reach up to "
@@ -86,12 +86,12 @@ en:
       strength_very_stormy: "very stromy"
       strength_extremly_stormy: "extremly stromy"
       direction_circular: "circulatory directions"
-    daytime:
-      morning: "morning"
-      noon: "noon"
-      afternoon: "afternoon"
-      evening: "evening"
-      night: "night"
+  daytime:
+    morning: "morning"
+    noon: "noon"
+    afternoon: "afternoon"
+    evening: "evening"
+    night: "night"
   direction:
     north: "north"
     south: "south"
