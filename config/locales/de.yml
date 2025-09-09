@@ -41,7 +41,15 @@ de:
       warmth_very_frosty: "frostiger"
       warmth_summer: "sommerlicher" 
       warmth_hot: "heißer"
-      warmth_tropical: " mit einer tropischen Nacht"      
+      warmth_tropical: " mit einer tropischen Nacht"
+    apparent_temperature:
+      text_start: "Diese Bedingungeen führen zu "
+      text_maximum: ". Die maximale gefühlte Temperatur wird "
+      text_minimum: " Grad Celsius und die minimale gefühlte Temperature "
+      text_finish: " Grad Celsius betragen."
+      feeling_normal: "einem normalen thermischen Empfinden"
+      feeling_strong_heat: "einer starken Wärmebelastung"
+      feeling_extreme_hear: "einer extremen Wärmebelastung"        
     pressure:
       text_start: "Der Luftdruck ist heute "
       text_with: " und wird im Mittel "

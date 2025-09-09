@@ -8,7 +8,7 @@ en:
       tropical_night: "tropical night (temperature does not fall below 20 degrees celsius)"    
     apparent_temperature:
       strong_heat_day: "strong thermal stress (apparent temperature exceeds 32 degrees celsius)"
-      extreme_heat_day: "extreme thermal stress (apparent temperature exceeds 32 degrees celsius)"
+      extreme_heat_day: "extreme thermal stress (apparent temperature exceeds 38 degrees celsius)"
     pressure:
       low_pressure: "low pressure (pressure below 1005 hPa)"
       very_low_pressure: "low pressure (pressure below 990 hPa)"
@@ -41,7 +41,15 @@ en:
       warmth_very_frosty: "very frosty"
       warmth_summer: "summer" 
       warmth_hot: "hot"
-      warmth_tropical: " with a tropical night"   
+      warmth_tropical: " with a tropical night"
+    apparent_temperature:
+      text_start: "This conditions will lead to a"
+      text_maximum: ". The maximum apparent temperature will be "
+      text_minimum: " degrees celsius and the minimum apparent temperature "
+      text_finish: " degrees celsius."
+      feeling_normal: " normal thermal sensation"
+      feeling_strong_heat: " strong thermal stress"
+      feeling_extreme_hear: "n extreme thermal stress"      
     pressure:
       text_start: "The pressure today will be "
       text_with: " with "
