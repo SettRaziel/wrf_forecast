@@ -49,7 +49,7 @@ en:
       text_finish: " degrees celsius."
       feeling_normal: " normal thermal sensation"
       feeling_strong_heat: " strong thermal stress"
-      feeling_extreme_hear: "n extreme thermal stress"      
+      feeling_extreme_heat: "n extreme thermal stress"      
     pressure:
       text_start: "The pressure today will be "
       text_with: " with "

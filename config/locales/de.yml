@@ -49,7 +49,7 @@ de:
       text_finish: " Grad Celsius betragen."
       feeling_normal: "einem normalen thermischen Empfinden"
       feeling_strong_heat: "einer starken Wärmebelastung"
-      feeling_extreme_hear: "einer extremen Wärmebelastung"        
+      feeling_extreme_heat: "einer extremen Wärmebelastung"        
     pressure:
       text_start: "Der Luftdruck ist heute "
       text_with: " und wird im Mittel "
