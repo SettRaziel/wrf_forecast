@@ -2,7 +2,7 @@ module WrfForecast
 
   module Text
 
-    # This class generates the forecast text for the temperature
+    # This class generates the forecast text for the air temperature
     # data of the forecast
     # warnings: the hot day contains the summer day and can have a tropical night or frost day
     # but exclude the ice day
@@ -11,7 +11,7 @@ module WrfForecast
 
       private
 
-      # method to generate the forecast text for the temperature
+      # method to generate the forecast text for the air temperature
       def generate_forecast_text
         @text = I18n.t("forecast_text.air_temperature.text_start")
         @text.concat(create_warmth_text).concat(".")
