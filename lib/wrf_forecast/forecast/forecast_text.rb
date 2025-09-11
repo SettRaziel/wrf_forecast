@@ -42,8 +42,8 @@ module WrfForecast
 
     # @return [PressureText] the class generating the pressure forecast text
     attr_reader :pressure_text
-    # @return [TemperatureText] the class generating the temperature forecast text
-    attr_reader :temperature_text
+    # @return [AirTemperatureText] the class generating the temperature forecast text
+    attr_reader :air_temperature_text
     # @return [WindText] the class generating the wind forecast text
     attr_reader :wind_text
     # @return [RainText] the class generating the rain forecast text
@@ -66,7 +66,7 @@ module WrfForecast
     # method to create the body text for the text forecast
     def create_body
       @body = @suntime_text.text.concat("\n")
-      @body.concat(@temperature_text.text).concat("\n")
+      @body.concat(@air_temperature_text.text).concat("\n")
       @body.concat(@pressure_text.text).concat("\n")
       @body.concat(@wind_text.text).concat("\n")
       @body.concat(@rain_text.text)
@@ -76,8 +76,8 @@ module WrfForecast
     # method to create the warning text for the forecast
     def create_warnings
       @warnings= ""
-      @warnings.concat("\n") if (!@temperature_text.warnings.empty?)
-      @warnings.concat(@temperature_text.warnings)
+      @warnings.concat("\n") if (!@air_temperature_text.warnings.empty?)
+      @warnings.concat(@air_temperature_text.warnings)
       @warnings.concat("\n") if (!@wind_text.warnings.empty?)
       @warnings.concat(@wind_text.warnings)
       @warnings.concat("\n") if (!@rain_text.warnings.empty?)
@@ -107,7 +107,7 @@ module WrfForecast
     def initialize_air_temperature_text(repository, handler)
       extreme_values = repository.extreme_values[:air_temperature]
       threshold = handler.temperature_threshold.indicators
-      @temperature_text = WrfForecast::Text::AirTemperatureText.new(extreme_values, threshold)
+      @air_temperature_text = WrfForecast::Text::AirTemperatureText.new(extreme_values, threshold)
       nil
     end
 
