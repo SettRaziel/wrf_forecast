@@ -12,8 +12,8 @@ describe WrfForecast::Threshold::ThresholdHandler do
         wrf_handler = WrfLibrary::Wrf::Handler.new(BERLIN_SMALL_DATA, Time.parse("2020-02-23"))
         repository = WrfForecast::ForecastRepository.new(wrf_handler)
         threshold_handler = WrfForecast::Threshold::ThresholdHandler.new(repository)
-        expect(threshold_handler.temperature_threshold).to be_truthy
-        expect(threshold_handler.temperature_threshold.indicators[:ice_day].is_active).to eq(false)
+        expect(threshold_handler.air_temperature_threshold).to be_truthy
+        expect(threshold_handler.air_temperature_threshold.indicators[:ice_day].is_active).to eq(false)
         expect(threshold_handler.wind_threshold).to be_truthy
         expect(threshold_handler.wind_threshold.indicators[:squall_day].is_active).to eq(false)
         expect(threshold_handler.rain_threshold).to be_truthy
