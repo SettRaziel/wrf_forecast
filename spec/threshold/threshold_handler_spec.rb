@@ -18,6 +18,8 @@ describe WrfForecast::Threshold::ThresholdHandler do
         expect(threshold_handler.wind_threshold.indicators[:squall_day].is_active).to eq(false)
         expect(threshold_handler.rain_threshold).to be_truthy
         expect(threshold_handler.rain_threshold.indicators[:strong_rain].is_active).to eq(false)
+        expect(threshold_handler.apparent_temperature_threshold).to be_truthy
+        expect(threshold_handler.apparent_temperature_threshold.indicators[:strong_heat_day].is_active).to eq(false)
       end
     end
   end
@@ -32,6 +34,7 @@ describe WrfForecast::Threshold::ThresholdHandler do
         expect(threshold_handler.warnings[:air_temperature][0].identifier).to eq(:frost_day)
         expect(threshold_handler.warnings[:wind_speed]).to be_empty
         expect(threshold_handler.warnings[:rain]).to be_empty
+        expect(threshold_handler.warnings[:apparent_temperature]).to be_empty
       end
     end
   end
@@ -46,6 +49,7 @@ describe WrfForecast::Threshold::ThresholdHandler do
         expect(threshold_handler.warnings[:air_temperature][0].identifier).to eq(:frost_day)
         expect(threshold_handler.warnings[:wind_speed]).to be_empty
         expect(threshold_handler.warnings[:rain]).to be_empty
+        expect(threshold_handler.warnings[:apparent_temperature]).to be_empty
       end
     end
   end
