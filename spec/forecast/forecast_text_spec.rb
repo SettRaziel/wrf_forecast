@@ -35,7 +35,13 @@ def get_berlin_body
   expected_body.concat(I18n.t("forecast_text.wind.text_mean")).concat("16")
   expected_body.concat(I18n.t("forecast_text.wind.text_finish")).concat("\n")
 
-  expected_body.concat(I18n.t("forecast_text.rain.no_rain"))
+  expected_body.concat(I18n.t("forecast_text.rain.no_rain")).concat("\n")
+  
+  expected_body.concat(I18n.t("forecast_text.apparent_temperature.text_start"))
+  expected_body.concat(I18n.t("forecast_text.apparent_temperature.feeling_normal"))
+  expected_body.concat(I18n.t("forecast_text.apparent_temperature.text_maximum")).concat("4")
+  expected_body.concat(I18n.t("forecast_text.apparent_temperature.text_minimum")).concat("-9")
+  expected_body.concat(I18n.t("forecast_text.apparent_temperature.text_finish"))
 end
 
 def get_hannover_header
@@ -71,7 +77,13 @@ def get_hannover_body
   expected_body.concat(I18n.t("forecast_text.wind.text_mean")).concat("17")
   expected_body.concat(I18n.t("forecast_text.wind.text_finish")).concat("\n")
 
-  expected_body.concat(I18n.t("forecast_text.rain.no_rain"))
+  expected_body.concat(I18n.t("forecast_text.rain.no_rain")).concat("\n")
+
+  expected_body.concat(I18n.t("forecast_text.apparent_temperature.text_start"))
+  expected_body.concat(I18n.t("forecast_text.apparent_temperature.feeling_normal"))
+  expected_body.concat(I18n.t("forecast_text.apparent_temperature.text_maximum")).concat("10")
+  expected_body.concat(I18n.t("forecast_text.apparent_temperature.text_minimum")).concat("-5")
+  expected_body.concat(I18n.t("forecast_text.apparent_temperature.text_finish"))
 end
 
 describe WrfForecast::ForecastText do
