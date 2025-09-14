@@ -49,26 +49,31 @@ ruby wrf_forecast.rb --default --file <filename>
 ```
 will lead to a forecast text like this:
 ```
-Weather forecast of Berlin-Schöneberg for the 2020-08-19 00:00:00 +0200
+Weather forecast of Berlin-Schöneberg for the 2025-09-14 00:00:00 +0200.
 
-Sunrise: 05:56, Sunset: 20:23
-Today will be a summer day. The maximum temperature will reach up to 27 degrees celsius. The minimum temperature will be 15 degrees celsius.
-The wind will be normal and will reach up to 11 km/h from west. The mean wind will be 7 km/h.
+Sunrise: 06:38, Sunset: 19:25
+Today will be a cold day. The maximum temperature will reach up to 10 degrees celsius. The minimum temperature will be -4 degrees celsius.
+The pressure today will be high with 1014.0 hPa in the mean value.The maximum pressure will not rise above 1021 hPa and the minimum will not be below 1009 hPa.
+The wind will be normal and will reach up to 23 km/h from west. The mean wind will be 16 km/h.
 The forecast does not predict rain.
+This conditions will lead to a normal thermal sensation. The maximum apparent temperature will be 4 degrees celsius and the minimum apparent temperature -9 degrees celsius.
 
-Warnings:
-summer day (temperature will exceed 25 degrees celsius)
+Warnings: 
+frost day (temperature will fall below 0 degrees celsius)
+
 ```
 or with no warnings present:
 ```
-Weather forecast of Husum for the 2020-08-19 00:00:00 +0200
+Weather forecast of Berlin-Schöneberg for the 2025-09-14 00:00:00 +0200.
 
-Sunrise: 06:08, Sunset: 20:45
-Today will be a normal day. The maximum temperature will reach up to 25 degrees celsius. The minimum temperature will be 14 degrees celsius.
-The wind will be normal and will reach up to 19 km/h from southwest. The mean wind will be 11 km/h.
-The forecast does not predict rain.
+Sunrise: 06:38, Sunset: 19:25
+Today will be a normal day. The maximum temperature will reach up to 10 degrees celsius. The minimum temperature will be 1 degrees celsius.
+The pressure today will be high with 1020.6 hPa in the mean value.The maximum pressure will not rise above 1023 hPa and the minimum will not be below 1019 hPa.
+The wind will be normal and will reach up to 17 km/h from northeast. The mean wind will be 11 km/h.
+The forecast does predict normal rain with a maximum of 0.3 mm in 1 hour and up to 1 mm for the day. There are some dry periods during the day.
+This conditions will lead to a normal thermal sensation. The maximum apparent temperature will be 6 degrees celsius and the minimum apparent temperature -4 degrees celsius.
 
-Warnings: - 
+Warnings: -
 ```
 The same forecast can be achieved by setting the required parameters manually:
 ```
