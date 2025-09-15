@@ -20,7 +20,7 @@
       "minimum": 100970.313,
       "maximum": 102055.805
     },
-    "temperature": {
+    "air_temperature": {
       "minimum": 269.893,
       "maximum": 282.696
     },

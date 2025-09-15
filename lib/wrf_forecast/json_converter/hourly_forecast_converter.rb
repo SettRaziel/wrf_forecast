@@ -30,7 +30,7 @@ module WrfForecast
 
       # method to create the output hash for the temperature values
       # @return [Array] the array with the hourly temperature values
-      def generate_temperature_values
+      def generate_air_temperature_values
         WrfLibrary::Statistic::Hourly.calculate_hourly_means(:air_temperature, @wrf_handler)
       end
 

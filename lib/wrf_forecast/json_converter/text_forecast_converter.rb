@@ -18,7 +18,7 @@ module WrfForecast
 
       # method to create the output hash for the temperature values
       # @return [Hash] the extreme values of the temperature      
-      def generate_temperature_values
+      def generate_air_temperature_values
         extreme_values = @forecast.extreme_values[:air_temperature]
         { :minimum => extreme_values.minimum.round(3), 
           :maximum => extreme_values.maximum.round(3) }
