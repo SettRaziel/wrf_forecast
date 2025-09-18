@@ -16,13 +16,22 @@
     }
   },
   "weather_data": {
+    "air_temperature": {
+      "minimum": 269.893,
+      "maximum": 282.696
+    },
+    "apparent_temperature": {
+      "minimum": -8.099,
+      "maximum": 3.531
+    },
     "pressure": {
       "minimum": 100970.313,
       "maximum": 102055.805
     },
-    "air_temperature": {
-      "minimum": 269.893,
-      "maximum": 282.696
+    "rain": {
+      "minimum": 0.0,
+      "maximum": 0.001,
+      "sum": 0.001
     },
     "wind_speed": {
       "minimum": 2.568,
@@ -30,11 +39,6 @@
     },
     "wind_direction": {
       "prevalent_direction": "west"
-    },
-    "rain": {
-      "minimum": 0.0,
-      "maximum": 0.001,
-      "sum": 0.001
     },
     "warnings": [
       "frost day (temperature will fall below 0 degrees celsius)"

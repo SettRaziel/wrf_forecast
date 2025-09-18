@@ -22,16 +22,24 @@ module WrfForecast
       # @return [WrfHandler] the wrf handler with the data of the model run
       attr_accessor :wrf_handler
 
+      # method to create the output hash for the temperature values
+      # @return [Array] the array with the hourly temperature values
+      def generate_apparent_temperature_values
+        timestamps = @wrf_handler.retrieve_data_set(:forecast_time)
+        data = @forecast.forecast_data[:apparent_temperature]
+        WrfLibrary::Statistic::Hourly.calculate_hourly_data_means(timestamps, data)
+      end
+
+      # method to create the output hash for the air temperature values
+      # @return [Array] the array with the hourly temperature values
+      def generate_air_temperature_values
+        WrfLibrary::Statistic::Hourly.calculate_hourly_means(:air_temperature, @wrf_handler)
+      end
+
       # method to create the output hash for the pressure values
       # @return [Array] the array with the hourly pressure values
       def generate_pressure_values
         WrfLibrary::Statistic::Hourly.calculate_hourly_means(:pressure, @wrf_handler)
-      end
-
-      # method to create the output hash for the temperature values
-      # @return [Array] the array with the hourly temperature values
-      def generate_air_temperature_values
-        WrfLibrary::Statistic::Hourly.calculate_hourly_means(:air_temperature, @wrf_handler)
       end
 
       # method to create the output hash for the wind values
