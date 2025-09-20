@@ -92,29 +92,39 @@ With the parameter `-j` or `--json` the output will be converted to a json objec
         "y": 52.49
       }
     },
-    "start_date": "2020-08-19 00:00:00 +0200",
+    "start_date": "2025-09-20 00:00:00 +0200",
     "suntime": {
-      "sunrise": "2020-08-19 05:56:00 +0200",
-      "sunset": "2020-08-19 20:23:00 +0200"
+      "sunrise": "2025-09-20 06:49:00 +0200",
+      "sunset": "2025-09-20 19:11:00 +0200"
     }
   },
   "weather_data": {
-    "temperature": {
-      "minimum": 288.491,
-      "maximum": 298.396
+    "air_temperature": {
+      "minimum": 269.893,
+      "maximum": 282.696
     },
-    "wind_speed": {
-      "minimum": 0.401,
-      "maximum": 3.691,
-      "prevalent_direction": "northwest"
+    "apparent_temperature": {
+      "minimum": -8.099,
+      "maximum": 3.531
+    },
+    "pressure": {
+      "minimum": 100970.313,
+      "maximum": 102055.805
     },
     "rain": {
       "minimum": 0.0,
-      "maximum": 0.027,
-      "sum": 0.056
+      "maximum": 0.001,
+      "sum": 0.001
+    },
+    "wind_speed": {
+      "minimum": 2.568,
+      "maximum": 6.22
+    },
+    "wind_direction": {
+      "prevalent_direction": "west"
     },
     "warnings": [
-      "summer day (temperature will exceed 25 degrees celsius)"
+      "frost day (temperature will fall below 0 degrees celsius)"
     ]
   }
 }
@@ -132,33 +142,45 @@ or with parameter `-a` or `--aggregate` the hourly values of the forecast day wi
         "y": 52.49
       }
     },
-    "start_date": "2021-06-29 00:00:00 +0200",
+    "start_date": "2025-09-20 00:00:00 +0200",
     "suntime": {
-      "sunrise": "2021-06-29 04:46:00 +0200",
-      "sunset": "2021-06-29 21:33:00 +0200"
+      "sunrise": "2025-09-20 06:49:00 +0200",
+      "sunset": "2025-09-20 19:11:00 +0200"
     }
   },
   "weather_data": {
-    "temperature": [
-      282.893,
-      282.721,
+    "air_temperature": [
+      272.893,
       ...
-      285.98
+      275.98
     ],
-    "wind_speed": [
-      2.855,
-      2.78,
+    "apparent_temperature": [
+      -5.104,
       ...
-      2.94
+      -1.253
+    ],
+    "pressure": [
+      102024.258,
+      ...
+      100989.031
     ],
     "rain": [
-      0.0,
       0.0,
       ...
       0.0
     ],
+    "wind_speed": [
+      2.855,
+      ...
+      2.94
+    ],
+    "wind_direction": [
+      "SW",
+      ...
+      "W"
+    ],
     "warnings": [
-      "summer day (temperature will exceed 25 degrees celsius)"
+      "frost day (temperature will fall below 0 degrees celsius)"
     ]
   }
 }
