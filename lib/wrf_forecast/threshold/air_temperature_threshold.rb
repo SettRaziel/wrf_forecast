@@ -12,17 +12,17 @@ module WrfForecast
     # * summer day: the temperature did exceed 25.0 degress celsius at least once
     # * hot day: the temperature did exceed 30.0 degress celsius at least once
     # * tropical night: the temperature of the day did not fall below 20.0 degrees celsius
-    class TemperatureThreshold < BaseThreshold
+    class AirTemperatureThreshold < BaseThreshold
 
       private
 
       # initialization of the required indicators
       def initialize_indicators
-        add_indicator(:ice_day, true, I18n.t("threshold.temperature.ice_day"))
-        add_indicator(:frost_day, false, I18n.t("threshold.temperature.frost_day"))
-        add_indicator(:summer_day, false, I18n.t("threshold.temperature.summer_day"))
-        add_indicator(:hot_day, false, I18n.t("threshold.temperature.hot_day"))
-        add_indicator(:tropical_night, true, I18n.t("threshold.temperature.tropical_night"))
+        add_indicator(:ice_day, true, I18n.t("threshold.air_temperature.ice_day"))
+        add_indicator(:frost_day, false, I18n.t("threshold.air_temperature.frost_day"))
+        add_indicator(:summer_day, false, I18n.t("threshold.air_temperature.summer_day"))
+        add_indicator(:hot_day, false, I18n.t("threshold.air_temperature.hot_day"))
+        add_indicator(:tropical_night, true, I18n.t("threshold.air_temperature.tropical_night"))
         nil
       end
 

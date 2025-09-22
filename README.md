@@ -49,26 +49,31 @@ ruby wrf_forecast.rb --default --file <filename>
 ```
 will lead to a forecast text like this:
 ```
-Weather forecast of Berlin-Schöneberg for the 2020-08-19 00:00:00 +0200
+Weather forecast of Berlin-Schöneberg for the 2025-09-14 00:00:00 +0200.
 
-Sunrise: 05:56, Sunset: 20:23
-Today will be a summer day. The maximum temperature will reach up to 27 degrees celsius. The minimum temperature will be 15 degrees celsius.
-The wind will be normal and will reach up to 11 km/h from west. The mean wind will be 7 km/h.
+Sunrise: 06:38, Sunset: 19:25
+Today will be a cold day. The maximum temperature will reach up to 10 degrees celsius. The minimum temperature will be -4 degrees celsius.
+The pressure today will be high with 1014.0 hPa in the mean value.The maximum pressure will not rise above 1021 hPa and the minimum will not be below 1009 hPa.
+The wind will be normal and will reach up to 23 km/h from west. The mean wind will be 16 km/h.
 The forecast does not predict rain.
+This conditions will lead to a normal thermal sensation. The maximum apparent temperature will be 4 degrees celsius and the minimum apparent temperature -9 degrees celsius.
 
-Warnings:
-summer day (temperature will exceed 25 degrees celsius)
+Warnings: 
+frost day (temperature will fall below 0 degrees celsius)
+
 ```
 or with no warnings present:
 ```
-Weather forecast of Husum for the 2020-08-19 00:00:00 +0200
+Weather forecast of Berlin-Schöneberg for the 2025-09-14 00:00:00 +0200.
 
-Sunrise: 06:08, Sunset: 20:45
-Today will be a normal day. The maximum temperature will reach up to 25 degrees celsius. The minimum temperature will be 14 degrees celsius.
-The wind will be normal and will reach up to 19 km/h from southwest. The mean wind will be 11 km/h.
-The forecast does not predict rain.
+Sunrise: 06:38, Sunset: 19:25
+Today will be a normal day. The maximum temperature will reach up to 10 degrees celsius. The minimum temperature will be 1 degrees celsius.
+The pressure today will be high with 1020.6 hPa in the mean value.The maximum pressure will not rise above 1023 hPa and the minimum will not be below 1019 hPa.
+The wind will be normal and will reach up to 17 km/h from northeast. The mean wind will be 11 km/h.
+The forecast does predict normal rain with a maximum of 0.3 mm in 1 hour and up to 1 mm for the day. There are some dry periods during the day.
+This conditions will lead to a normal thermal sensation. The maximum apparent temperature will be 6 degrees celsius and the minimum apparent temperature -4 degrees celsius.
 
-Warnings: - 
+Warnings: -
 ```
 The same forecast can be achieved by setting the required parameters manually:
 ```
@@ -87,29 +92,39 @@ With the parameter `-j` or `--json` the output will be converted to a json objec
         "y": 52.49
       }
     },
-    "start_date": "2020-08-19 00:00:00 +0200",
+    "start_date": "2025-09-20 00:00:00 +0200",
     "suntime": {
-      "sunrise": "2020-08-19 05:56:00 +0200",
-      "sunset": "2020-08-19 20:23:00 +0200"
+      "sunrise": "2025-09-20 06:49:00 +0200",
+      "sunset": "2025-09-20 19:11:00 +0200"
     }
   },
   "weather_data": {
-    "temperature": {
-      "minimum": 288.491,
-      "maximum": 298.396
+    "air_temperature": {
+      "minimum": 269.893,
+      "maximum": 282.696
     },
-    "wind_speed": {
-      "minimum": 0.401,
-      "maximum": 3.691,
-      "prevalent_direction": "northwest"
+    "apparent_temperature": {
+      "minimum": -8.099,
+      "maximum": 3.531
+    },
+    "pressure": {
+      "minimum": 100970.313,
+      "maximum": 102055.805
     },
     "rain": {
       "minimum": 0.0,
-      "maximum": 0.027,
-      "sum": 0.056
+      "maximum": 0.001,
+      "sum": 0.001
+    },
+    "wind_speed": {
+      "minimum": 2.568,
+      "maximum": 6.22
+    },
+    "wind_direction": {
+      "prevalent_direction": "west"
     },
     "warnings": [
-      "summer day (temperature will exceed 25 degrees celsius)"
+      "frost day (temperature will fall below 0 degrees celsius)"
     ]
   }
 }
@@ -127,33 +142,45 @@ or with parameter `-a` or `--aggregate` the hourly values of the forecast day wi
         "y": 52.49
       }
     },
-    "start_date": "2021-06-29 00:00:00 +0200",
+    "start_date": "2025-09-20 00:00:00 +0200",
     "suntime": {
-      "sunrise": "2021-06-29 04:46:00 +0200",
-      "sunset": "2021-06-29 21:33:00 +0200"
+      "sunrise": "2025-09-20 06:49:00 +0200",
+      "sunset": "2025-09-20 19:11:00 +0200"
     }
   },
   "weather_data": {
-    "temperature": [
-      282.893,
-      282.721,
+    "air_temperature": [
+      272.893,
       ...
-      285.98
+      275.98
     ],
-    "wind_speed": [
-      2.855,
-      2.78,
+    "apparent_temperature": [
+      -5.104,
       ...
-      2.94
+      -1.253
+    ],
+    "pressure": [
+      102024.258,
+      ...
+      100989.031
     ],
     "rain": [
-      0.0,
       0.0,
       ...
       0.0
     ],
+    "wind_speed": [
+      2.855,
+      ...
+      2.94
+    ],
+    "wind_direction": [
+      "SW",
+      ...
+      "W"
+    ],
     "warnings": [
-      "summer day (temperature will exceed 25 degrees celsius)"
+      "frost day (temperature will fall below 0 degrees celsius)"
     ]
   }
 }

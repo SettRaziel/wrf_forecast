@@ -10,8 +10,10 @@ module WrfForecast
 
       # @return [PressureThreshold] the class holding the pressure thresholds
       attr_reader :pressure_threshold
-      # @return [TemperatureThreshold] the class holding the temperature thresholds
-      attr_reader :temperature_threshold
+      # @return [AirTemperatureThreshold] the class holding the air temperature thresholds
+      attr_reader :air_temperature_threshold
+      # @return [ApparentTemperatureThreshold] the class holding the apparent temperature thresholds
+      attr_reader :apparent_temperature_threshold
       # @return [WindThreshold] the class holding the wind thresholds
       attr_reader :wind_threshold
       # @return [RainThreshold] the class holding the rain thresholds
@@ -24,7 +26,9 @@ module WrfForecast
       def initialize(forecast_repository)
         data = forecast_repository.forecast_data
         @pressure_threshold = WrfForecast::Threshold::PressureThreshold.new(data[:pressure])
-        @temperature_threshold = WrfForecast::Threshold::TemperatureThreshold.new(data[:air_temperature])
+        @air_temperature_threshold = WrfForecast::Threshold::AirTemperatureThreshold.new(data[:air_temperature])
+        @apparent_temperature_threshold = WrfForecast::Threshold::ApparentTemperatureThreshold.
+                                          new(data[:apparent_temperature])
         @wind_threshold = WrfForecast::Threshold::WindThreshold.new(data[:wind_speed])
         @rain_threshold = WrfForecast::Threshold::RainThreshold.new(forecast_repository.hourly_rain)
         collect_active_thresholds
@@ -35,7 +39,8 @@ module WrfForecast
       # method to collect all overstepped thresholds indicating significant weather
       def collect_active_thresholds
         @warnings = Hash.new()
-        @warnings[:air_temperature] = collect_thresholds_for(@temperature_threshold)
+        @warnings[:air_temperature] = collect_thresholds_for(@air_temperature_threshold)
+        @warnings[:apparent_temperature] = collect_thresholds_for(@apparent_temperature_threshold)
         @warnings[:wind_speed] = collect_thresholds_for(@wind_threshold)
         @warnings[:rain] = collect_thresholds_for(@rain_threshold)
         nil
