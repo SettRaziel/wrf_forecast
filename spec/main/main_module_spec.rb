@@ -393,7 +393,7 @@ describe WrfForecast do
         expected.concat(" Die Temperatur erreicht Werte bis 10 Grad Celsius")
         expected.concat(" und sinkt bis auf Werte um -4 Grad Celsius.\n")
         expected.concat("Der Luftdruck ist heute hoch und wird im Mittel 1014.0 hPa betragen.")        
-        expected.concat("Der maximale Luftdruck wird 1021 hPa nicht über- und das Minimum 1009 hPa unterschreiten.\n")
+        expected.concat(" Der maximale Luftdruck wird 1021 hPa nicht über- und das Minimum 1009 hPa unterschreiten.\n")
         expected.concat("Der Wind weht normal und erreicht maximale Geschwindigkeiten ")
         expected.concat("von 23 km/h aus West. Die mittlere Geschwindigkeit beträgt 16 km/h.\n")
         expected.concat("Die Vorhersage prognostiziert keinen Niederschlag.\n")
