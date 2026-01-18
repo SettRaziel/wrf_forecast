@@ -21,12 +21,12 @@
       "maximum": 282.696
     },
     "apparent_temperature": {
-      "minimum": -8.099,
-      "maximum": 3.531
+      "minimum": -8.092,
+      "maximum": 3.539
     },
     "pressure": {
-      "minimum": 100970.313,
-      "maximum": 102055.805
+      "minimum": 101522.639,
+      "maximum": 102620.695
     },
     "rain": {
       "minimum": 0.0,
