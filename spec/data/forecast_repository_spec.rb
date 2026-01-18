@@ -13,8 +13,8 @@ describe WrfForecast::ForecastRepository do
         repository = WrfForecast::ForecastRepository.new(handler)
         pressure_values = repository.forecast_data[:pressure]
         expect(pressure_values.size).to eq(3420)
-        expect(pressure_values[0].round(3)).to eq(102060.688)
-        expect(pressure_values[4].round(3)).to eq(102065.234)
+        expect(pressure_values[0].round(3)).to eq(102610.515)
+        expect(pressure_values[4].round(3)).to eq(102616.95)
       end
     end
   end
@@ -24,8 +24,8 @@ describe WrfForecast::ForecastRepository do
       it "initialize handler, fill the forecast data, check pressure extremes" do
         repository = WrfForecast::ForecastRepository.new(handler)
         extreme_values = repository.extreme_values[:pressure]
-        expect(extreme_values.maximum.round(3)).to eq(103577.672)
-        expect(extreme_values.minimum.round(3)).to eq(101944.836)
+        expect(extreme_values.maximum.round(3)).to eq(104149.014)
+        expect(extreme_values.minimum.round(3)).to eq(102499.477)
       end
     end
   end
@@ -146,8 +146,8 @@ describe WrfForecast::ForecastRepository do
         repository = WrfForecast::ForecastRepository.new(handler)
         apparent_temperature_values = repository.forecast_data[:apparent_temperature]
         expect(apparent_temperature_values.size).to eq(3420)
-        expect(apparent_temperature_values[0].round(3)).to eq(5.228)
-        expect(apparent_temperature_values[3419].round(3)).to eq(-0.611)
+        expect(apparent_temperature_values[0].round(3)).to eq(5.241)
+        expect(apparent_temperature_values[3419].round(3)).to eq(-0.605)
       end
     end
   end
@@ -157,8 +157,8 @@ describe WrfForecast::ForecastRepository do
       it "initialize handler, fill the forecast data, check apparent temperature extreme values" do
         repository = WrfForecast::ForecastRepository.new(handler)
         extreme_values = repository.extreme_values[:apparent_temperature]
-        expect(extreme_values.maximum.round(3)).to eq(5.74)
-        expect(extreme_values.minimum.round(3)).to eq(-8.877)
+        expect(extreme_values.maximum.round(3)).to eq(5.751)
+        expect(extreme_values.minimum.round(3)).to eq(-8.872)
       end
     end
   end
