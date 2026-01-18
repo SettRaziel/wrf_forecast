@@ -42,8 +42,12 @@ module WrfForecast
     # @param [WrfHandler] wrf_handler the wrf handler with the data
     def add_pressure_data(wrf_handler)
       pressure = wrf_handler.retrieve_data_set(:pressure)
-      @forecast_data[:pressure] = pressure
-      @extreme_values[:pressure] = RubyUtils::Statistic.extreme_values(pressure)
+      temperature = wrf_handler.retrieve_data_set(:air_temperature)
+      elevation = wrf_handler.data_repository.meta_data.station.elevation
+      reduced_pressure = WrfLibrary::Measurand::Pressure.reduce_pressure_to_sealevel(pressure, temperature, elevation)
+      @forecast_data[:pressure] = reduced_pressure
+
+      @extreme_values[:pressure] = RubyUtils::Statistic.extreme_values(reduced_pressure)
       nil
     end
 
