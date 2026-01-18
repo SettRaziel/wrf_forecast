@@ -54,7 +54,7 @@ de:
       text_start: "Der Luftdruck ist heute "
       text_with: " und wird im Mittel "
       text_continue: " hPa betragen."
-      text_maximum: "Der maximale Luftdruck wird "
+      text_maximum: " Der maximale Luftdruck wird "
       text_minimum: " hPa nicht über- und das Minimum "
       text_finish: " hPa unterschreiten."
       level_normal: "normal"
