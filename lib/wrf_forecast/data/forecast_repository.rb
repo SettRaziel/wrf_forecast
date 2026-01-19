@@ -1,6 +1,7 @@
 require 'ruby_utils/statistic'
 require 'wrf_library/data/wind_direction_repository'
 require "wrf_library/apparent_temperature"
+require "wrf_library/measurand"
 
 module WrfForecast
 
