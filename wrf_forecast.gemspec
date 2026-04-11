@@ -1,6 +1,6 @@
 Gem::Specification.new do |s|
   s.name          = "wrf_forecast"
-  s.version       = "0.3.0"
+  s.version       = "0.4.1"
   s.summary       = "WRF Textforecast with ruby"
   s.description   = "Scripts to generate a weather forecast based on the data of a station meteogram"
   s.authors       = ["Benjamin Held"]
@@ -16,7 +16,8 @@ Gem::Specification.new do |s|
   s.add_development_dependency "rake", "~> 13.0", ">= 13.0.1"
   s.add_development_dependency "rspec", "~> 3.9", ">= 3.9.0"
 
-  s.add_dependency "ruby_utils", "~> 0.2.0", "> 0.2.0"
-  s.add_dependency "wrf_library", "~> 0.5.0", "> 0.5.0"
-  s.add_dependency "i18n", "~> 1.8.9", ">= 1.8.9"
+  s.add_dependency "ruby_utils", "> 0.2.2", ">= 0.3.0", "< 0.5.0"
+  s.add_dependency "wrf_library", ">= 0.7.2", "> 0.7.0", "< 0.8"
+  s.add_dependency "i18n", ">= 1.8.10", "> 1.8.10"
+  s.add_development_dependency "bundler-audit", "~> 0.9.0", ">= 0.9.0"  
 end

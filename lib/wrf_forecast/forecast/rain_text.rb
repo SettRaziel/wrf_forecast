@@ -61,7 +61,7 @@ module WrfForecast
           @warnings.concat"\n" if (!@warnings.empty?)
           @warnings.concat(@thresholds[:continous_rain].warning_text)
         end
-        return intensity
+        intensity
       end
 
       # method to generate the text with rain values
@@ -85,7 +85,7 @@ module WrfForecast
           text.concat(I18n.t("forecast_text.rain.text_period_no_dry"))
         end
         text.concat(I18n.t("forecast_text.rain.text_period_finish"))
-        return text
+        text
       end
 
       # method to check if it should rain in the forecast time
@@ -94,7 +94,7 @@ module WrfForecast
         @hourly_rain.each { |value|
           return true if (value > 0.05)
         }
-        return false
+        false
       end
 
       # method to calculate the total rain of the day

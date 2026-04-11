@@ -1,4 +1,4 @@
-require "wrf_library/statistic"
+require "wrf_forecast/json_converter"
 
 module WrfForecast
 
@@ -6,7 +6,7 @@ module WrfForecast
 
     # Child class to generate valid json output for the result data of a given wrf meteogram
     # result already stored in a data repository
-    class HourlyForecastJsonConverter < WrfForecast::JsonConverter::ForecastStationJsonConverter
+    class FaultyForecastJsonConverter < WrfForecast::JsonConverter::ForecastStationJsonConverter
 
       # initialization
       # @param [WrfHandler] wrf_handler the wrf handler with the input data
@@ -46,12 +46,6 @@ module WrfForecast
       # @return [Array] the array with the hourly wind values
       def generate_windspeed_values
         WrfLibrary::Statistic::Hourly.calculate_hourly_windspeed_means(@wrf_handler)
-      end
-
-      # method to create the output hash for wind direction values
-      # @return [Array] the array with the hourly values      
-      def generate_winddirection_values
-        WrfLibrary::Statistic::Hourly.calculate_hourly_winddirection_means(@wrf_handler)
       end
 
       # method to create the output hash for the precipitation values

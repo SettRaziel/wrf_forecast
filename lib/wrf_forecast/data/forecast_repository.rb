@@ -1,5 +1,7 @@
 require 'ruby_utils/statistic'
 require 'wrf_library/data/wind_direction_repository'
+require "wrf_library/apparent_temperature"
+require "wrf_library/measurand"
 require "wrf_library/statistic"
 
 module WrfForecast
@@ -20,22 +22,37 @@ module WrfForecast
     attr_reader :hourly_values
 
     # initialization
-    # @param [WrfHandler] the wrf handler with the data
+    # @param [WrfHandler] wrf_handler the wrf handler with the data
     def initialize(wrf_handler)
       @extreme_values = Hash.new()
       @forecast_data = Hash.new()
       @hourly_values = Hash.new()
       @time_data = wrf_handler.retrieve_data_set(:forecast_time)
 
+      add_pressure_data(wrf_handler)
       add_temperature_data(wrf_handler)
       add_windspeed_data(wrf_handler)
       add_rain_data(wrf_handler)
+      calculate_apparent_temperature(wrf_handler)
     end
 
     private
 
     # @return [Array] the time stamp data
     attr_reader :time_data
+
+    # method to add the pressure data und determine extreme values
+    # @param [WrfHandler] wrf_handler the wrf handler with the data
+    def add_pressure_data(wrf_handler)
+      pressure = wrf_handler.retrieve_data_set(:pressure)
+      temperature = wrf_handler.retrieve_data_set(:air_temperature)
+      elevation = wrf_handler.data_repository.meta_data.station.elevation
+      reduced_pressure = WrfLibrary::Measurand::Pressure.reduce_pressure_to_sealevel(pressure, temperature, elevation)
+      @forecast_data[:pressure] = reduced_pressure
+
+      @extreme_values[:pressure] = RubyUtils::Statistic.extreme_values(reduced_pressure)
+      nil
+    end
 
     # method to add the temperature data und determine extreme values
     # @param [WrfHandler] wrf_handler the wrf handler with the data
@@ -56,7 +73,7 @@ module WrfForecast
       v_component = wrf_handler.retrieve_data_set(:v_wind)
       wind_speed = Array.new()
       wind_direction = Array.new()
-      u_component.zip(v_component).each { |u, v| 
+      u_component.zip(v_component).each { |u, v|
         wind_speed << Math.sqrt(u**2+v**2)
         wind_direction << Math.atan2(u, v) * r2d + 180
       }
@@ -88,6 +105,25 @@ module WrfForecast
       @forecast_data[:rain] = rain_data
       @hourly_values[:rain] = WrfLibrary::Statistic::Hourly.calculate_hourly_rainsum(wrf_handler)
       @extreme_values[:rain] = RubyUtils::Statistic.extreme_values(@hourly_values[:rain])
+      nil
+    end
+
+    # method to calculate the apparant temperature from the given forecast data set
+    # @param [WrfHandler] wrf_handler the wrf handler with the data
+    def calculate_apparent_temperature(wrf_handler)
+      pressure = @forecast_data[:pressure]
+      temperature = @forecast_data[:air_temperature]
+      wind_speed = @forecast_data[:wind_speed]
+      humidity = wrf_handler.retrieve_data_set(:mixing_ratio)
+      apparent_temperature = Array.new()
+      humidity.each_with_index { |value, i|
+        temperature_value = temperature[i] - 273.15
+        pressure_value = pressure[i] / 100
+        apparent_temperature << WrfLibrary::ApparentTemperature.calculate_apparent_temperature(
+                                temperature_value, wind_speed[i], value, pressure_value)
+      }
+      @extreme_values[:apparent_temperature] = RubyUtils::Statistic.extreme_values(apparent_temperature)
+      @forecast_data[:apparent_temperature] = apparent_temperature
       nil
     end
 

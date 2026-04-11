@@ -23,7 +23,7 @@ module WrfForecast
     # main entry point and initialization
     # @param [Array] arguments the input values from the terminal input ARGV
     def initialize(arguments)
-      @parameter_handler = Parameter::ParameterHandler.new(arguments)
+      @parameter_handler = WrfForecast::Parameter::ParameterHandler.new(arguments)
       initialize_locale
 
       if (!parameter_handler.repository.parameters[:help] && 
@@ -142,7 +142,7 @@ module WrfForecast
 
   # call to print version number and author
   def self.print_version
-    puts "wrf_forecast version 0.3.0".yellow
+    puts "wrf_forecast version 0.4.1".yellow
     puts "Created by Benjamin Held (March 2019)".yellow
     nil
   end
@@ -157,6 +157,7 @@ module WrfForecast
 
   # private method to determine which kind of json output needs to be created,
   # based on the given script parameter json and aggregate
+  # @return [String] the json output as a string
   private_class_method def self.determine_json_output
     if (@parameter_handler.repository.parameters[:aggregate])
       return @forecast_handler.generate_hourly_json_output          

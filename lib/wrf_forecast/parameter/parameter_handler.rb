@@ -19,6 +19,7 @@ module WrfForecast
       def validate_parameters
         check_occurrence(:offset, :period) if (@repository.parameters[:offset])
         check_occurrence(:aggregate, :json) if (@repository.parameters[:aggregate])
+        nil
       end
 
       # private method to the specified parameter constraints
@@ -28,6 +29,10 @@ module WrfForecast
 
         # check mandatory file parameter
         check_mandatory_parameter(:file)
+
+        # set default value for period if not set
+        @repository.parameters[:period] = "24" if (@repository.parameters[:period] == nil)
+        nil
       end
 
     end

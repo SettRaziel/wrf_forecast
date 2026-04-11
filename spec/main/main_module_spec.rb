@@ -30,9 +30,13 @@ describe WrfForecast do
         expected.concat("Today will be a cold day.")
         expected.concat(" The maximum temperature will reach up to 10 degrees celsius.")
         expected.concat(" The minimum temperature will be -4 degrees celsius.\n")
+        expected.concat("The pressure today will be high with 1019.5 hPa in the mean value.")
+        expected.concat(" The maximum pressure will not rise above 1027 hPa and the minimum will not be below 1015 hPa.\n")        
         expected.concat("The wind will be normal and will reach up to ")
         expected.concat("23 km/h from west. The mean wind will be 16 km/h.\n")
-        expected.concat("The forecast does not predict precipitation.\n\n")
+        expected.concat("The forecast does not predict precipitation.\n")
+        expected.concat("This conditions will lead to a normal thermal sensation. ")
+        expected.concat("The maximum apparent temperature will be 4 degrees celsius and the minimum apparent temperature -9 degrees celsius.\n\n")
         expected.concat("Warnings: \n")
         expected.concat("frost day (temperature will fall below 0 degrees celsius)")
         expect(WrfForecast.output_forecast).to eq(expected)
@@ -58,14 +62,50 @@ describe WrfForecast do
         expected.concat("Today will be a cold day.")
         expected.concat(" The maximum temperature will reach up to 10 degrees celsius.")
         expected.concat(" The minimum temperature will be -4 degrees celsius.\n")
+        expected.concat("The pressure today will be high with 1019.5 hPa in the mean value.")
+        expected.concat(" The maximum pressure will not rise above 1027 hPa and the minimum will not be below 1015 hPa.\n")        
         expected.concat("The wind will be normal and will reach up to ")
         expected.concat("23 km/h from west. The mean wind will be 16 km/h.\n")
-        expected.concat("The forecast does not predict precipitation.\n\n")
+        expected.concat("The forecast does not predict precipitation.\n")
+        expected.concat("This conditions will lead to a normal thermal sensation. ")
+        expected.concat("The maximum apparent temperature will be 4 degrees celsius and the minimum apparent temperature -9 degrees celsius.\n\n")
         expected.concat("Warnings: \n")
         expected.concat("frost day (temperature will fall below 0 degrees celsius)")
         expect(WrfForecast.output_forecast).to eq(expected)
         expect(parameters[:date]).to eq(timestamp)
         expect(WrfForecast.wrf_handler.data_repository.repository.size).to eq(994)
+        expect(WrfForecast.forecast_handler).to be_truthy
+      end
+    end
+  end
+
+  describe "#output_forecast" do
+    context "given an array of parameters with timestamp values" do
+      it "initialize the handler and repositories correctly, create output" do
+        timestamp = Time.parse("00:00").to_s
+        arguments = ["-d", timestamp, "--file", BERLIN_DATA.to_path]
+        WrfForecast.initialize(arguments)
+        parameters = WrfForecast.parameter_handler.repository.parameters
+        suntime = WrfForecast::Text::SuntimeText.new(WrfForecast.wrf_handler.data_repository.meta_data)
+
+        expected = "Weather forecast of Berlin for the #{timestamp}.\n\n"
+        expected.concat(suntime.text).concat("\n")
+        expected.concat("Today will be a normal day.")
+        expected.concat(" The maximum temperature will reach up to 10 degrees celsius.")
+        expected.concat(" The minimum temperature will be 1 degrees celsius.\n")
+        expected.concat("The pressure today will be high with 1026.1 hPa in the mean value.")
+        expected.concat(" The maximum pressure will not rise above 1029 hPa and the minimum will not be below 1024 hPa.\n")
+        expected.concat("The wind will be normal and will reach up to ")
+        expected.concat("17 km/h from northeast. The mean wind will be 11 km/h.\n")
+        expected.concat("The forecast does predict normal rain with a maximum of ")
+        expected.concat("0.3 mm in 1 hour and up to 1 mm for the day.")
+        expected.concat(" There are some dry periods during the day.\n")
+        expected.concat("This conditions will lead to a normal thermal sensation. ")
+        expected.concat("The maximum apparent temperature will be 6 degrees celsius and the minimum apparent temperature -4 degrees celsius.\n\n")
+        expected.concat("Warnings: -")
+        expect(WrfForecast.output_forecast).to eq(expected)
+        expect(parameters[:date]).to eq(timestamp)
+        expect(WrfForecast.wrf_handler.data_repository.repository.size).to eq(1124)
         expect(WrfForecast.forecast_handler).to be_truthy
       end
     end
@@ -85,11 +125,15 @@ describe WrfForecast do
         expected.concat("Today will be a normal day.")
         expected.concat(" The maximum temperature will reach up to 10 degrees celsius.")
         expected.concat(" The minimum temperature will be 1 degrees celsius.\n")
+        expected.concat("The pressure today will be high with 1026.1 hPa in the mean value.")
+        expected.concat(" The maximum pressure will not rise above 1029 hPa and the minimum will not be below 1024 hPa.\n")
         expected.concat("The wind will be normal and will reach up to ")
         expected.concat("17 km/h from northeast. The mean wind will be 11 km/h.\n")
         expected.concat("The forecast does predict normal rain with a maximum of ")
         expected.concat("0.3 mm in 1 hour and up to 1 mm for the day.")
-        expected.concat(" There are some dry periods during the day.\n\n")
+        expected.concat(" There are some dry periods during the day.\n")
+        expected.concat("This conditions will lead to a normal thermal sensation. ")
+        expected.concat("The maximum apparent temperature will be 6 degrees celsius and the minimum apparent temperature -4 degrees celsius.\n\n")
         expected.concat("Warnings: -")
         expect(WrfForecast.output_forecast).to eq(expected)
         expect(parameters[:date]).to eq(timestamp)
@@ -114,11 +158,15 @@ describe WrfForecast do
         expected.concat("Today will be a cold day.")
         expected.concat(" The maximum temperature will reach up to 10 degrees celsius.")
         expected.concat(" The minimum temperature will be -1 degrees celsius.\n")
+        expected.concat("The pressure today will be high with 1027.0 hPa in the mean value.")
+        expected.concat(" The maximum pressure will not rise above 1031 hPa and the minimum will not be below 1025 hPa.\n")        
         expected.concat("The wind will be normal and will reach up to ")
         expected.concat("19 km/h from northeast. The mean wind will be 12 km/h.\n")
         expected.concat("The forecast does predict normal rain with a maximum of ")
         expected.concat("0.3 mm in 1 hour and up to 1 mm for the day.")
-        expected.concat(" There are some dry periods during the day.\n\n")
+        expected.concat(" There are some dry periods during the day.\n")
+        expected.concat("This conditions will lead to a normal thermal sensation. ")
+        expected.concat("The maximum apparent temperature will be 6 degrees celsius and the minimum apparent temperature -7 degrees celsius.\n\n")
         expected.concat("Warnings: \n")
         expected.concat("frost day (temperature will fall below 0 degrees celsius)")
         expect(WrfForecast.output_forecast).to eq(expected)
@@ -144,11 +192,15 @@ describe WrfForecast do
         expected.concat("Heute wird es ein kalter Tag.")
         expected.concat(" Die Temperatur erreicht Werte bis 10 Grad Celsius")
         expected.concat(" und sinkt bis auf Werte um -1 Grad Celsius.\n")
+        expected.concat("Der Luftdruck ist heute hoch und wird im Mittel 1027.0 hPa betragen.")
+        expected.concat(" Der maximale Luftdruck wird 1031 hPa nicht über- und das Minimum 1025 hPa unterschreiten.\n")
         expected.concat("Der Wind weht normal und erreicht maximale Geschwindigkeiten ")
         expected.concat("von 19 km/h aus Nordost. Die mittlere Geschwindigkeit beträgt 12 km/h.\n")
         expected.concat("Die Vorhersage prognostiziert normalen Regen mit einem Maximum von ")
         expected.concat("0.3 mm in 1 Stunde und bis zu 1 mm über den Tag. ")
-        expected.concat("Es gibt einige trockene Perioden während des Tages.\n\n")
+        expected.concat("Es gibt einige trockene Perioden während des Tages.\n")
+        expected.concat("Diese Bedingungeen führen zu einem normalen thermischen Empfinden.")
+        expected.concat(" Die maximale gefühlte Temperatur wird 6 Grad Celsius und die minimale gefühlte Temperature -7 Grad Celsius betragen.\n\n")
         expected.concat("Warnungen: \n")
         expected.concat("Frosttag (Temperatur fällt unter 0 Grad Celsius)")
         expect(WrfForecast.output_forecast).to eq(expected)
@@ -178,9 +230,13 @@ describe WrfForecast do
         expected.concat("Today will be a cold day.")
         expected.concat(" The maximum temperature will reach up to 7 degrees celsius.")
         expected.concat(" The minimum temperature will be -2 degrees celsius.\n")
+        expected.concat("The pressure today will be high with 1031.7 hPa in the mean value.")
+        expected.concat(" The maximum pressure will not rise above 1035 hPa and the minimum will not be below 1028 hPa.\n")        
         expected.concat("The wind will be normal and will reach up to ")
         expected.concat("27 km/h from northeast. The mean wind will be 21 km/h.\n")
-        expected.concat("The forecast does not predict precipitation.\n\n")
+        expected.concat("The forecast does not predict precipitation.\n")
+        expected.concat("This conditions will lead to a normal thermal sensation. ")
+        expected.concat("The maximum apparent temperature will be 0 degrees celsius and the minimum apparent temperature -7 degrees celsius.\n\n")
         expected.concat("Warnings: \n")
         expected.concat("frost day (temperature will fall below 0 degrees celsius)")
         expect(WrfForecast.output_forecast).to eq(expected)
@@ -206,9 +262,13 @@ describe WrfForecast do
         expected.concat("Today will be a cold day.")
         expected.concat(" The maximum temperature will reach up to 10 degrees celsius.")
         expected.concat(" The minimum temperature will be -4 degrees celsius.\n")
+        expected.concat("The pressure today will be high with 1019.5 hPa in the mean value.")
+        expected.concat(" The maximum pressure will not rise above 1027 hPa and the minimum will not be below 1015 hPa.\n")        
         expected.concat("The wind will be normal and will reach up to ")
         expected.concat("23 km/h from west. The mean wind will be 16 km/h.\n")
-        expected.concat("The forecast does not predict precipitation.\n\n")
+        expected.concat("The forecast does not predict precipitation.\n")
+        expected.concat("This conditions will lead to a normal thermal sensation. ")
+        expected.concat("The maximum apparent temperature will be 4 degrees celsius and the minimum apparent temperature -9 degrees celsius.\n\n")
         expected.concat("Warnings: \n")
         expected.concat("frost day (temperature will fall below 0 degrees celsius)")
         expect(WrfForecast.output_forecast).to eq(expected)
@@ -233,11 +293,15 @@ describe WrfForecast do
         expected.concat("Today will be a normal day.")
         expected.concat(" The maximum temperature will reach up to 10 degrees celsius.")
         expected.concat(" The minimum temperature will be 1 degrees celsius.\n")
+        expected.concat("The pressure today will be high with 1026.1 hPa in the mean value.")
+        expected.concat(" The maximum pressure will not rise above 1029 hPa and the minimum will not be below 1024 hPa.\n")                
         expected.concat("The wind will be normal and will reach up to ")
         expected.concat("17 km/h from northeast. The mean wind will be 11 km/h.\n")
         expected.concat("The forecast does predict normal rain with a maximum of ")
         expected.concat("0.3 mm in 1 hour and up to 1 mm for the day.")
-        expected.concat(" There are some dry periods during the day.\n\n")
+        expected.concat(" There are some dry periods during the day.\n")
+        expected.concat("This conditions will lead to a normal thermal sensation. ")
+        expected.concat("The maximum apparent temperature will be 6 degrees celsius and the minimum apparent temperature -4 degrees celsius.\n\n")
         expected.concat("Warnings: -")
         expect(WrfForecast.output_forecast).to eq(expected)
         expect(parameters[:date]).to eq(timestamp)
@@ -330,9 +394,13 @@ describe WrfForecast do
         expected.concat("Today will be a cold day.")
         expected.concat(" The maximum temperature will reach up to 10 degrees celsius.")
         expected.concat(" The minimum temperature will be -4 degrees celsius.\n")
+        expected.concat("The pressure today will be high with 1019.5 hPa in the mean value.")
+        expected.concat(" The maximum pressure will not rise above 1027 hPa and the minimum will not be below 1015 hPa.\n")        
         expected.concat("The wind will be normal and will reach up to ")
         expected.concat("23 km/h from west. The mean wind will be 16 km/h.\n")
-        expected.concat("The forecast does not predict precipitation.\n\n")
+        expected.concat("The forecast does not predict precipitation.\n")
+        expected.concat("This conditions will lead to a normal thermal sensation. ")
+        expected.concat("The maximum apparent temperature will be 4 degrees celsius and the minimum apparent temperature -9 degrees celsius.\n\n")
         expected.concat("Warnings: \n")
         expected.concat("frost day (temperature will fall below 0 degrees celsius)")
         expect(File.read(output_file)).to eq(expected)
@@ -362,9 +430,13 @@ describe WrfForecast do
         expected.concat("Heute wird es ein kalter Tag.")
         expected.concat(" Die Temperatur erreicht Werte bis 10 Grad Celsius")
         expected.concat(" und sinkt bis auf Werte um -4 Grad Celsius.\n")
+        expected.concat("Der Luftdruck ist heute hoch und wird im Mittel 1019.5 hPa betragen.")        
+        expected.concat(" Der maximale Luftdruck wird 1027 hPa nicht über- und das Minimum 1015 hPa unterschreiten.\n")
         expected.concat("Der Wind weht normal und erreicht maximale Geschwindigkeiten ")
         expected.concat("von 23 km/h aus West. Die mittlere Geschwindigkeit beträgt 16 km/h.\n")
-        expected.concat("Die Vorhersage prognostiziert keinen Niederschlag.\n\n")
+        expected.concat("Die Vorhersage prognostiziert keinen Niederschlag.\n")
+        expected.concat("Diese Bedingungeen führen zu einem normalen thermischen Empfinden. ")
+        expected.concat("Die maximale gefühlte Temperatur wird 4 Grad Celsius und die minimale gefühlte Temperature -9 Grad Celsius betragen.\n\n")
         expected.concat("Warnungen: \n")
         expected.concat("Frosttag (Temperatur fällt unter 0 Grad Celsius)")
         expect(WrfForecast.output_forecast).to eq(expected)
@@ -474,7 +546,7 @@ describe WrfForecast do
                     " -o, --offset    ".light_blue + "argument:".red + " <offset>".yellow  + \
                     "; specifies how many hours from the forecast should be skipped\n" + \
                     " -p, --period    ".light_blue + "argument:".red + " <period>".yellow  + \
-                    "; specifies the forecast period\n" + \
+                    "; specifies the forecast period, if not set a default of 24 is set\n" + \
                     " -s, --save      ".light_blue + "argument:".red + " <target>".yellow  + \
                     "; specifies the output file where the results are saved\n").to_stdout
       end
@@ -515,7 +587,7 @@ describe WrfForecast do
           arguments = ["--version"]
           WrfForecast.initialize(arguments)
           WrfForecast.print_version
-        }.to output("wrf_forecast version 0.3.0".yellow + "\n" + \
+        }.to output("wrf_forecast version 0.4.1".yellow + "\n" + \
                     "Created by Benjamin Held (March 2019)".yellow + "\n").to_stdout
       end
     end

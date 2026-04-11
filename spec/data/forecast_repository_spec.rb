@@ -9,6 +9,29 @@ describe WrfForecast::ForecastRepository do
 
   describe ".new" do
     context "given a meteogram output file and the date" do
+      it "initialize handler, fill the forecast data, check pressure values" do
+        repository = WrfForecast::ForecastRepository.new(handler)
+        pressure_values = repository.forecast_data[:pressure]
+        expect(pressure_values.size).to eq(3420)
+        expect(pressure_values[0].round(3)).to eq(102610.515)
+        expect(pressure_values[4].round(3)).to eq(102616.95)
+      end
+    end
+  end
+
+  describe ".new" do
+    context "given a meteogram output file and the date" do
+      it "initialize handler, fill the forecast data, check pressure extremes" do
+        repository = WrfForecast::ForecastRepository.new(handler)
+        extreme_values = repository.extreme_values[:pressure]
+        expect(extreme_values.maximum.round(3)).to eq(104149.014)
+        expect(extreme_values.minimum.round(3)).to eq(102499.477)
+      end
+    end
+  end
+
+  describe ".new" do
+    context "given a meteogram output file and the date" do
       it "initialize handler, fill the forecast data, check temperature values" do
         repository = WrfForecast::ForecastRepository.new(handler)
         temperature_values = repository.forecast_data[:air_temperature]
@@ -137,6 +160,29 @@ describe WrfForecast::ForecastRepository do
         extreme_values = repository.extreme_values[:rain]
         expect(extreme_values.maximum.round(3)).to eq(0.334)
         expect(extreme_values.minimum.round(3)).to eq(0.0)
+      end
+    end
+  end
+
+  describe ".new" do
+    context "given a meteogram output file and the date" do
+      it "initialize handler, fill the forecast data, check apparent temperature data values" do
+        repository = WrfForecast::ForecastRepository.new(handler)
+        apparent_temperature_values = repository.forecast_data[:apparent_temperature]
+        expect(apparent_temperature_values.size).to eq(3420)
+        expect(apparent_temperature_values[0].round(3)).to eq(5.241)
+        expect(apparent_temperature_values[3419].round(3)).to eq(-0.605)
+      end
+    end
+  end
+
+  describe ".new" do
+    context "given a meteogram output file and the date" do
+      it "initialize handler, fill the forecast data, check apparent temperature extreme values" do
+        repository = WrfForecast::ForecastRepository.new(handler)
+        extreme_values = repository.extreme_values[:apparent_temperature]
+        expect(extreme_values.maximum.round(3)).to eq(5.751)
+        expect(extreme_values.minimum.round(3)).to eq(-8.872)
       end
     end
   end

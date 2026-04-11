@@ -39,6 +39,7 @@ module WrfForecast
       end
 
       # method to generate the text about the day
+      # @return [String] the substring containing the wind strength
       def create_strength_text
         wind_strength = I18n.t("forecast_text.wind.strength_normal")
         if (is_threshold_active?(:hurricane_day))
@@ -52,10 +53,11 @@ module WrfForecast
         elsif (is_threshold_active?(:windy_day))
           wind_strength = I18n.t("forecast_text.wind.strength_windy")
         end
-        return wind_strength
+        wind_strength
       end
 
       # method to generate the text with wind values
+      # @return [String] the substring containing the wind values and text conclusion
       def create_wind_text
         text = I18n.t("forecast_text.wind.text_maximum")
         text.concat((@extreme_values.maximum * 3.6).ceil.to_s)
@@ -65,15 +67,16 @@ module WrfForecast
         mean = (@extreme_values.maximum + @extreme_values.minimum) / 2.0
         text.concat((mean * 3.6).ceil.to_s)
         text.concat(I18n.t("forecast_text.wind.text_finish"))
-        return text
+        text
       end
 
       # method to create the text for the prevalent wind direction
+      # @return [WrfForecast::Directions] the prevalent wind direction
       def create_prevalent_direction_text
         if (@prevalent_direction == nil)
           return I18n.t("forecast_text.wind.direction_circular")
         end
-        return WrfForecast::Directions.new().get_direction_string(@prevalent_direction)
+        WrfForecast::Directions.new().get_direction_string(@prevalent_direction)
       end
 
     end

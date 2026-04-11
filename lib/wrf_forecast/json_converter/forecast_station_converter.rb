@@ -44,23 +44,47 @@ module WrfForecast
       # @return [Hash] the key-value hashes for the json output 
       def generate_data_values
         measurands = Hash.new()
-        measurands[:temperature] = generate_temperature_values
-        measurands[:wind_speed] = generate_wind_values
+        measurands[:air_temperature] = generate_air_temperature_values
+        measurands[:apparent_temperature] = generate_apparent_temperature_values
+        measurands[:pressure] = generate_pressure_values
         measurands[:rain] = generate_rain_values
+        measurands[:wind_speed] = generate_windspeed_values
+        measurands[:wind_direction] = generate_winddirection_values
         measurands[:warnings] = generate_warnings
-        return measurands
+        measurands
       end
 
       # abstract method to create the output hash for the temperature values
       # @raise [NotImplementedError] if the child class does not implement this
-      def generate_temperature_values
+      def generate_apparent_temperature_values
         fail NotImplementedError, " Error: the subclass #{self.class} needs " \
         "to implement the method: #{__method__.to_s} from its base class".red
       end
 
-      # abstract method to create the output hash for the wind values
+      # abstract method to create the output hash for the temperature values
       # @raise [NotImplementedError] if the child class does not implement this
-      def generate_wind_values
+      def generate_air_temperature_values
+        fail NotImplementedError, " Error: the subclass #{self.class} needs " \
+        "to implement the method: #{__method__.to_s} from its base class".red
+      end
+
+      # abstract method to create the output hash for the temperature values
+      # @raise [NotImplementedError] if the child class does not implement this
+      def generate_pressure_values
+        fail NotImplementedError, " Error: the subclass #{self.class} needs " \
+        "to implement the method: #{__method__.to_s} from its base class".red
+      end
+
+      # abstract method to create the output hash for the wind speed values
+      # @raise [NotImplementedError] if the child class does not implement this
+      def generate_windspeed_values
+        fail NotImplementedError, " Error: the subclass #{self.class} needs " \
+        "to implement the method: #{__method__.to_s} from its base class".red
+      end
+
+      # abstract method to create the output hash for the wind direction values
+      # @raise [NotImplementedError] if the child class does not implement this
+      def generate_winddirection_values
         fail NotImplementedError, " Error: the subclass #{self.class} needs " \
         "to implement the method: #{__method__.to_s} from its base class".red
       end
@@ -73,6 +97,7 @@ module WrfForecast
       end
 
       # method to create the output array for the warnings
+      # @return [Array] an array of Strings containing the warning texts
       def generate_warnings
         values = Array.new()
         @warnings.each_value { |value|
@@ -80,11 +105,11 @@ module WrfForecast
             values << element.warning_text
           }
         }
-        return values
+        values
       end
 
       # method to convert a float hourstamp to a valid time object
-      # @param [Time] forecast_data the start date of the forecast
+      # @param [Time] forecast_date the start date of the forecast
       # @param [Float] float_time the suntime hour as a float
       # @return [Time] the suntime as a time object
       def convert_suntime(forecast_date, float_time)

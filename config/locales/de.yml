@@ -1,16 +1,24 @@
 de:
   threshold:
+    air_temperature:
+      ice_day: "Eistag (Temperatur bleibt ganztägig unter 0 Grad Celsius)"
+      frost_day: "Frosttag (Temperatur fällt unter 0 Grad Celsius)"
+      summer_day: "Sommertag (Temperatur steigt über 25 Grad Celsius)"
+      hot_day: "Hitzetag (Temperatur steigt über 30 Grad Celsius)"
+      tropical_night: "tropische Nacht (Temperatur bleibt ganztägig über 20 Grad Celsius)"    
+    apparent_temperature:
+      strong_heat_day: "Starke Wärmebelastung (Gefühlte Temperatur überschreitet 32 Grad Celsius"
+      extreme_heat_day: "Extreme Wärmebelastung (Gefühlte Temperatur überschreitet 38 Grad Celsius"
+    pressure:
+      low_pressure: "geringer Luftdruck (Luftdruck kleiner 1005 hPa)"
+      very_low_pressure: "geringer Luftdruck (Luftdruck kleiner 990 hPa)"
+      high_pressure: "hoher Luftdruck (Luftdruck größer 1020 hPa)"
+      very_high_pressure: "hoher Luftdruck (Luftdruck größer 1035 hPa)"
     rain:
       strong_rain: "Starkregen (stündliche Niederschlagsumme übersteigt 15 mm)"
       heavy_rain: "heftiger Starkregen (stündliche Niederschlagsumme übersteigt 25 mm)"
       extreme_rain: "extremer Starkregen (stündliche Niederschlagsumme übersteigt 40 mm)"
       continous_rain: "Dauerregen (Niederschlagssumme übersteigt 30 mm in 24 Stunden)"
-    temperature:
-      ice_day: "Eistag (Temperatur bleibt ganztägig unter 0 Grad Celsius)"
-      frost_day: "Frosttag (Temperatur fällt unter 0 Grad Celsius)"
-      summer_day: "Sommertag (Temperatur steigt über 25 Grad Celsius)"
-      hot_day: "Hitzetag (Temperatur steigt über 30 Grad Celsius)"
-      tropical_night: "tropische Nacht (Temperatur bleibt ganztägig über 20 Grad Celsius)"
     wind:
       windy_day: "windig (Windgeschwindigkeit übersteigt 9 m/s, 33 km/h, 5 bft)"
       squall_day: "Böen (Windgeschwindigkeit übersteigt 14 m/s, 51 km/h, 7 bft)"
@@ -22,6 +30,38 @@ de:
       header_start: "Wetterbericht von "
       header_conn: " für den "
       warnings: "Warnungen: "
+    air_temperature:
+      text_start: "Heute wird es ein "
+      text_day: " Tag"
+      text_maximum: " Die Temperatur erreicht Werte bis "
+      text_minimum: " Grad Celsius und sinkt bis auf Werte um "
+      text_finish: " Grad Celsius."
+      warmth_normal: "normaler"
+      warmth_cold: "kalter"
+      warmth_very_frosty: "frostiger"
+      warmth_summer: "sommerlicher" 
+      warmth_hot: "heißer"
+      warmth_tropical: " mit einer tropischen Nacht"
+    apparent_temperature:
+      text_start: "Diese Bedingungeen führen zu "
+      text_maximum: ". Die maximale gefühlte Temperatur wird "
+      text_minimum: " Grad Celsius und die minimale gefühlte Temperature "
+      text_finish: " Grad Celsius betragen."
+      feeling_normal: "einem normalen thermischen Empfinden"
+      feeling_strong_heat: "einer starken Wärmebelastung"
+      feeling_extreme_heat: "einer extremen Wärmebelastung"        
+    pressure:
+      text_start: "Der Luftdruck ist heute "
+      text_with: " und wird im Mittel "
+      text_continue: " hPa betragen."
+      text_maximum: " Der maximale Luftdruck wird "
+      text_minimum: " hPa nicht über- und das Minimum "
+      text_finish: " hPa unterschreiten."
+      level_normal: "normal"
+      level_low: "gering"
+      level_very_low: "sehr gering"
+      level_high: "hoch"
+      level_very_high: "sehr hoch"
     rain:
       no_rain: "Die Vorhersage prognostiziert keinen Niederschlag."
       rain_start: "Die Vorhersage prognostiziert "
@@ -46,18 +86,6 @@ de:
     suntime:
       sunrise: "Sonnenaufgang: "
       sunset: "Sonnenuntergang: "
-    temperature:
-      text_start: "Heute wird es ein "
-      text_day: " Tag"
-      text_maximum: " Die Temperatur erreicht Werte bis "
-      text_minimum: " Grad Celsius und sinkt bis auf Werte um "
-      text_finish: " Grad Celsius."
-      warmth_normal: "normaler"
-      warmth_cold: "kalter"
-      warmth_very_frosty: "frostiger"
-      warmth_summer: "sommerlicher" 
-      warmth_hot: "heißer"
-      warmth_tropical: " mit einer tropischen Nacht"
     wind:
       text_start: "Der Wind weht "
       text_maximum: " und erreicht maximale Geschwindigkeiten von "
@@ -71,12 +99,12 @@ de:
       strength_very_stormy: "sehr stürmisch"
       strength_extremly_stormy: "orkanartig"
       direction_circular: "aus unterschiedlichen Richtungen"
-    daytime:
-      morning: "morgens"
-      noon: "mittags"
-      afternoon: "nachtmittags"
-      evening: "abends"
-      night: "nachts"
+  daytime:
+    morning: "morgens"
+    noon: "mittags"
+    afternoon: "nachtmittags"
+    evening: "abends"
+    night: "nachts"
   direction:
     north: "Nord"
     south: "Süd"

@@ -27,7 +27,7 @@ module WrfForecast
       add_single_argument_text(:offset, " -o, --offset    ", " <offset>",
             "; specifies how many hours from the forecast should be skipped")
       add_single_argument_text(:period, " -p, --period    ", " <period>",
-            "; specifies the forecast period")
+            "; specifies the forecast period, if not set a default of 24 is set")
       add_single_argument_text(:save, " -s, --save      ", " <target>",
             "; specifies the output file where the results are saved")
       nil
@@ -45,6 +45,7 @@ module WrfForecast
       puts "help usage for parameter:".green +
            " ruby <script> <parameter> (-h | --help)"
       puts "#{get_script_name} help:".light_yellow
+      nil
     end
 
     # method to print the invalid parameter combinations
@@ -57,7 +58,8 @@ module WrfForecast
       nil
     end
 
-      # method to set the name of the script project
+    # method to set the name of the script project
+    # @return [String] the script name
     def self.get_script_name
       "WRF forecast"
     end

@@ -44,7 +44,7 @@ module WrfForecast
 
       # helper method to format the time from a Float to a timestamp with hh:mm
       # @param [Float] time the given time as a decimal number
-      # @param [String] the formatted, human readable timestamp
+      # @return [String] the formatted, human readable timestamp
       def format_time(time)
         hours = time.floor
         text = ""
