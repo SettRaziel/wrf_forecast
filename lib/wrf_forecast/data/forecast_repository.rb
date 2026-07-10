@@ -1,6 +1,5 @@
 require 'ruby_utils/statistic'
 require 'wrf_library/data/wind_direction_repository'
-require "wrf_library/apparent_temperature"
 require "wrf_library/measurand"
 
 module WrfForecast
@@ -137,7 +136,7 @@ module WrfForecast
       humidity.each_with_index { |value, i|
         temperature_value = temperature[i] - 273.15
         pressure_value = pressure[i] / 100
-        apparent_temperature << WrfLibrary::ApparentTemperature.calculate_apparent_temperature(
+        apparent_temperature << WrfLibrary::Measurand::ApparentTemperature.calculate_apparent_temperature(
                                 temperature_value, wind_speed[i], value, pressure_value)
       }
       @extreme_values[:apparent_temperature] = RubyUtils::Statistic.extreme_values(apparent_temperature)
