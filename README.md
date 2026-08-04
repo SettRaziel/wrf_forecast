@@ -186,6 +186,10 @@ or with parameter `-a` or `--aggregate` the hourly values of the forecast day wi
 }
 ```
 
+## Documentation
+Documentation is written in yard and can be created by running the shell-script `create_yard.sh`. Yard needs to be installed on the system in order to do that.
+The documentation can also be found online [here](https://bheld.eu/doc/wrfforecast_doc/index.html).
+
 ## License
 see [LICENSE](https://github.com/SettRaziel/wrf_forecast/blob/development/LICENSE)
 
