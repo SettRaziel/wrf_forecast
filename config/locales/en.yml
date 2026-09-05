@@ -5,6 +5,7 @@ en:
       frost_day: "frost day (temperature will fall below 0 degrees celsius)"
       summer_day: "summer day (temperature will exceed 25 degrees celsius)"
       hot_day: "hot day (temperature will exceed 30 degrees celsius)"
+      desert_day: "desert day (temperature will exceed 35 degrees celsius)"
       tropical_night: "tropical night (temperature does not fall below 20 degrees celsius)"    
     apparent_temperature:
       strong_heat_day: "strong thermal stress (apparent temperature exceeds 32 degrees celsius)"
@@ -41,6 +42,7 @@ en:
       warmth_very_frosty: "very frosty"
       warmth_summer: "summer" 
       warmth_hot: "hot"
+      warmth_desert: "desert"
       warmth_tropical: " with a tropical night"
     apparent_temperature:
       text_start: "This conditions will lead to a"

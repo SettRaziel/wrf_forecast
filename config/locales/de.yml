@@ -5,6 +5,7 @@ de:
       frost_day: "Frosttag (Temperatur fällt unter 0 Grad Celsius)"
       summer_day: "Sommertag (Temperatur steigt über 25 Grad Celsius)"
       hot_day: "Hitzetag (Temperatur steigt über 30 Grad Celsius)"
+      desert_day: "Wüstentag (Temperatur steigt über 35 Grad Celsius)"
       tropical_night: "tropische Nacht (Temperatur bleibt ganztägig über 20 Grad Celsius)"    
     apparent_temperature:
       strong_heat_day: "Starke Wärmebelastung (Gefühlte Temperatur überschreitet 32 Grad Celsius"
@@ -41,6 +42,7 @@ de:
       warmth_very_frosty: "frostiger"
       warmth_summer: "sommerlicher" 
       warmth_hot: "heißer"
+      warmth_desert: "wüstenahnlicher"
       warmth_tropical: " mit einer tropischen Nacht"
     apparent_temperature:
       text_start: "Diese Bedingungeen führen zu "
