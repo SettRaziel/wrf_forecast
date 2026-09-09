@@ -15,6 +15,7 @@ describe WrfForecast::Threshold::AirTemperatureThreshold do
         expect(indicators.indicators[:frost_day].is_active).to eq(true)
         expect(indicators.indicators[:summer_day].is_active).to eq(false)
         expect(indicators.indicators[:hot_day].is_active).to eq(false)
+        expect(indicators.indicators[:desert_day].is_active).to eq(false)        
         expect(indicators.indicators[:tropical_night].is_active).to eq(false)
       end
     end
@@ -34,6 +35,7 @@ describe WrfForecast::Threshold::AirTemperatureThreshold do
         expect(indicators.indicators[:frost_day].is_active).to eq(true)
         expect(indicators.indicators[:summer_day].is_active).to eq(false)
         expect(indicators.indicators[:hot_day].is_active).to eq(false)
+        expect(indicators.indicators[:desert_day].is_active).to eq(false)
         expect(indicators.indicators[:tropical_night].is_active).to eq(false)
       end
     end
@@ -53,6 +55,7 @@ describe WrfForecast::Threshold::AirTemperatureThreshold do
         expect(indicators.indicators[:frost_day].is_active).to eq(true)
         expect(indicators.indicators[:summer_day].is_active).to eq(false)
         expect(indicators.indicators[:hot_day].is_active).to eq(false)
+        expect(indicators.indicators[:desert_day].is_active).to eq(false)
         expect(indicators.indicators[:tropical_night].is_active).to eq(false)
       end
     end
@@ -72,6 +75,7 @@ describe WrfForecast::Threshold::AirTemperatureThreshold do
         expect(indicators.indicators[:frost_day].is_active).to eq(false)
         expect(indicators.indicators[:summer_day].is_active).to eq(false)
         expect(indicators.indicators[:hot_day].is_active).to eq(false)
+        expect(indicators.indicators[:desert_day].is_active).to eq(false)
         expect(indicators.indicators[:tropical_night].is_active).to eq(false)
       end
     end
@@ -91,6 +95,7 @@ describe WrfForecast::Threshold::AirTemperatureThreshold do
         expect(indicators.indicators[:frost_day].is_active).to eq(false)
         expect(indicators.indicators[:summer_day].is_active).to eq(true)
         expect(indicators.indicators[:hot_day].is_active).to eq(false)
+        expect(indicators.indicators[:desert_day].is_active).to eq(false)
         expect(indicators.indicators[:tropical_night].is_active).to eq(false)
       end
     end
@@ -110,6 +115,7 @@ describe WrfForecast::Threshold::AirTemperatureThreshold do
         expect(indicators.indicators[:frost_day].is_active).to eq(false)
         expect(indicators.indicators[:summer_day].is_active).to eq(true)
         expect(indicators.indicators[:hot_day].is_active).to eq(true)
+        expect(indicators.indicators[:desert_day].is_active).to eq(false)
         expect(indicators.indicators[:tropical_night].is_active).to eq(false)
       end
     end
@@ -129,6 +135,27 @@ describe WrfForecast::Threshold::AirTemperatureThreshold do
         expect(indicators.indicators[:frost_day].is_active).to eq(false)
         expect(indicators.indicators[:summer_day].is_active).to eq(true)
         expect(indicators.indicators[:hot_day].is_active).to eq(true)
+        expect(indicators.indicators[:desert_day].is_active).to eq(false)
+        expect(indicators.indicators[:tropical_night].is_active).to eq(true)
+      end
+    end
+  end
+
+  describe ".new" do
+    context "given an array of temperature data for a tropical desert day" do
+      it "generate and check temperature indicators" do
+        temperature_values = [ 296, 296, 296, 295, 295, 295, 294, 294, 294, 294, 
+                               295, 295, 296, 296, 297, 297, 298, 298, 299, 299,
+                               300, 300, 301, 301, 302, 302, 303, 303, 304, 304, 
+                               309, 305, 304, 304, 303, 303, 302, 302, 301, 300,
+                               299, 299, 298, 298, 297, 297, 296, 296, 296, 296
+                             ]
+        indicators = WrfForecast::Threshold::AirTemperatureThreshold.new(temperature_values)
+        expect(indicators.indicators[:ice_day].is_active).to eq(false)
+        expect(indicators.indicators[:frost_day].is_active).to eq(false)
+        expect(indicators.indicators[:summer_day].is_active).to eq(true)
+        expect(indicators.indicators[:hot_day].is_active).to eq(true)
+        expect(indicators.indicators[:desert_day].is_active).to eq(true)
         expect(indicators.indicators[:tropical_night].is_active).to eq(true)
       end
     end
@@ -159,6 +186,7 @@ describe WrfForecast::Threshold::AirTemperatureThreshold do
         expect(indicators.indicators[:frost_day].warning_text).to eq(I18n.t("threshold.air_temperature.frost_day"))
         expect(indicators.indicators[:summer_day].warning_text).to eq(I18n.t("threshold.air_temperature.summer_day"))
         expect(indicators.indicators[:hot_day].warning_text).to eq(I18n.t("threshold.air_temperature.hot_day"))
+        expect(indicators.indicators[:desert_day].warning_text).to eq(I18n.t("threshold.air_temperature.desert_day"))
         expect(indicators.indicators[:tropical_night].warning_text).to eq(I18n.t("threshold.air_temperature.tropical_night"))
       end
     end
