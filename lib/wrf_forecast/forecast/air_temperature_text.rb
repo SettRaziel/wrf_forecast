@@ -38,7 +38,9 @@ module WrfForecast
           warmth = I18n.t("forecast_text.air_temperature.warmth_cold")
         end
 
-        if (is_threshold_active?(:hot_day))
+        if (is_threshold_active?(:desert_day))
+          warmth = I18n.t("forecast_text.air_temperature.warmth_desert")
+        elsif (is_threshold_active?(:hot_day))
           warmth = I18n.t("forecast_text.air_temperature.warmth_hot")
         elsif (is_threshold_active?(:summer_day))
           warmth = I18n.t("forecast_text.air_temperature.warmth_summer")
