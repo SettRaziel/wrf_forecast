@@ -22,6 +22,7 @@ module WrfForecast
         add_indicator(:frost_day, false, I18n.t("threshold.air_temperature.frost_day"))
         add_indicator(:summer_day, false, I18n.t("threshold.air_temperature.summer_day"))
         add_indicator(:hot_day, false, I18n.t("threshold.air_temperature.hot_day"))
+        add_indicator(:desert_day, false, I18n.t("threshold.air_temperature.desert_day"))
         add_indicator(:tropical_night, true, I18n.t("threshold.air_temperature.tropical_night"))
         nil
       end
@@ -34,6 +35,7 @@ module WrfForecast
           change_indicator(:frost_day, true, value < 273.15)
           change_indicator(:summer_day, true, value > 298.15)
           change_indicator(:hot_day, true, value > 303.15)
+          change_indicator(:desert_day, true, value > 308.15)
           change_indicator(:tropical_night, false, value < 293.15)
         }
         nil

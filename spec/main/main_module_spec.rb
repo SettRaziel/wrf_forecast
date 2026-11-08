@@ -321,7 +321,7 @@ describe WrfForecast do
       it "initialize the handler and repositories correctly, create and save output" do
         timestamp = "2021-06-29 00:00:00 +0200"
         output_file = File.join(__dir__,"output.json")
-        arguments = ["-d", timestamp, "-p", "24", "-s", output_file, "-a", "-f", "-j", BERLIN_SMALL_DATA.to_path]
+        arguments = ["-d", timestamp, "-p", "24", "-s", output_file, "-a", "-j", "-f", BERLIN_SMALL_DATA.to_path]
         WrfForecast.initialize(arguments)
         parameters = WrfForecast.parameter_handler.repository.parameters
 
