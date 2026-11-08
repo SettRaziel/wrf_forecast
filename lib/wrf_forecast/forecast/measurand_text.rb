@@ -37,7 +37,7 @@ module WrfForecast
       # @return boolean if the thresolhd to the indicator is active
       def is_threshold_active?(indicator)
         if (@thresholds[indicator].is_active)
-          @warnings = @thresholds[indicator].warning_text
+          @warnings = @thresholds[indicator].warning_text.dup
         end
         @thresholds[indicator].is_active
       end
